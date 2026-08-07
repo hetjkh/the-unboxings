@@ -114,10 +114,10 @@ export default function Header({
             className="md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
           >
             <Image
-              src="/The Unboxing.png"
+              src="/The-Unboxing.svg"
               alt="The Unboxing"
-              width={280}
-              height={40}
+              width={2048}
+              height={288}
               priority
               className={`h-[20px] w-auto transition-[filter] duration-300 md:h-[23px] ${logoClass}`}
             />
