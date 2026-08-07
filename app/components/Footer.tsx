@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 function ArrowIcon() {
@@ -171,14 +172,16 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Brand wordmark */}
-      <div className="flex justify-center px-8 pb-12 md:px-16 md:pb-16">
-        <Link
-          href="/"
-          aria-label="The Unboxing - go to homepage"
-          className="w-full text-center text-7xl leading-none font-bold tracking-[-0.06em] text-white uppercase no-underline md:text-[8rem] lg:text-[12rem]"
-        >
-          The Unboxing
+      {/* Brand logo */}
+      <div className="flex justify-center px-4 pb-12 md:px-8 md:pb-16 lg:px-12">
+        <Link href="/" aria-label="The Unboxing - go to homepage" className="block w-full max-w-[1440px]">
+          <Image
+            src="/The-Unboxing.svg"
+            alt="The Unboxing"
+            width={2048}
+            height={288}
+            className="h-auto w-full brightness-0 invert"
+          />
         </Link>
       </div>
 
