@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function ArrowIcon() {
   return (
     <svg
@@ -167,6 +169,17 @@ export default function Footer() {
           </p>
           <FooterInput label="Email" name="footer-email" placeholder="Your email address" />
         </div>
+      </div>
+
+      {/* Brand wordmark */}
+      <div className="flex justify-center px-8 pb-12 md:px-16 md:pb-16">
+        <Link
+          href="/"
+          aria-label="The Unboxing - go to homepage"
+          className="w-full text-center text-7xl leading-none font-bold tracking-[-0.06em] text-white uppercase no-underline md:text-[8rem] lg:text-[12rem]"
+        >
+          The Unboxing
+        </Link>
       </div>
 
       {/* Bottom bar */}
