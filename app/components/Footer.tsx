@@ -1,59 +1,4 @@
-import Image from "next/image";
 import Link from "next/link";
-
-function ArrowIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path
-        d="M6 3L11 8L6 13"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="square"
-      />
-    </svg>
-  );
-}
-
-function FooterInput({
-  label,
-  placeholder,
-  name,
-}: {
-  label: string;
-  placeholder: string;
-  name: string;
-}) {
-  return (
-    <div className="mt-6">
-      <label className="sr-only" htmlFor={name}>
-        {label}
-      </label>
-      <div className="relative border-b border-white">
-        <input
-          id={name}
-          name={name}
-          type="text"
-          placeholder={placeholder}
-          className="w-full bg-transparent py-3 pr-10 text-sm leading-5 text-white outline-none placeholder:text-white/80"
-        />
-        <button
-          type="submit"
-          aria-label={`Submit ${label}`}
-          className="absolute top-1/2 right-0 flex -translate-y-1/2 cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-white"
-        >
-          <ArrowIcon />
-        </button>
-      </div>
-    </div>
-  );
-}
 
 const quickLinks = [
   { label: "Products", href: "/products" },
@@ -71,36 +16,21 @@ const companyLinks = [
   { label: "Case Studies", href: "/case-studies" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact Us", href: "/contact-us" },
-  {
-    label: "Privacy Policy",
-    href: "#",
-  },
+  { label: "Privacy Policy", href: "#" },
 ];
 
-function FooterLinkList({
-  links,
-}: {
-  links: { label: string; href: string; isButton?: boolean }[];
-}) {
+function FooterLinks({ links }: { links: { label: string; href: string }[] }) {
   return (
-    <ul className="m-0 list-none p-0">
+    <ul className="m-0 list-none space-y-3 p-0">
       {links.map((link) => (
-        <li key={link.label} className="mb-3 last:mb-0">
-          {link.isButton ? (
-            <button
-              type="button"
-              className="cursor-pointer border-0 bg-transparent p-0 text-xs leading-4 text-white underline underline-offset-2"
-            >
-              {link.label}
-            </button>
-          ) : (
-            <a
-              href={link.href}
-              className="text-xs leading-4 text-white underline underline-offset-2"
-            >
-              {link.label}
-            </a>
-          )}
+        <li key={link.label}>
+          <a
+            href={link.href}
+            className="group inline-flex items-center gap-2 text-xs leading-5 text-white/55 no-underline hover:text-white"
+          >
+            <span className="h-px w-0 bg-white transition-all duration-300 group-hover:w-4" aria-hidden="true" />
+            {link.label}
+          </a>
         </li>
       ))}
     </ul>
@@ -109,87 +39,93 @@ function FooterLinkList({
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white">
-      {/* Top CTA */}
-      <div className="px-8 py-20 text-center md:px-16">
-        <h2 className="m-0 text-base leading-6 font-bold tracking-[-0.03em] uppercase">
-          Let&apos;s Create Something Memorable
-        </h2>
-        <p className="mx-auto mt-8 max-w-[872px] text-2xl leading-10 font-light tracking-[-0.03em] md:text-[32px] md:leading-[48px]">
-          Whether you&apos;re planning a corporate event, welcoming new employees, or building
-          your brand — we&apos;d love to help you create lasting impressions.
-        </p>
-        <a
-          href="/contact-us"
-          className="mt-8 inline-flex h-12 cursor-pointer items-center justify-center border border-white bg-transparent px-8 text-xs leading-4 font-bold tracking-[0.04em] text-white uppercase no-underline"
+    <footer className="overflow-hidden bg-[#0a0a0a] text-white">
+      <div className="mx-auto max-w-[1440px] px-8 pt-16 md:px-16 md:pt-24">
+        <div className="grid gap-12 border-t border-white/20 pt-8 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
+          <div>
+            <p className="m-0 text-[10px] font-medium tracking-[0.24em] text-white/40 uppercase">
+              The Unboxing newsletter
+            </p>
+            <h2 className="m-0 mt-5 max-w-[760px] text-[clamp(2.75rem,6vw,6rem)] leading-[0.9] font-light tracking-[-0.06em] uppercase">
+              Ideas worth
+              <br />
+              unboxing.
+            </h2>
+          </div>
+
+          <div className="flex flex-col justify-end">
+            <p className="m-0 max-w-[480px] text-sm leading-6 text-white/55">
+              Get considered inspiration, material stories and gifting insights delivered occasionally—not constantly.
+            </p>
+            <form className="mt-8" action="#" method="post">
+              <label className="sr-only" htmlFor="footer-email">Email address</label>
+              <div className="flex border-b border-white py-3">
+                <input
+                  id="footer-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  placeholder="Your email address"
+                  className="min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/35"
+                />
+                <button
+                  type="submit"
+                  className="cursor-pointer border-0 bg-transparent px-0 py-2 text-[10px] font-bold tracking-[0.14em] text-white uppercase"
+                >
+                  Subscribe →
+                </button>
+              </div>
+              <p className="m-0 mt-3 text-[10px] leading-4 text-white/30">
+                By subscribing, you agree to receive news from The Unboxing.
+              </p>
+            </form>
+          </div>
+        </div>
+
+        <div className="mt-20 grid gap-12 border-t border-white/15 py-12 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1.4fr] lg:gap-16">
+          <div>
+            <h3 className="m-0 mb-6 text-[10px] font-bold tracking-[0.16em] text-white uppercase">Explore</h3>
+            <FooterLinks links={quickLinks} />
+          </div>
+          <div>
+            <h3 className="m-0 mb-6 text-[10px] font-bold tracking-[0.16em] text-white uppercase">Company</h3>
+            <FooterLinks links={companyLinks} />
+          </div>
+          <div>
+            <h3 className="m-0 mb-6 text-[10px] font-bold tracking-[0.16em] text-white uppercase">Get in touch</h3>
+            <p className="m-0 max-w-[360px] text-xs leading-5 text-white/50">
+              UAE-based corporate gifting and branded merchandise specialists. Worldwide delivery. Bulk orders welcome.
+            </p>
+            <div className="mt-7 space-y-2">
+              <a href="mailto:hello@theunboxing.ae" className="block text-sm text-white no-underline hover:text-white/60">hello@theunboxing.ae</a>
+              <a href="tel:+97150000000" className="block text-sm text-white no-underline hover:text-white/60">+971 50 000 0000</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Brand wordmark — styling intentionally preserved */}
+      <div className="flex justify-center px-4 pb-12 md:px-8 md:pb-16">
+        <Link
+          href="/"
+          aria-label="The Unboxing - go to homepage"
+          className="flex items-baseline justify-center gap-3 no-underline md:gap-5"
         >
-          Contact Us
-        </a>
-      </div>
-
-      {/* Links Grid */}
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-8 pb-20 md:px-16 lg:grid-cols-[1fr_1fr_2fr] lg:gap-6">
-        <div>
-          <h3 className="m-0 mb-6 text-xs leading-4 font-bold tracking-[-0.05em] uppercase">
-            Quick Links
-          </h3>
-          <FooterLinkList links={quickLinks} />
-        </div>
-
-        <div>
-          <h3 className="m-0 mb-6 text-xs leading-4 font-bold tracking-[-0.05em] uppercase">
-            Company
-          </h3>
-          <FooterLinkList links={companyLinks} />
-        </div>
-
-        <div>
-          <h3 className="m-0 mb-6 text-xs leading-4 font-bold tracking-[-0.05em] uppercase">
-            Get In Touch
-          </h3>
-          <p className="m-0 text-xs leading-5 font-normal text-white/80">
-            UAE-based corporate gifting and branded merchandise specialists.
-            Worldwide delivery. Bulk orders welcome.
-          </p>
-          <p className="m-0 mt-4 text-xs leading-5 font-normal text-white">
-            <a href="mailto:hello@theunboxing.ae" className="text-white underline underline-offset-2">
-              hello@theunboxing.ae
-            </a>
-          </p>
-          <p className="m-0 mt-2 text-xs leading-5 font-normal text-white">
-            <a href="tel:+97150000000" className="text-white underline underline-offset-2">
-              +971 50 000 0000
-            </a>
-          </p>
-
-          <h3 className="m-0 mt-10 mb-6 text-xs leading-4 font-bold tracking-[-0.05em] uppercase">
-            Stay Updated
-          </h3>
-          <p className="m-0 text-xs leading-4 font-normal text-white">
-            Get inspiration, gifting trends, and exclusive corporate offers in your inbox.
-          </p>
-          <FooterInput label="Email" name="footer-email" placeholder="Your email address" />
-        </div>
-      </div>
-
-      {/* Brand logo */}
-      <div className="flex justify-center px-4 pb-12 md:px-8 md:pb-16 lg:px-12">
-        <Link href="/" aria-label="The Unboxing - go to homepage" className="block w-full max-w-[1440px]">
-          <Image
-            src="/The-Unboxing.svg"
-            alt="The Unboxing"
-            width={2048}
-            height={288}
-            className="h-auto w-full brightness-0 invert"
-          />
+          <span className="text-sm leading-none font-medium tracking-[0.2em] text-white uppercase md:text-base lg:text-xl">
+            The
+          </span>
+          <span className="text-6xl leading-none font-bold tracking-[-0.05em] text-white uppercase md:text-8xl lg:text-[10rem]">
+            Unboxing
+          </span>
         </Link>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10 px-8 py-6 text-center md:px-16">
-        <p className="m-0 text-[10px] leading-4 text-white/40">
-          © {new Date().getFullYear()} The Unboxing. All rights reserved. UAE-Based Corporate Gifting & Brand Solutions.
-        </p>
+      <div className="border-t border-white/10 px-8 py-6 md:px-16">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-2 text-[10px] leading-4 text-white/30 sm:flex-row sm:items-center sm:justify-between">
+          <p className="m-0">© {new Date().getFullYear()} The Unboxing. All rights reserved.</p>
+          <p className="m-0">UAE-based · Worldwide delivery</p>
+        </div>
       </div>
     </footer>
   );

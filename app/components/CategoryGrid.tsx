@@ -1,24 +1,22 @@
-import Image from "next/image";
-
 const categories = [
   {
     title: "Employee Experience",
-    image: "/experience1.png",
+    video: "/video/1.mp4",
     href: "/solutions",
   },
   {
     title: "Client Experience",
-    image: "/experience2.png",
+    video: "/video/2.mp4",
     href: "/solutions",
   },
   {
     title: "Brand Experience",
-    image: "/experience3.png",
+    video: "/video/3.mp4",
     href: "/branding-services",
   },
   {
     title: "Event Experience",
-    image: "/experience4.png",
+    video: "/video/4.mp4",
     href: "/solutions",
   },
 ];
@@ -37,15 +35,19 @@ export default function CategoryGrid() {
           <a
             key={category.title}
             href={category.href}
+            data-motion-card
             className="group flex flex-col no-underline"
           >
-            <div className="relative aspect-square w-full overflow-hidden bg-[#ececec]">
-              <Image
-                src={category.image}
-                alt={category.title}
-                fill
-                className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 1024px) 50vw, 25vw"
+            <div data-motion-media className="relative aspect-square w-full overflow-hidden bg-[#ececec]">
+              <video
+                src={category.video}
+                aria-label={category.title}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
               />
             </div>
             <span className="flex items-center justify-center py-3 text-center text-xs leading-4 font-medium tracking-[-0.36px] text-black">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 
 export const metadata: Metadata = {
   title: "The Unboxing | Corporate Gifts & Branded Merchandise UAE",

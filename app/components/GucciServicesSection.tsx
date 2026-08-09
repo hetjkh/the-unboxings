@@ -7,7 +7,7 @@ const services = [
       "Acrylic, wood, marble, brass and steel are selected for their structural presence and tactile character.",
     linkText: "Explore Our Process",
     href: "/branding-services",
-    image: "/material-fabrication.png",
+    image: "/materials/1.png",
   },
   {
     title: "Tactile Finishes",
@@ -15,7 +15,7 @@ const services = [
       "Leather, fabric, glass and crystal bring weight, softness and clarity to an experience worth holding onto.",
     linkText: "View Brand Stories",
     href: "#brand-stories",
-    image: "/experience-client.png",
+    image: "/materials/2.png",
   },
   {
     title: "Future-Minded Choices",
@@ -23,7 +23,7 @@ const services = [
       "Resin, concrete and recycled materials allow us to balance expressive design with responsible production.",
     linkText: "Start Your Project",
     href: "/contact-us#start-project",
-    image: "/brand-story-homeowners.png",
+    image: "/materials/3.png",
   },
 ];
 
@@ -57,7 +57,7 @@ export default function GucciServicesSection() {
         <div className="grid grid-cols-1 items-stretch gap-10 md:grid-cols-3">
           {services.map((service) => (
             <article key={service.title} className="flex h-full flex-col">
-              <div className="relative aspect-square w-full shrink-0 overflow-hidden">
+              <div data-motion-media className="relative aspect-square w-full shrink-0 overflow-hidden">
                 <Image
                   src={service.image}
                   alt={service.title}

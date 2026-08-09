@@ -47,10 +47,10 @@ export default function IndustriesSection() {
           </div>
         </div>
       </div>
-      <div ref={carouselRef} className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-8 pb-2 [scrollbar-width:none] md:px-16">
+      <div ref={carouselRef} data-lenis-prevent className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-8 pb-2 [scrollbar-width:none] md:px-16">
         {industries.map(([number, industry, image]) => (
-          <a key={industry} href="/contact-us#start-project" className="group w-[78vw] shrink-0 snap-start no-underline sm:w-[360px]">
-            <div className="relative aspect-[4/5] overflow-hidden bg-[#f5f5f5]">
+          <a key={industry} href="/contact-us#start-project" data-motion-card className="group w-[78vw] shrink-0 snap-start no-underline sm:w-[360px]">
+            <div data-motion-media className="relative aspect-[4/5] overflow-hidden bg-[#f5f5f5]">
               <Image src={image} alt={industry} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 78vw, 360px" />
               <span className="absolute top-4 left-4 text-xs font-light tracking-[-0.04em] text-white">{number}</span>
             </div>

@@ -9,21 +9,24 @@ import IndustriesSection from "./components/IndustriesSection";
 import ConceptLabSection from "./components/ConceptLabSection";
 import StartProjectSection from "./components/StartProjectSection";
 import Footer from "./components/Footer";
+import HomeMotion from "./components/HomeMotion";
 
 export default function Home() {
   return (
     <>
       <Header overlay />
       <main>
-        <Hero />
-        <CategoryGrid />
-        <MenCampaignHero />
-        <MadeInItalySection />
-        <GucciServicesSection />
-        <CreateMethodSection />
-        <IndustriesSection />
-        <ConceptLabSection />
-        <StartProjectSection />
+        <HomeMotion>
+          <Hero />
+          <CategoryGrid />
+          <MenCampaignHero />
+          <MadeInItalySection />
+          <GucciServicesSection />
+          <CreateMethodSection />
+          <IndustriesSection />
+          <ConceptLabSection />
+          <StartProjectSection />
+        </HomeMotion>
       </main>
       <Footer />
     </>
