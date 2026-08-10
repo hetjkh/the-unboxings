@@ -8,7 +8,7 @@ export default function Hero() {
       description="Custom-designed merchandise, employee welcome kits, VIP gifts, event giveaways and branded experiences, crafted exclusively for your brand."
       heading
       image="/hero1.png"
-      video="/hero.mp4"
+      video="/hero.webm"
       href="/contact-us#start-project"
       buttonStyle="light"
       buttonText="Let's Create Something Unique"

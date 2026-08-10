@@ -27,7 +27,7 @@ export default function MadeInItalySection() {
         </div>
         <div data-motion-media className="relative min-h-[500px] overflow-hidden md:min-h-[720px]">
           <Image
-            src="/made-in-italy-workshop.png"
+            src="/made-in-italy-workshop.webp"
             alt="Artisans hand-finishing a premium presentation object"
             fill
             className="object-cover"

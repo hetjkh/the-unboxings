@@ -75,7 +75,7 @@ export default function CampaignHero({
           tabIndex={-1}
           className="absolute inset-0 h-full w-full object-cover object-center"
         >
-          <source src={video} type="video/mp4" />
+          <source src={video} type={video.endsWith(".webm") ? "video/webm" : "video/mp4"} />
         </video>
       ) : mobileImage ? (
         <Image

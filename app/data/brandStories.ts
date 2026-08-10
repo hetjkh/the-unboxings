@@ -2,7 +2,7 @@ export const brandStories = [
   {
     slug: "dubai-developer-homeowners",
     title: "How a Dubai Developer Welcomed 500 Homeowners",
-    image: "/brand-story-homeowners.png",
+    image: "/brand-story-homeowners.webp",
     alt: "Premium homeowner welcome experience being assembled in a studio",
     challenge: "Create an arrival moment that made every new homeowner feel considered from day one.",
     concept: "An architectural welcome ritual that turned a handover into a lasting brand memory.",
@@ -26,7 +26,7 @@ export const brandStories = [
   {
     slug: "leadership-summit-ritual",
     title: "Designing a Leadership Summit That Lasted Beyond the Room",
-    image: "/brand-story-summit.png",
+    image: "/brand-story-summit.webp",
     alt: "Executive summit presentation kits on a dark table",
     challenge: "Make a leadership summit feel personal, not transactional, from arrival to follow-up.",
     concept: "A tactile suite of tools and keepsakes designed as one quiet, cohesive ritual.",
@@ -38,7 +38,7 @@ export const brandStories = [
   {
     slug: "hospitality-arrival-experience",
     title: "Reimagining the VIP Hotel Arrival Experience",
-    image: "/brand-story-hospitality.png",
+    image: "/brand-story-hospitality.webp",
     alt: "Luxury hospitality welcome box being opened on a dark stone counter",
     challenge: "Give a premium guest experience an opening gesture with genuine warmth.",
     concept: "A considered arrival object that blended utility, scent and a sense of place.",

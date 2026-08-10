@@ -1,22 +1,22 @@
 const categories = [
   {
     title: "Employee Experience",
-    video: "/video/1.mp4",
+    video: "/video/1.webm",
     href: "/solutions",
   },
   {
     title: "Client Experience",
-    video: "/video/2.mp4",
+    video: "/video/2.webm",
     href: "/solutions",
   },
   {
     title: "Brand Experience",
-    video: "/video/3.mp4",
+    video: "/video/3.webm",
     href: "/branding-services",
   },
   {
     title: "Event Experience",
-    video: "/video/4.mp4",
+    video: "/video/4.webm",
     href: "/solutions",
   },
 ];

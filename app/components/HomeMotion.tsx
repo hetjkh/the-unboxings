@@ -83,21 +83,6 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
           });
         }
 
-        const cards = section.querySelectorAll("article, ol > li, [data-motion-card]");
-        if (cards.length) {
-          gsap.from(cards, {
-            autoAlpha: 0,
-            y: 42,
-            duration: 0.8,
-            stagger: 0.08,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: cards[0],
-              start: "top 88%",
-              once: true,
-            },
-          });
-        }
       });
 
       gsap.utils.toArray<HTMLElement>("[data-motion-media]", root).forEach((media) => {
@@ -115,10 +100,27 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
       });
     }, root);
 
-    const refresh = window.setTimeout(() => ScrollTrigger.refresh(), 100);
+    const refreshScrollPositions = () => ScrollTrigger.refresh();
+    const media = root.querySelectorAll<HTMLImageElement | HTMLVideoElement>("img, video");
+
+    media.forEach((item) => {
+      if (item instanceof HTMLImageElement) {
+        if (!item.complete) item.addEventListener("load", refreshScrollPositions, { once: true });
+      } else if (item.readyState < 1) {
+        item.addEventListener("loadedmetadata", refreshScrollPositions, { once: true });
+      }
+    });
+
+    window.addEventListener("load", refreshScrollPositions, { once: true });
+    const refresh = window.setTimeout(refreshScrollPositions, 100);
 
     return () => {
       window.clearTimeout(refresh);
+      window.removeEventListener("load", refreshScrollPositions);
+      media.forEach((item) => {
+        item.removeEventListener("load", refreshScrollPositions);
+        item.removeEventListener("loadedmetadata", refreshScrollPositions);
+      });
       context.revert();
       lenis.off("scroll", updateScrollTrigger);
       lenis.destroy();

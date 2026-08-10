@@ -1,228 +1,174 @@
-import Header from "../components/Header";
+import type { Metadata } from "next";
+import Image from "next/image";
 import Footer from "../components/Footer";
-import type { ReactNode } from "react";
+import Header from "../components/Header";
 
-function Icon({ children }: { children: ReactNode }) {
-  return (
-    <svg
-      width="28"
-      height="28"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.25"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className="text-black"
-    >
-      {children}
-    </svg>
-  );
+export const metadata: Metadata = {
+  title: "Industries | The Unboxing",
+  description: "Branded merchandise and gifting experiences shaped around your industry.",
+};
+
+const industries = [
+  {
+    name: "Real Estate",
+    image: "/industries/real-estate.webp",
+    description: "Handover experiences, site-visit kits, and client milestones made memorable.",
+  },
+  {
+    name: "Hospitality",
+    image: "/industries/hospitality.webp",
+    description: "Guest amenities, opening gifts, and VIP arrivals with a considered sense of place.",
+  },
+  {
+    name: "Government",
+    image: "/industries/government.webp",
+    description: "Official presentations, national occasions, and distinguished corporate hospitality.",
+  },
+  {
+    name: "Healthcare",
+    image: "/industries/healthcare.webp",
+    description: "Wellness programs, staff recognition, and conference experiences designed with care.",
+  },
+  {
+    name: "Education",
+    image: "/industries/education.webp",
+    description: "Student welcomes, graduation moments, and recognition that celebrates progress.",
+  },
+  {
+    name: "Aviation",
+    image: "/industries/aviation.webp",
+    description: "Crew gifts, passenger amenities, and branded essentials made to travel.",
+  },
+  {
+    name: "Construction",
+    image: "/industries/construction.webp",
+    description: "Project milestones, safety programs, and handover packages built for impact.",
+  },
+  {
+    name: "Technology",
+    image: "/industries/technology.webp",
+    description: "Onboarding kits, launch merchandise, and useful tools for connected teams.",
+  },
+  {
+    name: "Finance",
+    image: "/industries/finance.webp",
+    description: "Executive gifts, employee rewards, and premium experiences for valued clients.",
+  },
+  {
+    name: "Automotive",
+    image: "/industries/automotive.webp",
+    description: "Vehicle launches, dealer events, and ownership moments that carry the brand forward.",
+  },
+  {
+    name: "Luxury",
+    image: "/industries/luxury.webp",
+    description: "Refined objects, elevated packaging, and tactile experiences with lasting presence.",
+  },
+  {
+    name: "Retail",
+    image: "/industries/retail.webp",
+    description: "Seasonal campaigns, loyalty rewards, and team merchandise made for everyday visibility.",
+  },
+] as const;
+
+function Arrow() {
+  return <span aria-hidden="true">-&gt;</span>;
 }
-
-const industries: {
-  title: string;
-  description: string;
-  icon: ReactNode;
-}[] = [
-  {
-    title: "Real Estate",
-    description: "Handover gifts, site visit kits, client appreciation",
-    icon: (
-      <Icon>
-        <path d="M3 21h18" />
-        <path d="M5 21V8l7-5 7 5v13" />
-        <path d="M9 21v-6h6v6" />
-        <path d="M9 10h.01M15 10h.01" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Banking & Finance",
-    description: "VIP client gifts, employee rewards, event merchandise",
-    icon: (
-      <Icon>
-        <path d="M3 10h18L12 3 3 10z" />
-        <path d="M5 10v8M9 10v8M15 10v8M19 10v8" />
-        <path d="M3 18h18" />
-        <path d="M2 21h20" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Government",
-    description: "National Day gifts, corporate hospitality, official presentations",
-    icon: (
-      <Icon>
-        <path d="M12 3l8 5v2H4V8l8-5z" />
-        <path d="M6 10v7M10 10v7M14 10v7M18 10v7" />
-        <path d="M4 17h16" />
-        <path d="M3 21h18" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Healthcare",
-    description: "Wellness kits, staff appreciation, conference giveaways",
-    icon: (
-      <Icon>
-        <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z" />
-        <path d="M12 9v5M9.5 11.5h5" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Hospitality",
-    description: "Welcome amenities, VIP packages, hotel opening gifts",
-    icon: (
-      <Icon>
-        <path d="M3 21h18" />
-        <path d="M5 21V10h14v11" />
-        <path d="M9 21v-4h6v4" />
-        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-        <path d="M9 14h.01M15 14h.01" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Education",
-    description: "Graduation gifts, staff recognition, student welcome kits",
-    icon: (
-      <Icon>
-        <path d="M12 3l9 5-9 5-9-5 9-5z" />
-        <path d="M5 10.5v4.5c0 1.5 3.1 3 7 3s7-1.5 7-3v-4.5" />
-        <path d="M21 8v6" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Technology",
-    description: "Tech accessories, employee onboarding, event merchandise",
-    icon: (
-      <Icon>
-        <rect x="3" y="4" width="18" height="12" rx="1" />
-        <path d="M8 20h8M12 16v4" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Retail",
-    description: "Loyalty programs, seasonal promotions, team uniforms",
-    icon: (
-      <Icon>
-        <path d="M6 8h12l1 12H5L6 8z" />
-        <path d="M9 8V6a3 3 0 0 1 6 0v2" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Construction",
-    description: "Safety wear, milestone gifts, handover packages",
-    icon: (
-      <Icon>
-        <path d="M14 7l3-3 3 3-3 3" />
-        <path d="M17 4l-5.5 5.5a3 3 0 0 0 0 4.2l.3.3" />
-        <path d="M10 14l-7 7" />
-        <path d="M7 11l-4 1 2 2 1-4z" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Oil & Gas",
-    description: "Safety kits, team recognition, executive corporate gifts",
-    icon: (
-      <Icon>
-        <path d="M12 3c0 4-4 6-4 10a4 4 0 0 0 8 0c0-4-4-6-4-10z" />
-        <path d="M10 17.5c.5 1 1.2 1.5 2 1.5s1.5-.5 2-1.5" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Automotive",
-    description: "Dealer meets, launch events, client appreciation",
-    icon: (
-      <Icon>
-        <path d="M3 13l2-5a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 5" />
-        <path d="M3 13h18v3a1 1 0 0 1-1 1h-1" />
-        <path d="M3 16a1 1 0 0 1-1-1v-2" />
-        <circle cx="7" cy="17" r="2" />
-        <circle cx="17" cy="17" r="2" />
-        <path d="M9 17h6" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Logistics",
-    description: "Driver kits, employee uniforms, appreciation gifts",
-    icon: (
-      <Icon>
-        <path d="M3 7h11v10H3z" />
-        <path d="M14 10h4l3 3v4h-7v-7z" />
-        <circle cx="7" cy="18" r="2" />
-        <circle cx="17" cy="18" r="2" />
-      </Icon>
-    ),
-  },
-  {
-    title: "Aviation",
-    description: "Crew gifts, passenger amenities, corporate merchandise",
-    icon: (
-      <Icon>
-        <path d="M12 3v6l8 3v2l-8-1.5V19l3 1.5V22l-4.5-1.5L6 22v-1.5L9 19v-6.5L1 14v-2l8-3V3a1.5 1.5 0 0 1 3 0z" />
-      </Icon>
-    ),
-  },
-];
 
 export default function IndustriesPage() {
   return (
     <>
       <Header />
       <main>
-        <section aria-label="Shop by Industry" className="bg-white">
-          <div className="px-8 pt-14 pb-10 text-center md:px-16">
-            <h1 className="m-0 text-base leading-6 font-bold tracking-[-0.03em] text-black uppercase">
-              Industries We Serve
-            </h1>
-            <p className="mx-auto mt-4 max-w-[720px] text-base leading-6 font-normal text-black">
-              We understand the unique gifting needs of different sectors. Select your industry
-              and we&apos;ll recommend the most relevant products and solutions for your team.
+        <section aria-labelledby="industries-title" className="relative bg-white text-black">
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#dce8ed] md:aspect-[16/7]">
+            <Image
+              src="/industries/industries-hero-source.png"
+              alt="Modern real estate development under construction"
+              fill
+              priority
+              className="object-cover object-[68%_bottom] md:object-bottom"
+              sizes="100vw"
+            />
+          </div>
+          <div className="relative px-8 py-10 md:absolute md:inset-0 md:flex md:items-center md:px-16 md:py-0">
+            <div className="mx-auto w-full max-w-[1312px]">
+              <div className="max-w-[470px] md:w-[42%]">
+                <p className="m-0 text-[10px] font-bold tracking-[0.12em] text-black/45 uppercase">Where ideas meet context</p>
+                <h1 id="industries-title" className="m-0 mt-4 text-4xl leading-none font-light md:text-6xl">Industries</h1>
+                <p className="m-0 mt-6 max-w-[400px] text-xs leading-5 text-black/60">
+                  Industry knowledge shapes the ideas we bring to the table and the experiences we make possible.
+                </p>
+                <a href="#industry-directory" className="mt-8 inline-flex items-center gap-3 border-b border-black pb-1 text-xs font-bold text-black no-underline uppercase">
+                  Explore sectors <Arrow />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section aria-label="Our approach" className="grid border-b border-[#dedede] bg-white md:grid-cols-[0.7fr_1.3fr]">
+          <div className="px-8 py-10 md:px-16 md:py-16">
+            <p className="m-0 text-[10px] font-bold tracking-[0.1em] text-black/40 uppercase">Sector intelligence</p>
+          </div>
+          <div className="border-t border-[#dedede] px-8 py-10 md:border-t-0 md:border-l md:px-16 md:py-16">
+            <p className="m-0 max-w-[760px] text-2xl leading-8 font-light md:text-4xl md:leading-[1.2]">
+              The right idea starts with understanding the audience, environment, and standards of your world.
+            </p>
+            <p className="m-0 mt-7 max-w-[580px] text-xs leading-5 text-black/55">
+              We translate sector insight into relevant products, materials, packaging, and moments that feel specific to your people rather than selected from a catalogue.
             </p>
           </div>
+        </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-[#e5e5e5]">
-            {industries.map((industry) => (
-              <a
-                key={industry.title}
-                href="/contact-us"
-                className="flex flex-col items-center text-center border-r border-b border-[#e5e5e5] p-8 no-underline hover:bg-[#f9f9f9] transition-colors duration-200"
-              >
-                <span className="inline-flex" aria-hidden="true">
-                  {industry.icon}
-                </span>
-                <h2 className="m-0 mt-4 text-base leading-6 font-bold tracking-[-0.03em] text-black uppercase">
-                  {industry.title}
-                </h2>
-                <p className="m-0 mt-2 text-xs leading-5 font-normal text-black/50">
-                  {industry.description}
-                </p>
-                <span className="mt-4 text-xs leading-4 font-medium text-black underline underline-offset-2">
-                  Contact Us →
-                </span>
-              </a>
+        <section id="industry-directory" aria-labelledby="industry-directory-title" className="bg-white">
+          <div className="flex items-end justify-between px-8 py-10 md:px-16 md:py-14">
+            <div>
+              <p className="m-0 text-[10px] font-bold tracking-[0.1em] text-black/40 uppercase">Explore</p>
+              <h2 id="industry-directory-title" className="m-0 mt-3 text-base font-bold uppercase">Industries we serve</h2>
+            </div>
+            <span className="text-xs text-black/45">12 sectors</span>
+          </div>
+
+          <div className="grid grid-cols-1 border-t border-[#dedede] sm:grid-cols-2 lg:grid-cols-3">
+            {industries.map((industry, index) => (
+              <article key={industry.name} className="group border-r border-b border-[#dedede] bg-white">
+                <a href="/contact-us#start-project" className="block text-black no-underline">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-[#efefed]">
+                    <Image
+                      src={industry.image}
+                      alt={`${industry.name} industry`}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <span className="absolute top-4 left-4 text-[10px] font-medium text-white">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div className="flex min-h-[180px] flex-col p-6 md:p-7">
+                    <h3 className="m-0 text-lg leading-6 font-medium">{industry.name}</h3>
+                    <p className="m-0 mt-3 max-w-[380px] text-xs leading-5 text-black/50">{industry.description}</p>
+                    <span className="mt-auto flex items-center justify-between pt-7 text-[10px] font-bold tracking-[0.08em] uppercase">
+                      Discuss your brief <Arrow />
+                    </span>
+                  </div>
+                </a>
+              </article>
             ))}
           </div>
+        </section>
 
-          <div className="px-8 py-14 text-center md:px-16">
-            <p className="m-0 text-base leading-6 font-normal text-black">
-              Don&apos;t see your industry? We serve all sectors. Let&apos;s talk.
-            </p>
-            <a
-              href="/contact-us"
-              className="mt-6 inline-flex h-12 items-center justify-center bg-black px-10 text-xs font-bold tracking-[0.04em] text-white uppercase no-underline"
-            >
-              Contact Our Team
+        <section aria-label="Start an industry project" className="grid bg-[#cbd8d4] md:grid-cols-[1.4fr_0.6fr]">
+          <div className="px-8 py-14 md:px-16 md:py-20">
+            <p className="m-0 text-[10px] font-bold tracking-[0.1em] text-black/50 uppercase">Your sector is only the start</p>
+            <h2 className="m-0 mt-4 max-w-[720px] text-3xl leading-tight font-light md:text-5xl">
+              Tell us the moment. We will shape the right experience around it.
+            </h2>
+          </div>
+          <div className="flex items-end border-t border-black/15 px-8 py-10 md:border-t-0 md:border-l md:px-12 md:py-16">
+            <a href="/contact-us#start-project" className="flex w-full items-center justify-between border-b border-black pb-3 text-xs font-bold text-black no-underline uppercase">
+              Start your project <Arrow />
             </a>
           </div>
         </section>

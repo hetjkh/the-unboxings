@@ -15,7 +15,7 @@ const productsLinks = [
   { label: "Awards & Recognition", href: "/products" },
   { label: "Packaging Solutions", href: "/products" },
   { label: "Luxury Gifts", href: "/products" },
-  { label: "Travel Collection", href: "/products" },
+  { label: "Travel Collection", href: "/products/travel-collection" },
 ];
 
 const solutionsLinks = [
