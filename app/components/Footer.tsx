@@ -106,16 +106,16 @@ export default function Footer() {
       </div>
 
       {/* Brand wordmark — styling intentionally preserved */}
-      <div className="flex justify-center px-4 pb-12 md:px-8 md:pb-16">
+      <div className="flex justify-center px-3 pb-12 md:px-6 md:pb-16">
         <Link
           href="/"
           aria-label="The Unboxing - go to homepage"
-          className="flex items-baseline justify-center gap-3 no-underline md:gap-5"
+          className="flex w-full items-baseline justify-center gap-2 no-underline md:gap-5"
         >
-          <span className="text-sm leading-none font-medium tracking-[0.2em] text-white uppercase md:text-base lg:text-xl">
+          <span className="text-base leading-none font-medium tracking-normal text-white uppercase md:text-xl lg:text-3xl">
             The
           </span>
-          <span className="text-6xl leading-none font-bold tracking-[-0.05em] text-white uppercase md:text-8xl lg:text-[10rem]">
+          <span className="text-7xl leading-none font-bold tracking-normal text-white uppercase md:text-[9rem] lg:text-[13rem] xl:text-[15rem]">
             Unboxing
           </span>
         </Link>

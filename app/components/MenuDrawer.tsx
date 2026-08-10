@@ -6,15 +6,15 @@ import { useEffect, useState } from "react";
 // ─── Navigation Data ────────────────────────────────────────────────────────
 
 const productsLinks = [
-  { label: "Tech & Electronics", href: "/products" },
-  { label: "Drinkware", href: "/products" },
-  { label: "Office Essentials", href: "/products" },
-  { label: "Executive Gifts", href: "/products" },
-  { label: "Eco Collection", href: "/products" },
-  { label: "Apparel & Uniforms", href: "/products" },
-  { label: "Awards & Recognition", href: "/products" },
-  { label: "Packaging Solutions", href: "/products" },
-  { label: "Luxury Gifts", href: "/products" },
+  { label: "Tech & Electronics", href: "/products/tech-electronics" },
+  { label: "Drinkware", href: "/products/drinkware" },
+  { label: "Office Essentials", href: "/products/office-essentials" },
+  { label: "Executive Gifts", href: "/products/executive-gifts" },
+  { label: "Eco Collection", href: "/products/eco-collection" },
+  { label: "Apparel & Uniforms", href: "/products/apparel-uniforms" },
+  { label: "Awards & Recognition", href: "/products/awards-recognition" },
+  { label: "Packaging Solutions", href: "/products/packaging-solutions" },
+  { label: "Luxury Gifts", href: "/products/luxury-gifts" },
   { label: "Travel Collection", href: "/products/travel-collection" },
 ];
 
@@ -59,17 +59,17 @@ const productFeatures = [
   {
     name: "Executive Gifts",
     image: "/cat_executive.png",
-    href: "/products",
+    href: "/products/executive-gifts",
   },
   {
     name: "Eco Collection",
     image: "/cat_eco.png",
-    href: "/products",
+    href: "/products/eco-collection",
   },
   {
     name: "Tech & Electronics",
     image: "/cat_tech.png",
-    href: "/products",
+    href: "/products/tech-electronics",
   },
 ];
 
