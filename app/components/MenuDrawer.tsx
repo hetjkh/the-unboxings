@@ -34,7 +34,8 @@ const primaryLinks = [
   { label: "Solutions", panel: "solutions" as MenuPanel },
   { label: "Shop by Occasion", href: "/occasions" },
   { label: "Shop by Industry", href: "/industries" },
-  { label: "Branding Services", href: "/branding-services" },
+  { label: "Behind the Design", href: "/behind-the-design" },
+  { label: "Materials", href: "/materials" },
   { label: "Inspiration Gallery", href: "/inspiration-gallery" },
   { label: "Resources", href: "/resources" },
 ];

@@ -12,7 +12,7 @@ const categories = [
   {
     title: "Brand Experience",
     video: "/video/3.webm",
-    href: "/branding-services",
+    href: "/behind-the-design",
   },
   {
     title: "Event Experience",
