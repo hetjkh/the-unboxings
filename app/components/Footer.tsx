@@ -106,16 +106,16 @@ export default function Footer() {
       </div>
 
       {/* Brand wordmark — styling intentionally preserved */}
-      <div className="flex justify-center px-3 pb-12 md:px-6 md:pb-16">
+      <div className="flex w-full justify-center px-3 pb-12 md:px-6 md:pb-16">
         <Link
           href="/"
           aria-label="The Unboxing - go to homepage"
-          className="flex w-full items-baseline justify-center gap-2 no-underline md:gap-5"
+          className="flex w-full min-w-0 items-baseline justify-center gap-[2vw] overflow-hidden whitespace-nowrap no-underline"
         >
-          <span className="text-base leading-none font-medium tracking-normal text-white uppercase md:text-xl lg:text-3xl">
+          <span className="shrink-0 text-[clamp(0.65rem,2vw,1.875rem)] leading-none font-medium tracking-normal text-white uppercase">
             The
           </span>
-          <span className="text-7xl leading-none font-bold tracking-normal text-white uppercase md:text-[9rem] lg:text-[13rem] xl:text-[15rem]">
+          <span className="min-w-0 text-[clamp(2.5rem,15vw,15rem)] leading-[0.82] font-bold tracking-[-0.045em] text-white uppercase">
             Unboxing
           </span>
         </Link>
