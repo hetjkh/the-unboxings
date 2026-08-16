@@ -65,6 +65,15 @@ export default function CreateMethodSection() {
             </article>
           ))}
         </div>
+
+        <div className="mt-10 flex justify-center border-t border-white/20 pt-10">
+          <a
+            href="/behind-the-design"
+            className="inline-flex min-h-12 items-center justify-center border border-white/30 px-8 text-[10px] font-bold tracking-[0.14em] text-white uppercase no-underline hover:bg-white hover:text-black"
+          >
+            Explore behind the design&nbsp; →
+          </a>
+        </div>
       </div>
     </section>
   );

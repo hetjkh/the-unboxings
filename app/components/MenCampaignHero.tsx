@@ -3,7 +3,7 @@ import Link from "next/link";
 import { brandStories } from "../data/brandStories";
 
 export default function MenCampaignHero() {
-  const [featuredStory, ...supportingStories] = brandStories;
+  const [featuredStory, ...supportingStories] = brandStories.slice(0, 4);
 
   return (
     <section
@@ -109,6 +109,11 @@ export default function MenCampaignHero() {
               </div>
             </Link>
           ))}
+        </div>
+        <div className="mt-10 flex justify-center">
+          <Link href="/inspiration-gallery" className="inline-flex min-h-12 items-center justify-center border border-white/30 px-8 text-[10px] font-bold tracking-[0.14em] text-white uppercase no-underline hover:bg-white hover:text-black">
+            View more inspirations&nbsp; →
+          </Link>
         </div>
       </div>
     </section>
