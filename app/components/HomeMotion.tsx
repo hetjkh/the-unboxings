@@ -98,6 +98,20 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
           },
         });
       });
+
+      gsap.utils.toArray<HTMLElement>("[data-motion-card]", root).forEach((card) => {
+        gsap.from(card, {
+          autoAlpha: 0,
+          y: 48,
+          duration: 0.95,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 88%",
+            once: true,
+          },
+        });
+      });
     }, root);
 
     const refreshScrollPositions = () => ScrollTrigger.refresh();
