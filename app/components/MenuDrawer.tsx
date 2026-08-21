@@ -59,17 +59,17 @@ const productFeatures = [
   },
   {
     name: "Executive Gifts",
-    image: "/cat_executive.png",
+    image: "/products/15.jpg",
     href: "/products/executive-gifts",
   },
   {
     name: "Eco Collection",
-    image: "/cat_eco.png",
+    image: "/products/21.jpg",
     href: "/products/eco-collection",
   },
   {
     name: "Tech & Electronics",
-    image: "/cat_tech.png",
+    image: "/products/07.jpg",
     href: "/products/tech-electronics",
   },
 ];
@@ -82,17 +82,17 @@ const solutionFeatures = [
   },
   {
     name: "Luxury Packaging",
-    image: "/cat_packaging.png",
+    image: "/products/31.jpg",
     href: "/solutions",
   },
   {
     name: "Awards & Recognition",
-    image: "/cat_awards.png",
+    image: "/products/27.jpg",
     href: "/solutions",
   },
   {
     name: "Branded Apparel",
-    image: "/cat_apparel.png",
+    image: "/products/24.jpg",
     href: "/solutions",
   },
 ];

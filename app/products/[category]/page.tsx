@@ -32,7 +32,7 @@ export default async function ProductCategoryPage({ params }: { params: Promise<
             <p className="m-0 mt-5 max-w-[430px] text-xs leading-5 text-black/55">{category.description}</p>
           </div>
           <div className="relative aspect-[4/3] overflow-hidden bg-[#f1f1ef] md:aspect-auto md:min-h-[430px]">
-            <Image src={category.image} alt={category.name} fill priority className="object-cover" sizes="(max-width: 768px) 100vw, 65vw" />
+            <Image src={category.image} alt={category.name} fill priority className="object-contain object-center p-6" sizes="(max-width: 768px) 100vw, 65vw" />
           </div>
         </section>
 
