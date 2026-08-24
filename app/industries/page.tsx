@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const industries = [
   {
     name: "Real Estate",
-    image: "/industries/REAL ESTATE.webp",
+    image: "/industries/real-estate.webp",
     description: "Handover experiences, site-visit kits, and client milestones made memorable.",
   },
   {
@@ -21,52 +21,52 @@ const industries = [
   },
   {
     name: "Government",
-    image: "/industries/GOVERNMENT.webp",
+    image: "/industries/government.webp",
     description: "Official presentations, national occasions, and distinguished corporate hospitality.",
   },
   {
     name: "Healthcare",
-    image: "/industries/HEALTHCARE.webp",
+    image: "/industries/healthcare.webp",
     description: "Wellness programs, staff recognition, and conference experiences designed with care.",
   },
   {
     name: "Education",
-    image: "/industries/EDUCATION.webp",
+    image: "/industries/education.webp",
     description: "Student welcomes, graduation moments, and recognition that celebrates progress.",
   },
   {
     name: "Aviation",
-    image: "/industries/AVIATION.webp",
+    image: "/industries/aviation.webp",
     description: "Crew gifts, passenger amenities, and branded essentials made to travel.",
   },
   {
     name: "Construction",
-    image: "/industries/CONSTRUCTION.webp",
+    image: "/industries/construction.webp",
     description: "Project milestones, safety programs, and handover packages built for impact.",
   },
   {
     name: "Technology",
-    image: "/industries/TECHNOLOGY.webp",
+    image: "/industries/technology.webp",
     description: "Onboarding kits, launch merchandise, and useful tools for connected teams.",
   },
   {
     name: "Finance",
-    image: "/industries/FINANCE.webp",
+    image: "/industries/finance.webp",
     description: "Executive gifts, employee rewards, and premium experiences for valued clients.",
   },
   {
     name: "Automotive",
-    image: "/industries/AUTOMOTIVE.webp",
+    image: "/industries/automotive.webp",
     description: "Vehicle launches, dealer events, and ownership moments that carry the brand forward.",
   },
   {
     name: "Luxury",
-    image: "/industries/LUXURY.webp",
+    image: "/industries/luxury.webp",
     description: "Refined objects, elevated packaging, and tactile experiences with lasting presence.",
   },
   {
     name: "Retail",
-    image: "/industries/RETAIL.webp",
+    image: "/industries/retail.webp",
     description: "Seasonal campaigns, loyalty rewards, and team merchandise made for everyday visibility.",
   },
 ] as const;
@@ -83,7 +83,7 @@ export default function IndustriesPage() {
         <section aria-labelledby="industries-title" className="relative bg-white text-black">
           <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#dce8ed] md:aspect-[16/7]">
             <Image
-              src="/industries/industries-hero-source.png"
+              src="/industries/real-estate.webp"
               alt="Modern real estate development under construction"
               fill
               priority

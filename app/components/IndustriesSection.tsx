@@ -4,18 +4,18 @@ import Image from "next/image";
 import { useRef } from "react";
 
 const industries = [
-  ["01", "Real Estate", "/industries/REAL ESTATE.webp"],
+  ["01", "Real Estate", "/industries/real-estate.webp"],
   ["02", "Hospitality", "/industries/hospitality.webp"],
-  ["03", "Government", "/industries/GOVERNMENT.webp"],
-  ["04", "Healthcare", "/industries/HEALTHCARE.webp"],
-  ["05", "Education", "/industries/EDUCATION.webp"],
-  ["06", "Aviation", "/industries/AVIATION.webp"],
-  ["07", "Construction", "/industries/CONSTRUCTION.webp"],
-  ["08", "Technology", "/industries/TECHNOLOGY.webp"],
-  ["09", "Finance", "/industries/FINANCE.webp"],
-  ["10", "Automotive", "/industries/AUTOMOTIVE.webp"],
-  ["11", "Luxury", "/industries/LUXURY.webp"],
-  ["12", "Retail", "/industries/RETAIL.webp"],
+  ["03", "Government", "/industries/government.webp"],
+  ["04", "Healthcare", "/industries/healthcare.webp"],
+  ["05", "Education", "/industries/education.webp"],
+  ["06", "Aviation", "/industries/aviation.webp"],
+  ["07", "Construction", "/industries/construction.webp"],
+  ["08", "Technology", "/industries/technology.webp"],
+  ["09", "Finance", "/industries/finance.webp"],
+  ["10", "Automotive", "/industries/automotive.webp"],
+  ["11", "Luxury", "/industries/luxury.webp"],
+  ["12", "Retail", "/industries/retail.webp"],
 ] as const;
 
 function Arrow({ direction }: { direction: "left" | "right" }) {
