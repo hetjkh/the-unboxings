@@ -36,7 +36,7 @@ export default async function BrandStoryPage({
             {story.title}
           </h1>
         </section>
-        <div className="relative aspect-square w-full overflow-hidden bg-[#f5f5f5] md:aspect-[16/9]">
+        <div className="relative aspect-square w-full overflow-hidden md:aspect-[16/9]">
           <Image src={story.image} alt={story.alt} fill priority className="object-cover" sizes="100vw" />
         </div>
         <section className="mx-auto max-w-[1200px] px-8 py-14 md:px-16 md:py-20">

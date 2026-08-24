@@ -4,18 +4,18 @@ import Image from "next/image";
 import { useRef } from "react";
 
 const industries = [
-  ["01", "Real Estate", "/industries/real-estate-handover.png"],
-  ["02", "Hospitality", "/industries/hospitality-experience.png"],
-  ["03", "Government", "/industries/government-experience.png"],
-  ["04", "Healthcare", "/industries/healthcare-experience.png"],
-  ["05", "Education", "/industries/education-experience.png"],
-  ["06", "Aviation", "/industries/aviation-experience.png"],
-  ["07", "Construction", "/industries/construction-experience.png"],
-  ["08", "Technology", "/industries/technology-experience.png"],
-  ["09", "Finance", "/industries/finance-experience.png"],
-  ["10", "Automotive", "/industries/automotive-experience.png"],
-  ["11", "Luxury", "/industries/luxury-experience.png"],
-  ["12", "Retail", "/industries/retail-experience.png"],
+  ["01", "Real Estate", "/industries/REAL ESTATE.webp"],
+  ["02", "Hospitality", "/industries/hospitality.webp"],
+  ["03", "Government", "/industries/GOVERNMENT.webp"],
+  ["04", "Healthcare", "/industries/HEALTHCARE.webp"],
+  ["05", "Education", "/industries/EDUCATION.webp"],
+  ["06", "Aviation", "/industries/AVIATION.webp"],
+  ["07", "Construction", "/industries/CONSTRUCTION.webp"],
+  ["08", "Technology", "/industries/TECHNOLOGY.webp"],
+  ["09", "Finance", "/industries/FINANCE.webp"],
+  ["10", "Automotive", "/industries/AUTOMOTIVE.webp"],
+  ["11", "Luxury", "/industries/LUXURY.webp"],
+  ["12", "Retail", "/industries/RETAIL.webp"],
 ] as const;
 
 function Arrow({ direction }: { direction: "left" | "right" }) {

@@ -4,67 +4,52 @@ import Footer from "../components/Footer";
 
 const solutions = [
   {
-    title: "Executive Welcome Kit",
+    title: "Employee Welcome Kits",
     description:
-      "Premium leather bag, notebook, bottle, wireless charger, and branded stationery — all curated in a luxury rigid box.",
-    image: "/cat_welcome.png",
-    tags: ["Onboarding", "HR"],
+      "Onboarding sets built from tech, office essentials and drinkware — a complete first-day experience in one branded box.",
+    image: "/products/06.jpg",
+    href: "/products/tech-electronics",
+    tags: ["Onboarding", "Tech"],
   },
   {
-    title: "Conference Delegate Kit",
+    title: "Event Merchandise",
     description:
-      "Tote bag, branded notebook, pen, USB drive, lanyard, and event badge — perfect for conferences and summits.",
-    image: "/cat_promo.png",
-    tags: ["Events", "Conferences"],
+      "Coordinated apparel and uniforms for conferences, activations and teams that need to look like one brand on the floor.",
+    image: "/apprales%20%26%20uniforms/corporate-classic.png",
+    href: "/products/apparel-uniforms",
+    tags: ["Events", "Apparel"],
   },
   {
-    title: "Luxury Real Estate Handover Box",
+    title: "Executive Gifts",
     description:
-      "A curated box of premium products for new homeowners — keys presented in a marble tray, champagne flutes, and a personalized card.",
-    image: "/cat_packaging.png",
-    tags: ["Real Estate", "VIP"],
+      "Premium presentation sets for leadership, clients and milestones — considered pieces, not catalogue giveaways.",
+    image: "/products/15.jpg",
+    href: "/products/executive-gifts",
+    tags: ["Leadership", "VIP"],
   },
   {
-    title: "Wellness Gift Box",
+    title: "Awards & Recognition",
     description:
-      "Aromatherapy diffuser, bamboo products, reusable bottle, and natural soaps — promoting employee wellbeing.",
-    image: "/cat_eco.png",
-    tags: ["Wellness", "HR"],
+      "Bespoke trophies and recognition pieces that make achievement tangible for teams, partners and long service.",
+    image: "/products/27.jpg",
+    href: "/products/awards-recognition",
+    tags: ["Recognition", "Culture"],
   },
   {
-    title: "CEO Appreciation Collection",
+    title: "Packaging Solutions",
     description:
-      "Marble accessories, leather portfolio, crystal award, and premium writing instruments — for your most valued leaders.",
-    image: "/cat_executive.png",
-    tags: ["Executive", "VIP"],
+      "Presentation packaging engineered around the product and the opening moment — for launches, handovers and gifting.",
+    image: "/products/35.jpg",
+    href: "/products/packaging-solutions",
+    tags: ["Launch", "Unboxing"],
   },
   {
-    title: "Ramadan Premium Hamper",
+    title: "Luxury Gifts",
     description:
-      "Luxury dates, Arabic coffee set, candle, and a premium crystal gift — beautifully packaged for the Holy Month.",
-    image: "/cat_luxury.png",
-    tags: ["Ramadan", "Seasonal"],
-  },
-  {
-    title: "Tech Kit",
-    description:
-      "Wireless charger, Bluetooth earbuds, power bank, and laptop sleeve — all branded with your company logo.",
-    image: "/cat_tech.png",
-    tags: ["Tech", "Onboarding"],
-  },
-  {
-    title: "Work From Home Kit",
-    description:
-      "Ergonomic mouse pad, phone stand, cable organizer, coffee mug, and a branded notebook for the remote team.",
-    image: "/cat_office.png",
-    tags: ["WFH", "HR"],
-  },
-  {
-    title: "Brand Launch Kit",
-    description:
-      "A complete branded experience — apparel, tech accessories, stationery, and packaging that tells your brand story.",
-    image: "/cat_apparel.png",
-    tags: ["Marketing", "Launch"],
+      "Refined writing, fragrance and collectible gifts for client appreciation, seasonal giving and senior relationships.",
+    image: "/products/41.jpg",
+    href: "/products/luxury-gifts",
+    tags: ["Clients", "Seasonal"],
   },
 ];
 
@@ -113,10 +98,10 @@ export default function SolutionsPage() {
                       {solution.description}
                     </p>
                     <a
-                      href="/contact-us"
+                      href={solution.href}
                       className="mt-4 shrink-0 text-base leading-6 font-medium text-black underline underline-offset-2"
                     >
-                      Contact Us
+                      View collection
                     </a>
                   </div>
                 </article>

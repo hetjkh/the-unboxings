@@ -32,7 +32,7 @@ export default function ResourcesPage() {
               {resourceArticles.map((article) => (
                 <article key={article.slug} className="flex h-full flex-col">
                   <Link href={`/resources/${article.slug}`} className="group block no-underline">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-[#f5f5f5]">
+                    <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={article.images[0].src}
                         alt={article.images[0].alt}

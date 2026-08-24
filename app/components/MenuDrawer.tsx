@@ -21,18 +21,15 @@ const productsLinks = [
 const solutionsLinks = [
   { label: "Employee Welcome Kits", href: "/solutions" },
   { label: "Event Merchandise", href: "/solutions" },
-  { label: "Executive Gifts", href: "/solutions" },
-  { label: "Promotional Campaigns", href: "/solutions" },
-  { label: "Client Appreciation", href: "/solutions" },
-  { label: "Office Branding", href: "/solutions" },
-  { label: "Brand Launch Kits", href: "/solutions" },
-  { label: "Ramadan & Seasonal", href: "/solutions" },
+  { label: "Executive Gifts", href: "/products/executive-gifts" },
+  { label: "Awards & Recognition", href: "/products/awards-recognition" },
+  { label: "Packaging Solutions", href: "/products/packaging-solutions" },
+  { label: "Luxury Gifts", href: "/products/luxury-gifts" },
 ];
 
 const primaryLinks = [
   { label: "Products", panel: "products" as MenuPanel },
   { label: "Solutions", panel: "solutions" as MenuPanel },
-  { label: "Shop by Occasion", href: "/occasions" },
   { label: "Shop by Industry", href: "/industries" },
   { label: "Behind the Design", href: "/behind-the-design" },
   { label: "Materials", href: "/materials" },
@@ -76,24 +73,24 @@ const productFeatures = [
 
 const solutionFeatures = [
   {
-    name: "Conference Kits",
-    image: "/cat_promo.png",
+    name: "Employee Welcome Kits",
+    image: "/products/06.jpg",
     href: "/solutions",
   },
   {
-    name: "Luxury Packaging",
-    image: "/products/31.jpg",
-    href: "/solutions",
+    name: "Event Merchandise",
+    image: "/apprales%20%26%20uniforms/corporate-classic.png",
+    href: "/products/apparel-uniforms",
   },
   {
     name: "Awards & Recognition",
     image: "/products/27.jpg",
-    href: "/solutions",
+    href: "/products/awards-recognition",
   },
   {
-    name: "Branded Apparel",
-    image: "/products/24.jpg",
-    href: "/solutions",
+    name: "Luxury Gifts",
+    image: "/products/41.jpg",
+    href: "/products/luxury-gifts",
   },
 ];
 

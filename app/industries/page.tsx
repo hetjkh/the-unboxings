@@ -11,62 +11,62 @@ export const metadata: Metadata = {
 const industries = [
   {
     name: "Real Estate",
-    image: "/industries/real-estate-handover.png",
+    image: "/industries/REAL ESTATE.webp",
     description: "Handover experiences, site-visit kits, and client milestones made memorable.",
   },
   {
     name: "Hospitality",
-    image: "/industries/hospitality-experience.png",
+    image: "/industries/hospitality.webp",
     description: "Guest amenities, opening gifts, and VIP arrivals with a considered sense of place.",
   },
   {
     name: "Government",
-    image: "/industries/government-experience.png",
+    image: "/industries/GOVERNMENT.webp",
     description: "Official presentations, national occasions, and distinguished corporate hospitality.",
   },
   {
     name: "Healthcare",
-    image: "/industries/healthcare-experience.png",
+    image: "/industries/HEALTHCARE.webp",
     description: "Wellness programs, staff recognition, and conference experiences designed with care.",
   },
   {
     name: "Education",
-    image: "/industries/education-experience.png",
+    image: "/industries/EDUCATION.webp",
     description: "Student welcomes, graduation moments, and recognition that celebrates progress.",
   },
   {
     name: "Aviation",
-    image: "/industries/aviation-experience.png",
+    image: "/industries/AVIATION.webp",
     description: "Crew gifts, passenger amenities, and branded essentials made to travel.",
   },
   {
     name: "Construction",
-    image: "/industries/construction-experience.png",
+    image: "/industries/CONSTRUCTION.webp",
     description: "Project milestones, safety programs, and handover packages built for impact.",
   },
   {
     name: "Technology",
-    image: "/industries/technology-experience.png",
+    image: "/industries/TECHNOLOGY.webp",
     description: "Onboarding kits, launch merchandise, and useful tools for connected teams.",
   },
   {
     name: "Finance",
-    image: "/industries/finance-experience.png",
+    image: "/industries/FINANCE.webp",
     description: "Executive gifts, employee rewards, and premium experiences for valued clients.",
   },
   {
     name: "Automotive",
-    image: "/industries/automotive-experience.png",
+    image: "/industries/AUTOMOTIVE.webp",
     description: "Vehicle launches, dealer events, and ownership moments that carry the brand forward.",
   },
   {
     name: "Luxury",
-    image: "/industries/luxury-experience.png",
+    image: "/industries/LUXURY.webp",
     description: "Refined objects, elevated packaging, and tactile experiences with lasting presence.",
   },
   {
     name: "Retail",
-    image: "/industries/retail-experience.png",
+    image: "/industries/RETAIL.webp",
     description: "Seasonal campaigns, loyalty rewards, and team merchandise made for everyday visibility.",
   },
 ] as const;

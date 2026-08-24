@@ -104,13 +104,13 @@ export default async function ResourceArticlePage({
               </div>
             </div>
 
-            <div className="relative min-h-[420px] bg-[#11100f] lg:min-h-full">
+            <div className="relative min-h-[420px] overflow-hidden lg:min-h-full">
               <Image
                 src={cover.src}
                 alt={cover.alt}
                 fill
                 priority
-                className="object-contain p-6 md:p-10"
+                className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 55vw"
               />
             </div>
@@ -125,16 +125,16 @@ export default async function ResourceArticlePage({
 
             {gallery.length > 0 ? (
               <div
-                className={`mx-auto mt-14 grid max-w-[1100px] gap-4 ${gallery.length > 1 ? "md:grid-cols-2" : ""}`}
+                className={`mx-auto mt-14 grid max-w-[1100px] gap-6 ${gallery.length > 1 ? "md:grid-cols-2" : ""}`}
               >
                 {gallery.map((image) => (
-                  <figure key={image.src} className="m-0 bg-[#f4f3ef]">
+                  <figure key={image.src} className="m-0">
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={image.src}
                         alt={image.alt}
                         fill
-                        className="object-contain p-4"
+                        className="object-cover"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
