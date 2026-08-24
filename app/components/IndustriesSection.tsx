@@ -8,14 +8,15 @@ const industries = [
   ["02", "Hospitality", "/industries/hospitality.webp"],
   ["03", "Government", "/industries/government.webp"],
   ["04", "Healthcare", "/industries/healthcare.webp"],
-  ["05", "Education", "/industries/education.webp"],
-  ["06", "Aviation", "/industries/aviation.webp"],
-  ["07", "Construction", "/industries/construction.webp"],
-  ["08", "Technology", "/industries/technology.webp"],
-  ["09", "Finance", "/industries/finance.webp"],
-  ["10", "Automotive", "/industries/automotive.webp"],
-  ["11", "Luxury", "/industries/luxury.webp"],
-  ["12", "Retail", "/industries/retail.webp"],
+  ["05", "Health & Wellness", "/industries/health-wellness.webp"],
+  ["06", "Education", "/industries/education.webp"],
+  ["07", "Aviation", "/industries/aviation.webp"],
+  ["08", "Construction", "/industries/construction.webp"],
+  ["09", "Technology", "/industries/technology.webp"],
+  ["10", "Finance", "/industries/finance.webp"],
+  ["11", "Automotive", "/industries/automotive.webp"],
+  ["12", "Luxury", "/industries/luxury.webp"],
+  ["13", "Retail", "/industries/retail.webp"],
 ] as const;
 
 function Arrow({ direction }: { direction: "left" | "right" }) {

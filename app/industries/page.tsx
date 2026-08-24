@@ -30,6 +30,11 @@ const industries = [
     description: "Wellness programs, staff recognition, and conference experiences designed with care.",
   },
   {
+    name: "Health & Wellness",
+    image: "/industries/health-wellness.webp",
+    description: "Spa rituals, wellbeing kits, and lifestyle gifts that support balance and recovery.",
+  },
+  {
     name: "Education",
     image: "/industries/education.webp",
     description: "Student welcomes, graduation moments, and recognition that celebrates progress.",
