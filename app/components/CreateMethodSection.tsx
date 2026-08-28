@@ -3,7 +3,8 @@ const method = [
   { letter: "R", title: "Research", description: "Find the cultural, material and contextual insight." },
   { letter: "E", title: "Envision", description: "Shape a concept people will want to keep." },
   { letter: "A", title: "Assemble", description: "Prototype, refine and bring every detail into alignment." },
-  { letter: "T", title: "Transform", description: "Deliver an experience with measurable brand impact." },
+  { letter: "T", title: "Transform", description: "Elevate the idea into a considered brand experience." },
+  { letter: "E", title: "Execute", description: "Deliver with precision, on time and with measurable brand impact." },
 ];
 
 export default function CreateMethodSection() {
@@ -26,11 +27,11 @@ export default function CreateMethodSection() {
             </h2>
           </div>
           <p className="m-0 max-w-[390px] text-sm leading-6 text-white/60 md:text-right">
-            Five connected stages. One clear path from opportunity to lasting brand impact.
+            Six connected stages. One clear path from opportunity to lasting brand impact.
           </p>
         </header>
 
-        <div className="grid md:grid-cols-5">
+        <div className="grid md:grid-cols-6">
           {method.map(({ letter, title, description }, index) => (
             <article
               key={title}
