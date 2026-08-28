@@ -84,31 +84,35 @@ export default function IndustriesPage() {
   return (
     <>
       <Header />
-      <main>
-        <section aria-labelledby="industries-title" className="relative bg-white text-black">
-          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#dce8ed] md:aspect-[16/7]">
+      <main className="bg-white">
+        <section
+          aria-labelledby="industries-title"
+          className="grid h-[68vh] min-h-[520px] max-h-[820px] grid-rows-[auto_1fr] overflow-hidden border-b border-black/20 bg-[#0a0a0a] text-white md:grid-cols-[1fr_1.05fr] md:grid-rows-1"
+        >
+          <div className="flex flex-col justify-center px-8 py-10 md:px-16 md:py-16">
+            <p className="m-0 text-[11px] font-bold tracking-[0.14em] text-white/45 uppercase md:text-xs">Where ideas meet context</p>
+            <h1 id="industries-title" className="m-0 mt-5 text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.95] font-light tracking-[-0.04em] uppercase">
+              Industries
+            </h1>
+            <p className="m-0 mt-6 max-w-[560px] text-base leading-7 text-white/65 md:text-lg md:leading-8">
+              Industry knowledge shapes the ideas we bring to the table and the experiences we make possible.
+            </p>
+            <a
+              href="#industry-directory"
+              className="mt-8 inline-flex w-fit items-center gap-3 border-b border-white pb-1 text-xs font-bold text-white no-underline uppercase"
+            >
+              Explore sectors <Arrow />
+            </a>
+          </div>
+          <div className="relative h-full min-h-[360px] md:min-h-0">
             <Image
               src="/industries/real-estate.webp"
               alt="Modern real estate development under construction"
               fill
               priority
-              className="object-cover object-[68%_bottom] md:object-bottom"
-              sizes="100vw"
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
-          </div>
-          <div className="relative px-8 py-10 md:absolute md:inset-0 md:flex md:items-center md:px-16 md:py-0">
-            <div className="mx-auto w-full max-w-[1312px]">
-              <div className="max-w-[470px] md:w-[42%]">
-                <p className="m-0 text-[10px] font-bold tracking-[0.12em] text-black/45 uppercase">Where ideas meet context</p>
-                <h1 id="industries-title" className="m-0 mt-4 text-4xl leading-none font-light md:text-6xl">Industries</h1>
-                <p className="m-0 mt-6 max-w-[400px] text-xs leading-5 text-black/60">
-                  Industry knowledge shapes the ideas we bring to the table and the experiences we make possible.
-                </p>
-                <a href="#industry-directory" className="mt-8 inline-flex items-center gap-3 border-b border-black pb-1 text-xs font-bold text-black no-underline uppercase">
-                  Explore sectors <Arrow />
-                </a>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -132,7 +136,7 @@ export default function IndustriesPage() {
               <p className="m-0 text-[10px] font-bold tracking-[0.1em] text-black/40 uppercase">Explore</p>
               <h2 id="industry-directory-title" className="m-0 mt-3 text-base font-bold uppercase">Industries we serve</h2>
             </div>
-            <span className="text-xs text-black/45">12 sectors</span>
+            <span className="text-xs text-black/45">{industries.length} sectors</span>
           </div>
 
           <div className="grid grid-cols-1 border-t border-[#dedede] sm:grid-cols-2 lg:grid-cols-3">
