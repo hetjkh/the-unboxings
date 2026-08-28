@@ -11,6 +11,7 @@ const productsLinks = [
   { label: "Office Essentials", href: "/products/office-essentials" },
   { label: "Executive Gifts", href: "/products/executive-gifts" },
   { label: "Eco Collection", href: "/products/eco-collection" },
+  { label: "Health & Wellness", href: "/products/health-wellness" },
   { label: "Apparel & Uniforms", href: "/products/apparel-uniforms" },
   { label: "Awards & Recognition", href: "/products/awards-recognition" },
   { label: "Packaging Solutions", href: "/products/packaging-solutions" },
@@ -33,7 +34,7 @@ const primaryLinks = [
   { label: "Shop by Industry", href: "/industries" },
   { label: "Behind the Design", href: "/behind-the-design" },
   { label: "Materials", href: "/materials" },
-  { label: "Inspiration Gallery", href: "/inspiration-gallery" },
+  { label: "Brand Stories", href: "/inspiration-gallery" },
   { label: "Resources", href: "/resources" },
 ];
 
@@ -51,7 +52,7 @@ const footerLinks = [
 const productFeatures = [
   {
     name: "Employee Welcome Kits",
-    image: "/cat_welcome.png",
+    image: "/experience-employee.png",
     href: "/solutions",
   },
   {
@@ -74,7 +75,7 @@ const productFeatures = [
 const solutionFeatures = [
   {
     name: "Employee Welcome Kits",
-    image: "/products/06.jpg",
+    image: "/experience-employee.png",
     href: "/solutions",
   },
   {

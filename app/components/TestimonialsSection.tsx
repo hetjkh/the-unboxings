@@ -3,7 +3,7 @@ import Link from "next/link";
 const projects = [
   { number: "01", title: "A Landmark Arrival", description: "A considered welcome experience for 500 new homeowners.", href: "/brand-stories/dubai-developer-homeowners" },
   { number: "02", title: "A Boardroom Object", description: "Dubai architecture translated into an acrylic chess set.", href: "/brand-stories/dubai-skyline-chess-set" },
-  { number: "03", title: "An Event That Lingered", description: "A tactile leadership summit ritual designed to travel further.", href: "/brand-stories/leadership-summit-ritual" },
+  { number: "03", title: "Access, Unboxed", description: "A private banking card presentation designed around anticipation.", href: "/brand-stories/the-private-reveal" },
 ];
 
 export default function TestimonialsSection() {

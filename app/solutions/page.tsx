@@ -7,7 +7,7 @@ const solutions = [
     title: "Employee Welcome Kits",
     description:
       "Onboarding sets built from tech, office essentials and drinkware — a complete first-day experience in one branded box.",
-    image: "/products/06.jpg",
+    image: "/experience-employee.png",
     href: "/products/tech-electronics",
     tags: ["Onboarding", "Tech"],
   },

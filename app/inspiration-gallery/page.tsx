@@ -7,7 +7,7 @@ import HomeMotion from "../components/HomeMotion";
 import { brandStories } from "../data/brandStories";
 
 export const metadata: Metadata = {
-  title: "Inspiration | The Unboxing",
+  title: "Brand Stories | The Unboxing",
   description: "Explore how insights become ideas, designs and memorable brand experiences.",
 };
 
@@ -19,9 +19,9 @@ export default function InspirationGalleryPage() {
         <HomeMotion>
           <section aria-labelledby="inspiration-heading" className="grid bg-[#0a0a0a] text-white lg:min-h-[650px] lg:grid-cols-[0.9fr_1.1fr]">
             <div className="flex flex-col justify-between px-8 py-14 md:px-16 md:py-20">
-              <p className="m-0 text-[10px] font-medium tracking-[0.24em] text-white/40 uppercase">Inspiration</p>
+              <p className="m-0 text-[10px] font-medium tracking-[0.24em] text-white/40 uppercase">Selected work</p>
               <div className="mt-24">
-                <h1 id="inspiration-heading" className="m-0 text-[clamp(3.25rem,7vw,7rem)] leading-[0.87] font-light tracking-[-0.07em] uppercase">Ideas worth<br />unboxing</h1>
+                <h1 id="inspiration-heading" className="m-0 text-[clamp(3.25rem,7vw,7rem)] leading-[0.87] font-light tracking-[-0.07em] uppercase">Brand<br />Stories</h1>
                 <p className="m-0 mt-8 max-w-[520px] border-t border-white/25 pt-6 text-base leading-7 text-white/65">Every memorable piece begins with a story.</p>
                 <p className="m-0 mt-4 max-w-[520px] text-sm leading-6 text-white/45">Explore how an insight becomes an idea, an idea becomes a design, and a design becomes an experience people remember.</p>
               </div>
@@ -36,7 +36,7 @@ export default function InspirationGalleryPage() {
             <div className="mx-auto max-w-[1440px]">
               <header className="mb-12 flex items-end justify-between border-t border-white/25 pt-7 md:mb-16">
                 <div>
-                  <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-white/40 uppercase">Selected stories</p>
+                  <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-white/40 uppercase">Brand stories</p>
                   <h2 id="story-directory-heading" className="m-0 mt-4 text-3xl font-light tracking-[-0.045em] uppercase md:text-5xl">From brief to experience</h2>
                 </div>
                 <span className="hidden text-xs text-white/35 sm:block">{String(brandStories.length).padStart(2, "0")} stories</span>

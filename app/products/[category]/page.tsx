@@ -20,37 +20,27 @@ export default async function ProductCategoryPage({ params }: { params: Promise<
   const category = getCategory((await params).category);
   if (!category || category.slug === "travel-collection") notFound();
   const categoryProducts = products.filter((product) => product.category === category.slug);
-  const extraImage = categoryProducts.find((product) => product.image !== category.image) ?? categoryProducts[0];
-  const headerImages = extraImage
-    ? [
-        { src: category.image, alt: category.name },
-        { src: extraImage.image, alt: extraImage.name },
-      ]
-    : [{ src: category.image, alt: category.name }];
+  const containHeaderImage = category.slug === "health-wellness" || category.slug === "apparel-uniforms";
 
   return (
     <>
       <Header />
       <main className="bg-white">
-        <section className="grid h-[52vh] min-h-[380px] max-h-[620px] grid-rows-[auto_1fr] overflow-hidden border-b border-[#dedede] bg-white md:grid-cols-[1fr_1.15fr] md:grid-rows-1" aria-labelledby="category-title">
-          <div className="flex flex-col justify-center px-8 py-8 md:px-16 md:py-16">
-            <p className="m-0 text-xs font-bold tracking-[0.1em] text-black/40 uppercase">Products / {category.name}</p>
-            <h1 id="category-title" className="m-0 mt-5 text-4xl leading-[1.05] font-light tracking-[-0.03em] md:text-6xl lg:text-7xl">{category.name}</h1>
-            <p className="m-0 mt-6 max-w-[520px] text-sm leading-6 text-black/60 md:text-base md:leading-7">{category.description}</p>
+        <section className="grid h-[52vh] min-h-[420px] max-h-[680px] grid-rows-[auto_1fr] overflow-hidden border-b border-black/20 bg-[#0a0a0a] text-white md:grid-cols-[1fr_1.05fr] md:grid-rows-1" aria-labelledby="category-title">
+          <div className="flex flex-col justify-center px-8 py-10 md:px-16 md:py-16">
+            <p className="m-0 text-[11px] font-bold tracking-[0.14em] text-white/45 uppercase md:text-xs">Products / {category.name}</p>
+            <h1 id="category-title" className="m-0 mt-5 text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.95] font-light tracking-[-0.04em] uppercase">{category.name}</h1>
+            <p className="m-0 mt-6 max-w-[560px] text-base leading-7 text-white/65 md:text-lg md:leading-8">{category.description}</p>
           </div>
-          <div className="flex h-full min-h-0">
-            {headerImages.map((image, index) => (
-              <div key={image.src} className="relative min-h-0 flex-1">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  priority
-                  className={`object-contain ${headerImages.length > 1 ? (index === 0 ? "object-right" : "object-left") : "object-center"}`}
-                  sizes="(max-width: 768px) 50vw, 32vw"
-                />
-              </div>
-            ))}
+          <div className={`relative h-full min-h-[280px] md:min-h-0 ${containHeaderImage ? "flex items-center justify-center" : ""}`}>
+            <Image
+              src={category.image}
+              alt={category.name}
+              fill
+              priority
+              className={containHeaderImage ? "object-contain object-center" : "object-cover object-center"}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
         </section>
 

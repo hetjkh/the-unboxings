@@ -6,7 +6,7 @@ const quickLinks = [
   { label: "Shop by Occasion", href: "/occasions" },
   { label: "Shop by Industry", href: "/industries" },
   { label: "Behind the Design", href: "/behind-the-design" },
-  { label: "Inspiration Gallery", href: "/inspiration-gallery" },
+  { label: "Brand Stories", href: "/inspiration-gallery" },
   { label: "Resources", href: "/resources" },
 ];
 

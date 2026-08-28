@@ -112,7 +112,7 @@ export default function MenCampaignHero() {
         </div>
         <div className="mt-10 flex justify-center">
           <Link href="/inspiration-gallery" className="inline-flex min-h-12 items-center justify-center border border-white/30 px-8 text-[10px] font-bold tracking-[0.14em] text-white uppercase no-underline hover:bg-white hover:text-black">
-            View more inspirations&nbsp; →
+            View all brand stories&nbsp; →
           </Link>
         </div>
       </div>
