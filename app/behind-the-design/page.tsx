@@ -125,8 +125,8 @@ export default function BehindTheDesignPage() {
           </div>
           <div data-motion-media className="relative flex min-h-[520px] items-center justify-center bg-[#0a0a0a] p-4 lg:min-h-full lg:p-8">
             <ProcessImage
-              src="/behind-the-design/hero.png"
-              alt="Finished bespoke crystal award in a black presentation box"
+              src="/sketch.png"
+              alt="Hand sketching trophy designs on tracing paper beside acrylic prototypes and material samples"
               sizes="(max-width: 1024px) 100vw, 60vw"
               priority
               className="max-h-[min(85svh,900px)] object-contain object-center"
