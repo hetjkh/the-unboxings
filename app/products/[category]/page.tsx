@@ -8,7 +8,7 @@ import ProductGrid from "../../components/ProductGrid";
 import { getCategory, productCategories, products } from "../../data/products";
 
 export function generateStaticParams() {
-  return productCategories.filter((category) => category.slug !== "travel-collection").map((category) => ({ category: category.slug }));
+  return productCategories.map((category) => ({ category: category.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
 
 export default async function ProductCategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const category = getCategory((await params).category);
-  if (!category || category.slug === "travel-collection") notFound();
+  if (!category) notFound();
   const categoryProducts = products.filter((product) => product.category === category.slug);
   const containHeaderImage = category.slug === "health-wellness" || category.slug === "apparel-uniforms";
 

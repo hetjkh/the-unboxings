@@ -8,7 +8,7 @@ export default function ProductGrid({ items }: { items: readonly Product[] }) {
     <div className="grid grid-cols-2 gap-0 lg:grid-cols-4">
       {items.map((product) => (
         <article key={product.image} className="group flex flex-col bg-white">
-          <div className="relative aspect-square w-full overflow-hidden bg-[#f5f5f5]">
+          <div className="relative aspect-square w-full overflow-hidden bg-white">
             <Image src={product.image} alt={product.name} fill className="object-contain object-center p-3 transition-transform duration-500 group-hover:scale-[1.03]" sizes="(max-width: 1024px) 50vw, 25vw" />
           </div>
           <div className="flex min-h-[210px] flex-col px-4 pt-3 pb-4">
