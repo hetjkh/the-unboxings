@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { useRef } from "react";
 import {
   heroCtaContainerClass,
@@ -16,7 +17,8 @@ import { usePinHeroCta } from "../hooks/usePinHeroCta";
 
 type CampaignHeroProps = {
   ariaLabel: string;
-  title: string;
+  title: ReactNode;
+  titleAlt?: string;
   description?: string;
   heading?: boolean;
   image: string;
@@ -36,6 +38,7 @@ type CampaignHeroProps = {
 export default function CampaignHero({
   ariaLabel,
   title,
+  titleAlt,
   description,
   heading = false,
   image,
@@ -56,6 +59,8 @@ export default function CampaignHero({
 
   const buttonClassName =
     buttonStyle === "dark" ? heroOverlayButtonDark : heroOverlayButtonLight;
+
+  const imageAlt = titleAlt ?? (typeof title === "string" ? title : ariaLabel);
 
   return (
     <section
@@ -80,7 +85,7 @@ export default function CampaignHero({
       ) : mobileImage ? (
         <Image
           src={mobileImage}
-          alt={title}
+          alt={imageAlt}
           width={750}
           height={1200}
           priority={priority}
@@ -91,7 +96,7 @@ export default function CampaignHero({
       {!video ? (
         <Image
           src={image}
-          alt={title}
+          alt={imageAlt}
           width={1425}
           height={801}
           priority={priority}
