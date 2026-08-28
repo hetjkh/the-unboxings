@@ -52,7 +52,7 @@ const footerLinks = [
 const productFeatures = [
   {
     name: "Employee Welcome Kits",
-    image: "/products/14.jpg",
+    image: "/bo.png",
     href: "/solutions",
   },
   {
@@ -75,7 +75,7 @@ const productFeatures = [
 const solutionFeatures = [
   {
     name: "Employee Welcome Kits",
-    image: "/products/14.jpg",
+    image: "/bo.png",
     href: "/solutions",
   },
   {
