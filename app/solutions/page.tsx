@@ -7,39 +7,39 @@ const solutions = [
     title: "Employee Welcome Kits",
     description:
       "Onboarding sets built from tech, office essentials and drinkware — a complete first-day experience in one branded box.",
-    image: "/products/14.jpg",
-    href: "/products/tech-electronics",
-    tags: ["Onboarding", "Tech"],
+    image: "/bo.png",
+    href: "/products/office-essentials",
+    tags: ["Onboarding", "HR"],
   },
   {
     title: "Event Merchandise",
     description:
-      "Coordinated apparel and uniforms for conferences, activations and teams that need to look like one brand on the floor.",
-    image: "/apprales%20%26%20uniforms/corporate-classic.png",
+      "Coordinated apparel, kitchen aprons and uniforms for conferences, activations and teams that need to look like one brand on the floor.",
+    image: "/products/slides/kitchen-apron-black.png",
     href: "/products/apparel-uniforms",
-    tags: ["Events", "Apparel"],
+    tags: ["Events", "Kitchen"],
   },
   {
     title: "Executive Gifts",
     description:
       "Premium presentation sets for leadership, clients and milestones — considered pieces, not catalogue giveaways.",
-    image: "/products/15.jpg",
+    image: "/products/slides/luxury-gifts/executive-pen-set.png",
     href: "/products/executive-gifts",
     tags: ["Leadership", "VIP"],
   },
   {
-    title: "Awards & Recognition",
+    title: "Staff ID & Badges",
     description:
-      "Bespoke trophies and recognition pieces that make achievement tangible for teams, partners and long service.",
-    image: "/products/27.jpg",
-    href: "/products/awards-recognition",
-    tags: ["Recognition", "Culture"],
+      "Branded lanyards, staff cards and illuminated badges for events, retail, hospitality and corporate teams.",
+    image: "/products/slides/staff-id-premium-portrait-badge.png",
+    href: "/products/office-essentials",
+    tags: ["Events", "Staff"],
   },
   {
     title: "Packaging Solutions",
     description:
       "Presentation packaging engineered around the product and the opening moment — for launches, handovers and gifting.",
-    image: "/products/35.jpg",
+    image: "/products/slides/packaging/red-exploding-gift-box.png",
     href: "/products/packaging-solutions",
     tags: ["Launch", "Unboxing"],
   },
@@ -47,7 +47,7 @@ const solutions = [
     title: "Luxury Gifts",
     description:
       "Refined writing, fragrance and collectible gifts for client appreciation, seasonal giving and senior relationships.",
-    image: "/products/41.jpg",
+    image: "/products/slides/luxury-gifts/fountain-pen-leather.png",
     href: "/products/luxury-gifts",
     tags: ["Clients", "Seasonal"],
   },
@@ -73,7 +73,7 @@ export default function SolutionsPage() {
             <div className="grid grid-cols-1 items-stretch gap-10 md:grid-cols-3">
               {solutions.map((solution) => (
                 <article key={solution.title} className="flex h-full flex-col">
-                  <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-[#f5f5f5]">
+                  <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-white">
                     <Image
                       src={solution.image}
                       alt={solution.title}

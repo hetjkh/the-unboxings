@@ -23,7 +23,7 @@ const solutionsLinks = [
   { label: "Employee Welcome Kits", href: "/solutions" },
   { label: "Event Merchandise", href: "/solutions" },
   { label: "Executive Gifts", href: "/products/executive-gifts" },
-  { label: "Awards & Recognition", href: "/products/awards-recognition" },
+  { label: "Staff ID & Badges", href: "/products/office-essentials" },
   { label: "Packaging Solutions", href: "/products/packaging-solutions" },
   { label: "Luxury Gifts", href: "/products/luxury-gifts" },
 ];
@@ -80,17 +80,17 @@ const solutionFeatures = [
   },
   {
     name: "Event Merchandise",
-    image: "/apprales%20%26%20uniforms/corporate-classic.png",
+    image: "/products/slides/kitchen-apron-black.png",
     href: "/products/apparel-uniforms",
   },
   {
-    name: "Awards & Recognition",
-    image: "/products/27.jpg",
-    href: "/products/awards-recognition",
+    name: "Staff ID & Badges",
+    image: "/products/slides/staff-id-premium-portrait-badge.png",
+    href: "/products/office-essentials",
   },
   {
     name: "Luxury Gifts",
-    image: "/products/41.jpg",
+    image: "/products/slides/luxury-gifts/fountain-pen-leather.png",
     href: "/products/luxury-gifts",
   },
 ];
