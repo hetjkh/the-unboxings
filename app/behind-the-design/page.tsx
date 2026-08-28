@@ -12,53 +12,95 @@ export const metadata: Metadata = {
 const steps = [
   {
     title: "Idea",
+    tagline: "The Thought",
     description: "We begin with the brand, the audience and the moment it needs to create.",
+    detail: "The process begins on paper. Ideas are questioned, explored and refined before a single dimension is decided.",
     image: "/behind-the-design/idea.png",
     alt: "Concept notes, sketches and a black box asking what the experience should feel like",
   },
   {
     title: "Sketch",
+    tagline: "The Sketch",
     description: "Possibilities take shape on paper before materials set any limits.",
+    detail: "Multiple concepts are explored, challenged and refined until the right form emerges — designing the packaging and the object as one complete experience.",
     image: "/behind-the-design/sketch.png",
     alt: "Hand-drawn box concept sketches exploring opening mechanisms and bottle forms",
   },
   {
     title: "3D Design",
+    tagline: "The Measure",
     description: "Form, proportion and function are resolved down to the smallest detail.",
+    detail: "Precision turns an idea into something buildable. Every dimension, clearance and mechanism is carefully considered so the final experience feels effortless and refined.",
     image: "/behind-the-design/3d-design.png",
     alt: "Hands measuring a prototype beside CAD models, technical drawings and hardware",
   },
   {
     title: "Prototype",
+    tagline: "The Prototype",
     description: "The idea becomes something tangible that we can hold, assess and improve.",
+    detail: "Prototyping turns assumptions into answers. Each version tests the structure, fit and reveal — refining every detail before the final piece moves into production.",
     image: "/behind-the-design/prototype.png",
     alt: "Two packaging prototypes compared for structure and reveal experience",
   },
   {
     title: "Material Selection",
+    tagline: "The Layers",
     description: "Every texture, weight and finish is chosen with purpose.",
+    detail: "Every layer is designed with intention. From story and materials to personal details and the final object, each reveal builds anticipation for what comes next.",
     image: "/behind-the-design/materials.png",
     alt: "Stacked drawers with wood, stone and fabric samples beside hinges and hardware",
   },
   {
     title: "Production",
+    tagline: "The Assembly",
     description: "Precision technology and practiced craftsmanship work together.",
+    detail: "Every component is finished separately, then precisely brought together. Structure, materials, hidden mechanisms and illumination become one seamless final experience.",
     image: "/behind-the-design/production.png",
     alt: "Exploded view of lid, trays, mechanisms, illuminated base and bottle assembled as one",
   },
   {
     title: "Packaging",
+    tagline: "The Final Product",
     description: "The reveal is designed as carefully as the piece itself.",
+    detail: "The final form is intentionally restrained, allowing the experience to unfold through discovery. What appears simple from the outside transforms layer by layer.",
     image: "/behind-the-design/packaging.png",
     alt: "Closed presentation box beside the open illuminated packaging reveal",
   },
   {
     title: "Delivery",
+    tagline: "The Masterpiece",
     description: "The final experience reaches the people it was designed for.",
+    detail: "What began as an idea becomes a fully resolved experience — where material, structure, light and detail lead to one defining moment: the object itself.",
     image: "/behind-the-design/delivery.png",
     alt: "Finished perfume bottle revealed in its illuminated presentation box",
   },
 ] as const;
+
+function ProcessImage({
+  src,
+  alt,
+  sizes,
+  className = "",
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  sizes: string;
+  className?: string;
+  priority?: boolean;
+}) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={1600}
+      height={1200}
+      sizes={sizes}
+      priority={priority}
+      className={`h-auto w-full ${className}`}
+    />
+  );
+}
 
 export default function BehindTheDesignPage() {
   return (
@@ -81,8 +123,14 @@ export default function BehindTheDesignPage() {
               </a>
             </div>
           </div>
-          <div data-motion-media className="relative min-h-[520px] overflow-hidden lg:min-h-full">
-            <Image src="/behind-the-design/hero.png" alt="Finished bespoke crystal award in a black presentation box" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 60vw" />
+          <div data-motion-media className="relative flex min-h-[520px] items-center justify-center bg-[#0a0a0a] p-4 lg:min-h-full lg:p-8">
+            <ProcessImage
+              src="/behind-the-design/hero.png"
+              alt="Finished bespoke crystal award in a black presentation box"
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              priority
+              className="max-h-[min(85svh,900px)] object-contain object-center"
+            />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           </div>
         </section>
@@ -110,17 +158,24 @@ export default function BehindTheDesignPage() {
               {steps.map((step, index) => {
                 const imageFirst = index % 2 === 0;
                 return (
-                  <li data-motion-card key={step.title} className="relative grid overflow-hidden md:min-h-[420px] md:grid-cols-2">
-                    <div data-motion-media className={`relative min-h-[300px] overflow-hidden md:min-h-[420px] ${imageFirst ? "md:order-1" : "md:order-2"}`}>
-                      <Image src={step.image} alt={step.alt} fill className="object-cover transition-transform duration-1000 hover:scale-[1.025]" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <li data-motion-card key={step.title} className="relative grid md:grid-cols-2 md:items-stretch">
+                    <div data-motion-media className={`bg-[#0a0a0a] ${imageFirst ? "md:order-1" : "md:order-2"}`}>
+                      <ProcessImage
+                        src={step.image}
+                        alt={step.alt}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="transition-transform duration-1000 hover:scale-[1.01]"
+                      />
                     </div>
-                    <div className={`flex min-h-[260px] flex-col justify-between border-r border-b border-black/20 bg-[#f1f0ec] p-7 md:min-h-[420px] md:p-12 lg:p-16 ${imageFirst ? "md:order-2" : "md:order-1"}`}>
+                    <div className={`flex min-h-[320px] flex-col justify-between border-r border-b border-black/20 bg-[#f1f0ec] p-7 md:h-full md:p-12 lg:p-16 ${imageFirst ? "md:order-2" : "md:order-1"}`}>
                       <span className="text-[10px] font-medium tracking-[0.18em] text-black/35">{String(index + 1).padStart(2, "0")} / 08</span>
-                      <div>
-                        <h3 className="m-0 text-3xl font-light tracking-[-0.045em] uppercase md:text-4xl">{step.title}</h3>
-                        <p className="m-0 mt-5 max-w-[390px] text-sm leading-6 text-black/50">{step.description}</p>
+                      <div className="flex flex-1 flex-col justify-center py-8 md:py-10">
+                        <p className="m-0 text-[10px] font-bold tracking-[0.14em] text-black/40 uppercase">{step.tagline}</p>
+                        <h3 className="m-0 mt-4 text-3xl font-light tracking-[-0.045em] uppercase md:text-4xl">{step.title}</h3>
+                        <p className="m-0 mt-5 max-w-[420px] text-sm leading-6 text-black/60 md:text-base md:leading-7">{step.description}</p>
+                        <p className="m-0 mt-5 max-w-[420px] border-t border-black/10 pt-5 text-sm leading-6 text-black/45 md:text-base md:leading-7">{step.detail}</p>
                       </div>
-                      <span className="mt-8 text-black/40" aria-hidden="true">↓</span>
+                      <span className="text-black/40" aria-hidden="true">↓</span>
                     </div>
                   </li>
                 );
