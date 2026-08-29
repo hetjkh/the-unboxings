@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/cms/auth";
 import { getCollection, jsonError, mapDoc, revalidateCatalog } from "@/lib/cms/api";
+import { PLACEHOLDER_IMAGE } from "@/lib/cms/placeholders";
 import type { ProductInput } from "@/lib/cms/types";
 
 export async function GET(request: Request) {
@@ -24,7 +25,7 @@ export async function POST(request: Request) {
     const doc = {
       name: body.name.trim(),
       categorySlug: body.categorySlug.trim(),
-      image: body.image?.trim() || "/uploads/placeholder.png",
+      image: body.image?.trim() || PLACEHOLDER_IMAGE,
       description: body.description.trim(),
       sortOrder: Number.isFinite(body.sortOrder) ? Number(body.sortOrder) : 0,
       createdAt: timestamp,

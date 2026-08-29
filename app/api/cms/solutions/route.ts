@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/cms/auth";
 import { getCollection, jsonError, mapDoc, revalidateCatalog } from "@/lib/cms/api";
 import { slugify } from "@/lib/cms/serialize";
+import { PLACEHOLDER_IMAGE } from "@/lib/cms/placeholders";
 import type { SolutionInput } from "@/lib/cms/types";
 
 export async function GET() {
@@ -23,7 +24,7 @@ export async function POST(request: Request) {
       title: body.title.trim(),
       slug,
       description: body.description.trim(),
-      image: body.image?.trim() || "/uploads/placeholder.png",
+      image: body.image?.trim() || PLACEHOLDER_IMAGE,
       href: body.href?.trim() || "/solutions",
       tags: Array.isArray(body.tags) ? body.tags.map((tag) => String(tag).trim()).filter(Boolean) : [],
       sortOrder: Number.isFinite(body.sortOrder) ? Number(body.sortOrder) : 0,

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/cms/auth";
 import { getCollection, jsonError, mapDoc, revalidateCatalog } from "@/lib/cms/api";
+import { PLACEHOLDER_IMAGE } from "@/lib/cms/placeholders";
 import type { PageHeroInput } from "@/lib/cms/types";
 
 export async function GET() {
@@ -20,7 +21,7 @@ export async function POST(request: Request) {
     const doc = {
       pageKey: body.pageKey.trim(),
       label: body.label.trim(),
-      image: body.image?.trim() || "/uploads/placeholder.png",
+      image: body.image?.trim() || PLACEHOLDER_IMAGE,
       alt: body.alt?.trim() || body.label.trim(),
       title: body.title?.trim() || "",
       subtitle: body.subtitle?.trim() || "",

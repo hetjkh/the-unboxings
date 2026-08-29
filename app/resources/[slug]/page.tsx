@@ -8,6 +8,7 @@ import { getResourceBySlug, getResources } from "@/lib/cms/content";
 import { plainTextFromRich } from "@/lib/cms/rich-text";
 import type { ResourceBlock } from "@/lib/cms/content-types";
 import FormattedText from "../../components/FormattedText";
+import { PLACEHOLDER_IMAGE } from "@/lib/cms/placeholders";
 
 export const revalidate = 60;
 
@@ -71,7 +72,7 @@ export default async function ResourceArticlePage({
 
   if (!article) notFound();
 
-  const cover = article.images[0] ?? { src: "/uploads/placeholder.png", alt: plainTextFromRich(article.title) };
+  const cover = article.images[0] ?? { src: PLACEHOLDER_IMAGE, alt: plainTextFromRich(article.title) };
   const gallery = article.images.slice(1);
   const firstHeadingIndex = article.body.findIndex((block) => block.type === "heading");
   const intro = firstHeadingIndex === -1 ? article.body.slice(0, 3) : article.body.slice(0, firstHeadingIndex);

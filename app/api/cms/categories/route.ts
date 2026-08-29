@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/cms/auth";
 import { getCollection, jsonError, mapDoc, revalidateCatalog } from "@/lib/cms/api";
 import { slugify } from "@/lib/cms/serialize";
+import { PLACEHOLDER_IMAGE } from "@/lib/cms/placeholders";
 import type { CategoryInput } from "@/lib/cms/types";
 
 export async function GET() {
@@ -27,7 +28,7 @@ export async function POST(request: Request) {
     const doc = {
       name: body.name.trim(),
       slug,
-      image: body.image?.trim() || "/uploads/placeholder.png",
+      image: body.image?.trim() || PLACEHOLDER_IMAGE,
       description: body.description.trim(),
       headerImageFit: body.headerImageFit === "contain" ? "contain" : "cover",
       sortOrder: Number.isFinite(body.sortOrder) ? Number(body.sortOrder) : 0,

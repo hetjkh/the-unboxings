@@ -3,6 +3,7 @@ import { requireAuth } from "@/lib/cms/auth";
 import { getCollection, jsonError, mapDoc, revalidateCatalog } from "@/lib/cms/api";
 import { seedBrandStoriesIfMissing } from "@/lib/cms/content";
 import { slugify } from "@/lib/cms/serialize";
+import { PLACEHOLDER_IMAGE } from "@/lib/cms/placeholders";
 import type { BrandStoryInput } from "@/lib/cms/content-types";
 
 export async function GET() {
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
       tagline: body.tagline.trim(),
       challenge: body.challenge?.trim() || "",
       materials: body.materials?.trim() || "",
-      image: body.image?.trim() || "/uploads/placeholder.png",
+      image: body.image?.trim() || PLACEHOLDER_IMAGE,
       alt: body.alt?.trim() || body.title.trim(),
       gallery: Array.isArray(body.gallery) ? body.gallery : [],
       sections: Array.isArray(body.sections) ? body.sections : [],

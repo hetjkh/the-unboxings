@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { getResources } from "@/lib/cms/content";
 import FormattedText from "../components/FormattedText";
+import { PLACEHOLDER_IMAGE } from "@/lib/cms/placeholders";
 
 export const metadata: Metadata = {
   title: "Resource Centre | The Unboxing",
@@ -39,7 +40,7 @@ export default async function ResourcesPage() {
                   <Link href={`/resources/${article.slug}`} className="group block no-underline">
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
-                        src={article.images[0]?.src ?? "/uploads/placeholder.png"}
+                        src={article.images[0]?.src ?? PLACEHOLDER_IMAGE}
                         alt={article.images[0]?.alt ?? article.title}
                         fill
                         className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"

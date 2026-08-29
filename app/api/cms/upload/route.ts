@@ -3,6 +3,8 @@ import { requireAuth } from "@/lib/cms/auth";
 import { jsonError } from "@/lib/cms/api";
 import { saveUploadedFile } from "@/lib/cms/upload";
 
+export const runtime = "nodejs";
+
 export async function POST(request: Request) {
   try {
     await requireAuth();
@@ -23,6 +25,8 @@ export async function POST(request: Request) {
     if (error instanceof Error && error.message === "Unauthorized") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    return jsonError("Failed to upload image", 500);
+    console.error("POST /api/cms/upload failed:", error);
+    const message = error instanceof Error ? error.message : "Failed to upload image";
+    return jsonError(message, 500);
   }
 }

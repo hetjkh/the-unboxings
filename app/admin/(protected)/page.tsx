@@ -11,7 +11,7 @@ export default async function AdminDashboardPage() {
         <section className="border border-black/10 bg-white p-6">
           <h2 className="m-0 text-2xl font-light uppercase">Dashboard</h2>
           <p className="m-0 mt-3 max-w-2xl text-sm text-black/60">
-            Manage your catalog from here. Images are stored locally in <code>public/uploads/</code> and content is saved to MongoDB.
+            Manage your catalog from here. Content is saved to MongoDB. Uploaded images use Vercel Blob in production, or <code>public/uploads/</code> locally.
           </p>
         </section>
 
