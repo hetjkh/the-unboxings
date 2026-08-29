@@ -24,7 +24,7 @@ const STATIC_SOLUTIONS: Omit<Solution, "_id" | "createdAt" | "updatedAt">[] = [
     description:
       "Coordinated apparel, kitchen aprons and uniforms for conferences, activations and teams that need to look like one brand on the floor.",
     image: "/products/slides/kitchen-apron-black.png",
-    href: "/products/apparel-uniforms",
+    href: "/products/aprons",
     tags: ["Events", "Kitchen"],
     sortOrder: 1,
     featuredInNav: true,
@@ -35,7 +35,7 @@ const STATIC_SOLUTIONS: Omit<Solution, "_id" | "createdAt" | "updatedAt">[] = [
     description:
       "Premium presentation sets for leadership, clients and milestones — considered pieces, not catalogue giveaways.",
     image: "/products/slides/luxury-gifts/executive-pen-set.png",
-    href: "/products/executive-gifts",
+    href: "/products/luxury-writing",
     tags: ["Leadership", "VIP"],
     sortOrder: 2,
     featuredInNav: false,
@@ -46,7 +46,7 @@ const STATIC_SOLUTIONS: Omit<Solution, "_id" | "createdAt" | "updatedAt">[] = [
     description:
       "Branded lanyards, staff cards and illuminated badges for events, retail, hospitality and corporate teams.",
     image: "/products/slides/staff-id-premium-portrait-badge.png",
-    href: "/products/office-essentials",
+    href: "/products/staff-id",
     tags: ["Events", "Staff"],
     sortOrder: 3,
     featuredInNav: true,
@@ -63,12 +63,12 @@ const STATIC_SOLUTIONS: Omit<Solution, "_id" | "createdAt" | "updatedAt">[] = [
     featuredInNav: false,
   },
   {
-    title: "Luxury Gifts",
-    slug: "luxury-gifts-solution",
+    title: "Luxury Writing",
+    slug: "luxury-writing-solution",
     description:
-      "Refined writing, fragrance and collectible gifts for client appreciation, seasonal giving and senior relationships.",
+      "Refined fountain pens, ballpoints and executive writing sets for client appreciation, milestones and senior relationships.",
     image: "/products/slides/luxury-gifts/fountain-pen-leather.png",
-    href: "/products/luxury-gifts",
+    href: "/products/luxury-writing",
     tags: ["Clients", "Seasonal"],
     sortOrder: 5,
     featuredInNav: true,
@@ -94,7 +94,7 @@ function nowIso(): string {
 
 function staticCatalog(): CatalogData {
   const timestamp = nowIso();
-  const containSlugs = new Set(["health-wellness", "apparel-uniforms"]);
+  const containSlugs = new Set(["health-wellness", "apparel-uniforms", "aprons", "luxury-writing"]);
 
   const categories: Category[] = productCategories.map((category, index) => ({
     _id: `static-${category.slug}`,

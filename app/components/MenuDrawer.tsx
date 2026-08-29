@@ -15,9 +15,13 @@ const defaultProductsLinks = [
   { label: "Eco Collection", href: "/products/eco-collection" },
   { label: "Health & Wellness", href: "/products/health-wellness" },
   { label: "Apparel & Uniforms", href: "/products/apparel-uniforms" },
+  { label: "Aprons", href: "/products/aprons" },
+  { label: "Staff ID", href: "/products/staff-id" },
+  { label: "Keychains", href: "/products/keychains" },
   { label: "Awards & Recognition", href: "/products/awards-recognition" },
   { label: "Packaging Solutions", href: "/products/packaging-solutions" },
   { label: "Luxury Gifts", href: "/products/luxury-gifts" },
+  { label: "Luxury Writing", href: "/products/luxury-writing" },
   { label: "Travel Collection", href: "/products/travel-collection" },
 ];
 
@@ -25,9 +29,9 @@ const defaultSolutionsLinks = [
   { label: "Employee Welcome Kits", href: "/solutions" },
   { label: "Event Merchandise", href: "/solutions" },
   { label: "Executive Gifts", href: "/products/executive-gifts" },
-  { label: "Staff ID & Badges", href: "/products/office-essentials" },
+  { label: "Staff ID & Badges", href: "/products/staff-id" },
   { label: "Packaging Solutions", href: "/products/packaging-solutions" },
-  { label: "Luxury Gifts", href: "/products/luxury-gifts" },
+  { label: "Luxury Writing", href: "/products/luxury-writing" },
 ];
 
 const primaryLinks = [
@@ -83,17 +87,17 @@ const defaultSolutionFeatures = [
   {
     name: "Event Merchandise",
     image: "/products/slides/kitchen-apron-black.png",
-    href: "/products/apparel-uniforms",
+    href: "/products/aprons",
   },
   {
     name: "Staff ID & Badges",
     image: "/products/slides/staff-id-premium-portrait-badge.png",
-    href: "/products/office-essentials",
+    href: "/products/staff-id",
   },
   {
-    name: "Luxury Gifts",
+    name: "Luxury Writing",
     image: "/products/slides/luxury-gifts/fountain-pen-leather.png",
-    href: "/products/luxury-gifts",
+    href: "/products/luxury-writing",
   },
 ];
 

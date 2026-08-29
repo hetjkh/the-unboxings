@@ -29,12 +29,16 @@ export default async function ProductCategoryPage({ params }: { params: Promise<
 
   const categoryProducts = catalog.products.filter((product) => product.categorySlug === category.slug);
   const containHeaderImage = category.headerImageFit === "contain";
+  const tallHeader = category.slug === "luxury-writing";
+  const headerClassName = tallHeader
+    ? "grid h-[62vh] min-h-[520px] max-h-[820px] grid-rows-[auto_1fr] overflow-hidden border-b border-black/20 bg-[#0a0a0a] text-white md:grid-cols-[1fr_1.05fr] md:grid-rows-1"
+    : "grid h-[52vh] min-h-[420px] max-h-[680px] grid-rows-[auto_1fr] overflow-hidden border-b border-black/20 bg-[#0a0a0a] text-white md:grid-cols-[1fr_1.05fr] md:grid-rows-1";
 
   return (
     <>
       <Header />
       <main className="bg-white">
-        <section className="grid h-[52vh] min-h-[420px] max-h-[680px] grid-rows-[auto_1fr] overflow-hidden border-b border-black/20 bg-[#0a0a0a] text-white md:grid-cols-[1fr_1.05fr] md:grid-rows-1" aria-labelledby="category-title">
+        <section className={headerClassName} aria-labelledby="category-title">
           <div className="flex flex-col justify-center px-8 py-10 md:px-16 md:py-16">
             <p className="m-0 text-[11px] font-bold tracking-[0.14em] text-white/45 uppercase md:text-xs">Products / {category.name}</p>
             <h1 id="category-title" className="m-0 mt-5 text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.95] font-light tracking-[-0.04em] uppercase">
@@ -44,7 +48,7 @@ export default async function ProductCategoryPage({ params }: { params: Promise<
               <FormattedText html={category.description} />
             </p>
           </div>
-          <div className={`relative h-full min-h-[280px] md:min-h-0 ${containHeaderImage ? "flex items-center justify-center" : ""}`}>
+          <div className={`relative h-full ${tallHeader ? "min-h-[360px]" : "min-h-[280px]"} md:min-h-0 ${containHeaderImage ? "flex items-center justify-center" : ""}`}>
             <Image
               src={category.image}
               alt={plainTextFromRich(category.name)}
