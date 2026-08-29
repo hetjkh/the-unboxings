@@ -4,10 +4,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { getResourceArticle, resourceArticles, type ResourceBlock } from "../../data/resources";
+import { getResourceBySlug, getResources } from "@/lib/cms/content";
+import { plainTextFromRich } from "@/lib/cms/rich-text";
+import type { ResourceBlock } from "@/lib/cms/content-types";
+import FormattedText from "../../components/FormattedText";
 
-export function generateStaticParams() {
-  return resourceArticles.map(({ slug }) => ({ slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const resources = await getResources();
+  return resources.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -15,9 +21,9 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const article = getResourceArticle((await params).slug);
+  const article = await getResourceBySlug((await params).slug);
   return article
-    ? { title: `${article.title} | The Unboxing`, description: article.description }
+    ? { title: `${plainTextFromRich(article.title)} | The Unboxing`, description: article.description }
     : {};
 }
 
@@ -25,7 +31,7 @@ function BodyBlock({ block }: { block: ResourceBlock }) {
   if (block.type === "heading") {
     return (
       <h2 className="m-0 mt-16 border-t border-black/15 pt-6 text-xs font-bold tracking-[0.14em] text-black uppercase">
-        {block.text}
+        <FormattedText html={block.text} />
       </h2>
     );
   }
@@ -48,7 +54,11 @@ function BodyBlock({ block }: { block: ResourceBlock }) {
     );
   }
 
-  return <p className="m-0 mt-5 text-sm leading-7 text-black/70">{block.text}</p>;
+  return (
+    <p className="m-0 mt-5 text-sm leading-7 text-black/70">
+      <FormattedText html={block.text} />
+    </p>
+  );
 }
 
 export default async function ResourceArticlePage({
@@ -57,11 +67,11 @@ export default async function ResourceArticlePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const article = getResourceArticle(slug);
+  const article = await getResourceBySlug(slug);
 
   if (!article) notFound();
 
-  const cover = article.images[0];
+  const cover = article.images[0] ?? { src: "/uploads/placeholder.png", alt: plainTextFromRich(article.title) };
   const gallery = article.images.slice(1);
   const firstHeadingIndex = article.body.findIndex((block) => block.type === "heading");
   const intro = firstHeadingIndex === -1 ? article.body.slice(0, 3) : article.body.slice(0, firstHeadingIndex);
@@ -96,10 +106,10 @@ export default async function ResourceArticlePage({
                   id="article-title"
                   className="m-0 mt-6 max-w-[620px] text-[clamp(1.75rem,4.2vw,3.35rem)] leading-[1.05] font-light tracking-[-0.045em] uppercase"
                 >
-                  {article.title}
+                  <FormattedText html={article.title} />
                 </h1>
                 <p className="m-0 mt-8 max-w-[520px] border-t border-white/20 pt-6 text-sm leading-6 text-white/60">
-                  {article.description}
+                  <FormattedText html={article.description} />
                 </p>
               </div>
             </div>

@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { brandStories } from "../data/brandStories";
+import { getBrandStories } from "@/lib/cms/content";
+import FormattedText from "./FormattedText";
 
-export default function MenCampaignHero() {
+export default async function MenCampaignHero() {
+  const brandStories = await getBrandStories();
   const [featuredStory, ...supportingStories] = brandStories.slice(0, 4);
+
+  if (!featuredStory) return null;
 
   return (
     <section
@@ -55,7 +59,7 @@ export default function MenCampaignHero() {
                 Featured story
               </p>
               <h3 className="m-0 mt-5 text-2xl leading-[1.08] font-light tracking-[-0.04em] uppercase md:text-4xl">
-                {featuredStory.title}
+                <FormattedText html={featuredStory.title} />
               </h3>
               <p className="m-0 mt-6 text-sm leading-6 text-white/55">
                 {featuredStory.challenge}
@@ -97,7 +101,7 @@ export default function MenCampaignHero() {
 
               <div className="flex flex-1 flex-col p-5">
                 <h3 className="m-0 text-lg leading-6 font-medium tracking-[-0.03em] uppercase">
-                  {story.title}
+                  <FormattedText html={story.title} />
                 </h3>
                 <p className="m-0 mt-3 flex-1 text-xs leading-5 text-white/50">
                   {story.challenge}

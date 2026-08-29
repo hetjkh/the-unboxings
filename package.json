@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:cms": "tsx --env-file=.env.local scripts/seed-cms.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.8",
@@ -14,6 +15,7 @@
     "cors": "^2.8.6",
     "gsap": "^3.15.0",
     "lenis": "^1.3.26",
+    "mongodb": "^7.6.0",
     "next": "16.2.9",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -27,6 +29,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
+    "tsx": "^4.23.12",
     "typescript": "^5"
   }
 }

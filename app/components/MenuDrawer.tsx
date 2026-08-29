@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { buildNavCatalog } from "@/lib/cms/nav";
+import type { CatalogData } from "@/lib/cms/types";
 
 // ─── Navigation Data ────────────────────────────────────────────────────────
 
-const productsLinks = [
+const defaultProductsLinks = [
   { label: "Tech & Electronics", href: "/products/tech-electronics" },
   { label: "Drinkware", href: "/products/drinkware" },
   { label: "Office Essentials", href: "/products/office-essentials" },
@@ -19,7 +21,7 @@ const productsLinks = [
   { label: "Travel Collection", href: "/products/travel-collection" },
 ];
 
-const solutionsLinks = [
+const defaultSolutionsLinks = [
   { label: "Employee Welcome Kits", href: "/solutions" },
   { label: "Event Merchandise", href: "/solutions" },
   { label: "Executive Gifts", href: "/products/executive-gifts" },
@@ -49,7 +51,7 @@ const footerLinks = [
   { label: "FAQ", href: "/faq" },
 ];
 
-const productFeatures = [
+const defaultProductFeatures = [
   {
     name: "Employee Welcome Kits",
     image: "/bo.png",
@@ -72,7 +74,7 @@ const productFeatures = [
   },
 ];
 
-const solutionFeatures = [
+const defaultSolutionFeatures = [
   {
     name: "Employee Welcome Kits",
     image: "/bo.png",
@@ -134,6 +136,25 @@ type MenuDrawerProps = {
 
 export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
   const [activePanel, setActivePanel] = useState<MenuPanel>("main");
+  const [productsLinks, setProductsLinks] = useState(defaultProductsLinks);
+  const [solutionsLinks, setSolutionsLinks] = useState(defaultSolutionsLinks);
+  const [productFeatures, setProductFeatures] = useState(defaultProductFeatures);
+  const [solutionFeatures, setSolutionFeatures] = useState(defaultSolutionFeatures);
+
+  useEffect(() => {
+    fetch("/api/catalog")
+      .then((response) => response.json())
+      .then((catalog: CatalogData) => {
+        const nav = buildNavCatalog(catalog);
+        if (nav.productsLinks.length) setProductsLinks(nav.productsLinks);
+        if (nav.solutionsLinks.length) setSolutionsLinks(nav.solutionsLinks);
+        if (nav.productFeatures.length) setProductFeatures(nav.productFeatures);
+        if (nav.solutionFeatures.length) setSolutionFeatures(nav.solutionFeatures);
+      })
+      .catch(() => {
+        // Keep defaults when catalog API is unavailable.
+      });
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";

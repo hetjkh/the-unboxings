@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { resourceArticles } from "../data/resources";
+import { getResources } from "@/lib/cms/content";
+import FormattedText from "../components/FormattedText";
 
 export const metadata: Metadata = {
   title: "Resource Centre | The Unboxing",
@@ -11,7 +12,11 @@ export const metadata: Metadata = {
     "Gifting inspiration, industry trends, and practical guides to help you create impactful branded experiences for your team and clients.",
 };
 
-export default function ResourcesPage() {
+export const revalidate = 60;
+
+export default async function ResourcesPage() {
+  const resourceArticles = await getResources();
+
   return (
     <>
       <Header />
@@ -30,28 +35,28 @@ export default function ResourcesPage() {
           <div className="mx-auto max-w-[1440px] px-8 pb-14 md:px-16">
             <div className="grid grid-cols-1 items-stretch gap-10 md:grid-cols-3">
               {resourceArticles.map((article) => (
-                <article key={article.slug} className="flex h-full flex-col">
+                <article key={article._id} className="flex h-full flex-col">
                   <Link href={`/resources/${article.slug}`} className="group block no-underline">
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
-                        src={article.images[0].src}
-                        alt={article.images[0].alt}
+                        src={article.images[0]?.src ?? "/uploads/placeholder.png"}
+                        alt={article.images[0]?.alt ?? article.title}
                         fill
                         className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     </div>
                     <div className="mt-5 flex items-center gap-3">
-                      <span className="text-[10px] font-bold tracking-[0.08em] uppercase text-black/40 border border-black/20 px-2 py-0.5">
+                      <span className="border border-black/20 px-2 py-0.5 text-[10px] font-bold tracking-[0.08em] text-black/40 uppercase">
                         {article.category}
                       </span>
                       <span className="text-[10px] text-black/30">{article.readTime}</span>
                     </div>
                     <h2 className="m-0 mt-3 text-base leading-6 font-bold tracking-[-0.03em] text-black">
-                      {article.title}
+                      <FormattedText html={article.title} />
                     </h2>
                     <p className="m-0 mt-3 text-xs leading-5 font-normal text-black/60">
-                      {article.description}
+                      <FormattedText html={article.description} />
                     </p>
                     <span className="mt-4 inline-block text-xs leading-4 font-medium text-black underline underline-offset-2">
                       Read Article →

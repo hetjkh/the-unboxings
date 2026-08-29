@@ -5,7 +5,11 @@ import { notFound } from "next/navigation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import HomeMotion from "../../components/HomeMotion";
-import { brandStories } from "../../data/brandStories";
+import { getBrandStories, getBrandStoryBySlug } from "@/lib/cms/content";
+import { plainTextFromRich } from "@/lib/cms/rich-text";
+import FormattedText from "../../components/FormattedText";
+
+export const revalidate = 60;
 
 function StoryImage({
   src,
@@ -33,8 +37,9 @@ function StoryImage({
   );
 }
 
-export function generateStaticParams() {
-  return brandStories.map(({ slug }) => ({ slug }));
+export async function generateStaticParams() {
+  const stories = await getBrandStories();
+  return stories.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -43,10 +48,10 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const story = brandStories.find((item) => item.slug === slug);
+  const story = await getBrandStoryBySlug(slug);
   if (!story) return { title: "Brand Story | The Unboxing" };
   return {
-    title: `${story.title} | The Unboxing`,
+    title: `${plainTextFromRich(story.title)} | The Unboxing`,
     description: story.challenge,
   };
 }
@@ -57,7 +62,8 @@ export default async function BrandStoryPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const story = brandStories.find((item) => item.slug === slug);
+  const brandStories = await getBrandStories();
+  const story = await getBrandStoryBySlug(slug);
 
   if (!story) notFound();
 
@@ -74,13 +80,13 @@ export default async function BrandStoryPage({
               <p className="m-0 text-[10px] font-medium tracking-[0.24em] text-white/40 uppercase">Brand story</p>
               <div className="mt-24">
                 <h1 id="story-heading" className="m-0 max-w-[640px] text-[clamp(2.4rem,5.5vw,4.75rem)] leading-[0.92] font-light tracking-[-0.055em] uppercase">
-                  {story.title}
+                  <FormattedText html={story.title} />
                 </h1>
                 <p className="m-0 mt-8 max-w-[480px] border-t border-white/25 pt-6 text-base leading-7 text-white/65">
-                  {story.tagline}
+                  <FormattedText html={story.tagline} />
                 </p>
                 <p className="m-0 mt-5 max-w-[480px] text-sm leading-6 text-white/45">
-                  {story.challenge}
+                  <FormattedText html={story.challenge} />
                 </p>
               </div>
             </div>
@@ -100,7 +106,9 @@ export default async function BrandStoryPage({
             <div className="mx-auto max-w-[1200px]">
               <div className="mb-12 border-t border-black/10 pt-6 md:mb-16">
                 <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-black/35 uppercase">Materials & focus</p>
-                <p className="m-0 mt-4 max-w-[640px] text-sm leading-6 text-black/55">{story.materials}</p>
+                <p className="m-0 mt-4 max-w-[640px] text-sm leading-6 text-black/55">
+                  <FormattedText html={story.materials} />
+                </p>
               </div>
 
               {story.gallery.length === 1 ? (
@@ -109,7 +117,9 @@ export default async function BrandStoryPage({
                     {story.sections.map((section) => (
                       <article key={section.heading} className="border-t border-black/10 pt-6">
                         <h2 className="m-0 text-xs font-bold tracking-[0.08em] text-black/40 uppercase">{section.heading}</h2>
-                        <p className="m-0 mt-4 text-base leading-7 text-black/80 md:text-lg md:leading-8">{section.body}</p>
+                        <p className="m-0 mt-4 text-base leading-7 text-black/80 md:text-lg md:leading-8">
+                          <FormattedText html={section.body} />
+                        </p>
                       </article>
                     ))}
                   </div>
@@ -148,7 +158,9 @@ export default async function BrandStoryPage({
                           className={`flex flex-col justify-center p-7 md:p-12 lg:p-16 ${image ? (imageFirst ? "md:order-2" : "md:order-1") : ""}`}
                         >
                           <h2 className="m-0 text-xs font-bold tracking-[0.08em] text-black/40 uppercase">{section.heading}</h2>
-                          <p className="m-0 mt-4 text-base leading-7 text-black/80 md:text-lg md:leading-8">{section.body}</p>
+                          <p className="m-0 mt-4 text-base leading-7 text-black/80 md:text-lg md:leading-8">
+                          <FormattedText html={section.body} />
+                        </p>
                         </div>
                       </article>
                     );
@@ -171,7 +183,7 @@ export default async function BrandStoryPage({
           <section aria-label="Closing thought" className="bg-[#f1f0ec] px-8 py-16 md:px-16 md:py-24">
             <blockquote className="mx-auto m-0 max-w-[900px] text-center">
               <p className="m-0 text-2xl leading-snug font-light tracking-[-0.04em] text-black md:text-4xl md:leading-[1.2]">
-                {story.closing}
+                <FormattedText html={story.closing} />
               </p>
             </blockquote>
             <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row sm:justify-center">

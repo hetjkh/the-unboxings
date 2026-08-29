@@ -4,14 +4,20 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import HomeMotion from "../components/HomeMotion";
-import { brandStories } from "../data/brandStories";
+import { getBrandStories } from "@/lib/cms/content";
+import FormattedText from "../components/FormattedText";
 
 export const metadata: Metadata = {
   title: "Brand Stories | The Unboxing",
   description: "Explore how insights become ideas, designs and memorable brand experiences.",
 };
 
-export default function InspirationGalleryPage() {
+export const revalidate = 60;
+
+export default async function InspirationGalleryPage() {
+  const brandStories = await getBrandStories();
+  const featuredStory = brandStories[0];
+
   return (
     <>
       <Header />
@@ -27,7 +33,9 @@ export default function InspirationGalleryPage() {
               </div>
             </div>
             <div data-motion-media className="relative min-h-[500px] overflow-hidden lg:min-h-full">
-              <Image src={brandStories[0].image} alt={brandStories[0].alt} fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 55vw" />
+              {featuredStory ? (
+                <Image src={featuredStory.image} alt={featuredStory.alt} fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 55vw" />
+              ) : null}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
             </div>
           </section>
@@ -55,7 +63,9 @@ export default function InspirationGalleryPage() {
                       <div className={`flex min-h-[380px] flex-col justify-between p-7 md:min-h-[540px] md:p-12 ${imageFirst ? "lg:order-2" : "lg:order-1"}`}>
                         <p className="m-0 text-[10px] font-medium tracking-[0.18em] text-white/35 uppercase">Brand story</p>
                         <div className="my-14">
-                          <h3 className="m-0 text-3xl leading-[1.06] font-light tracking-[-0.045em] uppercase md:text-5xl">{story.title}</h3>
+                          <h3 className="m-0 text-3xl leading-[1.06] font-light tracking-[-0.045em] uppercase md:text-5xl">
+                            <FormattedText html={story.title} />
+                          </h3>
                           <p className="m-0 mt-6 max-w-[520px] text-sm leading-6 text-white/50">{story.challenge}</p>
                         </div>
                         <div className="border-t border-white/15 pt-5">

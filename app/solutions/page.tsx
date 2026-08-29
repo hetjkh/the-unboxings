@@ -1,59 +1,14 @@
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { getCatalog } from "@/lib/cms/queries";
+import FormattedText from "../components/FormattedText";
 
-const solutions = [
-  {
-    title: "Employee Welcome Kits",
-    description:
-      "Onboarding sets built from tech, office essentials and drinkware — a complete first-day experience in one branded box.",
-    image: "/bo.png",
-    href: "/products/office-essentials",
-    tags: ["Onboarding", "HR"],
-  },
-  {
-    title: "Event Merchandise",
-    description:
-      "Coordinated apparel, kitchen aprons and uniforms for conferences, activations and teams that need to look like one brand on the floor.",
-    image: "/products/slides/kitchen-apron-black.png",
-    href: "/products/apparel-uniforms",
-    tags: ["Events", "Kitchen"],
-  },
-  {
-    title: "Executive Gifts",
-    description:
-      "Premium presentation sets for leadership, clients and milestones — considered pieces, not catalogue giveaways.",
-    image: "/products/slides/luxury-gifts/executive-pen-set.png",
-    href: "/products/executive-gifts",
-    tags: ["Leadership", "VIP"],
-  },
-  {
-    title: "Staff ID & Badges",
-    description:
-      "Branded lanyards, staff cards and illuminated badges for events, retail, hospitality and corporate teams.",
-    image: "/products/slides/staff-id-premium-portrait-badge.png",
-    href: "/products/office-essentials",
-    tags: ["Events", "Staff"],
-  },
-  {
-    title: "Packaging Solutions",
-    description:
-      "Presentation packaging engineered around the product and the opening moment — for launches, handovers and gifting.",
-    image: "/products/slides/packaging/red-exploding-gift-box.png",
-    href: "/products/packaging-solutions",
-    tags: ["Launch", "Unboxing"],
-  },
-  {
-    title: "Luxury Gifts",
-    description:
-      "Refined writing, fragrance and collectible gifts for client appreciation, seasonal giving and senior relationships.",
-    image: "/products/slides/luxury-gifts/fountain-pen-leather.png",
-    href: "/products/luxury-gifts",
-    tags: ["Clients", "Seasonal"],
-  },
-];
+export const revalidate = 60;
 
-export default function SolutionsPage() {
+export default async function SolutionsPage() {
+  const catalog = await getCatalog();
+
   return (
     <>
       <Header />
@@ -71,8 +26,8 @@ export default function SolutionsPage() {
 
           <div className="mx-auto max-w-[1440px] px-8 pb-14 md:px-16">
             <div className="grid grid-cols-1 items-stretch gap-10 md:grid-cols-3">
-              {solutions.map((solution) => (
-                <article key={solution.title} className="flex h-full flex-col">
+              {catalog.solutions.map((solution) => (
+                <article key={solution._id} className="flex h-full flex-col">
                   <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-white">
                     <Image
                       src={solution.image}
@@ -84,18 +39,18 @@ export default function SolutionsPage() {
                   </div>
 
                   <div className="flex flex-1 flex-col items-center pt-4 text-center">
-                    <div className="flex flex-wrap justify-center gap-1 mb-2">
+                    <div className="mb-2 flex flex-wrap justify-center gap-1">
                       {solution.tags.map((tag) => (
-                        <span key={tag} className="px-2 py-0.5 text-[9px] font-bold tracking-[0.08em] uppercase text-black/40 border border-black/20">
+                        <span key={tag} className="border border-black/20 px-2 py-0.5 text-[9px] font-bold tracking-[0.08em] text-black/40 uppercase">
                           {tag}
                         </span>
                       ))}
                     </div>
                     <h2 className="m-0 text-base leading-6 font-bold tracking-[-0.03em] text-black uppercase">
-                      {solution.title}
+                      <FormattedText html={solution.title} />
                     </h2>
-                    <p className="m-0 mt-4 flex-1 max-w-[360px] text-base leading-6 font-normal text-black">
-                      {solution.description}
+                    <p className="m-0 mt-4 max-w-[360px] flex-1 text-base leading-6 font-normal text-black">
+                      <FormattedText html={solution.description} />
                     </p>
                     <a
                       href={solution.href}
@@ -109,7 +64,6 @@ export default function SolutionsPage() {
             </div>
           </div>
 
-          {/* Bottom CTA */}
           <div className="border-t border-[#e5e5e5] px-8 py-14 text-center md:px-16">
             <p className="m-0 text-base leading-6 font-normal text-black">
               Don&apos;t see what you&apos;re looking for? We build custom solutions from scratch.

@@ -1,30 +1,13 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ProductGrid from "../components/ProductGrid";
-import { products } from "../data/products";
+import { getCatalog } from "@/lib/cms/queries";
 
-function SortIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M2 4H14" stroke="currentColor" strokeWidth="1" />
-      <path d="M4 8H14" stroke="currentColor" strokeWidth="1" />
-      <path d="M6 12H14" stroke="currentColor" strokeWidth="1" />
-    </svg>
-  );
-}
+export const revalidate = 60;
 
-function FilterIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M2 4H14M4 8H14M6 12H14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-      <circle cx="3" cy="4" r="1.5" fill="currentColor" />
-      <circle cx="5" cy="8" r="1.5" fill="currentColor" />
-      <circle cx="7" cy="12" r="1.5" fill="currentColor" />
-    </svg>
-  );
-}
+export default async function ProductsPage() {
+  const catalog = await getCatalog();
 
-export default function ProductsPage() {
   return (
     <>
       <Header />
@@ -36,7 +19,7 @@ export default function ProductsPage() {
                 All Products
               </h1>
               <span className="text-xs leading-4 font-normal text-black">
-                {products.length} products
+                {catalog.products.length} products
               </span>
             </div>
             <p className="m-0 mt-2 text-xs leading-5 text-black/50">
@@ -50,20 +33,18 @@ export default function ProductsPage() {
                 type="button"
                 className="flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-xs leading-4 font-medium text-black"
               >
-                <SortIcon />
                 <span>Sort By: <span className="font-bold">Category</span></span>
               </button>
               <button
                 type="button"
                 className="flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-xs leading-4 font-medium text-black"
               >
-                <FilterIcon />
                 Filters
               </button>
             </div>
           </div>
 
-          <ProductGrid items={products} />
+          <ProductGrid items={catalog.products} categories={catalog.categories} />
         </section>
       </main>
       <Footer />

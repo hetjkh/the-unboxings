@@ -85,3 +85,48 @@ button:active {
     transition-duration: 0.01ms !important;
   }
 }
+
+.rich-text strong,
+.rich-text b,
+.rich-text-editor strong,
+.rich-text-editor b {
+  font-weight: 700;
+}
+
+.rich-text em,
+.rich-text i,
+.rich-text-editor em,
+.rich-text-editor i {
+  font-style: italic;
+}
+
+.rich-text u,
+.rich-text-editor u {
+  text-decoration: underline;
+}
+
+.rich-text mark,
+.rich-text-editor mark {
+  background-color: #f5e6a8;
+  color: inherit;
+  padding: 0 0.12em;
+}
+
+.rich-text a,
+.rich-text-editor a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.rich-text-editor {
+  white-space: pre-wrap;
+  word-break: break-word;
+  cursor: text;
+}
+
+.rich-text-editor:empty::before {
+  content: attr(data-placeholder);
+  color: rgb(0 0 0 / 35%);
+  pointer-events: none;
+}
