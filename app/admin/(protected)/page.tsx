@@ -20,7 +20,6 @@ export default async function AdminDashboardPage() {
             { label: "Categories", value: catalog.categories.length },
             { label: "Products", value: catalog.products.length },
             { label: "Solutions", value: catalog.solutions.length },
-            { label: "Page Heroes", value: catalog.pageHeroes.length },
           ].map((item) => (
             <div key={item.label} className="border border-black/10 bg-white p-5">
               <p className="m-0 text-[10px] font-bold tracking-[0.14em] text-black/40 uppercase">{item.label}</p>

@@ -18,13 +18,28 @@ async function saveToLocalDisk(file: File, fileName: string, buffer: Buffer): Pr
   return `/uploads/${fileName}`;
 }
 
+function getBlobToken(): string | undefined {
+  const raw = process.env.BLOB_READ_WRITE_TOKEN?.trim();
+  if (!raw) return undefined;
+  return raw.replace(/^["']|["']$/g, "");
+}
+
 async function saveToVercelBlob(file: File, fileName: string, buffer: Buffer): Promise<string> {
-  const blob = await put(`uploads/${fileName}`, buffer, {
-    access: "public",
+  const token = getBlobToken();
+  const options = {
+    access: "public" as const,
     contentType: file.type || "application/octet-stream",
     addRandomSuffix: false,
-  });
-  return blob.url;
+    ...(token ? { token } : {}),
+  };
+
+  try {
+    const blob = await put(`uploads/${fileName}`, buffer, options);
+    return blob.url;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Vercel Blob upload failed";
+    throw new Error(message);
+  }
 }
 
 export async function saveUploadedFile(file: File): Promise<string> {
@@ -32,14 +47,17 @@ export async function saveUploadedFile(file: File): Promise<string> {
   const buffer = Buffer.from(bytes);
   const fileName = buildFileName(file);
 
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
+  if (process.env.VERCEL) {
+    if (!getBlobToken() && !process.env.BLOB_STORE_ID) {
+      throw new Error(
+        "BLOB_READ_WRITE_TOKEN is missing. Connect your Blob store to this Vercel project, then redeploy.",
+      );
+    }
     return saveToVercelBlob(file, fileName, buffer);
   }
 
-  if (process.env.VERCEL) {
-    throw new Error(
-      "Image uploads on Vercel require Vercel Blob. Add a Blob store in your Vercel project settings.",
-    );
+  if (getBlobToken()) {
+    return saveToVercelBlob(file, fileName, buffer);
   }
 
   return saveToLocalDisk(file, fileName, buffer);
