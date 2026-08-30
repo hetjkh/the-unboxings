@@ -19,7 +19,7 @@ async function main() {
 
   const db = await getDb();
   const timestamp = new Date().toISOString();
-  const containSlugs = new Set(["health-wellness", "apparel-uniforms", "aprons", "luxury-writing", "keychains"]);
+  const containSlugs = new Set(["health-wellness", "apparel-uniforms", "aprons", "luxury-writing", "keychains", "staff-id"]);
 
   for (const [index, category] of productCategories.entries()) {
     await db.collection("categories").updateOne(

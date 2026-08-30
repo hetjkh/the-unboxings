@@ -94,7 +94,7 @@ function nowIso(): string {
 
 function staticCatalog(): CatalogData {
   const timestamp = nowIso();
-  const containSlugs = new Set(["health-wellness", "apparel-uniforms", "aprons", "luxury-writing", "keychains"]);
+  const containSlugs = new Set(["health-wellness", "apparel-uniforms", "aprons", "luxury-writing", "keychains", "staff-id"]);
 
   const categories: Category[] = productCategories.map((category, index) => ({
     _id: `static-${category.slug}`,
