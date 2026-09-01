@@ -90,18 +90,18 @@ export default function IndustriesPage() {
           className="grid h-[68vh] min-h-[520px] max-h-[820px] grid-rows-[auto_1fr] overflow-hidden border-b border-black/20 bg-[#0a0a0a] text-white md:grid-cols-[1fr_1.05fr] md:grid-rows-1"
         >
           <div className="flex flex-col justify-center px-8 py-10 md:px-16 md:py-16">
-            <p className="m-0 text-[11px] font-bold tracking-[0.14em] text-white/45 uppercase md:text-xs">Where ideas meet context</p>
+            <p className="m-0 text-[11px] font-bold tracking-[0.14em] text-white/45 uppercase md:text-xs">Designed with context</p>
             <h1 id="industries-title" className="m-0 mt-5 text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.95] font-light tracking-[-0.04em] uppercase">
-              Industries
+              By Industry
             </h1>
             <p className="m-0 mt-6 max-w-[560px] text-base leading-7 text-white/65 md:text-lg md:leading-8">
-              Industry knowledge shapes the ideas we bring to the table and the experiences we make possible.
+              Different industries create different moments. We design for the people, purpose and context behind each one.
             </p>
             <a
               href="#industry-directory"
               className="mt-8 inline-flex w-fit items-center gap-3 border-b border-white pb-1 text-xs font-bold text-white no-underline uppercase"
             >
-              Explore sectors <Arrow />
+              Explore industries <Arrow />
             </a>
           </div>
           <div className="relative h-full min-h-[360px] md:min-h-0">
@@ -118,14 +118,14 @@ export default function IndustriesPage() {
 
         <section aria-label="Our approach" className="grid border-b border-[#dedede] bg-white md:grid-cols-[0.7fr_1.3fr]">
           <div className="px-8 py-10 md:px-16 md:py-16">
-            <p className="m-0 text-[10px] font-bold tracking-[0.1em] text-black/40 uppercase">Sector intelligence</p>
+            <p className="m-0 text-[10px] font-bold tracking-[0.1em] text-black/40 uppercase">Designed with context</p>
           </div>
           <div className="border-t border-[#dedede] px-8 py-10 md:border-t-0 md:border-l md:px-16 md:py-16">
             <p className="m-0 max-w-[760px] text-2xl leading-8 font-light md:text-4xl md:leading-[1.2]">
-              The right idea starts with understanding the audience, environment, and standards of your world.
+              The right idea begins with understanding who it is for.
             </p>
             <p className="m-0 mt-7 max-w-[580px] text-xs leading-5 text-black/55">
-              We translate sector insight into relevant products, materials, packaging, and moments that feel specific to your people rather than selected from a catalogue.
+              We consider the audience, occasion and environment to create products, materials and packaging that feel considered—not selected from a catalogue.
             </p>
           </div>
         </section>

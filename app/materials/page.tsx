@@ -32,12 +32,12 @@ export default function MaterialsPage() {
         <HomeMotion>
           <section aria-labelledby="materials-heading" className="bg-[#0a0a0a] px-8 py-16 text-white md:px-16 md:py-24">
             <div className="mx-auto max-w-[1440px] border-t border-white/25 pt-7">
-              <p className="m-0 text-[10px] font-medium tracking-[0.22em] text-white/40 uppercase">Design resources</p>
+              <p className="m-0 text-[10px] font-medium tracking-[0.22em] text-white/40 uppercase">Material Exploration</p>
               <div className="mt-16 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
                 <h1 id="materials-heading" className="m-0 text-[clamp(3.5rem,8vw,8rem)] leading-[0.86] font-light tracking-[-0.07em] uppercase">Material<br />Library</h1>
                 <div className="border-t border-white/25 pt-6">
-                  <p className="m-0 text-xl leading-7 font-light">Choose the feeling before choosing the form.</p>
-                  <p className="m-0 mt-4 max-w-[520px] text-sm leading-6 text-white/50">Explore how different materials look, feel and perform—and discover which one best expresses your brand.</p>
+                  <p className="m-0 text-xl leading-7 font-light">Every material tells a different story.</p>
+                  <p className="m-0 mt-4 max-w-[520px] text-sm leading-6 text-white/50">Explore texture, weight, finish and character—and discover the materials that bring your brand to life.</p>
                 </div>
               </div>
             </div>

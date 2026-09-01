@@ -53,10 +53,10 @@ export const brandStories: readonly BrandStory[] = [
   },
   {
     slug: "dubai-skyline-chess-set",
-    title: "Turning Dubai's Skyline Into a Game of Strategy",
+    title: "Dubai, Built to Play.",
     tagline: "What if you could actually play with the Dubai skyline?",
     challenge:
-      "Create a premium executive gift that could represent Dubai without relying on another conventional souvenir.",
+      "How we transformed Dubai's iconic skyline into a functional executive piece designed to live beyond the gifting moment.",
     materials: "Clear acrylic · Smoked acrylic · Architectural form · Executive gift",
     image: "/brand-stories/dubai-skyline-chess-set/hero.png",
     alt: "Acrylic Dubai skyline chess set displayed against the city at night",
@@ -102,10 +102,10 @@ export const brandStories: readonly BrandStory[] = [
   },
   {
     slug: "the-private-reveal",
-    title: "Access, Unboxed",
+    title: "Access, Unboxed.",
     tagline: "Don't design a box. Design the reveal.",
     challenge:
-      "Create a premium presentation for an exclusive banking card where receiving it became an experience.",
+      "How we turned the presentation of an exclusive banking card into an experience worthy of what it unlocks.",
     materials: "Matte black · Smoked acrylic · Hidden magnets · Integrated illumination",
     image: "/brand-stories/the-private-reveal/hero.png",
     alt: "Illuminated private access card presentation box revealing a personalized name",
@@ -149,10 +149,10 @@ export const brandStories: readonly BrandStory[] = [
   },
   {
     slug: "a-majlis-reimagined",
-    title: "A Majlis, Reimagined",
+    title: "A Majlis, Reimagined.",
     tagline: "A Ramadan gesture rooted in generosity, culture and meaningful relationships.",
     challenge:
-      "Go beyond another elaborate seasonal hamper and design a gift inspired by the experience of Ramadan itself.",
+      "How we translated the spirit of Ramadan hospitality into a contemporary gifting experience.",
     materials: "Stone · Brass · Oud · Bakhoor · Arabic coffee · Mashrabiya detail",
     image: "/brand-stories/a-majlis-reimagined/hero.png",
     alt: "Contemporary majlis gift box with brass incense sculpture and mashrabiya doors",
@@ -193,8 +193,8 @@ export const brandStories: readonly BrandStory[] = [
     title: "From One Sketch to a Company Legacy",
     tagline: "The company had grown. The idea that started it all had never changed.",
     challenge:
-      "Create 100 premium pieces to mark a company's 25th anniversary — rooted in the idea that began it all.",
-    materials: "Hand-finished metal · Optical crystal · Numbered edition · Founder's sketch",
+      "To mark 25 years, we returned to where it all began, the founder's original sketch and transformed it into 100 individually crafted pieces.",
+    materials: "Founder's sketch · Hand-finished metal · Optical crystal · Numbered edition",
     image: "/brand-stories/from-sketch-to-legacy/hero.png",
     alt: "Gold skyline sculpture preserved in optical crystal beside the original sketch",
     gallery: [
@@ -238,7 +238,7 @@ export const brandStories: readonly BrandStory[] = [
     title: "The First Signature",
     tagline: "Before there was a company, there was a signature.",
     challenge:
-      "Transform the handwritten line that marked the beginning of a business into a sculptural object.",
+      "The signature that started a company, transformed into a piece of its legacy.",
     materials: "Formed brass · Optical crystal · Black stone · Limited edition",
     image: "/brand-stories/the-first-signature/hero.png",
     alt: "Gold signature sculpture casting its handwritten shadow onto crystal",
@@ -276,7 +276,7 @@ export const brandStories: readonly BrandStory[] = [
     title: "The Ascent",
     tagline: "Recognition, given form.",
     challenge:
-      "Create an award that didn't simply say achievement — but expressed it as an object of design.",
+      "Achievement isn't a destination. It's the journey upward. We turned that idea into an award designed to embody progress.",
     materials: "Optical crystal · Formed brass · Honed black stone",
     image: "/brand-stories/the-ascent/hero.png",
     alt: "Crystal award with a rising brass line on a black stone base",
@@ -321,7 +321,7 @@ export const brandStories: readonly BrandStory[] = [
     title: "The Quiet Journey",
     tagline: "Rest, before you arrive.",
     challenge:
-      "Reimagine the traditional travel amenity kit as an intuitive ritual for rest, comfort and arrival.",
+      "We designed the journey around what travellers need most — a moment to switch off.",
     materials: "Aromatherapy · Neck support · Earplugs · Sleep mask · Travel blanket",
     image: "/brand-stories/the-quiet-journey/hero.png",
     alt: "Open travel rest kit with aromatherapy, mask, earplugs, neck support and blanket",
@@ -363,7 +363,7 @@ export const brandStories: readonly BrandStory[] = [
     title: "Welcome, Before a Word Is Spoken",
     tagline: "A welcome designed to make every VIP guest feel expected, not simply accommodated.",
     challenge:
-      "Create an arrival ritual that lets the room itself say: we knew you were coming.",
+      "A sense of place, thoughtfully designed into the very first moment of arrival.",
     materials: "Place · Scent · Taste · Personalisation · Tomorrow",
     image: "/brand-stories/welcome-before-a-word/hero.png",
     alt: "VIP hospitality welcome chest with Dubai fragrance, keepsakes and local delicacies",

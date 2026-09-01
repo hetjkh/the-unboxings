@@ -70,7 +70,7 @@ export default async function InspirationGalleryPage() {
                         </div>
                         <div className="border-t border-white/15 pt-5">
                           <p className="m-0 text-[10px] leading-4 tracking-[0.1em] text-white/35 uppercase">{story.materials}</p>
-                          <Link href={`/brand-stories/${story.slug}`} className="mt-7 flex items-center justify-between text-[10px] font-bold tracking-[0.14em] text-white uppercase no-underline">View the brand story <span className="text-lg font-light" aria-hidden="true">→</span></Link>
+                          <Link href={`/brand-stories/${story.slug}`} className="mt-7 flex items-center justify-between text-[10px] font-bold tracking-[0.14em] text-white uppercase no-underline">View the story <span className="text-lg font-light" aria-hidden="true">→</span></Link>
                         </div>
                       </div>
                     </article>
@@ -83,7 +83,11 @@ export default async function InspirationGalleryPage() {
           <section className="grid bg-[#cbd8d4] text-black md:grid-cols-[1.4fr_0.6fr]" aria-labelledby="inspiration-cta-heading">
             <div className="px-8 py-14 md:px-16 md:py-20">
               <p className="m-0 text-[10px] font-bold tracking-[0.1em] text-black/50 uppercase">Your story starts here</p>
-              <h2 id="inspiration-cta-heading" className="m-0 mt-4 max-w-[800px] text-3xl leading-tight font-light tracking-[-0.04em] md:text-5xl">Bring us the moment. We will shape an experience around it.</h2>
+              <h2 id="inspiration-cta-heading" className="m-0 mt-4 max-w-[800px] text-3xl leading-tight font-light tracking-[-0.04em] md:text-5xl">
+                Don&apos;t start with the gift.
+                <br />
+                Start with the moment.
+              </h2>
             </div>
             <div className="flex items-end border-t border-black/15 px-8 py-10 md:border-t-0 md:border-l md:px-12 md:py-16">
               <a href="/contact-us#start-project" className="flex w-full items-center justify-between border-b border-black pb-3 text-xs font-bold text-black uppercase no-underline">Start your project <span aria-hidden="true">→</span></a>

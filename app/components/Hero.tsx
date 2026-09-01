@@ -6,13 +6,13 @@ export default function Hero() {
       ariaLabel="Custom Corporate Gifts & Branded Merchandise"
       title={
         <>
-          We don&apos;t sell gifts.
+          NOT JUST GIVEN.
           <br />
-          We design memorable brand experiences.
+          REMEMBERED
         </>
       }
-      titleAlt="We don't sell gifts. We design memorable brand experiences."
-      description="Custom-designed merchandise, employee welcome kits, VIP gifts, event giveaways and branded experiences, crafted exclusively for your brand."
+      titleAlt="Not just given. Remembered."
+      subline="Corporate gifting, designed differently."
       heading
       image="/hero1.png"
       video="/hero.webm"

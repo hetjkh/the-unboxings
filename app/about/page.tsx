@@ -5,56 +5,78 @@ import Footer from "../components/Footer";
 export const metadata = {
   title: "About Us | The Unboxing — Corporate Gifts & Branded Merchandise UAE",
   description:
-    "Your branding partner, not just a gift supplier. Learn about The Unboxing — UAE's leading corporate gifting and brand solutions company.",
+    "We don't start with a catalogue. We start with your story. Custom corporate gifts, branded merchandise and packaging experiences from The Unboxing.",
 };
 
 const differentiators = [
   {
-    title: "Creative Product Selection",
-    description: "We curate products that tell your brand story—from premium tech accessories to handcrafted luxury items.",
+    title: "We Start With the Idea",
+    description:
+      "We begin with the occasion, the recipient and the story you want to tell then find or create the right object around it.",
   },
   {
-    title: "Global Sourcing Network",
-    description: "Access to thousands of products from trusted manufacturers worldwide, with quality control at every step.",
+    title: "Designed, Not Just Branded",
+    description:
+      "From form and materials to colour, finish and functionality, customization goes far beyond placing a logo on a product.",
   },
   {
-    title: "Innovative Packaging",
-    description: "Our packaging designers create unboxing experiences that amplify your brand at the first moment of contact.",
+    title: "Packaging Is Part of the Gift",
+    description:
+      "We design the reveal as carefully as the product itself, turning packaging into part of the experience.",
   },
   {
-    title: "Customization Expertise",
-    description: "In-house capabilities for laser engraving, UV printing, embroidery, foil stamping, and more.",
+    title: "Materials That Change the Idea",
+    description:
+      "Acrylic, wood, leather, glass, metal, crystal, fabric and more selected to give each concept its own character.",
   },
   {
-    title: "Reliable Project Management",
-    description: "Dedicated account managers who handle everything from concept to delivery—on time, every time.",
+    title: "From Concept to Delivery",
+    description:
+      "Design, prototyping, sourcing, production, quality control, packaging and delivery managed as one connected process.",
   },
   {
-    title: "UAE-Based Support",
-    description: "A local team with deep knowledge of UAE corporate culture, occasions, and compliance requirements.",
+    title: "Built for 50 or 5,000",
+    description:
+      "From intimate executive gifting to large-scale campaigns, every project receives the same attention to detail.",
+  },
+] as const;
+
+const purposePrinciples = [
+  {
+    title: "Considered, Not Generic",
+    description: "Every gift begins with a purpose, a person and a moment not a catalogue.",
+  },
+  {
+    title: "Personal, Not Promotional",
+    description: "We create branded experiences that feel thoughtful, relevant and genuinely worth receiving.",
+  },
+  {
+    title: "Kept, Not Forgotten",
+    description:
+      "Because the best corporate gifts aren't simply opened. They're used, displayed, remembered and kept.",
   },
 ] as const;
 
 const process = [
   {
-    title: "Share Your Requirement",
-    description: "Tell us about your event, audience and budget through our project brief or a quick conversation.",
+    title: "Understand the Moment",
+    description: "Tell us who it's for, why you're gifting and what you want the experience to achieve.",
   },
   {
-    title: "Concept Development",
-    description: "We prepare tailored product recommendations, creative ideas and an initial direction.",
+    title: "Create the Concept",
+    description: "We explore ideas, products, materials and packaging to build a direction around your brand.",
   },
   {
-    title: "Branding & Sampling",
-    description: "Logo placement, digital mockups and physical samples are approved before production begins.",
+    title: "Design & Prototype",
+    description: "From branding and finishes to mockups and samples, we refine the details before production begins.",
   },
   {
-    title: "Production",
-    description: "Quality-controlled manufacturing follows strict brand guidelines and inspection at every stage.",
+    title: "Craft & Quality Check",
+    description: "Once approved, we manage production with attention to craftsmanship, consistency and quality.",
   },
   {
-    title: "Packaging & Delivery",
-    description: "Ready-to-present experiences are packaged with intention and delivered on time.",
+    title: "Package & Deliver",
+    description: "Every piece is prepared, presented and delivered ready for its final moment—the unboxing.",
   },
 ] as const;
 
@@ -79,7 +101,9 @@ export default function AboutPage() {
                   Partner
                 </h1>
                 <p className="m-0 mt-8 max-w-[500px] border-t border-white/25 pt-6 text-sm leading-6 text-white/60 md:text-base md:leading-7">
-                  Not just a gift supplier. We turn thoughtful objects into memorable expressions of your brand.
+                  We don&apos;t start with a catalogue.
+                  <br />
+                  We start with your story.
                 </p>
               </div>
             </div>
@@ -108,21 +132,33 @@ export default function AboutPage() {
             </div>
             <div>
               <p className="m-0 max-w-[980px] text-[clamp(1.8rem,3.5vw,3.75rem)] leading-[1.08] font-light tracking-[-0.045em]">
-                We create customized corporate gifting and branded merchandise that strengthens relationships, celebrates milestones and makes brands visible in meaningful ways.
+                We don&apos;t start with a catalogue.
+                <br />
+                We start with your story.
+              </p>
+              <p className="m-0 mt-8 max-w-[760px] text-sm leading-6 text-black/55 md:text-base md:leading-7">
+                The Unboxing creates custom corporate gifts, branded merchandise and packaging experiences designed around the people, moments and brands they represent.
               </p>
               <div className="mt-10 grid gap-6 border-t border-black/20 pt-7 md:grid-cols-2 md:gap-12">
                 <p className="m-0 text-sm leading-6 text-black/55">
-                  From employee joining kits to executive appreciation gifts, every project begins with the people and the moment it needs to serve.
+                  From a first idea to the final unboxing, we bring together{" "}
+                  <strong className="font-semibold text-black/75">
+                    concept, design, materials, customization, production and packaging
+                  </strong>{" "}
+                  to create something worth remembering.
                 </p>
                 <p className="m-0 text-sm leading-6 text-black/55">
-                  For large-scale campaigns and intimate gestures alike, we transform an initial idea into an experience people remember.
+                  Whether it&apos;s 50 executive gifts or 5,000 pieces for a brand campaign, every project begins with the same question:
                 </p>
               </div>
+              <p className="m-0 mt-8 text-lg font-medium tracking-[-0.02em] text-black md:text-xl">
+                What should this gift make someone feel?
+              </p>
               <a
                 href="/contact-us#start-project"
                 className="mt-10 inline-flex h-12 items-center justify-center bg-black px-8 text-xs font-bold tracking-[0.06em] text-white uppercase no-underline"
               >
-                Work With Us →
+                Create With Us →
               </a>
             </div>
           </div>
@@ -172,26 +208,27 @@ export default function AboutPage() {
                   id="mission-heading"
                   className="m-0 mt-5 text-[clamp(2.75rem,5vw,5rem)] leading-[0.9] font-light tracking-[-0.055em] uppercase"
                 >
-                  Our
+                  Why
                   <br />
-                  Mission
+                  We Exist
                 </h2>
               </header>
 
               <div>
                 <p className="m-0 max-w-[900px] text-[clamp(1.8rem,3.6vw,4rem)] leading-[1.08] font-light tracking-[-0.045em] text-white/90">
-                  We help organizations strengthen relationships through thoughtful, customized experiences that genuinely reflect their brand values.
+                  We want to change what people expect from corporate gifting. From something branded and given, to something considered, experienced and kept.
                 </p>
 
                 <div className="mt-12 grid grid-cols-1 border-t border-l border-white/20 sm:grid-cols-3">
-                  {["Thoughtful by design", "Personal to every brand", "Made to strengthen bonds"].map((principle, index) => (
-                    <div key={principle} className="min-h-[120px] border-r border-b border-white/20 p-5">
+                  {purposePrinciples.map((principle, index) => (
+                    <div key={principle.title} className="min-h-[160px] border-r border-b border-white/20 p-5 md:min-h-[180px]">
                       <span className="text-[10px] tracking-[0.16em] text-white/30">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <p className="m-0 mt-7 text-xs leading-5 font-medium tracking-[0.04em] uppercase">
-                        {principle}
+                        {principle.title}
                       </p>
+                      <p className="m-0 mt-4 text-xs leading-5 text-white/55">{principle.description}</p>
                     </div>
                   ))}
                 </div>
@@ -212,7 +249,7 @@ export default function AboutPage() {
                 <h2 id="process-heading" className="m-0 mt-4 text-3xl font-light tracking-[-0.045em] uppercase md:text-5xl">Our Process</h2>
               </div>
               <p className="m-0 max-w-[470px] text-sm leading-6 text-black/50 md:justify-self-end md:text-right">
-                One accountable path from the first requirement to the final delivery.
+                From the first idea to the final unboxing, every detail is considered.
               </p>
             </header>
 

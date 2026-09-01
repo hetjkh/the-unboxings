@@ -31,7 +31,9 @@ export default async function MenCampaignHero() {
             </h2>
           </div>
           <p className="m-0 max-w-[540px] text-sm leading-6 text-white/60 md:justify-self-end md:text-base md:leading-7">
-            We don&apos;t sell gifts. We design memorable brand experiences—from the first reference to the moment they are opened.
+            Every gift begins with a reason.
+            <br />
+            These are the stories behind what we created.
           </p>
         </header>
 
@@ -71,7 +73,7 @@ export default async function MenCampaignHero() {
                 {featuredStory.materials}
               </p>
               <span className="mt-8 flex items-center justify-between text-xs font-bold tracking-[0.08em] uppercase">
-                View case study
+                View the story
                 <span className="text-xl font-light transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>
               </span>
             </div>
@@ -107,7 +109,7 @@ export default async function MenCampaignHero() {
                   {story.challenge}
                 </p>
                 <span className="mt-5 flex items-center justify-between border-t border-white/15 pt-4 text-[10px] font-bold tracking-[0.12em] uppercase">
-                  Read story
+                  View the story
                   <span className="text-base font-light transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>
                 </span>
               </div>

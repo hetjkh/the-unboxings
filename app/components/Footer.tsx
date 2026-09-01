@@ -2,21 +2,21 @@ import Link from "next/link";
 
 const quickLinks = [
   { label: "Products", href: "/products" },
+  { label: "Gift by Industry", href: "/industries" },
   { label: "Solutions", href: "/solutions" },
-  { label: "Shop by Occasion", href: "/occasions" },
-  { label: "Shop by Industry", href: "/industries" },
+  { label: "Material Library", href: "/materials" },
   { label: "Behind the Design", href: "/behind-the-design" },
   { label: "Brand Stories", href: "/inspiration-gallery" },
-  { label: "Resources", href: "/resources" },
+  { label: "Ideas & Insights", href: "/resources" },
 ];
 
 const companyLinks = [
-  { label: "About Us", href: "/about" },
+  { label: "About The Unboxing", href: "/about" },
   { label: "Our Process", href: "/about#process" },
-  { label: "Case Studies", href: "/case-studies" },
+  { label: "Signature Projects", href: "/inspiration-gallery" },
   { label: "FAQ", href: "/faq" },
-  { label: "Contact Us", href: "/contact-us" },
-  { label: "Privacy Policy", href: "#" },
+  { label: "Contact", href: "/contact-us" },
+  { label: "Privacy", href: "/privacy" },
 ];
 
 function FooterLinks({ links }: { links: { label: string; href: string }[] }) {
@@ -55,7 +55,7 @@ export default function Footer() {
 
           <div className="flex flex-col justify-end">
             <p className="m-0 max-w-[480px] text-sm leading-6 text-white/55">
-              Get considered inspiration, material stories and gifting insights delivered occasionally—not constantly.
+              A considered edit of gifting ideas, material discoveries, packaging inspiration and brand stories delivered occasionally, never unnecessarily.
             </p>
             <form className="mt-8" action="#" method="post">
               <label className="sr-only" htmlFor="footer-email">Email address</label>
@@ -95,7 +95,7 @@ export default function Footer() {
           <div>
             <h3 className="m-0 mb-6 text-[10px] font-bold tracking-[0.16em] text-white uppercase">Get in touch</h3>
             <p className="m-0 max-w-[360px] text-xs leading-5 text-white/50">
-              UAE-based corporate gifting and branded merchandise specialists. Worldwide delivery. Bulk orders welcome.
+              Have an idea, occasion or brief in mind? Let&apos;s create something people will remember opening.
             </p>
             <div className="mt-7 space-y-2">
               <a href="mailto:hello@theunboxing.ae" className="block text-sm text-white no-underline hover:text-white/60">hello@theunboxing.ae</a>

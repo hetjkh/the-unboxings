@@ -11,6 +11,7 @@ import {
   heroOverlayHeadingClass,
   heroOverlaySplitDescriptionClass,
   heroOverlaySplitHeadingClass,
+  heroOverlaySplitSublineClass,
   heroOverlayTitleClass,
 } from "./heroCtaStyles";
 import { usePinHeroCta } from "../hooks/usePinHeroCta";
@@ -19,6 +20,7 @@ type CampaignHeroProps = {
   ariaLabel: string;
   title: ReactNode;
   titleAlt?: string;
+  subline?: string;
   description?: string;
   heading?: boolean;
   image: string;
@@ -39,6 +41,7 @@ export default function CampaignHero({
   ariaLabel,
   title,
   titleAlt,
+  subline,
   description,
   heading = false,
   image,
@@ -115,7 +118,14 @@ export default function CampaignHero({
       {splitLayout ? (
         <div className={`z-40 px-6 md:px-16 ${pinCta ? "fixed inset-x-0 bottom-6 md:bottom-10" : "absolute inset-x-0 bottom-6 md:bottom-10"}`}>
           <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-6 md:grid-cols-[minmax(0,0.95fr)_minmax(0,0.75fr)] md:items-start md:gap-12">
-            {heading ? <h1 className={heroOverlaySplitHeadingClass}>{title}</h1> : <p className={heroOverlayTitleClass}>{title}</p>}
+            {heading ? (
+              <div>
+                <h1 className={heroOverlaySplitHeadingClass}>{title}</h1>
+                {subline ? <p className={heroOverlaySplitSublineClass}>{subline}</p> : null}
+              </div>
+            ) : (
+              <p className={heroOverlayTitleClass}>{title}</p>
+            )}
             <div className="flex flex-col gap-5">
               {description ? <p className={heroOverlaySplitDescriptionClass}>{description}</p> : null}
               <div className="grid grid-cols-2 gap-3">

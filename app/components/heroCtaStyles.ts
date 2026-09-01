@@ -29,7 +29,10 @@ export const heroOverlayDescriptionClass =
   "m-0 max-w-[760px] text-center text-sm leading-5 font-normal text-white md:text-base md:leading-6";
 
 export const heroOverlaySplitHeadingClass =
-  "m-0 max-w-[470px] text-left text-3xl leading-[1.08] font-bold tracking-[-0.05em] text-white md:text-[38px] md:leading-[1.08]";
+  "m-0 max-w-[620px] text-left text-4xl leading-[1.06] font-bold tracking-[-0.05em] text-white md:text-5xl md:leading-[1.06] lg:text-6xl";
+
+export const heroOverlaySplitSublineClass =
+  "m-0 mt-4 max-w-[470px] text-left text-xs leading-5 font-normal tracking-[0.02em] text-white/75 md:mt-5 md:text-sm md:leading-6";
 
 export const heroOverlaySplitDescriptionClass =
   "m-0 max-w-[560px] text-left text-sm leading-5 font-normal text-white md:text-base md:leading-6";

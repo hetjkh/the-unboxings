@@ -35,24 +35,57 @@ const defaultSolutionsLinks = [
 ];
 
 const primaryLinks = [
-  { label: "Products", panel: "products" as MenuPanel },
   { label: "Solutions", panel: "solutions" as MenuPanel },
-  { label: "Shop by Industry", href: "/industries" },
+  { label: "Collections", panel: "products" as MenuPanel },
+  { label: "By Industry", panel: "industries" as MenuPanel },
+  { label: "Brand Stories", href: "/inspiration-gallery" },
   { label: "Behind the Design", href: "/behind-the-design" },
   { label: "Materials", href: "/materials" },
-  { label: "Brand Stories", href: "/inspiration-gallery" },
   { label: "Resources", href: "/resources" },
 ];
 
 const secondaryLinks = [
   { label: "About Us", href: "/about" },
   { label: "Our Process", href: "/about#process" },
-  { label: "Case Studies", href: "/case-studies" },
 ];
 
-const footerLinks = [
-  { label: "Contact Us", href: "/contact-us" },
-  { label: "FAQ", href: "/faq" },
+const defaultIndustriesLinks = [
+  { label: "Real Estate", href: "/industries" },
+  { label: "Hospitality", href: "/industries" },
+  { label: "Government", href: "/industries" },
+  { label: "Healthcare", href: "/industries" },
+  { label: "Health & Wellness", href: "/industries" },
+  { label: "Education", href: "/industries" },
+  { label: "Aviation", href: "/industries" },
+  { label: "Construction", href: "/industries" },
+  { label: "Technology", href: "/industries" },
+  { label: "Finance", href: "/industries" },
+  { label: "Automotive", href: "/industries" },
+  { label: "Luxury", href: "/industries" },
+  { label: "Retail", href: "/industries" },
+];
+
+const defaultIndustryFeatures = [
+  {
+    name: "Real Estate",
+    image: "/industries/real-estate.webp",
+    href: "/industries",
+  },
+  {
+    name: "Hospitality",
+    image: "/industries/hospitality.webp",
+    href: "/industries",
+  },
+  {
+    name: "Healthcare",
+    image: "/industries/healthcare.webp",
+    href: "/industries",
+  },
+  {
+    name: "Luxury",
+    image: "/industries/luxury.webp",
+    href: "/industries",
+  },
 ];
 
 const defaultProductFeatures = [
@@ -101,12 +134,13 @@ const defaultSolutionFeatures = [
   },
 ];
 
-type MenuPanel = "main" | "products" | "solutions";
+type MenuPanel = "main" | "solutions" | "products" | "industries";
 
 const panelOffset: Record<MenuPanel, number> = {
   main: 0,
-  products: 1,
-  solutions: 2,
+  solutions: 1,
+  products: 2,
+  industries: 3,
 };
 
 function CloseIcon() {
@@ -144,6 +178,8 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
   const [solutionsLinks, setSolutionsLinks] = useState(defaultSolutionsLinks);
   const [productFeatures, setProductFeatures] = useState(defaultProductFeatures);
   const [solutionFeatures, setSolutionFeatures] = useState(defaultSolutionFeatures);
+  const [industriesLinks] = useState(defaultIndustriesLinks);
+  const [industryFeatures] = useState(defaultIndustryFeatures);
 
   useEffect(() => {
     fetch("/api/catalog")
@@ -250,7 +286,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                       <button
                         type="button"
                         onClick={() => openSubPanel(link.panel!)}
-                        className="flex w-full cursor-pointer items-center justify-between border-0 bg-transparent py-2 text-left text-2xl leading-8 font-medium tracking-[-0.02em] text-black"
+                        className="flex w-full cursor-pointer items-center justify-between border-0 bg-transparent py-2 text-left text-2xl leading-8 font-bold tracking-[0.02em] text-black uppercase"
                       >
                         {link.label}
                         <ChevronIcon />
@@ -258,7 +294,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                     ) : (
                       <a
                         href={link.href}
-                        className="block py-2 text-2xl leading-8 font-medium tracking-[-0.02em] text-black no-underline"
+                        className="block py-2 text-2xl leading-8 font-bold tracking-[0.02em] text-black uppercase no-underline"
                       >
                         {link.label}
                       </a>
@@ -280,14 +316,55 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                 ))}
               </ul>
 
-              <ul className="m-0 mt-auto list-none p-0 pt-10">
-                {footerLinks.map((link) => (
+              <a
+                href="/contact-us#start-project"
+                className="mt-auto flex items-center justify-between pt-10 text-2xl leading-8 font-bold tracking-[0.02em] text-black uppercase no-underline"
+              >
+                Start a Project
+                <span aria-hidden="true" className="text-2xl font-light">
+                  →
+                </span>
+              </a>
+            </nav>
+
+            {/* ── Solutions Panel ── */}
+            <nav
+              aria-label="Solutions"
+              className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto px-10 pb-10"
+            >
+              <h2 className="m-0 text-[48px] leading-[56px] font-light tracking-[-0.03em] text-black uppercase">
+                Solutions
+              </h2>
+
+              <div className="mt-8 grid grid-cols-2 gap-4">
+                {solutionFeatures.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="group flex flex-col no-underline"
+                  >
+                    <div className="relative w-full aspect-square overflow-hidden bg-[#f5f5f5]">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover object-center"
+                        sizes="280px"
+                      />
+                    </div>
+                    <span className="mt-1 text-sm leading-5 font-normal text-black">
+                      {item.name}
+                    </span>
+                  </a>
+                ))}
+              </div>
+
+              <ul className="m-0 mt-10 list-none p-0">
+                {solutionsLinks.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className={`block py-1.5 text-xs leading-4 font-normal text-black underline underline-offset-2 ${
-                        link.label === "Contact Us" ? "font-bold" : ""
-                      }`}
+                      className="block py-2 text-base leading-6 font-normal text-black no-underline"
                     >
                       {link.label}
                     </a>
@@ -296,13 +373,13 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
               </ul>
             </nav>
 
-            {/* ── Products Panel ── */}
+            {/* ── Collections Panel ── */}
             <nav
-              aria-label="Products"
+              aria-label="Collections"
               className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto px-10 pb-10"
             >
-              <h2 className="m-0 text-[48px] leading-[56px] font-light tracking-[-0.03em] text-black">
-                Products
+              <h2 className="m-0 text-[48px] leading-[56px] font-light tracking-[-0.03em] text-black uppercase">
+                Collections
               </h2>
 
               <div className="mt-8 grid grid-cols-2 gap-4">
@@ -342,40 +419,40 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
               </ul>
             </nav>
 
-            {/* ── Solutions Panel ── */}
+            {/* ── By Industry Panel ── */}
             <nav
-              aria-label="Solutions"
+              aria-label="By Industry"
               className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto px-10 pb-10"
             >
-              <h2 className="m-0 text-[48px] leading-[56px] font-light tracking-[-0.03em] text-black">
-                Solutions
+              <h2 className="m-0 text-[48px] leading-[56px] font-light tracking-[-0.03em] text-black uppercase">
+                By Industry
               </h2>
 
               <div className="mt-8 grid grid-cols-2 gap-4">
-                {solutionFeatures.map((item) => (
+                {industryFeatures.map((industry) => (
                   <a
-                    key={item.name}
-                    href={item.href}
+                    key={industry.name}
+                    href={industry.href}
                     className="group flex flex-col no-underline"
                   >
                     <div className="relative w-full aspect-square overflow-hidden bg-[#f5f5f5]">
                       <Image
-                        src={item.image}
-                        alt={item.name}
+                        src={industry.image}
+                        alt={industry.name}
                         fill
                         className="object-cover object-center"
                         sizes="280px"
                       />
                     </div>
                     <span className="mt-1 text-sm leading-5 font-normal text-black">
-                      {item.name}
+                      {industry.name}
                     </span>
                   </a>
                 ))}
               </div>
 
               <ul className="m-0 mt-10 list-none p-0">
-                {solutionsLinks.map((link) => (
+                {industriesLinks.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
