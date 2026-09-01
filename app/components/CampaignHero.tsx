@@ -26,7 +26,7 @@ type CampaignHeroProps = {
   image: string;
   video?: string;
   mobileImage?: string;
-  href: string;
+  href?: string;
   buttonStyle?: "light" | "dark";
   buttonText?: string;
   secondaryHref?: string;
@@ -49,7 +49,7 @@ export default function CampaignHero({
   mobileImage,
   href,
   buttonStyle = "light",
-  buttonText = "Shop Now",
+  buttonText,
   secondaryHref,
   secondaryButtonText,
   splitLayout = false,
@@ -64,6 +64,8 @@ export default function CampaignHero({
     buttonStyle === "dark" ? heroOverlayButtonDark : heroOverlayButtonLight;
 
   const imageAlt = titleAlt ?? (typeof title === "string" ? title : ariaLabel);
+  const showButtons = Boolean(buttonText && href);
+  const showRightColumn = Boolean(description || showButtons);
 
   return (
     <section
@@ -117,7 +119,13 @@ export default function CampaignHero({
 
       {splitLayout ? (
         <div className={`z-40 px-6 md:px-16 ${pinCta ? "fixed inset-x-0 bottom-6 md:bottom-10" : "absolute inset-x-0 bottom-6 md:bottom-10"}`}>
-          <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-6 md:grid-cols-[minmax(0,0.95fr)_minmax(0,0.75fr)] md:items-start md:gap-12">
+          <div
+            className={`mx-auto grid max-w-[1440px] gap-6 ${
+              showRightColumn
+                ? "grid-cols-1 md:grid-cols-[minmax(0,0.95fr)_minmax(0,0.75fr)] md:items-start md:gap-12"
+                : "grid-cols-1"
+            }`}
+          >
             {heading ? (
               <div>
                 <h1 className={heroOverlaySplitHeadingClass}>{title}</h1>
@@ -126,19 +134,23 @@ export default function CampaignHero({
             ) : (
               <p className={heroOverlayTitleClass}>{title}</p>
             )}
-            <div className="flex flex-col gap-5">
-              {description ? <p className={heroOverlaySplitDescriptionClass}>{description}</p> : null}
-              <div className="grid grid-cols-2 gap-3">
-                <a href={href} className={`${buttonClassName} w-full`}>
-                  {buttonText}
-                </a>
-                {secondaryHref && secondaryButtonText ? (
-                  <a href={secondaryHref} className={`${heroOverlayButtonDark} w-full`}>
-                    {secondaryButtonText}
-                  </a>
+            {showRightColumn ? (
+              <div className="flex flex-col gap-5">
+                {description ? <p className={heroOverlaySplitDescriptionClass}>{description}</p> : null}
+                {showButtons ? (
+                  <div className={`grid gap-3 ${secondaryHref && secondaryButtonText ? "grid-cols-2" : "grid-cols-1"}`}>
+                    <a href={href} className={`${buttonClassName} w-full`}>
+                      {buttonText}
+                    </a>
+                    {secondaryHref && secondaryButtonText ? (
+                      <a href={secondaryHref} className={`${heroOverlayButtonDark} w-full`}>
+                        {secondaryButtonText}
+                      </a>
+                    ) : null}
+                  </div>
                 ) : null}
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
       ) : (
@@ -149,16 +161,18 @@ export default function CampaignHero({
             <p className={heroOverlayTitleClass}>{title}</p>
           )}
           {description ? <p className={heroOverlayDescriptionClass}>{description}</p> : null}
-          <div className="flex flex-wrap justify-center gap-3">
-            <a href={href} className={buttonClassName}>
-              {buttonText}
-            </a>
-            {secondaryHref && secondaryButtonText ? (
-              <a href={secondaryHref} className={heroOverlayButtonDark}>
-                {secondaryButtonText}
+          {showButtons ? (
+            <div className="flex flex-wrap justify-center gap-3">
+              <a href={href} className={buttonClassName}>
+                {buttonText}
               </a>
-            ) : null}
-          </div>
+              {secondaryHref && secondaryButtonText ? (
+                <a href={secondaryHref} className={heroOverlayButtonDark}>
+                  {secondaryButtonText}
+                </a>
+              ) : null}
+            </div>
+          ) : null}
         </div>
       )}
     </section>

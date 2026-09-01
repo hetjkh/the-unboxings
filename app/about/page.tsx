@@ -110,8 +110,8 @@ export default function AboutPage() {
 
             <div className="relative min-h-[520px] overflow-hidden lg:min-h-full">
               <Image
-                src="/made-in-italy-workshop.png"
-                alt="A specialist maker hand-finishing a premium presentation object"
+                src="/made-in-italy-workshop.webp"
+                alt="Artisans hand-finishing a premium presentation object in the workshop"
                 fill
                 priority
                 className="object-cover transition-transform duration-1000 hover:scale-[1.025]"

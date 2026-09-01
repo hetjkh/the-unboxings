@@ -16,11 +16,6 @@ export default function Hero() {
       heading
       image="/hero1.png"
       video="/hero.webm"
-      href="/contact-us#start-project"
-      buttonStyle="light"
-      buttonText="Let's Create Something Unique"
-      secondaryHref="#brand-stories"
-      secondaryButtonText="Explore Our Work"
       splitLayout
       priority
       bottomGradient
