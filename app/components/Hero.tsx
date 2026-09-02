@@ -8,7 +8,7 @@ export default function Hero() {
         <>
           NOT JUST GIVEN.
           <br />
-          REMEMBERED
+          REMEMBERED.
         </>
       }
       titleAlt="Not just given. Remembered."

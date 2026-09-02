@@ -13,12 +13,12 @@ export default function MadeInItalySection() {
               Crafted with Intention
             </h2>
             <p className="m-0 mt-6 max-w-[470px] text-sm leading-6 text-black/70 md:text-base">
-              We work with specialist makers who understand that exceptional objects are built slowly—from the first material choice to the final hand-finished detail.
+              We bring together specialist makers, material expertise and precise production.
             </p>
           </div>
           <div className="mt-12 border-t border-[#e5e5e5] pt-5">
             <p className="m-0 max-w-[470px] text-xs leading-5 text-black/60">
-              Precision, material knowledge and quiet craftsmanship give every brand experience a feeling that lasts beyond the first impression.
+              Material knowledge, precision and craftsmanship come together to create pieces that feel considered, distinctive and made to last.
             </p>
             <a href="/contact-us#start-project" className="mt-6 inline-flex h-12 items-center justify-center bg-black px-8 text-xs font-bold tracking-[0.04em] text-white uppercase no-underline">
               Start Your Project

@@ -23,6 +23,9 @@
 # misc
 .DS_Store
 *.pem
+public/BRAND STORY PAGE/
+.tmp-pptx*/
+*.tmp-pptx*
 
 # debug
 npm-debug.log*

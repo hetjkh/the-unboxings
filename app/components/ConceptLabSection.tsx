@@ -30,7 +30,7 @@ export default function ConceptLabSection() {
               Lab
             </h2>
             <p className="m-0 mt-8 max-w-[470px] text-sm leading-6 text-white/60 md:text-base md:leading-7">
-              Tell us what the moment needs to achieve. We will turn the right questions into an original direction for your brand.
+              Every memorable idea starts with the right questions. Tell us the moment, the people and the purpose — we&apos;ll shape the direction from there.
             </p>
 
             <div className="mt-10 flex items-center gap-4 text-[10px] tracking-[0.18em] text-white/35 uppercase">

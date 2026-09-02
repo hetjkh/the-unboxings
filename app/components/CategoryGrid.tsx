@@ -1,3 +1,5 @@
+import ExperienceVideo from "./ExperienceVideo";
+
 const categories = [
   {
     title: "Employee",
@@ -45,16 +47,7 @@ export default function CategoryGrid() {
             className="group relative block no-underline"
           >
             <div data-motion-media className="relative aspect-square w-full overflow-hidden bg-[#ececec]">
-              <video
-                src={category.video}
-                aria-label={`${category.title} experience`}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-              />
+              <ExperienceVideo src={category.video} label={`${category.title} experience`} />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/45 to-transparent px-4 pt-16 pb-4 text-white">
                 <p className="m-0 text-xs font-bold tracking-[0.08em] uppercase">{category.title}</p>
                 <p className="m-0 mt-2 max-h-0 overflow-hidden text-xs leading-5 text-white/85 opacity-0 transition-all duration-300 group-hover:mt-2 group-hover:max-h-16 group-hover:opacity-100">

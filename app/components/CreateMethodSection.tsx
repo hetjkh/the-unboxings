@@ -1,10 +1,10 @@
 const method = [
-  { letter: "C", title: "Consult", description: "Clarify the audience, objective and commercial opportunity." },
-  { letter: "R", title: "Research", description: "Find the cultural, material and contextual insight." },
-  { letter: "E", title: "Envision", description: "Shape a concept people will want to keep." },
-  { letter: "A", title: "Assemble", description: "Prototype, refine and bring every detail into alignment." },
-  { letter: "T", title: "Transform", description: "Elevate the idea into a considered brand experience." },
-  { letter: "E", title: "Execute", description: "Deliver with precision, on time and with measurable brand impact." },
+  { letter: "C", title: "Consult", description: "Understand the audience, occasion, objective and desired impact." },
+  { letter: "R", title: "Research", description: "Explore the cultural, material and contextual details that shape the idea." },
+  { letter: "E", title: "Envision", description: "Turn insight into a concept worth remembering — and keeping." },
+  { letter: "A", title: "Assemble", description: "Prototype, test and refine every material, detail and finish." },
+  { letter: "T", title: "Transform", description: "Bring product, packaging and presentation together as one experience." },
+  { letter: "E", title: "Execute", description: "Produce, quality-check and deliver every detail with precision." },
 ];
 
 export default function CreateMethodSection() {
@@ -27,17 +27,17 @@ export default function CreateMethodSection() {
             </h2>
           </div>
           <p className="m-0 max-w-[390px] text-sm leading-6 text-white/60 md:text-right">
-            Six connected stages. One clear path from opportunity to lasting brand impact.
+            Six stages. One considered process from first thought to final unboxing.
           </p>
         </header>
 
-        <div className="grid md:grid-cols-6">
+        <div className="grid md:grid-cols-6 md:grid-rows-[auto_minmax(11rem,1fr)_auto_auto]">
           {method.map(({ letter, title, description }, index) => (
             <article
               key={title}
-              className="group relative grid grid-cols-[3.5rem_1fr] gap-4 border-b border-white/15 py-8 last:border-b-0 md:block md:min-h-[360px] md:border-r md:border-b-0 md:px-6 md:py-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+              className="group relative grid grid-cols-[3.5rem_1fr] gap-4 border-b border-white/15 py-8 last:border-b-0 md:row-span-4 md:grid md:grid-rows-subgrid md:grid-cols-1 md:gap-0 md:border-r md:border-b-0 md:px-6 md:py-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
             >
-              <div className="relative">
+              <div className="relative md:row-start-1">
                 <span className="text-[10px] leading-4 font-medium tracking-[0.18em] text-white/35">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -47,21 +47,21 @@ export default function CreateMethodSection() {
                 />
               </div>
 
-              <div className="md:flex md:h-full md:flex-col">
-                <span
-                  aria-hidden="true"
-                  className="block text-6xl leading-[0.8] font-light tracking-[-0.06em] text-white/20 transition-colors duration-300 group-hover:text-white md:mt-8 md:text-[clamp(4.5rem,7vw,7rem)]"
-                >
-                  {letter}
-                </span>
-                <div className="mt-7 md:mt-auto">
-                  <h3 className="m-0 text-sm leading-5 font-bold tracking-[0.08em] uppercase">
-                    {title}
-                  </h3>
-                  <p className="m-0 mt-3 max-w-[260px] text-xs leading-5 text-white/55 transition-colors duration-300 group-hover:text-white/80">
-                    {description}
-                  </p>
+              <div className="col-start-2 grid gap-0 md:contents">
+                <div className="relative mt-0 md:row-start-2 md:pb-10">
+                  <span
+                    aria-hidden="true"
+                    className="block text-6xl leading-[0.8] font-light tracking-[-0.06em] text-white/20 transition-colors duration-300 group-hover:text-white md:absolute md:top-0 md:left-0 md:text-[clamp(4.5rem,7vw,7rem)] md:leading-none"
+                  >
+                    {letter}
+                  </span>
                 </div>
+                <h3 className="m-0 mt-10 text-sm leading-5 font-bold tracking-[0.08em] uppercase md:row-start-3 md:mt-0">
+                  {title}
+                </h3>
+                <p className="m-0 mt-3 max-w-[260px] text-xs leading-5 text-white/55 transition-colors duration-300 group-hover:text-white/80 md:row-start-4">
+                  {description}
+                </p>
               </div>
             </article>
           ))}

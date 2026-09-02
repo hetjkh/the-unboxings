@@ -1,9 +1,42 @@
 import Image from "next/image";
 
 const stories = [
-  { number: "01", title: "Architectural materials", description: "Acrylic brings clarity, precise form and architectural presence to a finished object.", material: "Acrylic", product: "Recognition award", image: "/materials/tiles/acrylic.png" },
-  { number: "02", title: "Tactile finishes", description: "Full-grain leather adds softness, character and a considered feel to every interaction.", material: "Leather", product: "Executive portfolio", image: "/materials/tiles/leather.png" },
-  { number: "03", title: "Future-minded choices", description: "Recycled composite materials create expressive products with a more responsible material story.", material: "Recycled composite", product: "Premium packaging", image: "/materials/tiles/recycled.png" },
+  {
+    number: "01",
+    title: "Architectural materials",
+    description:
+      "Clarity, precision and light give acrylic its distinctive architectural character—allowing ideas to take shape with remarkable definition.",
+    character: "Clear · Precise · Contemporary",
+    finishes: "Transparent · Frosted · Tinted · Layered",
+    customisation: "Laser Engraving · Printing · Embedded Elements",
+    material: "Acrylic",
+    product: "Recognition award",
+    idealFor: "Recognition Awards · Desk Objects · Sculptures · Display Pieces",
+    image: "/materials/tiles/acrylic.png",
+  },
+  {
+    number: "02",
+    title: "Leather",
+    description:
+      "Full-grain leather brings warmth, texture and character developing a richer expression through touch and time.",
+    character: "Tactile · Warm · Refined",
+    finishes: "Smooth · Grained · Embossed · Stitched",
+    customisation: "Debossing · Foil Stamping · Monogramming",
+    material: "Leather",
+    product: "Executive portfolio",
+    madeInto: "Executive portfolio",
+    idealFor: "Executive Accessories · Portfolios · Travel Pieces · Desk Objects · Packaging Details",
+    image: "/materials/tiles/leather.png",
+  },
+  {
+    number: "03",
+    title: "Recycled composites",
+    description: "Recycled composite materials create expressive products with a more responsible material story.",
+    material: "Recycled composite",
+    product: "Premium packaging",
+    idealFor: "Premium Packaging · Desk Objects · Accessories · Presentation Pieces",
+    image: "/materials/tiles/recycled.png",
+  },
 ] as const;
 
 export default function GucciServicesSection() {
@@ -13,10 +46,10 @@ export default function GucciServicesSection() {
         <header className="grid gap-7 border-t border-black pt-7 md:grid-cols-[0.75fr_1.25fr] md:items-end">
           <div>
             <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-black/40 uppercase">Surface · Weight · Finish</p>
-            <h2 id="material-library-heading" className="m-0 mt-4 text-3xl font-light tracking-[-0.045em] uppercase md:text-5xl">Material Library</h2>
+            <h2 id="material-library-heading" className="m-0 mt-4 text-3xl font-light tracking-[-0.045em] uppercase md:text-5xl">Material Story</h2>
           </div>
           <div className="md:justify-self-end md:text-right">
-            <p className="m-0 max-w-[650px] text-sm leading-6 text-black/50">Every material carries a message. We select it not only for how it looks, but for what it allows the final product to become.</p>
+            <p className="m-0 max-w-[650px] text-sm leading-6 text-black/50">Every material carries a message. We select it not only for how it looks, but for what it allows an idea to become.</p>
             <a href="/materials" className="mt-6 inline-flex items-center gap-3 border-b border-black pb-2 text-[10px] font-bold tracking-[0.1em] text-black uppercase no-underline">View more materials <span aria-hidden="true">→</span></a>
           </div>
         </header>
@@ -40,11 +73,35 @@ export default function GucciServicesSection() {
                 <div className="my-16">
                   <h3 className="m-0 max-w-[560px] text-3xl font-light tracking-[-0.045em] uppercase md:text-5xl">{story.title}</h3>
                   <p className="m-0 mt-6 max-w-[520px] text-sm leading-6 text-black/50">{story.description}</p>
+                  {"character" in story && story.character ? (
+                    <dl className="m-0 mt-8 grid max-w-[640px] grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-4">
+                      <div>
+                        <dt className="m-0 text-[10px] font-bold tracking-[0.12em] text-black/40 uppercase">Character</dt>
+                        <dd className="m-0 mt-2 text-xs leading-5 text-black/55">{story.character}</dd>
+                      </div>
+                      <div>
+                        <dt className="m-0 text-[10px] font-bold tracking-[0.12em] text-black/40 uppercase">Finishes</dt>
+                        <dd className="m-0 mt-2 text-xs leading-5 text-black/55">{story.finishes}</dd>
+                      </div>
+                      <div>
+                        <dt className="m-0 text-[10px] font-bold tracking-[0.12em] text-black/40 uppercase">Customisation</dt>
+                        <dd className="m-0 mt-2 text-xs leading-5 text-black/55">{story.customisation}</dd>
+                      </div>
+                    </dl>
+                  ) : null}
                 </div>
                 <div className="border-t border-black/20 pt-5">
-                  <p className="m-0 text-[10px] font-bold tracking-[0.12em] text-black/40 uppercase">Made into</p>
+                  {"madeInto" in story && story.madeInto ? (
+                    <div className="mb-5">
+                      <p className="m-0 text-[10px] font-bold tracking-[0.12em] text-black/40 uppercase">Made into</p>
+                      <ul className="m-0 mt-4 list-none p-0">
+                        <li className="border-l border-black pl-3 text-xs leading-5">{story.madeInto}</li>
+                      </ul>
+                    </div>
+                  ) : null}
+                  <p className="m-0 text-[10px] font-bold tracking-[0.12em] text-black/40 uppercase">Ideal for</p>
                   <ul className="m-0 mt-4 list-none p-0">
-                    <li className="border-l border-black pl-3 text-xs leading-5">{story.product}</li>
+                    <li className="border-l border-black pl-3 text-xs leading-5">{story.idealFor}</li>
                   </ul>
                 </div>
               </div>
@@ -56,7 +113,7 @@ export default function GucciServicesSection() {
       <div className="grid bg-[#cbd8d4] md:grid-cols-[1.4fr_0.6fr]">
         <div className="px-8 py-12 md:px-16 md:py-16">
           <p className="m-0 text-[10px] font-bold tracking-[0.1em] text-black/50 uppercase">From material to meaning</p>
-          <h3 className="m-0 mt-4 max-w-[760px] text-3xl leading-tight font-light tracking-[-0.04em] md:text-5xl">See how each choice becomes part of the final experience.</h3>
+          <h3 className="m-0 mt-4 max-w-[760px] text-3xl leading-tight font-light tracking-[-0.04em] md:text-5xl">See how every material choice becomes part of something meaningful.</h3>
         </div>
         <div className="flex items-end border-t border-black/15 px-8 py-10 md:border-t-0 md:border-l md:px-12 md:py-14">
           <a href="/behind-the-design" className="flex w-full items-center justify-between border-b border-black pb-3 text-xs font-bold text-black uppercase no-underline">Explore our process <span aria-hidden="true">→</span></a>

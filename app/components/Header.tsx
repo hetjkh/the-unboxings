@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import MenuDrawer from "./MenuDrawer";
+
+const MenuDrawer = dynamic(() => import("./MenuDrawer"), { ssr: false });
 
 function SearchIcon() {
   return (
@@ -87,7 +88,6 @@ export default function Header({
 
   const isSolid = !overlay || isScrolled;
   const textColor = isSolid ? "text-black" : "text-white";
-  const logoClass = isSolid ? "brightness-0" : "brightness-0 invert";
 
   return (
     <>
@@ -111,16 +111,14 @@ export default function Header({
           <Link
             href="/"
             aria-label="The Unboxing - go to homepage"
-            className="md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
+            className={`flex items-baseline gap-[0.35em] whitespace-nowrap no-underline transition-colors duration-300 ${textColor} md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2`}
           >
-            <Image
-              src="/The-Unboxing.svg"
-              alt="The Unboxing"
-              width={2048}
-              height={288}
-              priority
-              className={`h-[20px] w-auto transition-[filter] duration-300 md:h-[23px] ${logoClass}`}
-            />
+            <span className="text-[10px] leading-none font-medium tracking-normal uppercase md:text-xs">
+              The
+            </span>
+            <span className="text-xl leading-[0.82] font-bold tracking-[-0.045em] uppercase md:text-2xl">
+              Unboxing
+            </span>
           </Link>
 
           {/* Right: Icons */}
