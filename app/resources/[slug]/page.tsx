@@ -93,7 +93,7 @@ export default async function ResourceArticlePage({
                   href="/resources"
                   className="text-[10px] font-medium tracking-[0.24em] text-white/40 uppercase no-underline hover:text-white"
                 >
-                  Resource Centre
+                  The Unboxing Journal
                 </Link>
               </div>
 
@@ -172,7 +172,7 @@ export default async function ResourceArticlePage({
                     Start a Conversation
                   </a>
                   <Link href="/resources" className="text-xs text-black/50 underline underline-offset-4">
-                    Back to Resource Centre
+                    Back to The Unboxing Journal
                   </Link>
                 </div>
               </div>

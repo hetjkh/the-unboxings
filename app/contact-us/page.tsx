@@ -140,11 +140,11 @@ export default function ContactUsPage() {
                   type="submit"
                   className="group flex min-h-20 w-full cursor-pointer items-center justify-between gap-5 border-0 bg-black px-6 py-5 text-left text-xs font-bold tracking-[0.06em] text-white uppercase md:px-8 md:text-sm"
                 >
-                  <span>Receive Three Bespoke Concepts Within 48 Hours</span>
+                  <span>Receive Two Bespoke Concepts Within 48 Hours</span>
                   <span className="shrink-0 text-2xl font-light transition-transform group-hover:translate-x-2" aria-hidden="true">→</span>
                 </button>
-                <p className="m-0 mt-4 text-[10px] tracking-[0.08em] text-black/40 uppercase">
-                  Our designers will contact you within 24 hours.
+                <p className="m-0 mt-4 text-sm leading-6 text-black/55">
+                  We&apos;ll review your brief and get back to you within 24 hours.
                 </p>
               </div>
             </form>

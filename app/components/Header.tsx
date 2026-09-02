@@ -97,7 +97,7 @@ export default function Header({
         } ${isSolid ? "bg-white" : "bg-transparent"}`}
         style={overlay ? { top: promoOffset } : undefined}
       >
-        <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 py-4 md:px-8 md:py-6 lg:px-16">
+        <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 py-3 md:flex md:items-center md:justify-between md:px-8 md:py-6 lg:px-16">
           {/* Left: Start Your Project CTA */}
           <Link
             href="/contact-us#start-project"
@@ -111,18 +111,18 @@ export default function Header({
           <Link
             href="/"
             aria-label="The Unboxing - go to homepage"
-            className={`flex items-baseline gap-[0.35em] whitespace-nowrap no-underline transition-colors duration-300 ${textColor} md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2`}
+            className={`col-start-2 flex items-baseline gap-[0.3em] whitespace-nowrap no-underline transition-colors duration-300 ${textColor} md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:gap-[0.35em]`}
           >
-            <span className="text-[10px] leading-none font-medium tracking-normal uppercase md:text-xs">
+            <span className="text-[9px] leading-none font-medium tracking-normal uppercase sm:text-[10px] md:text-xs">
               The
             </span>
-            <span className="text-xl leading-[0.82] font-bold tracking-[-0.045em] uppercase md:text-2xl">
+            <span className="text-lg leading-[0.82] font-bold tracking-[-0.045em] uppercase sm:text-xl md:text-2xl">
               Unboxing
             </span>
           </Link>
 
           {/* Right: Icons */}
-          <div className={`flex items-center gap-4 md:gap-6 ${textColor}`}>
+          <div className={`col-start-3 flex items-center justify-end gap-3 sm:gap-4 md:gap-6 ${textColor}`}>
             <IconButton label="Search" className={textColor}>
               <SearchIcon />
             </IconButton>

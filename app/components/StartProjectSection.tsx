@@ -23,18 +23,23 @@ export default function StartProjectSection() {
 
           <div className="flex flex-col justify-between">
             <p className="m-0 max-w-[560px] text-base leading-7 text-black/65 md:text-xl md:leading-8">
-              Share your company, audience, occasion, quantity, budget, timeline and objectives. Add a brief when you are ready.
+              Tell us about the moment, the people and what you want to achieve. Share your timeline and budget, and we&apos;ll take it from there.
             </p>
 
             <div className="mt-12 grid grid-cols-3 border-t border-l border-black/20">
               {[
-                ["01", "Share your brief"],
-                ["02", "We shape ideas"],
-                ["03", "Review concepts"],
+                ["01", "Share the brief"],
+                ["02", "We shape the direction"],
+                ["03", "Review your concepts"],
               ].map(([number, label]) => (
-                <div key={number} className="min-h-[110px] border-r border-b border-black/20 p-4">
-                  <span className="text-[10px] tracking-[0.16em] text-black/35">{number}</span>
-                  <p className="m-0 mt-7 text-xs leading-4 font-medium uppercase">{label}</p>
+                <div key={number} className="min-h-[110px] min-w-0 border-r border-b border-black/20 p-3 sm:p-4">
+                  <p className="m-0 text-[10px] tracking-[0.16em] text-black/35 uppercase">
+                    {number}
+                    <span aria-hidden="true"> —</span>
+                  </p>
+                  <p className="m-0 mt-7 text-[10px] leading-4 font-medium uppercase sm:text-xs">
+                    {label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -45,11 +50,11 @@ export default function StartProjectSection() {
           href="/contact-us#start-project"
           className="group mt-12 flex min-h-20 items-center justify-between gap-6 bg-black px-6 py-5 text-xs font-bold tracking-[0.06em] text-white uppercase no-underline md:mt-16 md:px-8 md:text-sm"
         >
-          <span>Receive Three Bespoke Concepts Within 48 Hours</span>
+          <span>Receive Two Bespoke Concepts Within 48 Hours</span>
           <span className="shrink-0 text-2xl font-light transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>
         </a>
-        <p className="m-0 mt-4 text-[10px] leading-4 tracking-[0.08em] text-black/45 uppercase">
-          Our designers will contact you within 24 hours.
+        <p className="m-0 mt-4 text-sm leading-6 text-black/55">
+          We&apos;ll review your brief and get back to you within 24 hours.
         </p>
       </div>
     </section>

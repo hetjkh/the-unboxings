@@ -41,7 +41,7 @@ const primaryLinks = [
   { label: "Brand Stories", href: "/inspiration-gallery" },
   { label: "Behind the Design", href: "/behind-the-design" },
   { label: "Materials", href: "/materials" },
-  { label: "Resources", href: "/resources" },
+  { label: "Ideas & Insights", href: "/resources" },
 ];
 
 const secondaryLinks = [

@@ -8,7 +8,7 @@ import FormattedText from "../components/FormattedText";
 import { PLACEHOLDER_IMAGE } from "@/lib/cms/placeholders";
 
 export const metadata: Metadata = {
-  title: "Resource Centre | The Unboxing",
+  title: "The Unboxing Journal | The Unboxing",
   description:
     "Gifting inspiration, industry trends, and practical guides to help you create impactful branded experiences for your team and clients.",
 };
@@ -25,7 +25,7 @@ export default async function ResourcesPage() {
         <section aria-label="Resources & Inspiration" className="bg-white">
           <div className="px-8 pt-14 pb-10 text-center md:px-16">
             <h1 className="m-0 text-base leading-6 font-bold tracking-[-0.03em] text-black uppercase">
-              Resource Centre
+              The Unboxing Journal
             </h1>
             <p className="mx-auto mt-4 max-w-[720px] text-base leading-6 font-normal text-black">
               Gifting inspiration, industry trends, and practical guides to help you
