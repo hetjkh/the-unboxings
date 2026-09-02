@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef, type ReactNode } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SITE_LOADER_COMPLETE_EVENT } from "./SiteLoader";
 
 export default function HomeMotion({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -30,89 +31,99 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
-    const context = gsap.context(() => {
-      if (reduceMotion) return;
+    let context: gsap.Context | null = null;
 
-      const sections = gsap.utils.toArray<HTMLElement>("section", root);
-      const hero = sections[0];
+    const setupMotion = () => {
+      context?.revert();
+      context = gsap.context(() => {
+        if (reduceMotion) return;
 
-      if (hero) {
-        const heroCopy = hero.querySelectorAll("h1, h1 ~ div > p, h1 ~ div a");
-        gsap.from(heroCopy, {
-          autoAlpha: 0,
-          y: 32,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out",
-          delay: 0.15,
-        });
+        const sections = gsap.utils.toArray<HTMLElement>("section", root);
+        const hero = sections[0];
 
-        const heroMedia = hero.querySelector("video, img");
-        if (heroMedia) {
-          gsap.fromTo(
-            heroMedia,
-            { scale: 1.05 },
-            {
-              scale: 1.14,
-              ease: "none",
-              scrollTrigger: {
-                trigger: hero,
-                start: "top top",
-                end: "bottom top",
-                scrub: 1.2,
-              },
-            },
-          );
-        }
-      }
-
-      sections.slice(1).forEach((section) => {
-        const intro = section.querySelectorAll("h2, header > p");
-        if (intro.length) {
-          gsap.from(intro, {
+        if (hero) {
+          const heroCopy = hero.querySelectorAll("h1, h1 ~ div > p, h1 ~ div a");
+          gsap.from(heroCopy, {
             autoAlpha: 0,
-            y: 36,
-            duration: 0.85,
+            y: 32,
+            duration: 1,
             stagger: 0.1,
             ease: "power3.out",
+            delay: 0.15,
+          });
+
+          const heroMedia = hero.querySelector("video, img");
+          if (heroMedia) {
+            gsap.fromTo(
+              heroMedia,
+              { scale: 1.05 },
+              {
+                scale: 1.14,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: hero,
+                  start: "top top",
+                  end: "bottom top",
+                  scrub: 1.2,
+                },
+              },
+            );
+          }
+        }
+
+        sections.slice(1).forEach((section) => {
+          const intro = section.querySelectorAll("h2, header > p");
+          if (intro.length) {
+            gsap.from(intro, {
+              autoAlpha: 0,
+              y: 36,
+              duration: 0.85,
+              stagger: 0.1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 82%",
+                once: true,
+              },
+            });
+          }
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-motion-media]", root).forEach((media) => {
+          gsap.from(media, {
+            clipPath: "inset(8% 0% 8% 0%)",
+            scale: 0.96,
+            duration: 1.15,
+            ease: "power3.out",
             scrollTrigger: {
-              trigger: section,
-              start: "top 82%",
+              trigger: media,
+              start: "top 88%",
               once: true,
             },
           });
-        }
-
-      });
-
-      gsap.utils.toArray<HTMLElement>("[data-motion-media]", root).forEach((media) => {
-        gsap.from(media, {
-          clipPath: "inset(8% 0% 8% 0%)",
-          scale: 0.96,
-          duration: 1.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: media,
-            start: "top 88%",
-            once: true,
-          },
         });
-      });
 
-      gsap.utils.toArray<HTMLElement>("[data-motion-card]", root).forEach((card) => {
-        gsap.from(card, {
-          autoAlpha: 0,
-          y: 48,
-          duration: 0.95,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 88%",
-            once: true,
-          },
+        gsap.utils.toArray<HTMLElement>("[data-motion-card]", root).forEach((card) => {
+          gsap.from(card, {
+            autoAlpha: 0,
+            y: 48,
+            duration: 0.95,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 88%",
+              once: true,
+            },
+          });
         });
-      });
-    }, root);
+      }, root);
+    };
+
+    if (reduceMotion) {
+      setupMotion();
+    } else {
+      window.addEventListener(SITE_LOADER_COMPLETE_EVENT, setupMotion, { once: true });
+    }
 
     const refreshScrollPositions = () => ScrollTrigger.refresh();
     const media = root.querySelectorAll<HTMLImageElement | HTMLVideoElement>("img, video");
@@ -129,13 +140,14 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
     const refresh = window.setTimeout(refreshScrollPositions, 100);
 
     return () => {
+      window.removeEventListener(SITE_LOADER_COMPLETE_EVENT, setupMotion);
       window.clearTimeout(refresh);
       window.removeEventListener("load", refreshScrollPositions);
       media.forEach((item) => {
         item.removeEventListener("load", refreshScrollPositions);
         item.removeEventListener("loadedmetadata", refreshScrollPositions);
       });
-      context.revert();
+      context?.revert();
       lenis.off("scroll", updateScrollTrigger);
       lenis.destroy();
       gsap.ticker.remove(tick);
