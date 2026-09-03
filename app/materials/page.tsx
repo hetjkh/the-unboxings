@@ -137,7 +137,7 @@ export default function MaterialsPage() {
                       <h3 className="m-0 text-lg font-medium uppercase">{material.name}</h3>
                       <p className="m-0 mt-3 text-xs leading-5 text-black/50">{material.description}</p>
                       <div className="mt-auto border-t border-black/15 pt-5">
-                        <p className="m-0 text-[9px] font-bold tracking-[0.12em] text-black/35 uppercase">Applications</p>
+                        <p className="m-0 text-[9px] font-bold tracking-[0.12em] text-black/35 uppercase">Ideal for</p>
                         <p className="m-0 mt-2 text-xs leading-5">{material.products}</p>
                       </div>
                     </div>
