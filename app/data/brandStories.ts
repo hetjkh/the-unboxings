@@ -22,15 +22,15 @@ export const brandStories: readonly BrandStory[] = [
     title: "How a Dubai Developer Welcomed 500 Homeowners",
     tagline: "The first gift in a new home should feel like it belongs there.",
     challenge:
-      "Turn a standardized handover process into something that still felt personal, considered and worthy of the moment.",
-    materials: "500 homeowners · Bespoke packaging · Personalization · Property handover",
+      "Turn a standardized handover process into something that feels personal, considered and worthy of the moment.",
+    materials: "Architectural Crystal Model · Signature Home Fragrance · Leather Key Holder · Personalised Residence Plaque · Bespoke Presentation Box",
     image: "/brand-stories/dubai-developer-homeowners/hero.png",
     alt: "Homeowner carrying a The Unboxing welcome case into a Dubai apartment overlooking the skyline",
     gallery: ["/brand-stories/dubai-developer-homeowners/01.png"],
     sections: [
       {
         heading: "The Challenge",
-        body: "Handing over 500 homes is a major operational milestone. But for the homeowner, there is only one handover that matters — theirs. The challenge was to turn a standardized handover process into something that still felt personal, considered and worthy of the moment.",
+        body: "Handing over 500 homes is a major operational milestone. But for the homeowner, there is only one handover that matters — theirs. The challenge was to turn a standardized handover process into something that feels personal, considered and worthy of the moment.",
       },
       {
         heading: "The Idea",
@@ -364,7 +364,8 @@ export const brandStories: readonly BrandStory[] = [
     tagline: "A welcome designed to make every VIP guest feel expected, not simply accommodated.",
     challenge:
       "A sense of place, thoughtfully designed into the very first moment of arrival.",
-    materials: "Place · Scent · Taste · Personalisation · Tomorrow",
+    materials:
+      "<strong>Material</strong><br />Wood · Leather · Brass · Glass · Sculpted Metal · Premium Paper<br /><br /><strong>Inside the Experience</strong><br />Dubai Skyline Sculpture · Bespoke Fragrance · Reed Diffuser · Premium Dates &amp; Nuts · Leather Travel Accessories · Arabian Coffee · Personalised Welcome Note",
     image: "/brand-stories/welcome-before-a-word/hero.png",
     alt: "VIP hospitality welcome chest with Dubai fragrance, keepsakes and local delicacies",
     gallery: ["/brand-stories/welcome-before-a-word/01.png"],

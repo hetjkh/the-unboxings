@@ -17,13 +17,28 @@ function StoryImage({
   sizes,
   className = "",
   priority = false,
+  fill = false,
 }: {
   src: string;
   alt: string;
   sizes: string;
   className?: string;
   priority?: boolean;
+  fill?: boolean;
 }) {
+  if (fill) {
+    return (
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes={sizes}
+        priority={priority}
+        className={`object-cover object-center ${className}`}
+      />
+    );
+  }
+
   return (
     <Image
       src={src}
@@ -105,10 +120,10 @@ export default async function BrandStoryPage({
           <section aria-label="Story details" className="bg-white px-8 py-16 md:px-16 md:py-24">
             <div className="mx-auto max-w-[1200px]">
               <div className="mb-12 border-t border-black/10 pt-6 md:mb-16">
-                <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-black/35 uppercase">Materials & focus</p>
-                <p className="m-0 mt-4 max-w-[640px] text-sm leading-6 text-black/55">
-                  <FormattedText html={story.materials} />
-                </p>
+                <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-black/35 uppercase">Material & focus info</p>
+                <div className="mt-4 max-w-[760px] text-sm leading-6 text-black/55 [&_strong]:font-bold [&_strong]:text-black">
+                  <FormattedText html={story.materials} as="div" />
+                </div>
               </div>
 
               {story.gallery.length === 1 ? (
@@ -140,22 +155,23 @@ export default async function BrandStoryPage({
                     return (
                       <article
                         key={section.heading}
-                        className={`grid border-b border-black/10 ${image ? "md:grid-cols-2 md:items-start" : ""}`}
+                        className={`grid border-b border-black/10 ${image ? "md:grid-cols-2" : ""}`}
                       >
                         {image ? (
                           <div
                             data-motion-media
-                            className={`bg-[#f1f0ec] ${imageFirst ? "md:order-1" : "md:order-2"}`}
+                            className={`relative min-h-[280px] bg-[#f1f0ec] md:min-h-[420px] ${imageFirst ? "md:order-1" : "md:order-2"}`}
                           >
                             <StoryImage
                               src={image}
                               alt={`${story.title} — ${section.heading}`}
                               sizes="(max-width: 768px) 100vw, 50vw"
+                              fill
                             />
                           </div>
                         ) : null}
                         <div
-                          className={`flex flex-col justify-center p-7 md:p-12 lg:p-16 ${image ? (imageFirst ? "md:order-2" : "md:order-1") : ""}`}
+                          className={`flex flex-col justify-center p-7 md:p-10 lg:p-12 ${image ? (imageFirst ? "md:order-2" : "md:order-1") : ""}`}
                         >
                           <h2 className="m-0 text-xs font-bold tracking-[0.08em] text-black/40 uppercase">{section.heading}</h2>
                           <p className="m-0 mt-4 text-base leading-7 text-black/80 md:text-lg md:leading-8">
@@ -181,8 +197,8 @@ export default async function BrandStoryPage({
           </section>
 
           <section aria-label="Closing thought" className="bg-[#f1f0ec] px-8 py-16 md:px-16 md:py-24">
-            <blockquote className="mx-auto m-0 max-w-[900px] text-center">
-              <p className="m-0 text-2xl leading-snug font-light tracking-[-0.04em] text-black md:text-4xl md:leading-[1.2]">
+            <blockquote className="mx-auto m-0 w-full text-center">
+              <p className="m-0 whitespace-nowrap text-[clamp(1.05rem,2.6vw,2.25rem)] leading-snug font-light tracking-[-0.04em] text-black">
                 <FormattedText html={story.closing} />
               </p>
             </blockquote>

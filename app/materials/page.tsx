@@ -10,18 +10,90 @@ export const metadata: Metadata = {
 };
 
 const materials = [
-  { name: "Acrylic", image: "/materials/tiles/acrylic.png", products: "Awards · Display pieces", description: "Light, precise and highly adaptable, with clear, frosted, smoked and tinted finish options." },
-  { name: "Wood", image: "/materials/tiles/wood.png", products: "Boxes · Desk objects", description: "Natural grain and crafted joinery bring warmth and lasting character to presentation pieces." },
-  { name: "Leather", image: "/materials/tiles/leather.png", products: "Portfolios · Travel goods", description: "A tactile premium surface suited to pieces that become more personal through everyday use." },
-  { name: "Marble", image: "/materials/tiles/marble.png", products: "Key trays · Bases", description: "Distinctive natural veining and reassuring weight give ceremonial objects a permanent presence." },
-  { name: "Brass", image: "/materials/tiles/brass.png", products: "Plaques · Details", description: "Warm metal accents add precision, contrast and a refined sense of occasion." },
-  { name: "Steel", image: "/materials/tiles/steel.png", products: "Bottles · Accessories", description: "Durable and exact, with brushed, polished and bead-blasted finishes for modern applications." },
-  { name: "Crystal", image: "/materials/tiles/crystal.png", products: "Awards · Keepsakes", description: "Optical clarity, weight and light make crystal a natural choice for moments of recognition." },
-  { name: "Resin", image: "/materials/tiles/resin.png", products: "Sculptures · Inserts", description: "Color, transparency and embedded details create expressive forms that can be entirely bespoke." },
-  { name: "Fabric", image: "/materials/tiles/fabric.png", products: "Pouches · Presentation", description: "Woven texture and softness add warmth to protective packaging and presentation rituals." },
-  { name: "Glass", image: "/materials/tiles/glass.png", products: "Drinkware · Objects", description: "Clear, smoked and sculpted glass balances utility with a sense of visual lightness." },
-  { name: "Concrete", image: "/materials/tiles/concrete.png", products: "Trophies · Desk pieces", description: "Fine casting gives concrete architectural strength while preserving subtle texture and variation." },
-  { name: "Recycled", image: "/materials/tiles/recycled.png", products: "Notebooks · Packaging", description: "Considered composites and recycled fibers turn responsible choices into elevated finished objects." },
+  {
+    name: "Acrylic",
+    image: "/materials/tiles/acrylic.png",
+    products: "Awards · Desk Objects · Display Pieces · Sculptures · Presentation Pieces · Branded Installations",
+    description:
+      "Light, precise and highly adaptable, acrylic brings clarity and architectural definition to bespoke objects.",
+  },
+  {
+    name: "Wood",
+    image: "/materials/tiles/wood.png",
+    products: "Presentation Boxes · Desk Objects · Awards · Display Pieces · Executive Sets",
+    description:
+      "Natural grain, rich texture and crafted joinery bring warmth, character and permanence to every piece.",
+  },
+  {
+    name: "Leather",
+    image: "/materials/tiles/leather.png",
+    products: "Executive Portfolios · Travel Accessories · Desk Accessories · Presentation Cases",
+    description:
+      "Rich texture, natural character and a tactile finish that becomes more distinctive with use.",
+  },
+  {
+    name: "Marble",
+    image: "/materials/tiles/marble.png",
+    products: "Desk Objects · Presentation Bases · Awards · Key Trays · Executive Gifts",
+    description:
+      "Natural veining, substantial weight and a timeless finish give every piece a distinctive sense of permanence.",
+  },
+  {
+    name: "Brass",
+    image: "/materials/tiles/brass.png",
+    products: "Plaques · Awards · Desk Objects · Hardware · Decorative Accents · Presentation Pieces",
+    description:
+      "Warm, substantial and enduring, brass brings refined contrast and a distinctive sense of craftsmanship to every piece.",
+  },
+  {
+    name: "Steel",
+    image: "/materials/tiles/steel.png",
+    products: "Drinkware · Desk Accessories · Tech Accessories · Travel Accessories · Executive Gifts",
+    description:
+      "Clean, durable and precisely finished, stainless steel brings a contemporary character to functional objects.",
+  },
+  {
+    name: "Crystal",
+    image: "/materials/tiles/crystal.png",
+    products: "Awards · Recognition Pieces · Commemorative Objects · Architectural Keepsakes · Executive Gifts",
+    description:
+      "Optical clarity, sculptural form and the play of light give crystal an unmistakable sense of distinction.",
+  },
+  {
+    name: "Resin",
+    image: "/materials/tiles/resin.png",
+    products: "Sculptures · Awards · Desk Objects · Commemorative Pieces · Decorative Inserts · Bespoke Collectibles",
+    description:
+      "Colour, translucency and embedded elements allow resin to transform ideas, textures and stories into distinctive sculptural forms.",
+  },
+  {
+    name: "Fabric",
+    image: "/materials/tiles/fabric.png",
+    products: "Pouches · Gift Packaging · Travel Accessories · Presentation Linings · Sleeves · Executive Sets",
+    description:
+      "Texture, softness and depth bring warmth and tactile character to presentation, packaging and everyday objects.",
+  },
+  {
+    name: "Glass",
+    image: "/materials/tiles/glass.png",
+    products: "Drinkware · Awards · Desk Objects · Decorative Pieces · Presentation Objects · Executive Gifts",
+    description:
+      "Clarity, reflection and sculptural form give glass a refined presence that feels both contemporary and timeless.",
+  },
+  {
+    name: "Concrete",
+    image: "/materials/tiles/concrete.png",
+    products: "Awards · Desk Objects · Sculptures · Architectural Keepsakes · Bases · Branded Objects",
+    description:
+      "Raw texture, sculptural form and substantial weight give concrete a distinctive architectural presence.",
+  },
+  {
+    name: "Recycled",
+    image: "/materials/tiles/recycled.png",
+    products: "Packaging · Notebooks · Desk Accessories · Presentation Pieces · Event Gifts · Branded Objects",
+    description:
+      "Reclaimed fibres and recycled composites transform existing materials into distinctive objects with a more considered material story.",
+  },
 ] as const;
 
 export default function MaterialsPage() {
@@ -61,12 +133,12 @@ export default function MaterialsPage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/5" />
                       <span className="absolute top-5 left-5 text-[10px] font-medium tracking-[0.14em] text-white/70">{String(index + 1).padStart(2, "0")}</span>
                     </div>
-                    <div className="flex min-h-[235px] flex-col p-6 md:p-7">
+                    <div className="flex min-h-[280px] flex-col p-6 md:min-h-[300px] md:p-7">
                       <h3 className="m-0 text-lg font-medium uppercase">{material.name}</h3>
                       <p className="m-0 mt-3 text-xs leading-5 text-black/50">{material.description}</p>
                       <div className="mt-auto border-t border-black/15 pt-5">
                         <p className="m-0 text-[9px] font-bold tracking-[0.12em] text-black/35 uppercase">Applications</p>
-                        <p className="m-0 mt-2 text-xs">{material.products}</p>
+                        <p className="m-0 mt-2 text-xs leading-5">{material.products}</p>
                       </div>
                     </div>
                   </article>

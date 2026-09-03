@@ -3,7 +3,7 @@ import Image from "next/image";
 const stories = [
   {
     number: "01",
-    title: "Architectural materials",
+    title: "Acrylic",
     description:
       "Clarity, precision and light give acrylic its distinctive architectural character—allowing ideas to take shape with remarkable definition.",
     character: "Clear · Precise · Contemporary",
@@ -11,7 +11,7 @@ const stories = [
     customisation: "Laser Engraving · Printing · Embedded Elements",
     material: "Acrylic",
     product: "Recognition award",
-    idealFor: "Recognition Awards · Desk Objects · Sculptures · Display Pieces",
+    idealFor: "Awards · Desk Objects · Display Pieces · Sculptures · Presentation Pieces · Branded Installations",
     image: "/materials/tiles/acrylic.png",
   },
   {
@@ -25,16 +25,20 @@ const stories = [
     material: "Leather",
     product: "Executive portfolio",
     madeInto: "Executive portfolio",
-    idealFor: "Executive Accessories · Portfolios · Travel Pieces · Desk Objects · Packaging Details",
+    idealFor: "Executive Portfolios · Travel Accessories · Desk Accessories · Presentation Cases",
     image: "/materials/tiles/leather.png",
   },
   {
     number: "03",
     title: "Recycled composites",
-    description: "Recycled composite materials create expressive products with a more responsible material story.",
+    description:
+      "Reclaimed fibres and recycled composites transform existing materials into distinctive objects with a more considered material story.",
+    character: "Textured · Contemporary · Responsible · Distinctive",
+    finishes: "Matte · Speckled · Stone-Like · Smooth · Textured",
+    customisation: "Custom Colours · Moulded Forms · Engraving · Logo Detailing · Bespoke Patterns",
     material: "Recycled composite",
     product: "Premium packaging",
-    idealFor: "Premium Packaging · Desk Objects · Accessories · Presentation Pieces",
+    idealFor: "Packaging · Notebooks · Desk Accessories · Presentation Pieces · Event Gifts · Branded Objects",
     image: "/materials/tiles/recycled.png",
   },
 ] as const;

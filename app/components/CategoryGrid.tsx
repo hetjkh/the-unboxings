@@ -33,9 +33,8 @@ export default function CategoryGrid() {
       <div className="px-8 pt-14 pb-10 text-center md:px-16">
         <h2 className="m-0 text-base leading-6 font-bold tracking-[-0.03em] text-black uppercase">Experiences</h2>
         <p className="m-0 mt-3 text-xs font-bold tracking-[0.08em] text-black uppercase">Designed for every moment.</p>
-        <p className="mx-auto m-0 mt-4 max-w-[720px] text-xs leading-5 text-black/60 italic">
-          From welcoming someone new to recognizing a lasting partnership, we create gifting experiences around moments
-          that matter.
+        <p className="mx-auto m-0 mt-4 whitespace-nowrap text-xs leading-5 text-black/60 italic">
+          From welcoming someone new to recognizing a lasting partnership, we create gifting experiences around moments that matter.
         </p>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4">
