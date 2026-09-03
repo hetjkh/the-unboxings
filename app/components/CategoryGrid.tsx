@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ExperienceVideo from "./ExperienceVideo";
 
 const categories = [
@@ -5,25 +6,25 @@ const categories = [
     title: "Employee",
     tagline: "Welcome. Recognize. Celebrate.",
     video: "/video/1.webm",
-    href: "#start-project",
+    href: "/contact-us#start-project",
   },
   {
     title: "Client",
     tagline: "Thank. Connect. Be remembered.",
     video: "/video/2.webm",
-    href: "#start-project",
+    href: "/contact-us#start-project",
   },
   {
     title: "Brand",
     tagline: "Make your brand tangible.",
     video: "/video/3.webm",
-    href: "#start-project",
+    href: "/contact-us#start-project",
   },
   {
     title: "Event",
     tagline: "Make the moment last.",
     video: "/video/4.webm",
-    href: "#start-project",
+    href: "/contact-us#start-project",
   },
 ];
 
@@ -39,7 +40,7 @@ export default function CategoryGrid() {
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4">
         {categories.map((category) => (
-          <a
+          <Link
             key={category.title}
             href={category.href}
             data-motion-card
@@ -54,7 +55,7 @@ export default function CategoryGrid() {
                 </p>
               </div>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     </section>
