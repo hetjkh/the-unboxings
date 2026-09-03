@@ -367,7 +367,7 @@ export const brandStories: readonly BrandStory[] = [
       "A sense of place, thoughtfully designed into the very first moment of arrival.",
     materials: "Wood · Leather · Brass · Glass · Sculpted Metal · Premium Paper",
     materialsDetail:
-      "<strong>Material</strong><br />Wood · Leather · Brass · Glass · Sculpted Metal · Premium Paper<br /><br /><strong>Inside the Experience</strong><br />Dubai Skyline Sculpture · Bespoke Fragrance · Reed Diffuser · Premium Dates &amp; Nuts · Leather Travel Accessories · Arabian Coffee · Personalised Welcome Note",
+      "<strong>Material</strong><br />Wood · Leather · Brass · Glass · Sculpted Metal · Premium Paper",
     image: "/brand-stories/welcome-before-a-word/hero.png",
     alt: "VIP hospitality welcome chest with Dubai fragrance, keepsakes and local delicacies",
     gallery: ["/brand-stories/welcome-before-a-word/01.png"],
@@ -394,7 +394,7 @@ export const brandStories: readonly BrandStory[] = [
       },
       {
         heading: "The Experience",
-        body: "The products will eventually be used. But the real memory is created in one small moment: someone thought about my arrival before I got here. That's the difference between receiving an amenity — and feeling welcomed.",
+        body: "Dubai Skyline Sculpture · Bespoke Fragrance · Reed Diffuser · Premium Dates & Nuts · Leather Travel Accessories · Arabian Coffee · Personalised Welcome Note",
       },
     ],
     closing: "Luxury isn't what you leave in the room. It's how you make someone feel when they enter it.",
