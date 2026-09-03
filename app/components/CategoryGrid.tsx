@@ -5,25 +5,25 @@ const categories = [
     title: "Employee",
     tagline: "Welcome. Recognize. Celebrate.",
     video: "/video/1.webm",
-    href: "/solutions",
+    href: "#start-project",
   },
   {
     title: "Client",
     tagline: "Thank. Connect. Be remembered.",
     video: "/video/2.webm",
-    href: "/solutions",
+    href: "#start-project",
   },
   {
     title: "Brand",
     tagline: "Make your brand tangible.",
     video: "/video/3.webm",
-    href: "/behind-the-design",
+    href: "#start-project",
   },
   {
     title: "Event",
     tagline: "Make the moment last.",
     video: "/video/4.webm",
-    href: "/solutions",
+    href: "#start-project",
   },
 ];
 
