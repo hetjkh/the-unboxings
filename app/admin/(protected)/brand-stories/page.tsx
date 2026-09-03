@@ -12,6 +12,7 @@ const emptyStory = (): Omit<BrandStory, "_id" | "createdAt" | "updatedAt"> => ({
   tagline: "",
   challenge: "",
   materials: "",
+  materialsDetail: "",
   image: "",
   alt: "",
   gallery: [""],
@@ -115,6 +116,7 @@ export default function AdminBrandStoriesPage() {
       tagline: story.tagline,
       challenge: story.challenge,
       materials: story.materials,
+      materialsDetail: story.materialsDetail ?? "",
       image: story.image,
       alt: story.alt,
       gallery: story.gallery.length ? story.gallery : [""],
@@ -133,7 +135,8 @@ export default function AdminBrandStoriesPage() {
           <TextField label="Slug" value={form.slug} onChange={(value) => setForm({ ...form, slug: value })} plain />
           <TextField label="Tagline" value={form.tagline} onChange={(value) => setForm({ ...form, tagline: value })} multiline />
           <TextField label="Challenge" value={form.challenge} onChange={(value) => setForm({ ...form, challenge: value })} multiline />
-          <TextField label="Materials & focus" value={form.materials} onChange={(value) => setForm({ ...form, materials: value })} />
+          <TextField label="Materials & focus (card summary)" value={form.materials} onChange={(value) => setForm({ ...form, materials: value })} />
+          <TextField label="Materials detail (story page)" value={form.materialsDetail ?? ""} onChange={(value) => setForm({ ...form, materialsDetail: value })} multiline />
           <ImageField label="Hero image" value={form.image} onChange={(value) => setForm({ ...form, image: value })} />
           <TextField label="Hero alt text" value={form.alt} onChange={(value) => setForm({ ...form, alt: value })} />
           <TextField label="Closing quote" value={form.closing} onChange={(value) => setForm({ ...form, closing: value })} multiline />

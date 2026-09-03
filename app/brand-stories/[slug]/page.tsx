@@ -122,7 +122,7 @@ export default async function BrandStoryPage({
               <div className="mb-12 border-t border-black/10 pt-6 md:mb-16">
                 <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-black/35 uppercase">Material & focus info</p>
                 <div className="mt-4 max-w-[760px] text-sm leading-6 text-black/55 [&_strong]:font-bold [&_strong]:text-black">
-                  <FormattedText html={story.materials} as="div" />
+                  <FormattedText html={story.materialsDetail || story.materials} as="div" />
                 </div>
               </div>
 

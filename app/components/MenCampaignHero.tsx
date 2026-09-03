@@ -69,9 +69,9 @@ export default async function MenCampaignHero() {
             </div>
 
             <div className="mt-12 border-t border-white/20 pt-5">
-              <p className="m-0 text-[10px] leading-4 tracking-[0.12em] text-white/40 uppercase">
-                {featuredStory.materials}
-              </p>
+              <div className="text-[10px] leading-4 tracking-[0.12em] text-white/40 uppercase [&_strong]:font-bold [&_strong]:text-white/55">
+                <FormattedText html={featuredStory.materials} as="div" />
+              </div>
               <span className="mt-8 flex items-center justify-between text-xs font-bold tracking-[0.08em] uppercase">
                 View the story
                 <span className="text-xl font-light transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>

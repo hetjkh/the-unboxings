@@ -9,6 +9,7 @@ export type BrandStory = {
   tagline: string;
   challenge: string;
   materials: string;
+  materialsDetail?: string;
   image: string;
   alt: string;
   gallery: readonly string[];
@@ -364,7 +365,8 @@ export const brandStories: readonly BrandStory[] = [
     tagline: "A welcome designed to make every VIP guest feel expected, not simply accommodated.",
     challenge:
       "A sense of place, thoughtfully designed into the very first moment of arrival.",
-    materials:
+    materials: "Wood · Leather · Brass · Glass · Sculpted Metal · Premium Paper",
+    materialsDetail:
       "<strong>Material</strong><br />Wood · Leather · Brass · Glass · Sculpted Metal · Premium Paper<br /><br /><strong>Inside the Experience</strong><br />Dubai Skyline Sculpture · Bespoke Fragrance · Reed Diffuser · Premium Dates &amp; Nuts · Leather Travel Accessories · Arabian Coffee · Personalised Welcome Note",
     image: "/brand-stories/welcome-before-a-word/hero.png",
     alt: "VIP hospitality welcome chest with Dubai fragrance, keepsakes and local delicacies",

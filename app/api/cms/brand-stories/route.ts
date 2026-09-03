@@ -33,6 +33,7 @@ export async function POST(request: Request) {
       tagline: body.tagline.trim(),
       challenge: body.challenge?.trim() || "",
       materials: body.materials?.trim() || "",
+      materialsDetail: body.materialsDetail?.trim() || "",
       image: body.image?.trim() || PLACEHOLDER_IMAGE,
       alt: body.alt?.trim() || body.title.trim(),
       gallery: Array.isArray(body.gallery) ? body.gallery : [],

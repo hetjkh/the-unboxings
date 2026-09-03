@@ -69,7 +69,9 @@ export default async function InspirationGalleryPage() {
                           <p className="m-0 mt-6 max-w-[520px] text-sm leading-6 text-white/50">{story.challenge}</p>
                         </div>
                         <div className="border-t border-white/15 pt-5">
-                          <p className="m-0 text-[10px] leading-4 tracking-[0.1em] text-white/35 uppercase">{story.materials}</p>
+                          <div className="text-[10px] leading-4 tracking-[0.1em] text-white/35 uppercase [&_strong]:font-bold [&_strong]:text-white/55">
+                            <FormattedText html={story.materials} as="div" />
+                          </div>
                           <Link href={`/brand-stories/${story.slug}`} className="mt-7 flex items-center justify-between text-[10px] font-bold tracking-[0.14em] text-white uppercase no-underline">View the story <span className="text-lg font-light" aria-hidden="true">→</span></Link>
                         </div>
                       </div>

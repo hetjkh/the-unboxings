@@ -20,6 +20,7 @@ async function main() {
           tagline: story.tagline,
           challenge: story.challenge,
           materials: story.materials,
+          materialsDetail: story.materialsDetail ?? "",
           image: story.image,
           alt: story.alt,
           gallery: [...story.gallery],

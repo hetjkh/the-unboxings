@@ -19,6 +19,7 @@ export async function PUT(request: Request, context: RouteContext) {
       ...(body.tagline !== undefined ? { tagline: body.tagline.trim() } : {}),
       ...(body.challenge !== undefined ? { challenge: body.challenge.trim() } : {}),
       ...(body.materials !== undefined ? { materials: body.materials.trim() } : {}),
+      ...(body.materialsDetail !== undefined ? { materialsDetail: body.materialsDetail.trim() } : {}),
       ...(body.image !== undefined ? { image: body.image.trim() } : {}),
       ...(body.alt !== undefined ? { alt: body.alt.trim() } : {}),
       ...(body.gallery !== undefined ? { gallery: body.gallery } : {}),

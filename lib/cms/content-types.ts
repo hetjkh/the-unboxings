@@ -36,6 +36,7 @@ export interface BrandStory {
   tagline: string;
   challenge: string;
   materials: string;
+  materialsDetail?: string;
   image: string;
   alt: string;
   gallery: string[];
