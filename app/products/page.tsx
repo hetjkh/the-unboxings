@@ -2,11 +2,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ProductGrid from "../components/ProductGrid";
 import { getCatalog } from "@/lib/cms/queries";
+import { getSiteSettings } from "@/lib/cms/site-settings";
 
 export const revalidate = 60;
 
 export default async function ProductsPage() {
-  const catalog = await getCatalog();
+  const [catalog, settings] = await Promise.all([getCatalog(), getSiteSettings()]);
 
   return (
     <>
@@ -44,7 +45,11 @@ export default async function ProductsPage() {
             </div>
           </div>
 
-          <ProductGrid items={catalog.products} categories={catalog.categories} />
+          <ProductGrid
+            items={catalog.products}
+            categories={catalog.categories}
+            whatsappNumber={settings.whatsappNumber}
+          />
         </section>
       </main>
       <Footer />

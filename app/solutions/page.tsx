@@ -2,12 +2,19 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { getCatalog } from "@/lib/cms/queries";
+import { getSiteSettings } from "@/lib/cms/site-settings";
+import { plainTextFromRich } from "@/lib/cms/rich-text";
+import { buildWhatsAppUrl, solutionInquiryMessage } from "@/lib/whatsapp";
 import FormattedText from "../components/FormattedText";
 
 export const revalidate = 60;
 
 export default async function SolutionsPage() {
-  const catalog = await getCatalog();
+  const [catalog, settings] = await Promise.all([getCatalog(), getSiteSettings()]);
+  const generalContact = buildWhatsAppUrl(
+    settings.whatsappNumber,
+    "Hi The Unboxing,\n\nI'd like to discuss a custom branded solution.\n\nPlease share how we can get started.",
+  );
 
   return (
     <>
@@ -26,41 +33,64 @@ export default async function SolutionsPage() {
 
           <div className="mx-auto max-w-[1440px] px-8 pb-14 md:px-16">
             <div className="grid grid-cols-1 items-stretch gap-10 md:grid-cols-3">
-              {catalog.solutions.map((solution) => (
-                <article key={solution._id} className="flex h-full flex-col">
-                  <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-white">
-                    <Image
-                      src={solution.image}
-                      alt={solution.title}
-                      fill
-                      className="object-cover object-center"
-                      sizes="(max-width: 768px) 100vw, 400px"
-                    />
-                  </div>
+              {catalog.solutions.map((solution) => {
+                const title = plainTextFromRich(solution.title);
+                const description = plainTextFromRich(solution.description);
+                const detailsHref = buildWhatsAppUrl(
+                  settings.whatsappNumber,
+                  solutionInquiryMessage({
+                    title,
+                    description,
+                    tags: solution.tags,
+                  }),
+                );
 
-                  <div className="flex flex-1 flex-col items-center pt-4 text-center">
-                    <div className="mb-2 flex flex-wrap justify-center gap-1">
-                      {solution.tags.map((tag) => (
-                        <span key={tag} className="border border-black/20 px-2 py-0.5 text-[9px] font-bold tracking-[0.08em] text-black/40 uppercase">
-                          {tag}
-                        </span>
-                      ))}
+                return (
+                  <article key={solution._id} className="flex h-full flex-col">
+                    <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-white">
+                      <Image
+                        src={solution.image}
+                        alt={title}
+                        fill
+                        className="object-cover object-center"
+                        sizes="(max-width: 768px) 100vw, 400px"
+                      />
                     </div>
-                    <h2 className="m-0 text-base leading-6 font-bold tracking-[-0.03em] text-black uppercase">
-                      <FormattedText html={solution.title} />
-                    </h2>
-                    <p className="m-0 mt-4 max-w-[360px] flex-1 text-base leading-6 font-normal text-black">
-                      <FormattedText html={solution.description} />
-                    </p>
-                    <a
-                      href={solution.href}
-                      className="mt-4 shrink-0 text-base leading-6 font-medium text-black underline underline-offset-2"
-                    >
-                      View collection
-                    </a>
-                  </div>
-                </article>
-              ))}
+
+                    <div className="flex flex-1 flex-col items-center pt-4 text-center">
+                      <div className="mb-2 flex flex-wrap justify-center gap-1">
+                        {solution.tags.map((tag) => (
+                          <span key={tag} className="border border-black/20 px-2 py-0.5 text-[9px] font-bold tracking-[0.08em] text-black/40 uppercase">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h2 className="m-0 text-base leading-6 font-bold tracking-[-0.03em] text-black uppercase">
+                        <FormattedText html={solution.title} />
+                      </h2>
+                      <p className="m-0 mt-4 max-w-[360px] flex-1 text-base leading-6 font-normal text-black">
+                        <FormattedText html={solution.description} />
+                      </p>
+                      <div className="mt-4 flex shrink-0 flex-col items-center gap-2">
+                        <a
+                          href={detailsHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex h-10 items-center justify-center border border-black px-5 text-[10px] font-bold tracking-[0.06em] text-black uppercase no-underline hover:bg-black hover:text-white"
+                        >
+                          Request details
+                        </a>
+                        <a
+                          href={solution.href}
+                          className="text-base leading-6 font-medium text-black underline underline-offset-2"
+                        >
+                          View collection
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
 
@@ -69,10 +99,12 @@ export default async function SolutionsPage() {
               Don&apos;t see what you&apos;re looking for? We build custom solutions from scratch.
             </p>
             <a
-              href="/contact-us"
+              href={generalContact}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-6 inline-flex h-12 items-center justify-center bg-black px-10 text-xs font-bold tracking-[0.04em] text-white uppercase no-underline"
             >
-              Contact Us
+              Contact on WhatsApp
             </a>
           </div>
         </section>

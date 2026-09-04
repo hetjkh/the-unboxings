@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import BlackSelect from "../components/BlackSelect";
 
 export const metadata = {
   title: "Contact Us | The Unboxing — Corporate Gifts UAE",
@@ -7,35 +8,125 @@ export const metadata = {
     "Get in touch with The Unboxing team for corporate gifting, branded merchandise, and bulk orders.",
 };
 
-const formFields = [
+const textFields = [
   { name: "company", label: "Company", placeholder: "Your company name" },
-  { name: "audience", label: "Audience", placeholder: "Who is this for?" },
-  { name: "occasion", label: "Occasion", placeholder: "Event, launch, welcome…" },
-  { name: "quantity", label: "Quantity", placeholder: "Estimated units" },
-  { name: "budget", label: "Budget", placeholder: "Estimated budget" },
-  { name: "timeline", label: "Timeline", placeholder: "When do you need it?" },
-  { name: "industry", label: "Industry", placeholder: "Your industry" },
 ] as const;
+
+const selectFields = [
+  {
+    name: "audience",
+    label: "Audience",
+    placeholder: "Who is this for?",
+    options: [
+      "Employees",
+      "Clients",
+      "Partners",
+      "VIPs / Executives",
+      "Event guests",
+      "Mixed audience",
+      "Other",
+    ],
+  },
+  {
+    name: "occasion",
+    label: "Occasion",
+    placeholder: "Select an occasion",
+    options: [
+      "Employee welcome",
+      "Recognition / Award",
+      "Client appreciation",
+      "Brand launch",
+      "Event / Conference",
+      "Hospitality / VIP arrival",
+      "Seasonal / Cultural occasion",
+      "Other",
+    ],
+  },
+  {
+    name: "quantity",
+    label: "Quantity",
+    placeholder: "Estimated units",
+    options: [
+      "Under 50",
+      "50–100",
+      "100–250",
+      "250–500",
+      "500–1,000",
+      "1,000+",
+      "Not sure yet",
+    ],
+  },
+  {
+    name: "budget",
+    label: "Budget",
+    placeholder: "Estimated budget",
+    options: [
+      "Under AED 10,000",
+      "AED 10,000–25,000",
+      "AED 25,000–50,000",
+      "AED 50,000–100,000",
+      "AED 100,000+",
+      "Prefer to discuss",
+    ],
+  },
+  {
+    name: "timeline",
+    label: "Timeline",
+    placeholder: "When do you need it?",
+    options: [
+      "Within 2 weeks",
+      "2–4 weeks",
+      "1–2 months",
+      "2–3 months",
+      "3+ months",
+      "Flexible",
+    ],
+  },
+  {
+    name: "industry",
+    label: "Industry",
+    placeholder: "Your industry",
+    options: [
+      "Real Estate",
+      "Hospitality",
+      "Government",
+      "Healthcare",
+      "Health & Wellness",
+      "Education",
+      "Aviation",
+      "Construction",
+      "Technology",
+      "Finance",
+      "Automotive",
+      "Luxury",
+      "Retail",
+      "Other",
+    ],
+  },
+] as const;
+
+const fieldClassName =
+  "mt-3 w-full appearance-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black";
 
 const contactMethods = [
   {
     number: "01",
     title: "Email",
-    description: "Our team responds to all inquiries within 24 hours.",
+    description: "For briefs, enquiries and new projects.",
     action: "hello@theunboxing.ae",
     href: "mailto:hello@theunboxing.ae",
   },
   {
     number: "02",
     title: "WhatsApp",
-    description: "Sunday to Thursday, 9am – 6pm GST.",
-    action: "Message us on WhatsApp",
+    description: "For quick questions and conversations.",
+    action: "Start a conversation →",
     href: "https://wa.me/97150000000",
   },
   {
     number: "03",
     title: "Phone",
-    description: "Sunday to Thursday, 9am – 6pm GST.",
+    description: "Prefer to speak? We'd be happy to hear from you.",
     action: "+971 50 000 0000",
     href: "tel:+97150000000",
   },
@@ -57,17 +148,17 @@ export default function ContactUsPage() {
               </p>
               <h1
                 id="contact-heading"
-                className="m-0 mt-5 max-w-[900px] text-[clamp(3.25rem,8vw,8rem)] leading-[0.86] font-light tracking-[-0.07em] uppercase"
+                className="m-0 mt-5 max-w-[980px] text-[clamp(3rem,7.5vw,7.5rem)] leading-[0.86] font-light tracking-[-0.07em] uppercase"
               >
-                Let&apos;s Build
+                Let&apos;s Create
                 <br />
                 Something
                 <br />
-                Memorable
+                Worth Keeping
               </h1>
             </div>
             <p className="m-0 max-w-[520px] border-t border-white/25 pt-6 text-sm leading-6 text-white/60 md:text-base md:leading-7">
-              Whether you&apos;re planning a corporate event, launching a campaign, welcoming employees, or looking for premium branded merchandise — we&apos;d love to help.
+              Whether you&apos;re welcoming employees, celebrating clients, launching a brand or creating a defining moment, tell us what you want people to feel. We&apos;ll design the experience around it.
             </p>
           </div>
         </section>
@@ -89,7 +180,7 @@ export default function ContactUsPage() {
                 Project
               </h2>
               <p className="m-0 mt-7 max-w-[420px] text-sm leading-6 text-black/60 md:text-base md:leading-7">
-                Give our designers the context they need to shape an exceptional first direction.
+                Give us the context. We&apos;ll turn it into a considered creative direction.
               </p>
               <div className="mt-10 flex items-center gap-4 text-[10px] tracking-[0.16em] text-black/35 uppercase">
                 <span>Your context</span>
@@ -99,7 +190,7 @@ export default function ContactUsPage() {
             </header>
 
             <form className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2" encType="multipart/form-data">
-              {formFields.map((field) => (
+              {textFields.map((field) => (
                 <label key={field.name} className="group block">
                   <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
                     {field.label}
@@ -108,9 +199,19 @@ export default function ContactUsPage() {
                     name={field.name}
                     type="text"
                     placeholder={field.placeholder}
-                    className="mt-3 w-full border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black"
+                    className={fieldClassName}
                   />
                 </label>
+              ))}
+
+              {selectFields.map((field) => (
+                <BlackSelect
+                  key={field.name}
+                  name={field.name}
+                  label={field.label}
+                  placeholder={field.placeholder}
+                  options={field.options}
+                />
               ))}
 
               <label className="group block md:col-span-2">
@@ -119,6 +220,33 @@ export default function ContactUsPage() {
                   name="objectives"
                   rows={4}
                   placeholder="What should this experience achieve?"
+                  className="mt-3 w-full resize-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm leading-6 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black"
+                />
+              </label>
+
+              <label className="group block md:col-span-2">
+                <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
+                  Additional notes or requirements
+                </span>
+                <span className="mt-2 block text-xs leading-5 text-black/40">
+                  For example items to be included, materials, etc.
+                </span>
+                <textarea
+                  name="additionalNotes"
+                  rows={4}
+                  placeholder="Share any must-haves, materials, inclusions or constraints"
+                  className="mt-3 w-full resize-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm leading-6 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black"
+                />
+              </label>
+
+              <label className="group block md:col-span-2">
+                <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
+                  Are there any specific ideas you already have?
+                </span>
+                <textarea
+                  name="specificIdeas"
+                  rows={4}
+                  placeholder="Mood, references, product directions, packaging thoughts…"
                   className="mt-3 w-full resize-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm leading-6 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black"
                 />
               </label>
@@ -161,9 +289,9 @@ export default function ContactUsPage() {
                 </h2>
               </div>
               <p className="m-0 text-sm leading-6 text-black/50 md:justify-self-end md:text-right">
-                UAE-based · Worldwide delivery · Bulk orders welcome
+                Dubai-based · Global sourcing · International delivery
                 <br />
-                Dubai, United Arab Emirates
+                United Arab Emirates
               </p>
             </header>
 
@@ -180,7 +308,12 @@ export default function ContactUsPage() {
                   <div>
                     <h3 className="m-0 text-xl font-medium tracking-[-0.03em] uppercase">{method.title}</h3>
                     <p className="m-0 mt-3 text-xs leading-5 text-black/50 transition-colors group-hover:text-white/55">{method.description}</p>
-                    <a href={method.href} className="mt-6 inline-block text-sm text-black underline underline-offset-4 transition-colors group-hover:text-white">
+                    <a
+                      href={method.href}
+                      className="mt-6 inline-block text-sm text-black underline underline-offset-4 transition-colors group-hover:text-white"
+                      target={method.title === "WhatsApp" ? "_blank" : undefined}
+                      rel={method.title === "WhatsApp" ? "noopener noreferrer" : undefined}
+                    >
                       {method.action}
                     </a>
                   </div>

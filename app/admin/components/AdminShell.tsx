@@ -11,6 +11,7 @@ const links = [
   { href: "/admin/behind-the-design", label: "Behind the Design" },
   { href: "/admin/resources", label: "Resources" },
   { href: "/admin/brand-stories", label: "Brand Stories" },
+  { href: "/admin/settings", label: "Settings" },
 ];
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {
