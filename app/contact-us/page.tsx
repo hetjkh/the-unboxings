@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import BlackSelect from "../components/BlackSelect";
+import AutoGrowTextarea from "../components/AutoGrowTextarea";
 
 export const metadata = {
   title: "Contact Us | The Unboxing — Corporate Gifts UAE",
@@ -216,9 +217,9 @@ export default function ContactUsPage() {
 
               <label className="group block md:col-span-2">
                 <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">Objectives</span>
-                <textarea
+                <AutoGrowTextarea
                   name="objectives"
-                  rows={4}
+                  minRows={1}
                   placeholder="What should this experience achieve?"
                   className="mt-3 w-full resize-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm leading-6 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black"
                 />
@@ -231,9 +232,9 @@ export default function ContactUsPage() {
                 <span className="mt-2 block text-xs leading-5 text-black/40">
                   For example items to be included, materials, etc.
                 </span>
-                <textarea
+                <AutoGrowTextarea
                   name="additionalNotes"
-                  rows={4}
+                  minRows={1}
                   placeholder="Share any must-haves, materials, inclusions or constraints"
                   className="mt-3 w-full resize-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm leading-6 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black"
                 />
@@ -243,9 +244,9 @@ export default function ContactUsPage() {
                 <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
                   Are there any specific ideas you already have?
                 </span>
-                <textarea
+                <AutoGrowTextarea
                   name="specificIdeas"
-                  rows={4}
+                  minRows={1}
                   placeholder="Mood, references, product directions, packaging thoughts…"
                   className="mt-3 w-full resize-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm leading-6 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black"
                 />
