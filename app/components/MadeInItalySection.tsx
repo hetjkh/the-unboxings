@@ -4,7 +4,7 @@ export default function MadeInItalySection() {
   return (
     <section aria-label="Crafted with intention" className="bg-white">
       <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="flex min-h-[500px] flex-col justify-between px-8 py-16 md:min-h-[720px] md:px-16 md:py-20">
+        <div className="flex flex-col justify-between px-5 sm:px-8 py-16 md:min-h-[720px] md:px-16 md:py-20">
           <div>
             <p className="m-0 text-[10px] leading-4 font-bold tracking-[0.08em] text-black/40 uppercase">
               Made to be remembered
@@ -20,12 +20,12 @@ export default function MadeInItalySection() {
             <p className="m-0 max-w-[470px] text-xs leading-5 text-black/60">
               Material knowledge, precision and craftsmanship come together to create pieces that feel considered, distinctive and made to last.
             </p>
-            <a href="/contact-us#start-project" className="mt-6 inline-flex h-12 items-center justify-center bg-black px-8 text-xs font-bold tracking-[0.04em] text-white uppercase no-underline">
+            <a href="/contact-us#start-project" className="mt-6 inline-flex h-12 items-center justify-center bg-black px-5 sm:px-8 text-xs font-bold tracking-[0.04em] text-white uppercase no-underline">
               Start Your Project
             </a>
           </div>
         </div>
-        <div data-motion-media className="relative min-h-[500px] overflow-hidden md:min-h-[720px]">
+        <div data-motion-media className="relative aspect-[4/3] overflow-hidden md:aspect-auto md:min-h-[720px]">
           <Image
             src="/made-in-italy-workshop.webp"
             alt="Artisans hand-finishing a premium presentation object"

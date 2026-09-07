@@ -13,7 +13,7 @@ export default async function MenCampaignHero() {
     <section
       id="brand-stories"
       aria-labelledby="brand-stories-heading"
-      className="overflow-hidden bg-[#0a0a0a] px-8 py-16 text-white md:px-16 md:py-24"
+      className="overflow-hidden bg-[#0a0a0a] px-5 sm:px-8 py-16 text-white md:px-16 md:py-24"
     >
       <div className="mx-auto max-w-[1440px]">
         <header className="grid gap-8 border-b border-white/20 pb-10 md:grid-cols-[1fr_0.8fr] md:items-end md:pb-14">
@@ -42,7 +42,7 @@ export default async function MenCampaignHero() {
           data-motion-card
           className="group mt-10 grid overflow-hidden border border-white/20 text-white no-underline md:mt-14 md:grid-cols-[1.35fr_0.65fr]"
         >
-          <div data-motion-media className="relative min-h-[360px] overflow-hidden bg-white/10 md:min-h-[680px]">
+          <div data-motion-media className="relative aspect-[4/5] overflow-hidden md:aspect-auto bg-white/10 md:min-h-[680px]">
             <Image
               src={featuredStory.image}
               alt={featuredStory.alt}
@@ -55,7 +55,7 @@ export default async function MenCampaignHero() {
             </span>
           </div>
 
-          <div className="flex min-h-[360px] flex-col justify-between p-6 md:p-10">
+          <div className="flex flex-col justify-between p-6 md:min-h-[360px] md:p-10">
             <div>
               <p className="m-0 text-[10px] font-medium tracking-[0.18em] text-white/40 uppercase">
                 Featured story
@@ -117,7 +117,7 @@ export default async function MenCampaignHero() {
           ))}
         </div>
         <div className="mt-10 flex justify-center">
-          <Link href="/inspiration-gallery" className="inline-flex min-h-12 items-center justify-center border border-white/30 px-8 text-[10px] font-bold tracking-[0.14em] text-white uppercase no-underline hover:bg-white hover:text-black">
+          <Link href="/inspiration-gallery" className="inline-flex min-h-12 items-center justify-center border border-white/30 px-5 sm:px-8 text-[10px] font-bold tracking-[0.14em] text-white uppercase no-underline hover:bg-white hover:text-black">
             View all brand stories&nbsp; →
           </Link>
         </div>

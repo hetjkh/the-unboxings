@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { buildNavCatalog } from "@/lib/cms/nav";
 import type { CatalogData } from "@/lib/cms/types";
 
@@ -173,6 +173,9 @@ type MenuDrawerProps = {
 };
 
 export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
+  const drawerRef = useRef<HTMLElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const panelTriggerRef = useRef<HTMLButtonElement | null>(null);
   const [activePanel, setActivePanel] = useState<MenuPanel>("main");
   const [productsLinks, setProductsLinks] = useState(defaultProductsLinks);
   const [solutionsLinks, setSolutionsLinks] = useState(defaultSolutionsLinks);
@@ -197,15 +200,61 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (!isOpen) return;
+
+    const trigger = document.activeElement as HTMLElement | null;
+    const body = document.body;
+    const previousOverflow = body.style.overflow;
+    const previousPosition = body.style.position;
+    const previousTop = body.style.top;
+    const previousWidth = body.style.width;
+    const scrollY = window.scrollY;
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
+    body.style.overflow = "hidden";
+    if (mobile) {
+      body.style.position = "fixed";
+      body.style.top = `-${scrollY}px`;
+      body.style.width = "100%";
+    }
+    closeRef.current?.focus({ preventScroll: true });
+
+    return () => {
+      body.style.overflow = previousOverflow;
+      if (mobile) {
+        body.style.position = previousPosition;
+        body.style.top = previousTop;
+        body.style.width = previousWidth;
+        window.scrollTo({ top: scrollY, behavior: "instant" });
+      }
+      trigger?.focus({ preventScroll: true });
+    };
   }, [isOpen]);
+
+  const goBack = () => {
+    setActivePanel("main");
+    requestAnimationFrame(() => panelTriggerRef.current?.focus({ preventScroll: true }));
+  };
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Tab") {
+        const focusable = Array.from(drawerRef.current?.querySelectorAll<HTMLElement>("a[href], button, [tabindex='0']") ?? [])
+          .filter((element) => !element.closest("[inert]"));
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+        return;
+      }
       if (event.key !== "Escape") return;
       if (activePanel !== "main") {
         setActivePanel("main");
+        requestAnimationFrame(() => panelTriggerRef.current?.focus({ preventScroll: true }));
         return;
       }
       onClose();
@@ -226,12 +275,21 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
   }, [isOpen]);
 
   const handleClose = () => onClose();
-  const openSubPanel = (panel: MenuPanel) => setActivePanel(panel);
+  const openSubPanel = (panel: MenuPanel, trigger: HTMLButtonElement) => {
+    panelTriggerRef.current = trigger;
+    setActivePanel(panel);
+    requestAnimationFrame(() => {
+      const nav = drawerRef.current?.querySelector<HTMLElement>(`[data-panel="${panel}"]`);
+      if (nav) nav.scrollTop = 0;
+      nav?.querySelector<HTMLElement>("h2")?.focus({ preventScroll: true });
+    });
+  };
 
   return (
     <>
       <div
-        aria-hidden={!isOpen}
+        aria-hidden="true"
+        data-lenis-prevent
         className={`fixed inset-0 z-[60] bg-black/10 backdrop-blur-md transition-opacity duration-500 ease-in-out ${
           isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
@@ -239,21 +297,24 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
       />
 
       <aside
+        ref={drawerRef}
         id="main-navigation"
         role="dialog"
         aria-modal="true"
         aria-label="Main navigation"
         aria-hidden={!isOpen}
-        className={`fixed top-0 right-0 z-[70] flex h-full w-full max-w-[640px] flex-col overflow-hidden bg-white shadow-[-4px_0_24px_rgba(0,0,0,0.08)] transition-transform duration-500 ease-in-out ${
+        inert={!isOpen}
+        data-lenis-prevent
+        className={`fixed top-0 right-0 z-[70] flex h-dvh w-full max-w-[640px] flex-col overflow-hidden bg-white shadow-[-4px_0_24px_rgba(0,0,0,0.08)] transition-transform duration-500 ease-in-out md:h-full ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="relative flex shrink-0 items-center justify-between px-6 pt-6 pb-2">
+        <div className="relative flex shrink-0 items-center justify-between px-5 pt-[max(1rem,env(safe-area-inset-top))] pb-4 md:px-6 md:pt-6 md:pb-2">
           {activePanel !== "main" ? (
             <button
               type="button"
-              onClick={() => setActivePanel("main")}
-              className="flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-sm leading-5 font-bold tracking-[0.08em] text-black uppercase"
+              onClick={goBack}
+              className="flex min-h-11 cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-sm leading-5 font-bold tracking-[0.08em] text-black uppercase md:min-h-0"
             >
               <BackIcon />
               Back
@@ -263,10 +324,11 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
           )}
 
           <button
+            ref={closeRef}
             type="button"
             aria-label="Close menu"
             onClick={handleClose}
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-0 bg-black p-0 shadow-md"
+            className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border-0 bg-black p-0 shadow-md md:h-10 md:w-10"
           >
             <CloseIcon />
           </button>
@@ -278,15 +340,15 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
             style={{ transform: `translateX(-${panelOffset[activePanel] * 100}%)` }}
           >
             {/* ── Main Panel ── */}
-            <nav className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto px-10 pb-10">
+            <nav inert={activePanel !== "main"} aria-label="Main menu" className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto overscroll-y-contain px-5 pb-[max(2rem,env(safe-area-inset-bottom))] md:px-10 md:pb-10">
               <ul className="m-0 list-none p-0">
                 {primaryLinks.map((link) => (
                   <li key={link.label}>
                     {"panel" in link ? (
                       <button
                         type="button"
-                        onClick={() => openSubPanel(link.panel!)}
-                        className="flex w-full cursor-pointer items-center justify-between border-0 bg-transparent py-2 text-left text-2xl leading-8 font-bold tracking-[0.02em] text-black uppercase"
+                        onClick={(event) => openSubPanel(link.panel!, event.currentTarget)}
+                        className="flex min-h-12 w-full cursor-pointer items-center justify-between gap-3 border-0 bg-transparent py-2 text-left text-xl leading-7 font-bold tracking-[0.02em] text-black uppercase md:min-h-0 md:text-2xl md:leading-8"
                       >
                         {link.label}
                         <ChevronIcon />
@@ -294,7 +356,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                     ) : (
                       <a
                         href={link.href}
-                        className="block py-2 text-2xl leading-8 font-bold tracking-[0.02em] text-black uppercase no-underline"
+                        className="block min-h-12 py-2 text-xl leading-7 font-bold tracking-[0.02em] text-black uppercase no-underline md:min-h-0 md:text-2xl md:leading-8"
                       >
                         {link.label}
                       </a>
@@ -308,7 +370,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="block py-1.5 text-base leading-6 font-normal text-black no-underline"
+                      className="block py-2.5 text-base leading-6 font-normal text-black no-underline md:py-1.5"
                     >
                       {link.label}
                     </a>
@@ -318,7 +380,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
 
               <a
                 href="/contact-us#start-project"
-                className="mt-auto flex items-center justify-between pt-10 text-2xl leading-8 font-bold tracking-[0.02em] text-black uppercase no-underline"
+                className="mt-auto flex items-center justify-between gap-3 pt-10 text-xl leading-7 font-bold tracking-[0.02em] text-black uppercase no-underline md:text-2xl md:leading-8"
               >
                 Start a Project
                 <span aria-hidden="true" className="text-2xl font-light">
@@ -330,13 +392,15 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
             {/* ── Solutions Panel ── */}
             <nav
               aria-label="Solutions"
-              className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto px-10 pb-10"
+              data-panel="solutions"
+              inert={activePanel !== "solutions"}
+              className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto overscroll-y-contain px-5 pb-[max(2rem,env(safe-area-inset-bottom))] md:px-10 md:pb-10"
             >
-              <h2 className="m-0 text-[48px] leading-[56px] font-light tracking-[-0.03em] text-black uppercase">
+              <h2 tabIndex={-1} className="m-0 text-[clamp(1.75rem,8vw,2.5rem)] leading-tight outline-none md:text-[48px] md:leading-[56px] font-light tracking-[-0.03em] text-black uppercase">
                 Solutions
               </h2>
 
-              <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="mt-6 grid grid-cols-2 gap-3 md:mt-8 md:gap-4">
                 {solutionFeatures.map((item) => (
                   <a
                     key={item.name}
@@ -349,7 +413,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                         alt={item.name}
                         fill
                         className="object-cover object-center"
-                        sizes="280px"
+                        sizes="(max-width: 767px) 45vw, 280px"
                       />
                     </div>
                     <span className="mt-1 text-sm leading-5 font-normal text-black">
@@ -364,7 +428,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="block py-2 text-base leading-6 font-normal text-black no-underline"
+                      className="block py-2.5 text-base leading-6 font-normal text-black no-underline md:py-2"
                     >
                       {link.label}
                     </a>
@@ -376,13 +440,15 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
             {/* ── Collections Panel ── */}
             <nav
               aria-label="Collections"
-              className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto px-10 pb-10"
+              data-panel="products"
+              inert={activePanel !== "products"}
+              className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto overscroll-y-contain px-5 pb-[max(2rem,env(safe-area-inset-bottom))] md:px-10 md:pb-10"
             >
-              <h2 className="m-0 text-[48px] leading-[56px] font-light tracking-[-0.03em] text-black uppercase">
+              <h2 tabIndex={-1} className="m-0 text-[clamp(1.75rem,8vw,2.5rem)] leading-tight outline-none md:text-[48px] md:leading-[56px] font-light tracking-[-0.03em] text-black uppercase">
                 Collections
               </h2>
 
-              <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="mt-6 grid grid-cols-2 gap-3 md:mt-8 md:gap-4">
                 {productFeatures.map((product) => (
                   <a
                     key={product.name}
@@ -395,7 +461,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                         alt={product.name}
                         fill
                         className="object-cover object-center"
-                        sizes="280px"
+                        sizes="(max-width: 767px) 45vw, 280px"
                       />
                     </div>
                     <span className="mt-1 text-sm leading-5 font-normal text-black">
@@ -410,7 +476,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="block py-2 text-base leading-6 font-normal text-black no-underline"
+                      className="block py-2.5 text-base leading-6 font-normal text-black no-underline md:py-2"
                     >
                       {link.label}
                     </a>
@@ -422,13 +488,15 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
             {/* ── By Industry Panel ── */}
             <nav
               aria-label="By Industry"
-              className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto px-10 pb-10"
+              data-panel="industries"
+              inert={activePanel !== "industries"}
+              className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto overscroll-y-contain px-5 pb-[max(2rem,env(safe-area-inset-bottom))] md:px-10 md:pb-10"
             >
-              <h2 className="m-0 text-[48px] leading-[56px] font-light tracking-[-0.03em] text-black uppercase">
+              <h2 tabIndex={-1} className="m-0 text-[clamp(1.75rem,8vw,2.5rem)] leading-tight outline-none md:text-[48px] md:leading-[56px] font-light tracking-[-0.03em] text-black uppercase">
                 By Industry
               </h2>
 
-              <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="mt-6 grid grid-cols-2 gap-3 md:mt-8 md:gap-4">
                 {industryFeatures.map((industry) => (
                   <a
                     key={industry.name}
@@ -441,7 +509,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                         alt={industry.name}
                         fill
                         className="object-cover object-center"
-                        sizes="280px"
+                        sizes="(max-width: 767px) 45vw, 280px"
                       />
                     </div>
                     <span className="mt-1 text-sm leading-5 font-normal text-black">
@@ -456,7 +524,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="block py-2 text-base leading-6 font-normal text-black no-underline"
+                      className="block py-2.5 text-base leading-6 font-normal text-black no-underline md:py-2"
                     >
                       {link.label}
                     </a>

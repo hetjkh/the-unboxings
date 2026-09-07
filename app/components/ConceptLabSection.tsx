@@ -13,7 +13,7 @@ export default function ConceptLabSection() {
   return (
     <section
       aria-labelledby="concept-lab-heading"
-      className="overflow-hidden bg-[#0a0a0a] px-8 py-16 text-white md:px-16 md:py-24"
+      className="overflow-hidden bg-[#0a0a0a] px-5 sm:px-8 py-16 text-white md:px-16 md:py-24"
     >
       <div className="mx-auto max-w-[1440px]">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(520px,1.1fr)] lg:gap-20">
@@ -40,11 +40,11 @@ export default function ConceptLabSection() {
             </div>
           </header>
 
-          <ol className="m-0 grid list-none grid-cols-1 border-t border-l border-white/20 p-0 sm:grid-cols-2">
+          <ol className="m-0 grid list-none grid-cols-2 border-t border-l border-white/20 p-0">
             {prompts.map((prompt, index) => (
               <li
                 key={prompt}
-                className="group relative flex min-h-[150px] flex-col justify-between overflow-hidden border-r border-b border-white/20 p-5 transition-colors duration-300 hover:bg-white hover:text-black md:min-h-[190px] md:p-7"
+                className="group relative flex min-h-[140px] flex-col justify-between overflow-hidden border-r border-b border-white/20 p-4 transition-colors duration-300 hover:bg-white hover:text-black sm:min-h-[150px] sm:p-5 md:min-h-[190px] md:p-7"
               >
                 <div className="flex items-start justify-between">
                   <span className="text-[10px] leading-4 font-medium tracking-[0.18em] text-white/35 transition-colors duration-300 group-hover:text-black/40">
@@ -57,7 +57,7 @@ export default function ConceptLabSection() {
                     +
                   </span>
                 </div>
-                <span className="relative z-10 text-lg leading-6 font-medium tracking-[-0.025em] md:text-xl">
+                <span className="relative z-10 text-base leading-6 sm:text-lg font-medium tracking-[-0.025em] md:text-xl">
                   {prompt}
                 </span>
                 <span

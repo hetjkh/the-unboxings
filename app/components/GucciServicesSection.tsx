@@ -46,7 +46,7 @@ const stories = [
 export default function GucciServicesSection() {
   return (
     <section aria-labelledby="material-library-heading" className="bg-[#f1f0ec] text-black">
-      <div className="mx-auto max-w-[1440px] px-8 py-16 md:px-16 md:py-24">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 py-16 md:px-16 md:py-24">
         <header className="grid gap-7 border-t border-black pt-7 md:grid-cols-[0.75fr_1.25fr] md:items-end">
           <div>
             <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-black/40 uppercase">Surface · Weight · Finish</p>
@@ -64,7 +64,7 @@ export default function GucciServicesSection() {
           const imageFirst = index % 2 === 0;
           return (
             <article key={story.title} className="grid border-b border-black/20 bg-white lg:grid-cols-2">
-              <div data-motion-media className={`group relative min-h-[420px] overflow-hidden md:min-h-[560px] ${imageFirst ? "lg:order-1" : "lg:order-2"}`}>
+              <div data-motion-media className={`group relative aspect-square overflow-hidden md:aspect-auto md:min-h-[560px] ${imageFirst ? "lg:order-1" : "lg:order-2"}`}>
                 <Image src={story.image} alt={`${story.material} used to create a ${story.product}`} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 1024px) 100vw, 50vw" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/5" />
                 <div className="absolute right-0 bottom-0 left-0 flex items-end justify-between gap-5 p-6 text-white md:p-8">
@@ -72,9 +72,9 @@ export default function GucciServicesSection() {
                   <span className="text-right text-[10px] leading-4 text-white/65 uppercase">{story.product}</span>
                 </div>
               </div>
-              <div className={`flex min-h-[380px] flex-col justify-between px-8 py-10 md:min-h-[560px] md:px-16 md:py-14 ${imageFirst ? "lg:order-2" : "lg:order-1"}`}>
+              <div className={`flex min-h-[380px] flex-col justify-between px-5 sm:px-8 py-10 md:min-h-[560px] md:px-16 md:py-14 ${imageFirst ? "lg:order-2" : "lg:order-1"}`}>
                 <span className="text-[10px] font-medium tracking-[0.18em] text-black/35">{story.number} / MATERIAL STORY</span>
-                <div className="my-16">
+                <div className="my-10 md:my-16">
                   <h3 className="m-0 max-w-[560px] text-3xl font-light tracking-[-0.045em] uppercase md:text-5xl">{story.title}</h3>
                   <p className="m-0 mt-6 max-w-[520px] text-sm leading-6 text-black/50">{story.description}</p>
                   {"character" in story && story.character ? (
@@ -115,11 +115,11 @@ export default function GucciServicesSection() {
       </div>
 
       <div className="grid bg-[#cbd8d4] md:grid-cols-[1.4fr_0.6fr]">
-        <div className="px-8 py-12 md:px-16 md:py-16">
+        <div className="px-5 sm:px-8 py-12 md:px-16 md:py-16">
           <p className="m-0 text-[10px] font-bold tracking-[0.1em] text-black/50 uppercase">From material to meaning</p>
           <h3 className="m-0 mt-4 max-w-[760px] text-3xl leading-tight font-light tracking-[-0.04em] md:text-5xl">See how every material choice becomes part of something meaningful.</h3>
         </div>
-        <div className="flex items-end border-t border-black/15 px-8 py-10 md:border-t-0 md:border-l md:px-12 md:py-14">
+        <div className="flex items-end border-t border-black/15 px-5 sm:px-8 py-10 md:border-t-0 md:border-l md:px-12 md:py-14">
           <a href="/behind-the-design" className="flex w-full items-center justify-between border-b border-black pb-3 text-xs font-bold text-black uppercase no-underline">Explore our process <span aria-hidden="true">→</span></a>
         </div>
       </div>

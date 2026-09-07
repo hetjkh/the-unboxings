@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const MenuDrawer = dynamic(() => import("./MenuDrawer"), { ssr: false });
 
@@ -55,7 +55,7 @@ function IconButton({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className={`relative flex h-6 w-6 cursor-pointer items-center justify-center border-0 bg-transparent p-0 ${className}`}
+      className={`relative flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center border-0 bg-transparent p-0 md:h-6 md:w-6 ${className}`}
     >
       {children}
     </button>
@@ -73,6 +73,7 @@ export default function Header({
 }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
   useEffect(() => {
     if (!overlay) return;
@@ -97,7 +98,7 @@ export default function Header({
         } ${isSolid ? "bg-white" : "bg-transparent"}`}
         style={overlay ? { top: promoOffset } : undefined}
       >
-        <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 py-3 md:flex md:items-center md:justify-between md:px-8 md:py-6 lg:px-16">
+        <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-4 py-3 md:flex md:items-center md:justify-between md:px-8 md:py-6 lg:px-16">
           {/* Left: Start Your Project CTA */}
           <Link
             href="/contact-us#start-project"
@@ -111,7 +112,7 @@ export default function Header({
           <Link
             href="/"
             aria-label="The Unboxing - go to homepage"
-            className={`col-start-2 flex items-baseline gap-[0.3em] whitespace-nowrap no-underline transition-colors duration-300 ${textColor} md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:gap-[0.35em]`}
+            className={`col-start-1 flex min-h-11 items-baseline gap-[0.3em] self-center whitespace-nowrap no-underline transition-colors duration-300 max-md:items-center ${textColor} md:absolute md:top-1/2 md:left-1/2 md:min-h-0 md:-translate-x-1/2 md:-translate-y-1/2 md:gap-[0.35em]`}
           >
             <span className="text-[9px] leading-none font-medium tracking-normal uppercase sm:text-[10px] md:text-xs">
               The
@@ -122,7 +123,7 @@ export default function Header({
           </Link>
 
           {/* Right: Icons */}
-          <div className={`col-start-3 flex items-center justify-end gap-3 sm:gap-4 md:gap-6 ${textColor}`}>
+          <div className={`col-start-2 flex items-center justify-end gap-1 md:gap-6 ${textColor}`}>
             <IconButton label="Search" className={textColor}>
               <SearchIcon />
             </IconButton>
@@ -132,7 +133,7 @@ export default function Header({
               aria-expanded={isMenuOpen}
               aria-controls="main-navigation"
               onClick={() => setIsMenuOpen(true)}
-              className={`flex cursor-pointer items-center gap-0 border-0 bg-transparent p-0 ${textColor}`}
+              className={`flex h-11 min-w-11 cursor-pointer items-center justify-center gap-0 border-0 bg-transparent p-0 md:h-auto md:min-w-0 ${textColor}`}
             >
               <MenuIcon />
               <span className="ml-0 hidden text-base leading-6 font-normal md:inline">
@@ -143,7 +144,7 @@ export default function Header({
         </div>
       </header>
 
-      <MenuDrawer isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <MenuDrawer isOpen={isMenuOpen} onClose={closeMenu} />
     </>
   );
 }

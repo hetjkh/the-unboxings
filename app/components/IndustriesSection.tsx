@@ -35,7 +35,7 @@ export default function IndustriesSection() {
 
   return (
     <section aria-label="Industries" className="bg-white py-14 md:py-20">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-5 px-8 md:flex-row md:items-end md:justify-between md:px-16">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-5 px-5 sm:px-8 md:flex-row md:items-end md:justify-between md:px-16">
         <div>
           <p className="m-0 text-[10px] font-bold tracking-[0.08em] text-black/40 uppercase">Where ideas meet context</p>
           <h2 className="m-0 mt-3 text-base leading-6 font-bold tracking-[-0.03em] text-black uppercase">Industries</h2>
@@ -48,7 +48,7 @@ export default function IndustriesSection() {
           </div>
         </div>
       </div>
-      <div ref={carouselRef} data-lenis-prevent className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-8 pb-2 [scrollbar-width:none] md:px-16">
+      <div ref={carouselRef} data-lenis-prevent className="mt-10 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto overscroll-x-contain sm:scroll-px-8 md:scroll-px-0 px-5 sm:px-8 pb-2 [scrollbar-width:none] md:px-16">
         {industries.map(([number, industry, image]) => (
           <a key={industry} href="/contact-us#start-project" data-motion-card className="group w-[78vw] shrink-0 snap-start no-underline sm:w-[360px]">
             <div data-motion-media className="relative aspect-[4/5] overflow-hidden bg-[#f5f5f5]">

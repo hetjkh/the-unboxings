@@ -11,7 +11,7 @@ export default function CreateMethodSection() {
   return (
     <section
       aria-labelledby="create-method-heading"
-      className="overflow-hidden bg-[#0a0a0a] px-8 py-16 text-white md:px-16 md:py-24"
+      className="overflow-hidden bg-[#0a0a0a] px-5 sm:px-8 py-16 text-white md:px-16 md:py-24"
     >
       <div className="mx-auto max-w-[1440px]">
         <header className="grid gap-8 border-b border-white/20 pb-10 md:grid-cols-[1fr_auto] md:items-end md:pb-14">
@@ -70,7 +70,7 @@ export default function CreateMethodSection() {
         <div className="mt-10 flex justify-center border-t border-white/20 pt-10">
           <a
             href="/behind-the-design"
-            className="inline-flex min-h-12 items-center justify-center border border-white/30 px-8 text-[10px] font-bold tracking-[0.14em] text-white uppercase no-underline hover:bg-white hover:text-black"
+            className="inline-flex min-h-12 items-center justify-center border border-white/30 px-5 sm:px-8 text-[10px] font-bold tracking-[0.14em] text-white uppercase no-underline hover:bg-white hover:text-black"
           >
             Explore behind the design&nbsp; →
           </a>

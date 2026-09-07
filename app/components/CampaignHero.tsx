@@ -71,7 +71,7 @@ export default function CampaignHero({
     <section
       ref={sectionRef}
       aria-label={ariaLabel}
-      className={`relative w-full overflow-hidden ${fullViewport ? "h-svh" : ""}`}
+      className={`relative w-full overflow-hidden ${fullViewport ? "h-svh max-md:min-h-[420px]" : ""}`}
     >
       {video ? (
         <video
@@ -118,7 +118,7 @@ export default function CampaignHero({
       ) : null}
 
       {splitLayout ? (
-        <div className={`z-40 px-6 md:px-16 ${pinCta ? "fixed inset-x-0 bottom-6 md:bottom-10" : "absolute inset-x-0 bottom-6 md:bottom-10"}`}>
+        <div className={`z-40 px-5 max-md:absolute max-md:bottom-[max(1.5rem,env(safe-area-inset-bottom))] md:px-16 ${pinCta ? "fixed inset-x-0 bottom-6 md:bottom-10" : "absolute inset-x-0 bottom-6 md:bottom-10"}`}>
           <div
             className={`mx-auto grid max-w-[1440px] gap-6 ${
               showRightColumn

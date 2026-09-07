@@ -3,7 +3,7 @@ export default function StartProjectSection() {
     <section
       id="start-project"
       aria-labelledby="start-project-heading"
-      className="bg-[#f1f0ec] px-8 py-16 text-black md:px-16 md:py-24"
+      className="bg-[#f1f0ec] px-5 sm:px-8 py-16 text-black md:px-16 md:py-24"
     >
       <div className="mx-auto max-w-[1440px]">
         <div className="grid gap-12 border-t border-black pt-7 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">

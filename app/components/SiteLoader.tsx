@@ -119,13 +119,13 @@ export default function SiteLoader() {
         <div className="flex items-baseline justify-center gap-[0.35em] whitespace-nowrap">
           <span
             ref={theRef}
-            className="text-[clamp(1rem,2.8vw,1.875rem)] font-medium tracking-normal text-black uppercase"
+            className="text-[clamp(1rem,2.8vw,1.875rem)] font-medium tracking-normal text-black uppercase max-md:text-[clamp(0.65rem,2.8vw,1rem)]"
           >
             The
           </span>
           <span
             ref={unboxingRef}
-            className="text-[clamp(3.5rem,14vw,9.5rem)] leading-[0.82] font-bold tracking-[-0.045em] text-black uppercase"
+            className="text-[clamp(3.5rem,14vw,9.5rem)] leading-[0.82] font-bold tracking-[-0.045em] text-black uppercase max-md:text-[12vw]"
           >
             Unboxing
           </span>

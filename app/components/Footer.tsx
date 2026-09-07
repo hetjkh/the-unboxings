@@ -21,12 +21,12 @@ const companyLinks = [
 
 function FooterLinks({ links }: { links: { label: string; href: string }[] }) {
   return (
-    <ul className="m-0 list-none space-y-3 p-0">
+    <ul className="m-0 list-none p-0 md:space-y-3">
       {links.map((link) => (
         <li key={link.label}>
           <a
             href={link.href}
-            className="group inline-flex items-center gap-2 text-xs leading-5 text-white/55 no-underline hover:text-white"
+            className="group inline-flex min-h-11 items-center gap-2 text-xs leading-5 text-white/55 no-underline hover:text-white md:min-h-0"
           >
             <span className="h-px w-0 bg-white transition-all duration-300 group-hover:w-4" aria-hidden="true" />
             {link.label}
@@ -40,7 +40,7 @@ function FooterLinks({ links }: { links: { label: string; href: string }[] }) {
 export default function Footer() {
   return (
     <footer className="overflow-hidden bg-[#0a0a0a] text-white">
-      <div className="mx-auto max-w-[1440px] px-8 pt-16 md:px-16 md:pt-24">
+      <div className="mx-auto max-w-[1440px] px-5 pt-16 sm:px-8 md:px-16 md:pt-24">
         <div className="grid gap-12 border-t border-white/20 pt-8 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
           <div>
             <p className="m-0 text-[10px] font-medium tracking-[0.24em] text-white/40 uppercase">
@@ -67,11 +67,11 @@ export default function Footer() {
                   autoComplete="email"
                   required
                   placeholder="Your email address"
-                  className="min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/35"
+                  className="min-w-0 flex-1 bg-transparent text-base text-white outline-none placeholder:text-white/35 md:text-sm"
                 />
                 <button
                   type="submit"
-                  className="cursor-pointer border-0 bg-transparent px-0 py-2 text-[10px] font-bold tracking-[0.14em] text-white uppercase"
+                  className="min-h-11 shrink-0 cursor-pointer border-0 bg-transparent px-0 py-2 text-[10px] font-bold tracking-[0.14em] text-white uppercase md:min-h-0"
                 >
                   Subscribe →
                 </button>
@@ -83,7 +83,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-20 grid gap-12 border-t border-white/15 py-12 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1.4fr] lg:gap-16">
+        <div className="mt-12 grid grid-cols-2 gap-x-5 gap-y-10 border-t border-white/15 py-12 md:mt-20 md:gap-12 lg:grid-cols-[1fr_1fr_1.4fr] lg:gap-16">
           <div>
             <h3 className="m-0 mb-6 text-[10px] font-bold tracking-[0.16em] text-white uppercase">Explore</h3>
             <FooterLinks links={quickLinks} />
@@ -92,14 +92,14 @@ export default function Footer() {
             <h3 className="m-0 mb-6 text-[10px] font-bold tracking-[0.16em] text-white uppercase">Company</h3>
             <FooterLinks links={companyLinks} />
           </div>
-          <div>
+          <div className="col-span-2 sm:col-span-1">
             <h3 className="m-0 mb-6 text-[10px] font-bold tracking-[0.16em] text-white uppercase">Get in touch</h3>
             <p className="m-0 max-w-[360px] text-xs leading-5 text-white/50">
               Have an idea, occasion or brief in mind? Let&apos;s create something people will remember opening.
             </p>
             <div className="mt-7 space-y-2">
-              <a href="mailto:hello@theunboxing.ae" className="block text-sm text-white no-underline hover:text-white/60">hello@theunboxing.ae</a>
-              <a href="tel:+97150000000" className="block text-sm text-white no-underline hover:text-white/60">+971 50 000 0000</a>
+              <a href="mailto:hello@theunboxing.ae" className="flex min-h-11 items-center text-sm text-white no-underline hover:text-white/60 md:block md:min-h-0">hello@theunboxing.ae</a>
+              <a href="tel:+97150000000" className="flex min-h-11 items-center text-sm text-white no-underline hover:text-white/60 md:block md:min-h-0">+971 50 000 0000</a>
             </div>
           </div>
         </div>
@@ -121,7 +121,7 @@ export default function Footer() {
         </Link>
       </div>
 
-      <div className="border-t border-white/10 px-8 py-6 md:px-16">
+      <div className="border-t border-white/10 px-5 py-6 sm:px-8 md:px-16">
         <div className="mx-auto flex max-w-[1440px] flex-col gap-2 text-[10px] leading-4 text-white/30 sm:flex-row sm:items-center sm:justify-between">
           <p className="m-0">© {new Date().getFullYear()} The Unboxing. All rights reserved.</p>
           <p className="m-0">UAE-based · Worldwide delivery</p>
