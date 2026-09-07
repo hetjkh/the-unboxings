@@ -102,41 +102,60 @@ export default function MaterialsPage() {
       <Header />
       <main>
         <HomeMotion>
-          <section aria-labelledby="materials-heading" className="bg-[#0a0a0a] px-8 py-16 text-white md:px-16 md:py-24">
+          <section aria-labelledby="materials-heading" className="bg-[#0a0a0a] px-5 py-16 text-white sm:px-8 md:px-16 md:py-24">
             <div className="mx-auto max-w-[1440px] border-t border-white/25 pt-7">
               <p className="m-0 text-[10px] font-medium tracking-[0.22em] text-white/40 uppercase">Material Exploration</p>
-              <div className="mt-16 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-                <h1 id="materials-heading" className="m-0 text-[clamp(3.5rem,8vw,8rem)] leading-[0.86] font-light tracking-[-0.07em] uppercase">Material<br />Library</h1>
-                <div className="border-t border-white/25 pt-6">
-                  <p className="m-0 text-xl leading-7 font-light">Every material tells a different story.</p>
-                  <p className="m-0 mt-4 max-w-[520px] text-sm leading-6 text-white/50">Explore texture, weight, finish and character—and discover the materials that bring your brand to life.</p>
+              <div className="mt-10 grid gap-8 sm:mt-16 sm:gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+                <h1 id="materials-heading" className="m-0 text-[clamp(2.75rem,9vw,8rem)] leading-[0.86] font-light tracking-[-0.07em] uppercase">
+                  Material
+                  <br />
+                  Library
+                </h1>
+                <div className="min-w-0 border-t border-white/25 pt-6">
+                  <p className="m-0 text-lg leading-7 font-light sm:text-xl">Every material tells a different story.</p>
+                  <p className="m-0 mt-4 max-w-[520px] text-sm leading-6 text-white/50">
+                    Explore texture, weight, finish and character—and discover the materials that bring your brand to life.
+                  </p>
                 </div>
               </div>
             </div>
           </section>
 
-          <section aria-labelledby="materials-directory-heading" className="bg-[#f1f0ec] px-8 py-16 text-black md:px-16 md:py-24">
+          <section aria-labelledby="materials-directory-heading" className="bg-[#f1f0ec] px-5 py-16 text-black sm:px-8 md:px-16 md:py-24">
             <div className="mx-auto max-w-[1440px]">
-              <header className="flex items-end justify-between border-t border-black pt-7">
-                <div>
+              <header className="flex items-end justify-between gap-4 border-t border-black pt-7">
+                <div className="min-w-0">
                   <p className="m-0 text-[10px] font-medium tracking-[0.18em] text-black/40 uppercase">Explore the collection</p>
-                  <h2 id="materials-directory-heading" className="m-0 mt-4 text-3xl font-light tracking-[-0.045em] uppercase md:text-5xl">Materials and applications</h2>
+                  <h2
+                    id="materials-directory-heading"
+                    className="m-0 mt-4 text-[clamp(1.75rem,5vw,3rem)] font-light tracking-[-0.045em] uppercase md:text-5xl"
+                  >
+                    Materials and applications
+                  </h2>
                 </div>
-                <span className="hidden text-xs text-black/40 sm:block">12 materials</span>
+                <span className="hidden shrink-0 text-xs text-black/40 sm:block">12 materials</span>
               </header>
 
-              <div className="mt-12 grid border-t border-l border-black/20 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-10 grid border-t border-l border-black/20 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
                 {materials.map((material, index) => (
                   <article key={material.name} data-motion-card className="group border-r border-b border-black/20 bg-white">
                     <div data-motion-media className="relative aspect-[4/3] overflow-hidden bg-[#111]">
-                      <Image src={material.image} alt={`${material.name} samples and finished product applications`} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                      <Image
+                        src={material.image}
+                        alt={`${material.name} samples and finished product applications`}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/5" />
-                      <span className="absolute top-5 left-5 text-[10px] font-medium tracking-[0.14em] text-white/70">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="absolute top-5 left-5 text-[10px] font-medium tracking-[0.14em] text-white/70">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
                     </div>
-                    <div className="flex min-h-[280px] flex-col p-6 md:min-h-[300px] md:p-7">
+                    <div className="flex min-h-0 flex-col p-5 sm:min-h-[260px] sm:p-6 md:min-h-[300px] md:p-7">
                       <h3 className="m-0 text-lg font-medium uppercase">{material.name}</h3>
                       <p className="m-0 mt-3 text-xs leading-5 text-black/50">{material.description}</p>
-                      <div className="mt-auto border-t border-black/15 pt-5">
+                      <div className="mt-6 border-t border-black/15 pt-5 sm:mt-auto">
                         <p className="m-0 text-[9px] font-bold tracking-[0.12em] text-black/35 uppercase">Ideal for</p>
                         <p className="m-0 mt-2 text-xs leading-5">{material.products}</p>
                       </div>
@@ -148,12 +167,22 @@ export default function MaterialsPage() {
           </section>
 
           <section className="grid bg-[#cbd8d4] text-black md:grid-cols-[1.4fr_0.6fr]" aria-labelledby="materials-cta-heading">
-            <div className="px-8 py-14 md:px-16 md:py-20">
+            <div className="px-5 py-12 sm:px-8 sm:py-14 md:px-16 md:py-20">
               <p className="m-0 text-[10px] font-bold tracking-[0.1em] text-black/50 uppercase">Your material story</p>
-              <h2 id="materials-cta-heading" className="m-0 mt-4 max-w-[780px] text-3xl leading-tight font-light tracking-[-0.04em] md:text-5xl">Let the right material give your idea weight, texture and meaning.</h2>
+              <h2
+                id="materials-cta-heading"
+                className="m-0 mt-4 max-w-[780px] text-[clamp(1.75rem,5vw,3rem)] leading-tight font-light tracking-[-0.04em] md:text-5xl"
+              >
+                Let the right material give your idea weight, texture and meaning.
+              </h2>
             </div>
-            <div className="flex items-end border-t border-black/15 px-8 py-10 md:border-t-0 md:border-l md:px-12 md:py-16">
-              <a href="/contact-us#start-project" className="flex w-full items-center justify-between border-b border-black pb-3 text-xs font-bold text-black uppercase no-underline">Discuss your project <span aria-hidden="true">→</span></a>
+            <div className="flex items-end border-t border-black/15 px-5 py-8 sm:px-8 sm:py-10 md:border-t-0 md:border-l md:px-12 md:py-16">
+              <a
+                href="/contact-us#start-project"
+                className="flex min-h-12 w-full items-center justify-between border-b border-black pb-3 text-xs font-bold text-black uppercase no-underline"
+              >
+                Discuss your project <span aria-hidden="true">→</span>
+              </a>
             </div>
           </section>
         </HomeMotion>

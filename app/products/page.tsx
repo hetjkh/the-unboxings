@@ -14,7 +14,7 @@ export default async function ProductsPage() {
       <Header />
       <main>
         <section aria-label="All Products" className="bg-white">
-          <div className="px-8 pt-10 pb-6 md:px-16">
+          <div className="px-5 pt-8 pb-5 sm:px-8 sm:pt-10 sm:pb-6 md:px-16">
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <h1 className="m-0 text-base leading-6 font-bold tracking-[-0.03em] text-black uppercase">
                 All Products
@@ -23,22 +23,24 @@ export default async function ProductsPage() {
                 {catalog.products.length} products
               </span>
             </div>
-            <p className="m-0 mt-2 text-xs leading-5 text-black/50">
+            <p className="m-0 mt-2 max-w-[720px] text-xs leading-5 text-black/50">
               Browse our full range of customizable corporate gifting products and contact our team for a tailored proposal.
             </p>
           </div>
 
-          <div className="border-t border-[#e5e5e5] px-8 py-4 md:px-16">
+          <div className="border-t border-[#e5e5e5] px-5 py-3 sm:px-8 sm:py-4 md:px-16">
             <div className="flex items-center justify-between text-xs leading-4 font-medium text-black">
               <button
                 type="button"
-                className="flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-xs leading-4 font-medium text-black"
+                className="flex min-h-11 cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-xs leading-4 font-medium text-black md:min-h-0"
               >
-                <span>Sort By: <span className="font-bold">Category</span></span>
+                <span>
+                  Sort By: <span className="font-bold">Category</span>
+                </span>
               </button>
               <button
                 type="button"
-                className="flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-xs leading-4 font-medium text-black"
+                className="flex min-h-11 cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-xs leading-4 font-medium text-black md:min-h-0"
               >
                 Filters
               </button>
