@@ -32,12 +32,12 @@ export default function StartProjectSection() {
                 ["02", "We shape the direction"],
                 ["03", "Review your concepts"],
               ].map(([number, label]) => (
-                <div key={number} className="min-h-[110px] min-w-0 border-r border-b border-black/20 p-3 sm:p-4">
-                  <p className="m-0 text-[10px] tracking-[0.16em] text-black/35 uppercase">
+                <div key={number} className="group min-h-[110px] min-w-0 border-r border-b border-black/20 bg-transparent p-3 transition-colors duration-300 hover:bg-black sm:p-4">
+                  <p className="m-0 text-[10px] tracking-[0.16em] text-black/35 uppercase transition-colors duration-300 group-hover:text-white/50">
                     {number}
                     <span aria-hidden="true"> —</span>
                   </p>
-                  <p className="m-0 mt-7 text-[10px] leading-4 font-medium uppercase sm:text-xs">
+                  <p className="m-0 mt-7 text-[10px] leading-4 font-medium uppercase transition-colors duration-300 group-hover:text-white sm:text-xs">
                     {label}
                   </p>
                 </div>
