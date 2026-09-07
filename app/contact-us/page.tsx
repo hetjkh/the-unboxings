@@ -20,11 +20,20 @@ const selectFields = [
     placeholder: "Who is this for?",
     options: [
       "Employees",
+      "New Joiners",
+      "Leadership / Executives",
       "Clients",
+      "VIP Clients",
       "Partners",
-      "VIPs / Executives",
-      "Event guests",
-      "Mixed audience",
+      "Investors / Stakeholders",
+      "Customers",
+      "Event Guests / Attendees",
+      "Speakers / Delegates",
+      "Influencers / Creators",
+      "Media / Press",
+      "Homeowners / Residents",
+      "Hotel / Hospitality Guests",
+      "Government / Dignitaries",
       "Other",
     ],
   },
@@ -83,27 +92,19 @@ const selectFields = [
       "Flexible",
     ],
   },
-  {
-    name: "industry",
-    label: "Industry",
-    placeholder: "Your industry",
-    options: [
-      "Real Estate",
-      "Hospitality",
-      "Government",
-      "Healthcare",
-      "Health & Wellness",
-      "Education",
-      "Aviation",
-      "Construction",
-      "Technology",
-      "Finance",
-      "Automotive",
-      "Luxury",
-      "Retail",
-      "Other",
-    ],
-  },
+] as const;
+
+const industryOptions = [
+  "Real Estate & Property Development",
+  "Government & Public Sector",
+  "Hospitality & Hotels",
+  "Banking & Financial Services",
+  "Automotive",
+  "Technology & SaaS",
+  "Events & Exhibitions",
+  "Healthcare & Pharmaceuticals",
+  "Travel & Tourism",
+  "Luxury & Fashion",
 ] as const;
 
 const fieldClassName =
@@ -214,6 +215,15 @@ export default function ContactUsPage() {
                   options={field.options}
                 />
               ))}
+
+              <div className="md:col-span-2">
+                <BlackSelect
+                  name="industry"
+                  label="Industry"
+                  placeholder="Your industry"
+                  options={industryOptions}
+                />
+              </div>
 
               <label className="group block md:col-span-2">
                 <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">Objectives</span>
