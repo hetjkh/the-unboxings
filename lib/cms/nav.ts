@@ -1,4 +1,5 @@
 import type { Category, Product, Solution } from "@/lib/cms/types";
+import { plainTextFromRich } from "@/lib/cms/rich-text";
 
 export type NavCatalog = {
   categories: Category[];
@@ -7,12 +8,12 @@ export type NavCatalog = {
 
 export function buildNavCatalog(catalog: NavCatalog) {
   const productsLinks = catalog.categories.map((category) => ({
-    label: category.name,
+    label: plainTextFromRich(category.name),
     href: `/products/${category.slug}`,
   }));
 
   const solutionsLinks = catalog.solutions.map((solution) => ({
-    label: solution.title,
+    label: plainTextFromRich(solution.title),
     href: solution.href,
   }));
 
@@ -20,7 +21,7 @@ export function buildNavCatalog(catalog: NavCatalog) {
     .filter((category) => category.featuredInNav)
     .slice(0, 4)
     .map((category) => ({
-      name: category.name,
+      name: plainTextFromRich(category.name),
       image: category.image,
       href: `/products/${category.slug}`,
     }));
@@ -29,7 +30,7 @@ export function buildNavCatalog(catalog: NavCatalog) {
     .filter((solution) => solution.featuredInNav)
     .slice(0, 4)
     .map((solution) => ({
-      name: solution.title,
+      name: plainTextFromRich(solution.title),
       image: solution.image,
       href: solution.href,
     }));
@@ -38,7 +39,7 @@ export function buildNavCatalog(catalog: NavCatalog) {
 }
 
 export function getCategoryNameFromCatalog(categories: Category[], slug: string): string {
-  return categories.find((category) => category.slug === slug)?.name ?? "Products";
+  return plainTextFromRich(categories.find((category) => category.slug === slug)?.name ?? "Products");
 }
 
 export type GridProduct = Pick<Product, "_id" | "name" | "categorySlug" | "image" | "description">;

@@ -30,6 +30,8 @@ async function saveToVercelBlob(file: File, fileName: string, buffer: Buffer): P
     access: "public" as const,
     contentType: file.type || "application/octet-stream",
     addRandomSuffix: false,
+    // Long upstream TTL so Vercel Image Optimization caches transforms longer
+    cacheControlMaxAge: 60 * 60 * 24 * 31,
     ...(token ? { token } : {}),
   };
 
