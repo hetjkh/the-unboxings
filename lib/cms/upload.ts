@@ -1,7 +1,7 @@
 import { put } from "@vercel/blob";
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
-import { slugify } from "./serialize";
+import { slugify } from "./rich-text";
 
 const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
 

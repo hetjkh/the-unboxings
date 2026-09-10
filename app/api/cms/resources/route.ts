@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/cms/auth";
 import { getCollection, jsonError, mapDoc, revalidateCatalog } from "@/lib/cms/api";
 import { seedResourcesIfMissing } from "@/lib/cms/content";
-import { slugify } from "@/lib/cms/serialize";
+import { slugify } from "@/lib/cms/rich-text";
 import type { ResourceInput } from "@/lib/cms/content-types";
 
 export async function GET() {

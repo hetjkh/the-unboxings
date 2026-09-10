@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/cms/auth";
 import { getCollection, jsonError, mapDoc, revalidateCatalog } from "@/lib/cms/api";
-import { slugify, toObjectId } from "@/lib/cms/serialize";
+import { slugify } from "@/lib/cms/rich-text";
+import { toObjectId } from "@/lib/cms/serialize";
 import type { CategoryInput } from "@/lib/cms/types";
 
 type RouteContext = { params: Promise<{ id: string }> };

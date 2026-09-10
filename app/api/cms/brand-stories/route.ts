@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/cms/auth";
 import { getCollection, jsonError, mapDoc, revalidateCatalog } from "@/lib/cms/api";
 import { seedBrandStoriesIfMissing } from "@/lib/cms/content";
-import { slugify } from "@/lib/cms/serialize";
+import { slugify } from "@/lib/cms/rich-text";
 import { PLACEHOLDER_IMAGE } from "@/lib/cms/placeholders";
 import type { BrandStoryInput } from "@/lib/cms/content-types";
 

@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/cms/auth";
 import { getCollection, jsonError, mapDoc, revalidateCatalog } from "@/lib/cms/api";
-import { slugify, toObjectId } from "@/lib/cms/serialize";
+import { slugify } from "@/lib/cms/rich-text";
+import { toObjectId } from "@/lib/cms/serialize";
 import type { BrandStoryInput } from "@/lib/cms/content-types";
 
 type RouteContext = { params: Promise<{ id: string }> };
@@ -15,7 +16,7 @@ export async function PUT(request: Request, context: RouteContext) {
 
     const update = {
       ...(body.title !== undefined ? { title: body.title.trim() } : {}),
-      ...(body.slug !== undefined ? { slug: slugify(body.slug.trim() || body.title ?? "") } : {}),
+      ...(body.slug !== undefined ? { slug: slugify(body.slug.trim() || body.title || "") } : {}),
       ...(body.tagline !== undefined ? { tagline: body.tagline.trim() } : {}),
       ...(body.challenge !== undefined ? { challenge: body.challenge.trim() } : {}),
       ...(body.materials !== undefined ? { materials: body.materials.trim() } : {}),

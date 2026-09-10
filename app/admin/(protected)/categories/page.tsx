@@ -4,8 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import AdminShell from "../../components/AdminShell";
 import { CheckboxField, cmsFetch, ImageField, NumberField, TextField } from "../../components/AdminFields";
-import { plainTextFromRich } from "@/lib/cms/rich-text";
-import { slugify } from "@/lib/cms/serialize";
+import { plainTextFromRich, slugify } from "@/lib/cms/rich-text";
 import type { Category } from "@/lib/cms/types";
 
 const emptyCategory = (): Omit<Category, "_id" | "createdAt" | "updatedAt"> => ({

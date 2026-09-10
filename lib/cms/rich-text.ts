@@ -69,3 +69,12 @@ export function plainTextFromRich(html: string): string {
     : html;
   return decodeHtmlEntities(stripped).replace(/\s+/g, " ").trim();
 }
+
+/** URL-safe kebab slug (safe for client + server; no Node/Mongo imports). */
+export function slugify(value: string): string {
+  return plainTextFromRich(value)
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
