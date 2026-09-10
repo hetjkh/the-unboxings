@@ -12,10 +12,26 @@ export async function PUT(request: Request, context: RouteContext) {
     const { id } = await context.params;
     const body = (await request.json()) as Partial<CategoryInput>;
     const collection = await getCollection("categories");
+    const existing = await collection.findOne({ _id: toObjectId(id) });
+    if (!existing) return jsonError("Category not found", 404);
+
+    const nextSlug =
+      body.slug !== undefined
+        ? slugify(body.slug.trim() || body.name || String(existing.name ?? ""))
+        : undefined;
+
+    if (nextSlug !== undefined && !nextSlug) {
+      return jsonError("Could not create a valid slug from the name");
+    }
+
+    if (nextSlug && nextSlug !== existing.slug) {
+      const conflict = await collection.findOne({ slug: nextSlug, _id: { $ne: toObjectId(id) } });
+      if (conflict) return jsonError("A category with this slug already exists");
+    }
 
     const update = {
       ...(body.name !== undefined ? { name: body.name.trim() } : {}),
-      ...(body.slug !== undefined ? { slug: body.slug.trim() || slugify(body.name ?? "") } : {}),
+      ...(nextSlug !== undefined ? { slug: nextSlug } : {}),
       ...(body.image !== undefined ? { image: body.image.trim() } : {}),
       ...(body.description !== undefined ? { description: body.description.trim() } : {}),
       ...(body.headerImageFit !== undefined ? { headerImageFit: body.headerImageFit } : {}),
@@ -31,6 +47,16 @@ export async function PUT(request: Request, context: RouteContext) {
     );
 
     if (!result) return jsonError("Category not found", 404);
+
+    // Keep products linked when the category slug is repaired/renamed
+    if (nextSlug && nextSlug !== existing.slug) {
+      const products = await getCollection("products");
+      await products.updateMany(
+        { categorySlug: existing.slug },
+        { $set: { categorySlug: nextSlug, updatedAt: new Date().toISOString() } },
+      );
+    }
+
     await revalidateCatalog();
     return NextResponse.json(mapDoc(result));
   } catch (error) {

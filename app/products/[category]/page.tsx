@@ -63,7 +63,7 @@ export default async function ProductCategoryPage({ params }: { params: Promise<
 
           <div className="order-2 flex flex-col justify-end px-5 py-6 sm:px-8 sm:py-8 md:order-1 md:justify-center md:px-16 md:py-16">
             <p className="m-0 text-[10px] font-bold tracking-[0.14em] text-white/45 uppercase sm:text-[11px] md:text-xs">
-              Products / {category.name}
+              Products / {plainTextFromRich(category.name)}
             </p>
             <h1
               id="category-title"

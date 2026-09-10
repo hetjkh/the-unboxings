@@ -15,7 +15,7 @@ export default function ProductGrid({
   whatsappNumber: string;
 }) {
   const categoryName = (slug: string) =>
-    categories.find((category) => category.slug === slug)?.name ?? "Products";
+    plainTextFromRich(categories.find((category) => category.slug === slug)?.name ?? "Products");
 
   return (
     <div className="grid grid-cols-2 items-stretch gap-0 lg:grid-cols-4">

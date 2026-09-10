@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import AdminShell from "../../components/AdminShell";
 import { cmsFetch, ImageField, NumberField, TextField } from "../../components/AdminFields";
+import { plainTextFromRich } from "@/lib/cms/rich-text";
 import type { Category, Product } from "@/lib/cms/types";
 
 const emptyProduct = (): Omit<Product, "_id" | "createdAt" | "updatedAt"> => ({
@@ -110,7 +111,7 @@ export default function AdminProductsPage() {
             >
               {categories.map((category) => (
                 <option key={category._id} value={category.slug}>
-                  {category.name}
+                  {plainTextFromRich(category.name)}
                 </option>
               ))}
             </select>
@@ -138,7 +139,7 @@ export default function AdminProductsPage() {
               <option value="">All categories</option>
               {categories.map((category) => (
                 <option key={category._id} value={category.slug}>
-                  {category.name}
+                  {plainTextFromRich(category.name)}
                 </option>
               ))}
             </select>
@@ -151,9 +152,9 @@ export default function AdminProductsPage() {
                   <Image src={product.image} alt="" fill className="object-contain p-1" sizes="64px" />
                 </div>
                 <div>
-                  <h3 className="m-0 text-sm font-semibold">{product.name}</h3>
+                  <h3 className="m-0 text-sm font-semibold">{plainTextFromRich(product.name)}</h3>
                   <p className="m-0 mt-1 text-xs text-black/50">{product.categorySlug}</p>
-                  <p className="m-0 mt-2 text-xs text-black/60">{product.description}</p>
+                  <p className="m-0 mt-2 line-clamp-3 text-xs text-black/60">{plainTextFromRich(product.description)}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                   <button type="button" onClick={() => startEdit(product)} className="text-xs font-bold uppercase">

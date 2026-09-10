@@ -1,5 +1,14 @@
 const ALLOWED_TAGS = new Set(["strong", "b", "em", "i", "u", "mark", "a", "br", "p", "span"]);
 
+const NAMED_ENTITIES: Record<string, string> = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+};
+
 function stripDisallowedTags(html: string): string {
   return html.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, (match, tagName: string) => {
     const tag = tagName.toLowerCase();
@@ -18,9 +27,27 @@ function stripDisallowedTags(html: string): string {
   });
 }
 
+/** Decode common HTML entities (&amp; → &, &#39; → ', etc.) */
+export function decodeHtmlEntities(value: string): string {
+  if (!value || !value.includes("&")) return value;
+  return value.replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (match, entity: string) => {
+    const key = entity.toLowerCase();
+    if (key in NAMED_ENTITIES) return NAMED_ENTITIES[key];
+    if (key.startsWith("#x")) {
+      const code = Number.parseInt(key.slice(2), 16);
+      return Number.isFinite(code) ? String.fromCodePoint(code) : match;
+    }
+    if (key.startsWith("#")) {
+      const code = Number.parseInt(key.slice(1), 10);
+      return Number.isFinite(code) ? String.fromCodePoint(code) : match;
+    }
+    return match;
+  });
+}
+
 export function sanitizeRichText(input: string): string {
   if (!input) return "";
-  if (!/[<>]/.test(input)) return input;
+  if (!/[<>]/.test(input)) return decodeHtmlEntities(input);
 
   return stripDisallowedTags(
     input
@@ -37,11 +64,8 @@ export function isRichText(value: string): boolean {
 
 export function plainTextFromRich(html: string): string {
   if (!html) return "";
-  if (!/[<>]/.test(html)) return html;
-  return html
-    .replace(/<br\s*\/?>/gi, " ")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&nbsp;/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+  const stripped = /[<>]/.test(html)
+    ? html.replace(/<br\s*\/?>/gi, " ").replace(/<!--[\s\S]*?-->/g, " ").replace(/<[^>]+>/g, "")
+    : html;
+  return decodeHtmlEntities(stripped).replace(/\s+/g, " ").trim();
 }

@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     if (!body.title?.trim()) return jsonError("Title is required");
     if (!body.description?.trim()) return jsonError("Description is required");
 
-    const slug = body.slug?.trim() || slugify(body.title);
+    const slug = slugify(body.slug?.trim() || body.title);
     const timestamp = new Date().toISOString();
     const doc = {
       slug,

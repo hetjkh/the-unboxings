@@ -1,4 +1,5 @@
 import { ObjectId, type Document } from "mongodb";
+import { plainTextFromRich } from "@/lib/cms/rich-text";
 
 export function serializeDoc<T extends Document>(doc: T): T & { _id: string } {
   return {
@@ -11,8 +12,9 @@ export function toObjectId(id: string): ObjectId {
   return new ObjectId(id);
 }
 
+/** Always produces a URL-safe kebab slug (spaces, &, HTML entities stripped). */
 export function slugify(value: string): string {
-  return value
+  return plainTextFromRich(value)
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9]+/g, "-")

@@ -15,7 +15,7 @@ export async function PUT(request: Request, context: RouteContext) {
 
     const update = {
       ...(body.title !== undefined ? { title: body.title.trim() } : {}),
-      ...(body.slug !== undefined ? { slug: body.slug.trim() || slugify(body.title ?? "") } : {}),
+      ...(body.slug !== undefined ? { slug: slugify(body.slug.trim() || body.title ?? "") } : {}),
       ...(body.description !== undefined ? { description: body.description.trim() } : {}),
       ...(body.image !== undefined ? { image: body.image.trim() } : {}),
       ...(body.href !== undefined ? { href: body.href.trim() } : {}),

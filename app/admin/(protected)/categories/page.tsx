@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import AdminShell from "../../components/AdminShell";
 import { CheckboxField, cmsFetch, ImageField, NumberField, TextField } from "../../components/AdminFields";
+import { plainTextFromRich } from "@/lib/cms/rich-text";
+import { slugify } from "@/lib/cms/serialize";
 import type { Category } from "@/lib/cms/types";
 
 const emptyCategory = (): Omit<Category, "_id" | "createdAt" | "updatedAt"> => ({
@@ -20,6 +22,7 @@ export default function AdminCategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [form, setForm] = useState(emptyCategory());
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [slugTouched, setSlugTouched] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -37,6 +40,15 @@ export default function AdminCategoriesPage() {
   function resetForm() {
     setForm(emptyCategory());
     setEditingId(null);
+    setSlugTouched(false);
+  }
+
+  function handleNameChange(value: string) {
+    setForm((current) => ({
+      ...current,
+      name: value,
+      slug: !editingId && !slugTouched ? slugify(value) : current.slug,
+    }));
   }
 
   async function handleSubmit(event: React.FormEvent) {
@@ -74,6 +86,7 @@ export default function AdminCategoriesPage() {
 
   function startEdit(category: Category) {
     setEditingId(category._id);
+    setSlugTouched(true);
     setForm({
       name: category.name,
       slug: category.slug,
@@ -90,8 +103,19 @@ export default function AdminCategoriesPage() {
       <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
         <form onSubmit={handleSubmit} className="grid gap-4 border border-black/10 bg-white p-6">
           <h2 className="m-0 text-xl font-light uppercase">{editingId ? "Edit category" : "New category"}</h2>
-          <TextField label="Name" value={form.name} onChange={(value) => setForm({ ...form, name: value })} />
-          <TextField label="Slug" value={form.slug} onChange={(value) => setForm({ ...form, slug: value })} plain />
+          <TextField label="Name" value={form.name} onChange={handleNameChange} />
+          <TextField
+            label="Slug (URL)"
+            value={form.slug}
+            onChange={(value) => {
+              setSlugTouched(true);
+              setForm({ ...form, slug: value });
+            }}
+            plain
+          />
+          <p className="m-0 -mt-2 text-[11px] text-black/45">
+            Auto-fills from the name as <code className="text-black/60">events-activations</code>. Leave blank to generate on save.
+          </p>
           <ImageField label="Hero image" value={form.image} onChange={(value) => setForm({ ...form, image: value })} />
           <TextField label="Description" value={form.description} onChange={(value) => setForm({ ...form, description: value })} multiline />
           <label className="grid gap-2 text-sm">
@@ -124,26 +148,34 @@ export default function AdminCategoriesPage() {
           <h2 className="m-0 text-xl font-light uppercase">All categories</h2>
           {loading ? <p className="mt-4 text-sm text-black/50">Loading...</p> : null}
           <div className="mt-4 grid gap-4">
-            {categories.map((category) => (
-              <article key={category._id} className="grid grid-cols-[72px_1fr_auto] gap-4 border border-black/10 p-4">
-                <div className="relative h-16 w-16 bg-[#f7f7f7]">
-                  <Image src={category.image} alt="" fill className="object-contain p-1" sizes="64px" />
-                </div>
-                <div>
-                  <h3 className="m-0 text-sm font-semibold">{category.name}</h3>
-                  <p className="m-0 mt-1 text-xs text-black/50">/{category.slug}</p>
-                  <p className="m-0 mt-2 text-xs text-black/60">{category.description}</p>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <button type="button" onClick={() => startEdit(category)} className="text-xs font-bold uppercase">
-                    Edit
-                  </button>
-                  <button type="button" onClick={() => handleDelete(category._id)} className="text-xs text-red-600 uppercase">
-                    Delete
-                  </button>
-                </div>
-              </article>
-            ))}
+            {categories.map((category) => {
+              const badSlug = /[\s&%]/.test(category.slug) || category.slug !== slugify(category.slug);
+              return (
+                <article key={category._id} className="grid grid-cols-[72px_1fr_auto] gap-4 border border-black/10 p-4">
+                  <div className="relative h-16 w-16 bg-[#f7f7f7]">
+                    <Image src={category.image} alt="" fill className="object-contain p-1" sizes="64px" />
+                  </div>
+                  <div>
+                    <h3 className="m-0 text-sm font-semibold">{plainTextFromRich(category.name)}</h3>
+                    <p className="m-0 mt-1 text-xs text-black/50">/products/{category.slug}</p>
+                    {badSlug ? (
+                      <p className="m-0 mt-1 text-[11px] text-red-600">
+                        Broken slug — click Edit → Update to fix to /products/{slugify(category.name || category.slug)}
+                      </p>
+                    ) : null}
+                    <p className="m-0 mt-2 line-clamp-3 text-xs text-black/60">{plainTextFromRich(category.description)}</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <button type="button" onClick={() => startEdit(category)} className="text-xs font-bold uppercase">
+                      Edit
+                    </button>
+                    <button type="button" onClick={() => handleDelete(category._id)} className="text-xs text-red-600 uppercase">
+                      Delete
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       </div>
