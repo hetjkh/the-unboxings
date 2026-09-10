@@ -221,14 +221,19 @@ export default function AboutPage() {
 
                 <div className="mt-12 grid grid-cols-1 border-t border-l border-white/20 sm:grid-cols-3">
                   {purposePrinciples.map((principle, index) => (
-                    <div key={principle.title} className="min-h-[160px] border-r border-b border-white/20 p-5 md:min-h-[180px]">
-                      <span className="text-[10px] tracking-[0.16em] text-white/30">
+                    <div
+                      key={principle.title}
+                      className="group min-h-[160px] border-r border-b border-white/20 bg-transparent p-5 transition-colors duration-300 hover:bg-white md:min-h-[180px]"
+                    >
+                      <span className="text-[10px] tracking-[0.16em] text-white/30 transition-colors duration-300 group-hover:text-black/35">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <p className="m-0 mt-7 text-xs leading-5 font-medium tracking-[0.04em] uppercase">
+                      <p className="m-0 mt-7 text-xs leading-5 font-medium tracking-[0.04em] uppercase transition-colors duration-300 group-hover:text-black">
                         {principle.title}
                       </p>
-                      <p className="m-0 mt-4 text-xs leading-5 text-white/55">{principle.description}</p>
+                      <p className="m-0 mt-4 text-xs leading-5 text-white/55 transition-colors duration-300 group-hover:text-black/60">
+                        {principle.description}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -255,13 +260,20 @@ export default function AboutPage() {
 
             <ol className="m-0 mt-12 grid list-none border-t border-l border-black/20 p-0 md:grid-cols-5">
               {process.map((step, index) => (
-                <li key={step.title} className="flex min-h-[300px] flex-col justify-between border-r border-b border-black/20 p-6 md:min-h-[360px]">
-                  <span className="text-5xl font-light tracking-[-0.06em] text-black/15 md:text-6xl">
+                <li
+                  key={step.title}
+                  className="group flex min-h-[300px] flex-col justify-between border-r border-b border-black/20 bg-transparent p-6 transition-colors duration-300 hover:bg-black md:min-h-[360px]"
+                >
+                  <span className="text-5xl font-light tracking-[-0.06em] text-black/15 transition-colors duration-300 group-hover:text-white/25 md:text-6xl">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <h3 className="m-0 text-sm leading-5 font-bold tracking-[0.04em] uppercase">{step.title}</h3>
-                    <p className="m-0 mt-4 text-xs leading-5 text-black/50">{step.description}</p>
+                    <h3 className="m-0 text-sm leading-5 font-bold tracking-[0.04em] uppercase transition-colors duration-300 group-hover:text-white">
+                      {step.title}
+                    </h3>
+                    <p className="m-0 mt-4 text-xs leading-5 text-black/50 transition-colors duration-300 group-hover:text-white/60">
+                      {step.description}
+                    </p>
                   </div>
                 </li>
               ))}

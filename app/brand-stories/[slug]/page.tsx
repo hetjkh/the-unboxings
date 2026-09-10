@@ -208,9 +208,9 @@ export default async function BrandStoryPage({
             </div>
           </section>
 
-          <section aria-label="Closing thought" className="bg-[#f1f0ec] px-5 py-12 sm:px-8 sm:py-16 md:px-16 md:py-24">
-            <blockquote className="mx-auto m-0 w-full text-center">
-              <p className="m-0 text-[clamp(1.05rem,4.2vw,2.25rem)] leading-snug font-light tracking-[-0.04em] text-black whitespace-normal md:whitespace-nowrap md:text-[clamp(1.05rem,2.6vw,2.25rem)]">
+          <section aria-label="Closing thought" className="overflow-hidden bg-[#f1f0ec] px-5 py-12 sm:px-8 sm:py-16 md:px-16 md:py-24">
+            <blockquote className="mx-auto m-0 max-w-[900px] text-center">
+              <p className="m-0 text-[clamp(1.15rem,3.2vw,2.25rem)] leading-[1.25] font-light tracking-[-0.04em] text-balance break-words text-black">
                 <FormattedText html={story.closing} />
               </p>
             </blockquote>
