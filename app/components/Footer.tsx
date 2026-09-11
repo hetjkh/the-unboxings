@@ -99,7 +99,7 @@ export default function Footer() {
             </p>
             <div className="mt-7 space-y-2">
               <a href="mailto:hello@theunboxing.ae" className="flex min-h-11 items-center text-sm text-white no-underline hover:text-white/60 md:block md:min-h-0">hello@theunboxing.ae</a>
-              <a href="tel:+97150000000" className="flex min-h-11 items-center text-sm text-white no-underline hover:text-white/60 md:block md:min-h-0">+971 50 000 0000</a>
+              <a href="tel:+971506023071" className="flex min-h-11 items-center text-sm text-white no-underline hover:text-white/60 md:block md:min-h-0">+971 50 602 3071</a>
             </div>
           </div>
         </div>

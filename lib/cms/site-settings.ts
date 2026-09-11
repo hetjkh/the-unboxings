@@ -7,8 +7,8 @@ export type SiteSettings = {
 };
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  whatsappNumber: process.env.WHATSAPP_NUMBER?.trim() || "97150000000",
-  phoneNumber: process.env.CONTACT_PHONE?.trim() || "+971 50 000 0000",
+  whatsappNumber: process.env.WHATSAPP_NUMBER?.trim() || "971506023071",
+  phoneNumber: process.env.CONTACT_PHONE?.trim() || "+971 50 602 3071",
   email: process.env.CONTACT_EMAIL?.trim() || "hello@theunboxing.ae",
 };
 

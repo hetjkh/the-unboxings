@@ -123,14 +123,14 @@ const contactMethods = [
     title: "WhatsApp",
     description: "For quick questions and conversations.",
     action: "Start a conversation →",
-    href: "https://wa.me/97150000000",
+    href: "https://wa.me/971506023071",
   },
   {
     number: "03",
     title: "Phone",
     description: "Prefer to speak? We'd be happy to hear from you.",
-    action: "+971 50 000 0000",
-    href: "tel:+97150000000",
+    action: "+971 50 602 3071",
+    href: "tel:+971506023071",
   },
 ] as const;
 
