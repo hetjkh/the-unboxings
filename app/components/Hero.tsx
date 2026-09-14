@@ -16,6 +16,7 @@ export default function Hero() {
       heading
       image="/hero1.png"
       video="/hero.webm"
+      mobileVideo="/video.webm"
       splitLayout
       priority
       bottomGradient

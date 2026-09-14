@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   heroCtaContainerClass,
   heroOverlayButtonDark,
@@ -25,6 +25,7 @@ type CampaignHeroProps = {
   heading?: boolean;
   image: string;
   video?: string;
+  mobileVideo?: string;
   mobileImage?: string;
   href?: string;
   buttonStyle?: "light" | "dark";
@@ -46,6 +47,7 @@ export default function CampaignHero({
   heading = false,
   image,
   video,
+  mobileVideo,
   mobileImage,
   href,
   buttonStyle = "light",
@@ -59,6 +61,15 @@ export default function CampaignHero({
 }: CampaignHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const pinCta = usePinHeroCta(sectionRef);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const sync = () => setIsMobile(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   const buttonClassName =
     buttonStyle === "dark" ? heroOverlayButtonDark : heroOverlayButtonLight;
@@ -66,6 +77,9 @@ export default function CampaignHero({
   const imageAlt = titleAlt ?? (typeof title === "string" ? title : ariaLabel);
   const showButtons = Boolean(buttonText && href);
   const showRightColumn = Boolean(description || showButtons);
+  const activeVideo =
+    isMobile == null ? undefined : isMobile ? mobileVideo || video : video;
+  const hasVideo = Boolean(video || mobileVideo);
 
   return (
     <section
@@ -73,8 +87,9 @@ export default function CampaignHero({
       aria-label={ariaLabel}
       className={`relative w-full overflow-hidden ${fullViewport ? "h-svh max-md:min-h-[420px]" : ""}`}
     >
-      {video ? (
+      {activeVideo ? (
         <video
+          key={activeVideo}
           autoPlay
           muted
           loop
@@ -85,9 +100,14 @@ export default function CampaignHero({
           tabIndex={-1}
           className="absolute inset-0 h-full w-full object-cover object-center"
         >
-          <source src={video} type={video.endsWith(".webm") ? "video/webm" : "video/mp4"} />
+          <source
+            src={activeVideo}
+            type={activeVideo.endsWith(".webm") ? "video/webm" : "video/mp4"}
+          />
         </video>
-      ) : mobileImage ? (
+      ) : null}
+
+      {!hasVideo && mobileImage ? (
         <Image
           src={mobileImage}
           alt={imageAlt}
@@ -98,7 +118,8 @@ export default function CampaignHero({
           sizes="100vw"
         />
       ) : null}
-      {!video ? (
+
+      {!hasVideo ? (
         <Image
           src={image}
           alt={imageAlt}
@@ -106,6 +127,17 @@ export default function CampaignHero({
           height={801}
           priority={priority}
           className={`block h-auto w-full ${mobileImage ? "hidden md:block" : ""}`}
+          sizes="100vw"
+        />
+      ) : null}
+
+      {hasVideo && !activeVideo ? (
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          priority={priority}
+          className="object-cover object-center"
           sizes="100vw"
         />
       ) : null}
@@ -118,7 +150,11 @@ export default function CampaignHero({
       ) : null}
 
       {splitLayout ? (
-        <div className={`z-40 px-5 max-md:absolute max-md:bottom-[max(1.5rem,env(safe-area-inset-bottom))] md:px-16 ${pinCta ? "fixed inset-x-0 bottom-6 md:bottom-10" : "absolute inset-x-0 bottom-6 md:bottom-10"}`}>
+        <div
+          className={`z-40 px-5 max-md:absolute max-md:bottom-[max(1.5rem,env(safe-area-inset-bottom))] md:px-16 ${
+            pinCta ? "fixed inset-x-0 bottom-6 md:bottom-10" : "absolute inset-x-0 bottom-6 md:bottom-10"
+          }`}
+        >
           <div
             className={`mx-auto grid max-w-[1440px] gap-6 ${
               showRightColumn
@@ -138,7 +174,11 @@ export default function CampaignHero({
               <div className="flex flex-col gap-5">
                 {description ? <p className={heroOverlaySplitDescriptionClass}>{description}</p> : null}
                 {showButtons ? (
-                  <div className={`grid gap-3 ${secondaryHref && secondaryButtonText ? "grid-cols-2" : "grid-cols-1"}`}>
+                  <div
+                    className={`grid gap-3 ${
+                      secondaryHref && secondaryButtonText ? "grid-cols-2" : "grid-cols-1"
+                    }`}
+                  >
                     <a href={href} className={`${buttonClassName} w-full`}>
                       {buttonText}
                     </a>
