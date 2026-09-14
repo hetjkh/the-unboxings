@@ -4,6 +4,14 @@ import type { NextConfig } from "next";
 const IMAGE_CACHE_TTL = 60 * 60 * 24 * 31;
 
 const nextConfig: NextConfig = {
+  // Keep Baileys and media helpers outside the Turbopack bundle (optional peers + Node APIs).
+  serverExternalPackages: [
+    "@whiskeysockets/baileys",
+    "jimp",
+    "sharp",
+    "pino",
+    "qrcode",
+  ],
   images: {
     // WebP only: AVIF is slower to encode on first transform (cold cache)
     formats: ["image/webp"],

@@ -56,6 +56,8 @@ export function projectBriefMessage(fields: Record<string, string>): string {
   ];
 
   const order = [
+    "productInterest",
+    "productCategory",
     "company",
     "audience",
     "occasion",
@@ -64,12 +66,23 @@ export function projectBriefMessage(fields: Record<string, string>): string {
     "timeline",
     "industry",
     "objectives",
+    "additionalNotes",
+    "specificIdeas",
   ];
 
   for (const key of order) {
     const value = fields[key]?.trim();
     if (!value) continue;
-    const label = key.charAt(0).toUpperCase() + key.slice(1);
+    const label =
+      key === "productInterest"
+        ? "Product"
+        : key === "productCategory"
+          ? "Category"
+          : key === "additionalNotes"
+            ? "Additional notes"
+            : key === "specificIdeas"
+              ? "Specific ideas"
+              : key.charAt(0).toUpperCase() + key.slice(1);
     lines.push(`${label}: ${value}`);
   }
 

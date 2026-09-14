@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import BlackSelect from "./BlackSelect";
 import AutoGrowTextarea from "./AutoGrowTextarea";
 
@@ -111,26 +114,104 @@ export default function StartProjectForm({
   productCategory?: string;
   defaultSpecificIdeas?: string;
 }) {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [error, setError] = useState("");
+  const [briefFile, setBriefFile] = useState<File | null>(null);
+  const briefInputRef = useRef<HTMLInputElement>(null);
+
+  function onBriefChange(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0] ?? null;
+    setBriefFile(file);
+    setError("");
+  }
+
+  function clearBriefFile() {
+    setBriefFile(null);
+    if (briefInputRef.current) briefInputRef.current.value = "";
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus("sending");
+    setError("");
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    // Ensure selected brief file is always included for the email attachment.
+    data.delete("brief");
+    if (briefFile) {
+      data.set("brief", briefFile, briefFile.name);
+    }
+
+    try {
+      const response = await fetch("/api/project-brief", {
+        method: "POST",
+        body: data,
+      });
+      const payload = (await response.json().catch(() => ({}))) as {
+        error?: string;
+        warning?: string;
+        whatsapp?: { ok?: boolean; error?: string };
+      };
+
+      if (!response.ok) {
+        setStatus("error");
+        setError(payload.error || "Could not send your brief. Please try again.");
+        return;
+      }
+
+      if (payload.warning || payload.whatsapp?.ok === false) {
+        setStatus("error");
+        setError(
+          payload.warning ||
+            payload.whatsapp?.error ||
+            "Email sent, but WhatsApp delivery failed. Check Admin → Settings WhatsApp connection.",
+        );
+        return;
+      }
+
+      setStatus("sent");
+      clearBriefFile();
+      form.reset();
+    } catch {
+      setStatus("error");
+      setError("Could not send your brief. Please try again.");
+    }
+  }
+
+  if (status === "sent") {
+    return (
+      <div className="border border-black/15 bg-white/50 px-6 py-10 md:px-8">
+        <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-black/40 uppercase">Brief received</p>
+        <h3 className="m-0 mt-4 text-2xl font-light tracking-[-0.04em] uppercase">Thank you</h3>
+        <p className="m-0 mt-4 max-w-[420px] text-sm leading-6 text-black/60">
+          Your project brief is with our team. We&apos;ll review it and get back to you within 24 hours.
+        </p>
+        <button
+          type="button"
+          onClick={() => setStatus("idle")}
+          className="mt-8 cursor-pointer border-0 bg-transparent p-0 text-[11px] font-bold tracking-[0.08em] text-black uppercase underline underline-offset-4"
+        >
+          Send another brief
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <form className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2" encType="multipart/form-data">
-      {productName ? (
-        <input type="hidden" name="productInterest" value={productName} />
-      ) : null}
-      {productCategory ? (
-        <input type="hidden" name="productCategory" value={productCategory} />
-      ) : null}
+    <form
+      onSubmit={handleSubmit}
+      className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2"
+      encType="multipart/form-data"
+    >
+      {productName ? <input type="hidden" name="productInterest" value={productName} /> : null}
+      {productCategory ? <input type="hidden" name="productCategory" value={productCategory} /> : null}
 
       {textFields.map((field) => (
         <label key={field.name} className="group block">
-          <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
-            {field.label}
-          </span>
-          <input
-            name={field.name}
-            type="text"
-            placeholder={field.placeholder}
-            className={fieldClassName}
-          />
+          <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">{field.label}</span>
+          <input name={field.name} type="text" placeholder={field.placeholder} className={fieldClassName} />
         </label>
       ))}
 
@@ -145,12 +226,7 @@ export default function StartProjectForm({
       ))}
 
       <div className="md:col-span-2">
-        <BlackSelect
-          name="industry"
-          label="Industry"
-          placeholder="Your industry"
-          options={industryOptions}
-        />
+        <BlackSelect name="industry" label="Industry" placeholder="Your industry" options={industryOptions} />
       </div>
 
       <label className="group block md:col-span-2">
@@ -191,26 +267,58 @@ export default function StartProjectForm({
         />
       </label>
 
-      <label className="md:col-span-2">
+      <div className="md:col-span-2">
         <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">Brief Upload</span>
-        <span className="mt-3 flex min-h-24 cursor-pointer items-center justify-between gap-5 border border-dashed border-black/35 px-5 py-4 transition-colors hover:border-black hover:bg-white/40">
+        <input
+          ref={briefInputRef}
+          id="brief-upload"
+          name="brief"
+          type="file"
+          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
+          className="sr-only"
+          onChange={onBriefChange}
+        />
+        <button
+          type="button"
+          onClick={() => briefInputRef.current?.click()}
+          className="mt-3 flex min-h-24 w-full cursor-pointer items-center justify-between gap-5 border border-dashed border-black/35 bg-transparent px-5 py-4 text-left transition-colors hover:border-black hover:bg-white/40"
+        >
           <span>
-            <span className="block text-sm font-medium">Add your brief or reference files</span>
-            <span className="mt-1 block text-xs text-black/40">PDF, DOC, JPG or PNG</span>
+            <span className="block text-sm font-medium text-black">
+              {briefFile ? briefFile.name : "Add your brief or reference files"}
+            </span>
+            <span className="mt-1 block text-xs text-black/40">
+              {briefFile
+                ? `${(briefFile.size / 1024).toFixed(0)} KB · Ready to send with your email`
+                : "PDF, DOC, JPG or PNG · Temporary until you submit or refresh"}
+            </span>
           </span>
-          <span className="text-2xl font-light" aria-hidden="true">
-            +
+          <span className="text-2xl font-light text-black" aria-hidden="true">
+            {briefFile ? "✓" : "+"}
           </span>
-          <input name="brief" type="file" className="sr-only" />
-        </span>
-      </label>
+        </button>
+        {briefFile ? (
+          <button
+            type="button"
+            onClick={clearBriefFile}
+            className="mt-3 cursor-pointer border-0 bg-transparent p-0 text-[11px] font-bold tracking-[0.08em] text-black/50 uppercase underline underline-offset-4 hover:text-black"
+          >
+            Remove file
+          </button>
+        ) : null}
+      </div>
 
       <div className="pt-2 md:col-span-2">
         <button
           type="submit"
-          className="group flex min-h-20 w-full cursor-pointer items-center justify-between gap-5 border-0 bg-black px-6 py-5 text-left text-xs font-bold tracking-[0.06em] text-white uppercase md:px-8 md:text-sm"
+          disabled={status === "sending"}
+          className="group flex min-h-20 w-full cursor-pointer items-center justify-between gap-5 border-0 bg-black px-6 py-5 text-left text-xs font-bold tracking-[0.06em] text-white uppercase disabled:cursor-wait disabled:opacity-70 md:px-8 md:text-sm"
         >
-          <span>Submit — Receive Two Bespoke Concepts Within 48 Hours</span>
+          <span>
+            {status === "sending"
+              ? "Sending your brief…"
+              : "Submit — Receive Two Bespoke Concepts Within 48 Hours"}
+          </span>
           <span
             className="shrink-0 text-2xl font-light transition-transform group-hover:translate-x-2"
             aria-hidden="true"
@@ -218,6 +326,7 @@ export default function StartProjectForm({
             →
           </span>
         </button>
+        {error ? <p className="m-0 mt-4 text-sm leading-6 text-red-700">{error}</p> : null}
         <p className="m-0 mt-4 text-sm leading-6 text-black/55">
           We&apos;ll review your brief and get back to you within 24 hours.
         </p>
