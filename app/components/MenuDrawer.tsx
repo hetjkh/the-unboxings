@@ -36,7 +36,7 @@ const defaultSolutionsLinks = [
 const primaryLinks = [
   { label: "Solutions", panel: "solutions" as MenuPanel },
   { label: "Collections", panel: "products" as MenuPanel },
-  { label: "By Industry", panel: "industries" as MenuPanel },
+  { label: "By Industry", href: "/industries" },
   { label: "Brand Stories", href: "/inspiration-gallery" },
   { label: "Behind the Design", href: "/behind-the-design" },
   { label: "Materials", href: "/materials" },
