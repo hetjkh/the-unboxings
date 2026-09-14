@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 const MenuDrawer = dynamic(() => import("./MenuDrawer"), { ssr: false });
+const SearchOverlay = dynamic(() => import("./SearchOverlay"), { ssr: false });
 
 function SearchIcon() {
   return (
@@ -72,8 +73,10 @@ export default function Header({
   promoOffset = 0,
 }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
+  const closeSearch = useCallback(() => setIsSearchOpen(false), []);
 
   useEffect(() => {
     if (!overlay) return;
@@ -99,7 +102,6 @@ export default function Header({
         style={overlay ? { top: promoOffset } : undefined}
       >
         <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-4 py-3 md:flex md:items-center md:justify-between md:px-8 md:py-6 lg:px-16">
-          {/* Left: Start Your Project CTA */}
           <Link
             href="/contact-us#start-project"
             className={`hidden items-center gap-2 no-underline text-xs leading-[18px] font-bold md:flex ${textColor}`}
@@ -108,7 +110,6 @@ export default function Header({
             <span>Start Your Project</span>
           </Link>
 
-          {/* Center: Logo */}
           <Link
             href="/"
             aria-label="The Unboxing - go to homepage"
@@ -122,9 +123,15 @@ export default function Header({
             </span>
           </Link>
 
-          {/* Right: Icons */}
           <div className={`col-start-2 flex items-center justify-end gap-1 md:gap-6 ${textColor}`}>
-            <IconButton label="Search" className={textColor}>
+            <IconButton
+              label="Search"
+              className={textColor}
+              onClick={() => {
+                setIsMenuOpen(false);
+                setIsSearchOpen(true);
+              }}
+            >
               <SearchIcon />
             </IconButton>
             <button
@@ -136,15 +143,14 @@ export default function Header({
               className={`flex h-11 min-w-11 cursor-pointer items-center justify-center gap-0 border-0 bg-transparent p-0 md:h-auto md:min-w-0 ${textColor}`}
             >
               <MenuIcon />
-              <span className="ml-0 hidden text-base leading-6 font-normal md:inline">
-                MENU
-              </span>
+              <span className="ml-0 hidden text-base leading-6 font-normal md:inline">MENU</span>
             </button>
           </div>
         </div>
       </header>
 
       <MenuDrawer isOpen={isMenuOpen} onClose={closeMenu} />
+      <SearchOverlay isOpen={isSearchOpen} onClose={closeSearch} />
     </>
   );
 }
