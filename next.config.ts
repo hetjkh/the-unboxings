@@ -28,7 +28,7 @@ const nextConfig: NextConfig = {
     return [
       {
         // Static site images — long CDN/browser cache; allow refresh after TTL
-        source: "/:path*\\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico)",
+        source: "/:path*\\.:extension(jpg|jpeg|png|webp|avif|gif|svg|ico)",
         headers: [
           {
             key: "Cache-Control",

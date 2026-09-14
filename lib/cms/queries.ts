@@ -182,6 +182,11 @@ export async function getCategoryBySlug(slug: string): Promise<Category | undefi
   return catalog.categories.find((category) => category.slug === slug);
 }
 
+export async function getProductById(id: string): Promise<Product | undefined> {
+  const catalog = await getCatalog();
+  return catalog.products.find((product) => product._id === id);
+}
+
 export async function getPageHero(pageKey: string): Promise<PageHero | undefined> {
   const catalog = await getCatalog();
   return catalog.pageHeroes.find((hero) => hero.pageKey === pageKey);

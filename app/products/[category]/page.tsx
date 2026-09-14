@@ -87,11 +87,7 @@ export default async function ProductCategoryPage({ params }: { params: Promise<
         </div>
 
         {categoryProducts.length ? (
-          <ProductGrid
-            items={categoryProducts}
-            categories={catalog.categories}
-            whatsappNumber={settings.whatsappNumber}
-          />
+          <ProductGrid items={categoryProducts} categories={catalog.categories} />
         ) : (
           <section className="px-5 py-16 text-center sm:px-8 sm:py-20 md:px-16 md:py-28">
             <p className="m-0 text-xl font-light sm:text-2xl">Made around your brief.</p>
