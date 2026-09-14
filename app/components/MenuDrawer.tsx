@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { buildNavCatalog } from "@/lib/cms/nav";
-import type { CatalogData } from "@/lib/cms/types";
+import type { NavPayload } from "@/lib/cms/nav";
 
 // ─── Navigation Data ────────────────────────────────────────────────────────
 
@@ -184,20 +183,30 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
   const [industriesLinks] = useState(defaultIndustriesLinks);
   const [industryFeatures] = useState(defaultIndustryFeatures);
 
+  const navLoadedRef = useRef(false);
+
   useEffect(() => {
-    fetch("/api/catalog")
+    if (!isOpen || navLoadedRef.current) return;
+
+    let cancelled = false;
+    fetch("/api/nav")
       .then((response) => response.json())
-      .then((catalog: CatalogData) => {
-        const nav = buildNavCatalog(catalog);
-        if (nav.productsLinks.length) setProductsLinks(nav.productsLinks);
-        if (nav.solutionsLinks.length) setSolutionsLinks(nav.solutionsLinks);
-        if (nav.productFeatures.length) setProductFeatures(nav.productFeatures);
-        if (nav.solutionFeatures.length) setSolutionFeatures(nav.solutionFeatures);
+      .then((nav: NavPayload) => {
+        if (cancelled) return;
+        navLoadedRef.current = true;
+        if (nav.productsLinks?.length) setProductsLinks(nav.productsLinks);
+        if (nav.solutionsLinks?.length) setSolutionsLinks(nav.solutionsLinks);
+        if (nav.productFeatures?.length) setProductFeatures(nav.productFeatures);
+        if (nav.solutionFeatures?.length) setSolutionFeatures(nav.solutionFeatures);
       })
       .catch(() => {
-        // Keep defaults when catalog API is unavailable.
+        // Keep defaults when nav API is unavailable.
       });
-  }, []);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;

@@ -38,6 +38,8 @@ export function buildNavCatalog(catalog: NavCatalog) {
   return { productsLinks, solutionsLinks, productFeatures, solutionFeatures };
 }
 
+export type NavPayload = ReturnType<typeof buildNavCatalog>;
+
 export function getCategoryNameFromCatalog(categories: Category[], slug: string): string {
   return plainTextFromRich(categories.find((category) => category.slug === slug)?.name ?? "Products");
 }

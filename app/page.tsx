@@ -9,14 +9,16 @@ import IndustriesSection from "./components/IndustriesSection";
 import ConceptLabSection from "./components/ConceptLabSection";
 import StartProjectSection from "./components/StartProjectSection";
 import Footer from "./components/Footer";
-import HomeMotion from "./components/HomeMotion";
+import DeferredHomeMotion from "./components/DeferredHomeMotion";
+
+export const revalidate = 60;
 
 export default function Home() {
   return (
     <>
       <Header overlay />
       <main>
-        <HomeMotion>
+        <DeferredHomeMotion>
           <Hero />
           <CategoryGrid />
           <MenCampaignHero />
@@ -26,7 +28,7 @@ export default function Home() {
           <IndustriesSection />
           <ConceptLabSection />
           <StartProjectSection />
-        </HomeMotion>
+        </DeferredHomeMotion>
       </main>
       <Footer />
     </>

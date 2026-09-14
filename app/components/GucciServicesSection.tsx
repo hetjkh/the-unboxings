@@ -12,7 +12,7 @@ const stories = [
     material: "Acrylic",
     product: "Recognition award",
     idealFor: "Awards · Desk Objects · Display Pieces · Sculptures · Presentation Pieces · Branded Installations",
-    image: "/materials/tiles/acrylic.png",
+    image: "/materials/tiles/acrylic.webp",
   },
   {
     number: "02",
@@ -26,7 +26,7 @@ const stories = [
     product: "Executive portfolio",
     madeInto: "Executive portfolio",
     idealFor: "Executive Portfolios · Travel Accessories · Desk Accessories · Presentation Cases",
-    image: "/materials/tiles/leather.png",
+    image: "/materials/tiles/leather.webp",
   },
   {
     number: "03",
@@ -39,7 +39,7 @@ const stories = [
     material: "Recycled composite",
     product: "Premium packaging",
     idealFor: "Packaging · Notebooks · Desk Accessories · Presentation Pieces · Event Gifts · Branded Objects",
-    image: "/materials/tiles/recycled.png",
+    image: "/materials/tiles/recycled.webp",
   },
 ] as const;
 

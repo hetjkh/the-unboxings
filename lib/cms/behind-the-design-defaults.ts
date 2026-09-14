@@ -31,7 +31,7 @@ export const DEFAULT_BEHIND_THE_DESIGN: Omit<BehindTheDesignContent, "_id" | "cr
       description: "We begin with the brand, the audience and the moment it needs to create.",
       detail:
         "The process begins on paper. Ideas are questioned, explored and refined before a single dimension is decided.",
-      image: "/behind-the-design/idea.png",
+      image: "/behind-the-design/idea.webp",
       alt: "Concept notes, sketches and a black box asking what the experience should feel like",
       sortOrder: 0,
     },
@@ -42,7 +42,7 @@ export const DEFAULT_BEHIND_THE_DESIGN: Omit<BehindTheDesignContent, "_id" | "cr
       description: "Possibilities take shape on paper before materials set any limits.",
       detail:
         "Multiple concepts are explored, challenged and refined until the right form emerges — designing the packaging and the object as one complete experience.",
-      image: "/behind-the-design/sketch.png",
+      image: "/behind-the-design/sketch.webp",
       alt: "Hand-drawn box concept sketches exploring opening mechanisms and bottle forms",
       sortOrder: 1,
     },
@@ -53,7 +53,7 @@ export const DEFAULT_BEHIND_THE_DESIGN: Omit<BehindTheDesignContent, "_id" | "cr
       description: "Form, proportion and function are resolved down to the smallest detail.",
       detail:
         "Precision turns an idea into something buildable. Every dimension, clearance and mechanism is carefully considered so the final experience feels effortless and refined.",
-      image: "/behind-the-design/3d-design.png",
+      image: "/behind-the-design/3d-design.webp",
       alt: "Hands measuring a prototype beside CAD models, technical drawings and hardware",
       sortOrder: 2,
     },
@@ -64,7 +64,7 @@ export const DEFAULT_BEHIND_THE_DESIGN: Omit<BehindTheDesignContent, "_id" | "cr
       description: "The idea becomes something tangible that we can hold, assess and improve.",
       detail:
         "Prototyping turns assumptions into answers. Each version tests the structure, fit and reveal — refining every detail before the final piece moves into production.",
-      image: "/behind-the-design/prototype.png",
+      image: "/behind-the-design/prototype.webp",
       alt: "Two packaging prototypes compared for structure and reveal experience",
       sortOrder: 3,
     },

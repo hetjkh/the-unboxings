@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import HomeMotion from "../components/HomeMotion";
+import DeferredHomeMotion from "../components/DeferredHomeMotion";
 import { getBehindTheDesignContent } from "@/lib/cms/behind-the-design";
 import FormattedText from "../components/FormattedText";
 
@@ -47,7 +47,7 @@ export default async function BehindTheDesignPage() {
     <>
       <Header />
       <main>
-        <HomeMotion>
+        <DeferredHomeMotion>
         <section aria-labelledby="behind-design-heading" className="grid bg-[#0a0a0a] text-white lg:min-h-[calc(100svh-72px)] lg:grid-cols-[0.82fr_1.18fr]">
           <div className="flex flex-col justify-between px-5 py-12 sm:px-8 sm:py-14 md:px-16 md:py-20">
             <p className="m-0 text-[10px] font-medium tracking-[0.24em] text-white/40 uppercase">{content.hero.subtitle}</p>
@@ -147,7 +147,7 @@ export default async function BehindTheDesignPage() {
             <a href={content.cta.linkHref} className="flex min-h-12 w-full items-center justify-between border-b border-black pb-3 text-xs font-bold text-black uppercase no-underline">{content.cta.linkText} <span aria-hidden="true">→</span></a>
           </div>
         </section>
-        </HomeMotion>
+        </DeferredHomeMotion>
       </main>
       <Footer />
     </>

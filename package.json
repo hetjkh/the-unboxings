@@ -9,11 +9,10 @@
     "lint": "eslint",
     "seed:cms": "tsx --env-file=.env.local scripts/seed-cms.ts",
     "migrate:categories": "tsx --env-file=.env.local scripts/migrate-product-categories.ts",
-    "migrate:brand-stories": "tsx --env-file=.env.local scripts/migrate-brand-stories.ts"
+    "migrate:brand-stories": "tsx --env-file=.env.local scripts/migrate-brand-stories.ts",
+    "optimize:images": "tsx scripts/compress-large-images.mts && tsx scripts/update-image-refs.mts"
   },
   "dependencies": {
-    "@react-three/drei": "^10.7.8",
-    "@react-three/fiber": "^9.7.0",
     "@vercel/blob": "^2.8.0",
     "cors": "^2.8.6",
     "gsap": "^3.15.0",
@@ -21,8 +20,7 @@
     "mongodb": "^7.6.0",
     "next": "16.2.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "three": "^0.185.1"
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

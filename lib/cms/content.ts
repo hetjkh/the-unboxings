@@ -1,8 +1,13 @@
+import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { getDb, isMongoConfigured } from "../mongodb";
 import { brandStories as staticBrandStories } from "../../app/data/brandStories";
 import { resourceArticles as staticResources } from "../../app/data/resources";
 import type { BrandStory, ResourceArticle } from "./content-types";
 import { serializeDoc } from "./serialize";
+import { CONTENT_CACHE_TAG, CMS_CACHE_REVALIDATE_SECONDS } from "./cache-tags";
+
+const CACHE_REVALIDATE_SECONDS = CMS_CACHE_REVALIDATE_SECONDS;
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -32,7 +37,7 @@ function staticBrandStoriesList(): BrandStory[] {
   }));
 }
 
-export async function getResources(): Promise<ResourceArticle[]> {
+async function loadResourcesFromSource(): Promise<ResourceArticle[]> {
   if (!isMongoConfigured()) return staticResourcesList();
 
   try {
@@ -45,12 +50,7 @@ export async function getResources(): Promise<ResourceArticle[]> {
   }
 }
 
-export async function getResourceBySlug(slug: string): Promise<ResourceArticle | undefined> {
-  const resources = await getResources();
-  return resources.find((article) => article.slug === slug);
-}
-
-export async function getBrandStories(): Promise<BrandStory[]> {
+async function loadBrandStoriesFromSource(): Promise<BrandStory[]> {
   if (!isMongoConfigured()) return staticBrandStoriesList();
 
   try {
@@ -62,6 +62,25 @@ export async function getBrandStories(): Promise<BrandStory[]> {
     return staticBrandStoriesList();
   }
 }
+
+const getCachedResources = unstable_cache(loadResourcesFromSource, ["cms-resources"], {
+  revalidate: CACHE_REVALIDATE_SECONDS,
+  tags: [CONTENT_CACHE_TAG],
+});
+
+const getCachedBrandStories = unstable_cache(loadBrandStoriesFromSource, ["cms-brand-stories"], {
+  revalidate: CACHE_REVALIDATE_SECONDS,
+  tags: [CONTENT_CACHE_TAG],
+});
+
+export const getResources = cache(async (): Promise<ResourceArticle[]> => getCachedResources());
+
+export async function getResourceBySlug(slug: string): Promise<ResourceArticle | undefined> {
+  const resources = await getResources();
+  return resources.find((article) => article.slug === slug);
+}
+
+export const getBrandStories = cache(async (): Promise<BrandStory[]> => getCachedBrandStories());
 
 export async function getBrandStoryBySlug(slug: string): Promise<BrandStory | undefined> {
   const stories = await getBrandStories();

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import HomeMotion from "../../components/HomeMotion";
+import DeferredHomeMotion from "../../components/DeferredHomeMotion";
 import { getBrandStories, getBrandStoryBySlug } from "@/lib/cms/content";
 import { plainTextFromRich } from "@/lib/cms/rich-text";
 import FormattedText from "../../components/FormattedText";
@@ -89,7 +89,7 @@ export default async function BrandStoryPage({
     <>
       <Header />
       <main className="bg-white">
-        <HomeMotion>
+        <DeferredHomeMotion>
           <section
             aria-labelledby="story-heading"
             className="grid overflow-hidden border-b border-black/20 bg-[#0a0a0a] text-white md:h-[52vh] md:max-h-[680px] md:grid-cols-[1fr_1.05fr] lg:h-[min(calc(100svh-72px),820px)] lg:max-h-none"
@@ -229,7 +229,7 @@ export default async function BrandStoryPage({
               </Link>
             </div>
           </section>
-        </HomeMotion>
+        </DeferredHomeMotion>
       </main>
       <Footer />
     </>

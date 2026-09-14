@@ -1,13 +1,16 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getDb } from "@/lib/mongodb";
 import { serializeDoc } from "@/lib/cms/serialize";
+import { CATALOG_CACHE_TAG, CONTENT_CACHE_TAG } from "@/lib/cms/cache-tags";
 
 export function jsonError(message: string, status = 400) {
   return NextResponse.json({ error: message }, { status });
 }
 
 export async function revalidateCatalog() {
+  revalidateTag(CATALOG_CACHE_TAG, "max");
+  revalidateTag(CONTENT_CACHE_TAG, "max");
   revalidatePath("/products");
   revalidatePath("/products/[category]", "page");
   revalidatePath("/solutions");
@@ -17,6 +20,8 @@ export async function revalidateCatalog() {
   revalidatePath("/brand-stories/[slug]", "page");
   revalidatePath("/inspiration-gallery");
   revalidatePath("/");
+  revalidatePath("/api/nav");
+  revalidatePath("/api/catalog");
 }
 
 export async function getCollection(name: string) {

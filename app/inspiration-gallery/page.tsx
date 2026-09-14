@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import HomeMotion from "../components/HomeMotion";
+import DeferredHomeMotion from "../components/DeferredHomeMotion";
 import { getBrandStories } from "@/lib/cms/content";
 import FormattedText from "../components/FormattedText";
 
@@ -22,7 +22,7 @@ export default async function InspirationGalleryPage() {
     <>
       <Header />
       <main>
-        <HomeMotion>
+        <DeferredHomeMotion>
           <section aria-labelledby="inspiration-heading" className="grid bg-[#0a0a0a] text-white lg:min-h-[650px] lg:grid-cols-[0.9fr_1.1fr]">
             <div className="flex flex-col justify-between px-8 py-14 md:px-16 md:py-20">
               <p className="m-0 text-[10px] font-medium tracking-[0.24em] text-white/40 uppercase">Selected work</p>
@@ -95,7 +95,7 @@ export default async function InspirationGalleryPage() {
               <a href="/contact-us#start-project" className="flex w-full items-center justify-between border-b border-black pb-3 text-xs font-bold text-black uppercase no-underline">Start your project <span aria-hidden="true">→</span></a>
             </div>
           </section>
-        </HomeMotion>
+        </DeferredHomeMotion>
       </main>
       <Footer />
     </>

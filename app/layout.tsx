@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "lenis/dist/lenis.css";
 import SiteLoader from "./components/SiteLoader";
 
 export const metadata: Metadata = {

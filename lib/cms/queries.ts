@@ -1,3 +1,5 @@
+import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { getDb, isMongoConfigured } from "../mongodb";
 import { DEFAULT_BEHIND_THE_DESIGN } from "./behind-the-design-defaults";
 import { brandStories as staticBrandStories } from "../../app/data/brandStories";
@@ -5,6 +7,11 @@ import { resourceArticles as staticResources } from "../../app/data/resources";
 import { productCategories, products as staticProducts } from "../../app/data/products";
 import { serializeDoc } from "./serialize";
 import type { CatalogData, Category, PageHero, Product, Solution } from "./types";
+import { CATALOG_CACHE_TAG, CMS_CACHE_REVALIDATE_SECONDS } from "./cache-tags";
+
+export { CATALOG_CACHE_TAG, CONTENT_CACHE_TAG } from "./cache-tags";
+
+const CACHE_REVALIDATE_SECONDS = CMS_CACHE_REVALIDATE_SECONDS;
 
 const STATIC_SOLUTIONS: Omit<Solution, "_id" | "createdAt" | "updatedAt">[] = [
   {
@@ -143,7 +150,7 @@ async function getCollectionCount(name: string): Promise<number> {
   return db.collection(name).countDocuments();
 }
 
-export async function getCatalog(): Promise<CatalogData> {
+async function loadCatalogFromSource(): Promise<CatalogData> {
   if (!isMongoConfigured()) {
     return staticCatalog();
   }
@@ -177,6 +184,14 @@ export async function getCatalog(): Promise<CatalogData> {
   }
 }
 
+const getCachedCatalog = unstable_cache(loadCatalogFromSource, ["cms-catalog"], {
+  revalidate: CACHE_REVALIDATE_SECONDS,
+  tags: [CATALOG_CACHE_TAG],
+});
+
+/** Request-memoized + cross-request cached catalog. */
+export const getCatalog = cache(async (): Promise<CatalogData> => getCachedCatalog());
+
 export async function getCategoryBySlug(slug: string): Promise<Category | undefined> {
   const catalog = await getCatalog();
   return catalog.categories.find((category) => category.slug === slug);
@@ -190,6 +205,14 @@ export async function getProductById(id: string): Promise<Product | undefined> {
 export async function getPageHero(pageKey: string): Promise<PageHero | undefined> {
   const catalog = await getCatalog();
   return catalog.pageHeroes.find((hero) => hero.pageKey === pageKey);
+}
+
+export async function getNavCatalog(): Promise<Pick<CatalogData, "categories" | "solutions">> {
+  const catalog = await getCatalog();
+  return {
+    categories: catalog.categories,
+    solutions: catalog.solutions,
+  };
 }
 
 export async function seedDatabase(): Promise<{ seeded: boolean; message: string }> {

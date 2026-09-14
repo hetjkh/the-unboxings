@@ -2,9 +2,15 @@ import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/cms/auth";
 import { getCatalog, seedDatabase } from "@/lib/cms/queries";
 
+export const revalidate = 60;
+
 export async function GET() {
   const catalog = await getCatalog();
-  return NextResponse.json(catalog);
+  return NextResponse.json(catalog, {
+    headers: {
+      "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+    },
+  });
 }
 
 export async function POST() {

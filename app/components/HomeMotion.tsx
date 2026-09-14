@@ -2,9 +2,10 @@
 
 import { useLayoutEffect, useRef, type ReactNode } from "react";
 import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SITE_LOADER_COMPLETE_EVENT } from "./SiteLoader";
+import { SITE_LOADER_COMPLETE_EVENT } from "./site-loader-events";
 
 export default function HomeMotion({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null);
