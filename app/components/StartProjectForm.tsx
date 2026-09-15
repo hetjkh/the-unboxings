@@ -20,29 +20,38 @@ const textFields = [
   },
 ] as const;
 
-const selectFields = [
+const audienceGroups = [
   {
-    name: "audience",
-    label: "Audience",
-    placeholder: "Who is this for?",
-    options: [
-      "Employees",
-      "New Joiners",
-      "Leadership",
-      "Executives",
-      "Clients / VIP Clients / Customers",
-      "Partners",
-      "Investors / Stakeholders",
-      "Event Guests / Attendees",
-      "Speakers / Delegates",
-      "Influencers / Creators",
-      "Media / Press",
-      "Homeowners / Residents",
-      "Hotel / Hospitality Guests",
-      "Government / Dignitaries",
-      "Other",
-    ],
+    label: "Internal",
+    options: ["Employees", "New Joiners", "Leadership / Executives"],
   },
+  {
+    label: "Business & Commercial",
+    options: ["Clients / Customers", "VIP Clients", "Business Partners", "Investors / Stakeholders"],
+  },
+  {
+    label: "Events & Community",
+    options: ["Event Guests / Attendees", "Speakers / Delegates"],
+  },
+  {
+    label: "Brand & Communications",
+    options: ["Influencers / Creators", "Media / Press"],
+  },
+  {
+    label: "Hospitality & Residential",
+    options: ["Hotel / Hospitality Guests", "Homeowners / Residents"],
+  },
+  {
+    label: "Public Sector",
+    options: ["Government Officials / Dignitaries"],
+  },
+  {
+    label: "Other",
+    options: ["Other"],
+  },
+] as const;
+
+const selectFields = [
   {
     name: "occasion",
     label: "Occasion",
@@ -232,6 +241,13 @@ export default function StartProjectForm({
           />
         </label>
       ))}
+
+      <BlackSelect
+        name="audience"
+        label="Audience"
+        placeholder="Who is this for?"
+        groups={audienceGroups}
+      />
 
       {selectFields.map((field) => (
         <BlackSelect

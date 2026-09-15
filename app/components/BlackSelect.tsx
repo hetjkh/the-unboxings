@@ -2,18 +2,31 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 
+export type BlackSelectGroup = {
+  label: string;
+  options: readonly string[];
+};
+
 type BlackSelectProps = {
   name: string;
   label: string;
   placeholder: string;
-  options: readonly string[];
+  options?: readonly string[];
+  groups?: readonly BlackSelectGroup[];
 };
 
-export default function BlackSelect({ name, label, placeholder, options }: BlackSelectProps) {
+export default function BlackSelect({
+  name,
+  label,
+  placeholder,
+  options = [],
+  groups,
+}: BlackSelectProps) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const rootRef = useRef<HTMLDivElement>(null);
   const listId = useId();
+  const useGroups = Boolean(groups?.length);
 
   useEffect(() => {
     function onPointerDown(event: MouseEvent) {
@@ -33,6 +46,30 @@ export default function BlackSelect({ name, label, placeholder, options }: Black
       document.removeEventListener("keydown", onKeyDown);
     };
   }, []);
+
+  function selectOption(option: string) {
+    setValue(option);
+    setOpen(false);
+  }
+
+  function optionButton(option: string, indented = false) {
+    const selected = option === value;
+    return (
+      <li key={option} role="option" aria-selected={selected}>
+        <button
+          type="button"
+          onClick={() => selectOption(option)}
+          className={`flex w-full cursor-pointer border-0 py-2.5 text-left text-sm text-black/80 transition-colors ${
+            indented ? "px-5 pl-6" : "px-4"
+          } ${
+            selected ? "bg-black text-white" : "bg-white hover:bg-black hover:text-white"
+          }`}
+        >
+          {option}
+        </button>
+      </li>
+    );
+  }
 
   return (
     <div ref={rootRef} className="relative block">
@@ -56,27 +93,20 @@ export default function BlackSelect({ name, label, placeholder, options }: Black
         <ul
           id={listId}
           role="listbox"
-          className="absolute z-30 mt-1 max-h-60 w-full overflow-auto border border-black/15 bg-white py-1 shadow-[0_12px_40px_rgba(0,0,0,0.12)]"
+          className="absolute z-30 mt-1 max-h-72 w-full overflow-auto border border-black/15 bg-white py-1 shadow-[0_12px_40px_rgba(0,0,0,0.12)]"
         >
-          {options.map((option) => {
-            const selected = option === value;
-            return (
-              <li key={option} role="option" aria-selected={selected}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setValue(option);
-                    setOpen(false);
-                  }}
-                  className={`flex w-full cursor-pointer border-0 px-4 py-2.5 text-left text-sm transition-colors ${
-                    selected ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"
-                  }`}
-                >
-                  {option}
-                </button>
-              </li>
-            );
-          })}
+          {useGroups
+            ? groups!.map((group) => (
+                <li key={group.label} role="presentation">
+                  <div className="sticky top-0 z-[1] border-b border-black/15 bg-[#e8e7e2] px-4 py-3 text-sm font-medium tracking-[-0.01em] text-black">
+                    {group.label}
+                  </div>
+                  <ul role="group" aria-label={group.label} className="m-0 list-none p-0">
+                    {group.options.map((option) => optionButton(option, true))}
+                  </ul>
+                </li>
+              ))
+            : options.map((option) => optionButton(option))}
         </ul>
       ) : null}
     </div>
