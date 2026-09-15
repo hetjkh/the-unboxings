@@ -120,11 +120,9 @@ const fieldClassName =
 export default function StartProjectForm({
   productName,
   productCategory,
-  defaultSpecificIdeas = "",
 }: {
   productName?: string;
   productCategory?: string;
-  defaultSpecificIdeas?: string;
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
@@ -280,7 +278,6 @@ export default function StartProjectForm({
         <AutoGrowTextarea
           name="specificIdeas"
           minRows={1}
-          defaultValue={defaultSpecificIdeas}
           placeholder="Mood, references, product directions, packaging thoughts…"
           className="mt-3 w-full resize-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm leading-6 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black"
         />

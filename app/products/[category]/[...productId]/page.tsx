@@ -55,8 +55,6 @@ export default async function ProductDetailPage({
   const category = catalog.categories.find((item) => item.slug === product.categorySlug);
   const name = plainTextFromRich(product.name);
   const categoryName = plainTextFromRich(category?.name ?? "Products");
-  const description = plainTextFromRich(product.description);
-  const defaultIdeas = `Interested in: ${name} (${categoryName}). ${description}`;
 
   const related = [
     ...catalog.products.filter(
@@ -128,7 +126,6 @@ export default async function ProductDetailPage({
                 <StartProjectForm
                   productName={name}
                   productCategory={categoryName}
-                  defaultSpecificIdeas={defaultIdeas}
                 />
               </div>
             </div>
