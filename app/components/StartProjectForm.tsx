@@ -2,6 +2,7 @@
 
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import BlackSelect from "./BlackSelect";
+import BlackMultiSelect from "./BlackMultiSelect";
 import AutoGrowTextarea from "./AutoGrowTextarea";
 
 const textFields = [
@@ -11,12 +12,6 @@ const textFields = [
     label: "Contact number",
     placeholder: "+971 50 123 4567",
     type: "tel",
-  },
-  {
-    name: "contactEmail",
-    label: "Email address",
-    placeholder: "name@company.com",
-    type: "email",
   },
 ] as const;
 
@@ -157,25 +152,7 @@ export default function StartProjectForm({
   const [deliveryLocations, setDeliveryLocations] = useState<string[]>([]);
   const briefInputRef = useRef<HTMLInputElement>(null);
   const needsLocationCountry = deliveryLocations.includes("International");
-
-  function toggleDeliveryLocation(option: string) {
-    const exclusive = option === "International" || option === "Location Not Confirmed";
-
-    setDeliveryLocations((current) => {
-      if (current.includes(option)) {
-        return current.filter((item) => item !== option);
-      }
-
-      if (exclusive) {
-        return [option];
-      }
-
-      return [
-        ...current.filter((item) => item !== "International" && item !== "Location Not Confirmed"),
-        option,
-      ];
-    });
-  }
+  const exclusiveDeliveryOptions = ["International", "Location Not Confirmed"] as const;
 
   function onBriefChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0] ?? null;
@@ -274,44 +251,34 @@ export default function StartProjectForm({
             name={field.name}
             type={field.type}
             placeholder={field.placeholder}
-            required={field.name === "contactPhone" || field.name === "contactEmail"}
-            autoComplete={field.name === "contactEmail" ? "email" : field.name === "contactPhone" ? "tel" : "organization"}
+            required={field.name === "contactPhone"}
+            autoComplete={field.name === "contactPhone" ? "tel" : "organization"}
             className={fieldClassName}
           />
         </label>
       ))}
 
-      <fieldset className="m-0 border-0 p-0 md:col-span-2">
-        <legend className="p-0 text-[10px] font-bold tracking-[0.14em] text-black uppercase">
-          Delivery location
-        </legend>
-        <p className="m-0 mt-2 text-xs leading-5 text-black/45">
-          Where should the gifts be delivered? Select all that apply.
-        </p>
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {deliveryLocationOptions.map((option) => {
-            const checked = deliveryLocations.includes(option);
-            return (
-              <label
-                key={option}
-                className={`flex cursor-pointer items-center gap-3 border px-4 py-3 text-sm transition-colors ${
-                  checked ? "border-black bg-black text-white" : "border-black/20 bg-transparent text-black hover:border-black/50"
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  name="location"
-                  value={option}
-                  checked={checked}
-                  onChange={() => toggleDeliveryLocation(option)}
-                  className="h-4 w-4 shrink-0 accent-black"
-                />
-                <span>{option}</span>
-              </label>
-            );
-          })}
-        </div>
-      </fieldset>
+      <label className="group block">
+        <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">Email address</span>
+        <input
+          name="contactEmail"
+          type="email"
+          placeholder="name@company.com"
+          required
+          autoComplete="email"
+          className={fieldClassName}
+        />
+      </label>
+
+      <BlackMultiSelect
+        name="location"
+        label="Delivery location"
+        placeholder="Select delivery location(s)"
+        options={deliveryLocationOptions}
+        value={deliveryLocations}
+        onChange={setDeliveryLocations}
+        exclusiveOptions={exclusiveDeliveryOptions}
+      />
 
       {needsLocationCountry ? (
         <label className="group block md:col-span-2">
