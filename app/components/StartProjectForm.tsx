@@ -108,6 +108,7 @@ const industryOptions = [
   "Automotive",
   "Technology & SaaS",
   "Education",
+  "FMCG",
   "Events & Exhibitions",
   "Healthcare & Pharmaceuticals",
   "Travel & Tourism",
