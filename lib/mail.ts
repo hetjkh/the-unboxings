@@ -4,6 +4,8 @@ export type ProjectBriefPayload = {
   company: string;
   contactPhone: string;
   contactEmail: string;
+  location: string;
+  locationCountry: string;
   audience: string;
   occasion: string;
   quantity: string;
@@ -73,6 +75,8 @@ export function buildProjectBriefEmail(fields: ProjectBriefPayload) {
       ["Company", fields.company],
       ["Contact number", fields.contactPhone],
       ["Email", fields.contactEmail],
+      ["Location", fields.location],
+      ["Country / place", fields.locationCountry],
       ["Audience", fields.audience],
       ["Occasion", fields.occasion],
       ["Quantity", fields.quantity],

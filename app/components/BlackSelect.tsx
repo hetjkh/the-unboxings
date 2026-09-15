@@ -13,6 +13,7 @@ type BlackSelectProps = {
   placeholder: string;
   options?: readonly string[];
   groups?: readonly BlackSelectGroup[];
+  onChange?: (value: string) => void;
 };
 
 export default function BlackSelect({
@@ -21,6 +22,7 @@ export default function BlackSelect({
   placeholder,
   options = [],
   groups,
+  onChange,
 }: BlackSelectProps) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -49,6 +51,7 @@ export default function BlackSelect({
 
   function selectOption(option: string) {
     setValue(option);
+    onChange?.(option);
     setOpen(false);
   }
 

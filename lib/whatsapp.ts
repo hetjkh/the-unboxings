@@ -61,6 +61,8 @@ export function projectBriefMessage(fields: Record<string, string>): string {
     "company",
     "contactPhone",
     "contactEmail",
+    "location",
+    "locationCountry",
     "audience",
     "occasion",
     "quantity",
@@ -84,7 +86,9 @@ export function projectBriefMessage(fields: Record<string, string>): string {
             ? "Contact number"
             : key === "contactEmail"
               ? "Email"
-              : key === "additionalNotes"
+              : key === "locationCountry"
+                ? "Country / place"
+                : key === "additionalNotes"
                 ? "Additional notes"
                 : key === "specificIdeas"
                   ? "Specific ideas"

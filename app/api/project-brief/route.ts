@@ -10,6 +10,8 @@ const FIELD_KEYS = [
   "company",
   "contactPhone",
   "contactEmail",
+  "location",
+  "locationCountry",
   "audience",
   "occasion",
   "quantity",

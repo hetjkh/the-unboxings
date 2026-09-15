@@ -20,6 +20,18 @@ const textFields = [
   },
 ] as const;
 
+const locationOptions = [
+  "Abu Dhabi",
+  "Dubai",
+  "Sharjah",
+  "Ajman",
+  "Umm Al Quwain",
+  "Ras Al Khaimah",
+  "Fujairah",
+  "Domestic",
+  "International",
+] as const;
+
 const audienceGroups = [
   {
     label: "Internal",
@@ -57,13 +69,18 @@ const selectFields = [
     label: "Occasion",
     placeholder: "Select an occasion",
     options: [
-      "Employee welcome",
+      "Welcome / Onboarding",
+      "Appreciation / Thank You",
       "Recognition / Award",
-      "Client appreciation",
-      "Brand launch",
+      "Milestone / Achievement / Anniversary",
+      "Relationship Building",
       "Event / Conference",
-      "Hospitality / VIP arrival",
-      "Seasonal / Cultural occasion",
+      "Launch / Opening / Property Handover",
+      "Hospitality / VIP Welcome",
+      "Seasonal / Religious / Cultural Occasion",
+      "Personal Celebration",
+      "Farewell / Retirement",
+      "Apology / Service Recovery",
       "Other",
     ],
   },
@@ -137,7 +154,9 @@ export default function StartProjectForm({
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
   const [briefFile, setBriefFile] = useState<File | null>(null);
+  const [location, setLocation] = useState("");
   const briefInputRef = useRef<HTMLInputElement>(null);
+  const needsLocationCountry = location === "Domestic" || location === "International";
 
   function onBriefChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0] ?? null;
@@ -193,6 +212,7 @@ export default function StartProjectForm({
 
       setStatus("sent");
       clearBriefFile();
+      setLocation("");
       form.reset();
     } catch {
       setStatus("error");
@@ -241,6 +261,35 @@ export default function StartProjectForm({
           />
         </label>
       ))}
+
+      <BlackSelect
+        name="location"
+        label="Location"
+        placeholder="Which emirate is this project for?"
+        options={locationOptions}
+        onChange={setLocation}
+      />
+
+      {needsLocationCountry ? (
+        <label className="group block">
+          <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
+            Country / place
+          </span>
+          <input
+            name="locationCountry"
+            type="text"
+            required
+            placeholder={
+              location === "International"
+                ? "Enter country name"
+                : "Enter city or country name"
+            }
+            className={fieldClassName}
+          />
+        </label>
+      ) : (
+        <input type="hidden" name="locationCountry" value="" />
+      )}
 
       <BlackSelect
         name="audience"
