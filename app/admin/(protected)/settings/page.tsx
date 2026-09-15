@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import AdminShell from "../../components/AdminShell";
 import { cmsFetch, TextField } from "../../components/AdminFields";
 import type { SiteSettings } from "@/lib/cms/site-settings";
-import type { WhatsAppSessionSnapshot } from "@/lib/whatsapp-baileys";
+import type { WhatsAppSessionSnapshot } from "@/lib/whatsapp-client";
 
 export default function AdminSettingsPage() {
   const [form, setForm] = useState<SiteSettings>({
@@ -149,8 +149,8 @@ export default function AdminSettingsPage() {
             destination number above at the same time as Gmail.
           </p>
           <p className="m-0 text-[11px] leading-5 text-black/45">
-            Needs a long-running Node server (`npm run dev` / `npm start`). Does not stay connected on Vercel
-            serverless alone.
+            Runs on the VPS WhatsApp service (`WHATSAPP_SERVICE_URL`). Keep that process online with pm2; this site only
+            proxies Connect / QR / send.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.08em]">

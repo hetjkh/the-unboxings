@@ -43,6 +43,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# baileys whatsapp session
+# baileys whatsapp session (legacy local; now runs on VPS service)
 /data/baileys_auth/
 /data/tmp/
+
+# Separate GitHub repo (https://github.com/hetjkh/whatsapp-ser) — not part of the website
+/whatsapp-service/

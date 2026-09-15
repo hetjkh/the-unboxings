@@ -4,7 +4,7 @@ import {
   getWhatsAppSnapshot,
   logoutWhatsAppSession,
   startWhatsAppSession,
-} from "@/lib/whatsapp-baileys";
+} from "@/lib/whatsapp-client";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -12,9 +12,13 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     await requireAuth();
-    return NextResponse.json(getWhatsAppSnapshot());
-  } catch {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json(await getWhatsAppSnapshot());
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unauthorized";
+    if (message === "Unauthorized") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 

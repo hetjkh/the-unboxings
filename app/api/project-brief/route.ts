@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { buildProjectBriefEmail, createMailTransport, type ProjectBriefPayload } from "@/lib/mail";
 import { getSiteSettings } from "@/lib/cms/site-settings";
 import { projectBriefMessage } from "@/lib/whatsapp";
-import { sendWhatsAppBrief } from "@/lib/whatsapp-baileys";
+import { sendWhatsAppBrief } from "@/lib/whatsapp-client";
 
 export const runtime = "nodejs";
 
