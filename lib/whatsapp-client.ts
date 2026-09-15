@@ -20,6 +20,9 @@ export type WhatsAppMediaAttachment = {
   contentType?: string;
 };
 
+/** Keep base64 JSON under typical nginx limits after encoding (~33% overhead). */
+const MAX_MEDIA_BYTES = 4 * 1024 * 1024;
+
 function serviceConfig() {
   const baseUrl = (process.env.WHATSAPP_SERVICE_URL || "").trim().replace(/\/+$/, "");
   const secret = (process.env.WHATSAPP_SERVICE_SECRET || "").trim();
@@ -72,42 +75,6 @@ async function serviceFetch<T>(
   return data;
 }
 
-function isImageMedia(media: WhatsAppMediaAttachment): boolean {
-  if (media.contentType?.startsWith("image/")) return true;
-  return /\.(jpe?g|png|gif|webp)$/i.test(media.filename);
-}
-
-/** Shrink images before base64 transport so nginx (often 1mb) does not return 413. */
-async function prepareMediaForTransport(media: WhatsAppMediaAttachment): Promise<{
-  filename: string;
-  contentBase64: string;
-  contentType?: string;
-}> {
-  if (!isImageMedia(media)) {
-    if (media.content.length > 2.5 * 1024 * 1024) {
-      throw new Error("Attachment is too large for WhatsApp send (max ~2.5MB after email).");
-    }
-    return {
-      filename: media.filename,
-      contentBase64: media.content.toString("base64"),
-      contentType: media.contentType,
-    };
-  }
-
-  const sharp = (await import("sharp")).default;
-  const jpeg = await sharp(media.content)
-    .rotate()
-    .resize({ width: 1280, height: 1280, fit: "inside", withoutEnlargement: true })
-    .jpeg({ quality: 72, mozjpeg: true })
-    .toBuffer();
-
-  return {
-    filename: media.filename.replace(/\.[^.]+$/, "") + ".jpg",
-    contentBase64: jpeg.toString("base64"),
-    contentType: "image/jpeg",
-  };
-}
-
 export function getWhatsAppSnapshot(): Promise<WhatsAppSessionSnapshot> {
   return serviceFetch<WhatsAppSessionSnapshot>("/session");
 }
@@ -125,6 +92,7 @@ export async function sendWhatsAppBrief(
   text: string,
   media?: WhatsAppMediaAttachment | null,
 ): Promise<void> {
+  // Text first — VPS compresses attachments with sharp (not Vercel)
   await serviceFetch<{ ok: boolean }>("/send", {
     method: "POST",
     json: { phone, text, media: null },
@@ -132,14 +100,23 @@ export async function sendWhatsAppBrief(
 
   if (!media || media.content.length === 0) return;
 
+  if (media.content.length > MAX_MEDIA_BYTES) {
+    throw new Error(
+      `WhatsApp text was sent, but the attachment is too large (${Math.round(media.content.length / 1024)}KB). Max ~4MB.`,
+    );
+  }
+
   try {
-    const prepared = await prepareMediaForTransport(media);
     await serviceFetch<{ ok: boolean }>("/send", {
       method: "POST",
       json: {
         phone,
-        text: `Attachment: ${prepared.filename}`,
-        media: prepared,
+        text: `Attachment: ${media.filename}`,
+        media: {
+          filename: media.filename,
+          contentBase64: media.content.toString("base64"),
+          contentType: media.contentType,
+        },
       },
     });
   } catch (error) {
