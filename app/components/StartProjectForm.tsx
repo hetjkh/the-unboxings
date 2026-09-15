@@ -20,16 +20,16 @@ const textFields = [
   },
 ] as const;
 
-const locationOptions = [
-  "Abu Dhabi",
+const deliveryLocationOptions = [
   "Dubai",
+  "Abu Dhabi",
   "Sharjah",
   "Ajman",
-  "Umm Al Quwain",
   "Ras Al Khaimah",
   "Fujairah",
-  "Domestic",
+  "Umm Al Quwain",
   "International",
+  "Location Not Confirmed",
 ] as const;
 
 const audienceGroups = [
@@ -154,9 +154,28 @@ export default function StartProjectForm({
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
   const [briefFile, setBriefFile] = useState<File | null>(null);
-  const [location, setLocation] = useState("");
+  const [deliveryLocations, setDeliveryLocations] = useState<string[]>([]);
   const briefInputRef = useRef<HTMLInputElement>(null);
-  const needsLocationCountry = location === "Domestic" || location === "International";
+  const needsLocationCountry = deliveryLocations.includes("International");
+
+  function toggleDeliveryLocation(option: string) {
+    const exclusive = option === "International" || option === "Location Not Confirmed";
+
+    setDeliveryLocations((current) => {
+      if (current.includes(option)) {
+        return current.filter((item) => item !== option);
+      }
+
+      if (exclusive) {
+        return [option];
+      }
+
+      return [
+        ...current.filter((item) => item !== "International" && item !== "Location Not Confirmed"),
+        option,
+      ];
+    });
+  }
 
   function onBriefChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0] ?? null;
@@ -212,7 +231,7 @@ export default function StartProjectForm({
 
       setStatus("sent");
       clearBriefFile();
-      setLocation("");
+      setDeliveryLocations([]);
       form.reset();
     } catch {
       setStatus("error");
@@ -262,28 +281,48 @@ export default function StartProjectForm({
         </label>
       ))}
 
-      <BlackSelect
-        name="location"
-        label="Location"
-        placeholder="Which emirate is this project for?"
-        options={locationOptions}
-        onChange={setLocation}
-      />
+      <fieldset className="m-0 border-0 p-0 md:col-span-2">
+        <legend className="p-0 text-[10px] font-bold tracking-[0.14em] text-black uppercase">
+          Delivery location
+        </legend>
+        <p className="m-0 mt-2 text-xs leading-5 text-black/45">
+          Where should the gifts be delivered? Select all that apply.
+        </p>
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {deliveryLocationOptions.map((option) => {
+            const checked = deliveryLocations.includes(option);
+            return (
+              <label
+                key={option}
+                className={`flex cursor-pointer items-center gap-3 border px-4 py-3 text-sm transition-colors ${
+                  checked ? "border-black bg-black text-white" : "border-black/20 bg-transparent text-black hover:border-black/50"
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  name="location"
+                  value={option}
+                  checked={checked}
+                  onChange={() => toggleDeliveryLocation(option)}
+                  className="h-4 w-4 shrink-0 accent-black"
+                />
+                <span>{option}</span>
+              </label>
+            );
+          })}
+        </div>
+      </fieldset>
 
       {needsLocationCountry ? (
-        <label className="group block">
+        <label className="group block md:col-span-2">
           <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
-            Country / place
+            International country
           </span>
           <input
             name="locationCountry"
             type="text"
             required
-            placeholder={
-              location === "International"
-                ? "Enter country name"
-                : "Enter city or country name"
-            }
+            placeholder="Enter country name"
             className={fieldClassName}
           />
         </label>

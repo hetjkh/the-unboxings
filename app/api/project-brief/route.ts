@@ -30,6 +30,14 @@ const MAX_FILE_BYTES = 8 * 1024 * 1024;
 function readFields(form: FormData): ProjectBriefPayload {
   const fields = {} as ProjectBriefPayload;
   for (const key of FIELD_KEYS) {
+    if (key === "location") {
+      fields.location = form
+        .getAll("location")
+        .map((value) => String(value).trim())
+        .filter(Boolean)
+        .join(", ");
+      continue;
+    }
     fields[key] = String(form.get(key) ?? "").trim();
   }
   return fields;
