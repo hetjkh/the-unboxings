@@ -5,7 +5,19 @@ import BlackSelect from "./BlackSelect";
 import AutoGrowTextarea from "./AutoGrowTextarea";
 
 const textFields = [
-  { name: "company", label: "Company", placeholder: "Your company name" },
+  { name: "company", label: "Company", placeholder: "Your company name", type: "text" },
+  {
+    name: "contactPhone",
+    label: "Contact number",
+    placeholder: "+971 50 123 4567",
+    type: "tel",
+  },
+  {
+    name: "contactEmail",
+    label: "Email address",
+    placeholder: "name@company.com",
+    type: "email",
+  },
 ] as const;
 
 const selectFields = [
@@ -211,7 +223,14 @@ export default function StartProjectForm({
       {textFields.map((field) => (
         <label key={field.name} className="group block">
           <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">{field.label}</span>
-          <input name={field.name} type="text" placeholder={field.placeholder} className={fieldClassName} />
+          <input
+            name={field.name}
+            type={field.type}
+            placeholder={field.placeholder}
+            required={field.name === "contactPhone" || field.name === "contactEmail"}
+            autoComplete={field.name === "contactEmail" ? "email" : field.name === "contactPhone" ? "tel" : "organization"}
+            className={fieldClassName}
+          />
         </label>
       ))}
 

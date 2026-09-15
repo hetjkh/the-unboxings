@@ -59,6 +59,8 @@ export function projectBriefMessage(fields: Record<string, string>): string {
     "productInterest",
     "productCategory",
     "company",
+    "contactPhone",
+    "contactEmail",
     "audience",
     "occasion",
     "quantity",
@@ -78,11 +80,15 @@ export function projectBriefMessage(fields: Record<string, string>): string {
         ? "Product"
         : key === "productCategory"
           ? "Category"
-          : key === "additionalNotes"
-            ? "Additional notes"
-            : key === "specificIdeas"
-              ? "Specific ideas"
-              : key.charAt(0).toUpperCase() + key.slice(1);
+          : key === "contactPhone"
+            ? "Contact number"
+            : key === "contactEmail"
+              ? "Email"
+              : key === "additionalNotes"
+                ? "Additional notes"
+                : key === "specificIdeas"
+                  ? "Specific ideas"
+                  : key.charAt(0).toUpperCase() + key.slice(1);
     lines.push(`${label}: ${value}`);
   }
 

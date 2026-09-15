@@ -2,6 +2,8 @@ import nodemailer from "nodemailer";
 
 export type ProjectBriefPayload = {
   company: string;
+  contactPhone: string;
+  contactEmail: string;
   audience: string;
   occasion: string;
   quantity: string;
@@ -69,6 +71,8 @@ export function buildProjectBriefEmail(fields: ProjectBriefPayload) {
   const briefRows = (
     [
       ["Company", fields.company],
+      ["Contact number", fields.contactPhone],
+      ["Email", fields.contactEmail],
       ["Audience", fields.audience],
       ["Occasion", fields.occasion],
       ["Quantity", fields.quantity],

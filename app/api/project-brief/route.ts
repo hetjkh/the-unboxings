@@ -8,6 +8,8 @@ export const runtime = "nodejs";
 
 const FIELD_KEYS = [
   "company",
+  "contactPhone",
+  "contactEmail",
   "audience",
   "occasion",
   "quantity",
@@ -69,7 +71,7 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from: `"The Unboxing Website" <${config.from}>`,
       to: config.to,
-      replyTo: config.from,
+      replyTo: fields.contactEmail || config.from,
       subject: email.subject,
       text: `${email.text}${attachmentNote}`,
       html: `${email.html}${
