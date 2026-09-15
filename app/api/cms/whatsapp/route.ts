@@ -12,19 +12,26 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     await requireAuth();
+  } catch {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
     return NextResponse.json(await getWhatsAppSnapshot());
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unauthorized";
-    if (message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    return NextResponse.json({ error: message }, { status: 500 });
+    const message = error instanceof Error ? error.message : "WhatsApp status failed.";
+    return NextResponse.json({ error: message }, { status: 502 });
   }
 }
 
 export async function POST(request: Request) {
   try {
     await requireAuth();
+  } catch {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
     const body = (await request.json().catch(() => ({}))) as { action?: string };
     const action = body.action || "start";
 
@@ -37,9 +44,6 @@ export async function POST(request: Request) {
     return NextResponse.json(snapshot);
   } catch (error) {
     const message = error instanceof Error ? error.message : "WhatsApp action failed.";
-    if (message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: message }, { status: 502 });
   }
 }
