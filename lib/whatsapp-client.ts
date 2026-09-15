@@ -1,5 +1,3 @@
-import sharp from "sharp";
-
 export type WhatsAppConnectionStatus =
   | "idle"
   | "connecting"
@@ -27,7 +25,7 @@ function serviceConfig() {
   const secret = (process.env.WHATSAPP_SERVICE_SECRET || "").trim();
   if (!baseUrl || !secret) {
     throw new Error(
-      "WhatsApp service is not configured. Set WHATSAPP_SERVICE_URL and WHATSAPP_SERVICE_SECRET.",
+      "WhatsApp service is not configured. Set WHATSAPP_SERVICE_URL and WHATSAPP_SERVICE_SECRET on Vercel.",
     );
   }
   return { baseUrl, secret };
@@ -44,12 +42,18 @@ async function serviceFetch<T>(
     headers.set("Content-Type", "application/json");
   }
 
-  const response = await fetch(`${baseUrl}${path}`, {
-    ...init,
-    headers,
-    body: init?.json !== undefined ? JSON.stringify(init.json) : init?.body,
-    cache: "no-store",
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${baseUrl}${path}`, {
+      ...init,
+      headers,
+      body: init?.json !== undefined ? JSON.stringify(init.json) : init?.body,
+      cache: "no-store",
+    });
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : "network error";
+    throw new Error(`Cannot reach WhatsApp service at ${baseUrl}: ${detail}`);
+  }
 
   const data = (await response.json().catch(() => ({}))) as T & { error?: string };
   if (!response.ok) {
@@ -80,7 +84,6 @@ async function prepareMediaForTransport(media: WhatsAppMediaAttachment): Promise
   contentType?: string;
 }> {
   if (!isImageMedia(media)) {
-    // Cap non-image payloads; oversized files still need nginx limit raised
     if (media.content.length > 2.5 * 1024 * 1024) {
       throw new Error("Attachment is too large for WhatsApp send (max ~2.5MB after email).");
     }
@@ -91,6 +94,7 @@ async function prepareMediaForTransport(media: WhatsAppMediaAttachment): Promise
     };
   }
 
+  const sharp = (await import("sharp")).default;
   const jpeg = await sharp(media.content)
     .rotate()
     .resize({ width: 1280, height: 1280, fit: "inside", withoutEnlargement: true })
@@ -121,7 +125,6 @@ export async function sendWhatsAppBrief(
   text: string,
   media?: WhatsAppMediaAttachment | null,
 ): Promise<void> {
-  // Text first (small) so briefs still notify even if media is rejected
   await serviceFetch<{ ok: boolean }>("/send", {
     method: "POST",
     json: { phone, text, media: null },

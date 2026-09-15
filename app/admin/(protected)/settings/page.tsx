@@ -22,8 +22,8 @@ export default function AdminSettingsPage() {
     try {
       const data = await cmsFetch<WhatsAppSessionSnapshot>("/api/cms/whatsapp");
       setWa(data);
-    } catch {
-      // keep previous snapshot
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Failed to load WhatsApp status");
     }
   }, []);
 
