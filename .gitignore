@@ -49,3 +49,6 @@ next-env.d.ts
 
 # Separate GitHub repo (https://github.com/hetjkh/whatsapp-ser) — not part of the website
 /whatsapp-service/
+
+# image optimize temp map
+/scripts/.image-replacements.json

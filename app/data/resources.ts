@@ -152,7 +152,7 @@ export const resourceArticles: ResourceArticle[] = [
     readTime: "6 min read",
     images: [
       { src: "/resources/1.jpeg", alt: "Curated executive welcome kit with watch, wallet, pen and valet tray" },
-      { src: "/resources/24.jpeg", alt: "Tech organizer case with cables, chargers and everyday work accessories" },
+      { src: "/resources/24.webp", alt: "Tech organizer case with cables, chargers and everyday work accessories" },
     ],
     body: [
       { type: "paragraph", text: "Starting a new job comes with excitement, curiosity and a few nerves. From the first email to the first meeting, every interaction shapes how a new employee feels about the company." },
@@ -554,7 +554,7 @@ export const resourceArticles: ResourceArticle[] = [
     readTime: "6 min read",
     images: [
       { src: "/resources/12.jpeg", alt: "Sustainable gifts in cork, recycled glass, RPET felt and reclaimed wood" },
-      { src: "/resources/11.jpeg", alt: "Recycled coaster collection in cork, plastic, rubber and composite" },
+      { src: "/resources/11.webp", alt: "Recycled coaster collection in cork, plastic, rubber and composite" },
     ],
     body: [
       { type: "paragraph", text: "Sustainable corporate gifting has moved beyond bamboo pens and kraft notebooks. Today, the better questions are: What is it made from? Will people actually use it? How much packaging does it need?" },

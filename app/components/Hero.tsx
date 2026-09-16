@@ -14,7 +14,7 @@ export default function Hero() {
       titleAlt="Not just given. Remembered."
       subline="Corporate gifting, designed differently."
       heading
-      image="/hero1.png"
+      image="/hero1.webp"
       video="/hero.webm"
       mobileVideo="/video.webm"
       splitLayout

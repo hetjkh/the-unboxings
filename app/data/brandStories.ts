@@ -25,9 +25,9 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "Turn a standardized handover process into something that feels personal, considered and worthy of the moment.",
     materials: "Architectural Crystal Model · Signature Home Fragrance · Leather Key Holder · Personalised Residence Plaque · Bespoke Presentation Box",
-    image: "/brand-stories/dubai-developer-homeowners/hero.png",
+    image: "/brand-stories/dubai-developer-homeowners/hero.webp",
     alt: "Homeowner carrying a The Unboxing welcome case into a Dubai apartment overlooking the skyline",
-    gallery: ["/brand-stories/dubai-developer-homeowners/01.png"],
+    gallery: ["/brand-stories/dubai-developer-homeowners/01.webp"],
     sections: [
       {
         heading: "The Challenge",
@@ -59,19 +59,19 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "How we transformed Dubai's iconic skyline into a functional executive piece designed to live beyond the gifting moment.",
     materials: "Clear acrylic · Smoked acrylic · Architectural form · Executive gift",
-    image: "/brand-stories/dubai-skyline-chess-set/hero.png",
+    image: "/brand-stories/dubai-skyline-chess-set/hero.webp",
     alt: "Acrylic Dubai skyline chess set displayed against the city at night",
     gallery: [
-      "/brand-stories/dubai-skyline-chess-set/01.png",
-      "/brand-stories/dubai-skyline-chess-set/02.png",
-      "/brand-stories/dubai-skyline-chess-set/03.png",
-      "/brand-stories/dubai-skyline-chess-set/04.png",
-      "/brand-stories/dubai-skyline-chess-set/05.png",
-      "/brand-stories/dubai-skyline-chess-set/06.png",
-      "/brand-stories/dubai-skyline-chess-set/07.png",
-      "/brand-stories/dubai-skyline-chess-set/08.png",
-      "/brand-stories/dubai-skyline-chess-set/09.png",
-      "/brand-stories/dubai-skyline-chess-set/10.png",
+      "/brand-stories/dubai-skyline-chess-set/01.webp",
+      "/brand-stories/dubai-skyline-chess-set/02.webp",
+      "/brand-stories/dubai-skyline-chess-set/03.webp",
+      "/brand-stories/dubai-skyline-chess-set/04.webp",
+      "/brand-stories/dubai-skyline-chess-set/05.webp",
+      "/brand-stories/dubai-skyline-chess-set/06.webp",
+      "/brand-stories/dubai-skyline-chess-set/07.webp",
+      "/brand-stories/dubai-skyline-chess-set/08.webp",
+      "/brand-stories/dubai-skyline-chess-set/09.webp",
+      "/brand-stories/dubai-skyline-chess-set/10.webp",
     ],
     sections: [
       {
@@ -108,13 +108,13 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "How we turned the presentation of an exclusive banking card into an experience worthy of what it unlocks.",
     materials: "Matte black · Smoked acrylic · Hidden magnets · Integrated illumination",
-    image: "/brand-stories/the-private-reveal/hero.png",
+    image: "/brand-stories/the-private-reveal/hero.webp",
     alt: "Illuminated private access card presentation box revealing a personalized name",
     gallery: [
-      "/brand-stories/the-private-reveal/01.png",
-      "/brand-stories/the-private-reveal/02.png",
-      "/brand-stories/the-private-reveal/03.png",
-      "/brand-stories/the-private-reveal/04.png",
+      "/brand-stories/the-private-reveal/01.webp",
+      "/brand-stories/the-private-reveal/02.webp",
+      "/brand-stories/the-private-reveal/03.webp",
+      "/brand-stories/the-private-reveal/04.webp",
     ],
     sections: [
       {
@@ -155,11 +155,11 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "How we translated the spirit of Ramadan hospitality into a contemporary gifting experience.",
     materials: "Stone · Brass · Oud · Bakhoor · Arabic coffee · Mashrabiya detail",
-    image: "/brand-stories/a-majlis-reimagined/hero.png",
+    image: "/brand-stories/a-majlis-reimagined/hero.webp",
     alt: "Contemporary majlis gift box with brass incense sculpture and mashrabiya doors",
     gallery: [
-      "/brand-stories/a-majlis-reimagined/01.png",
-      "/brand-stories/a-majlis-reimagined/02.png",
+      "/brand-stories/a-majlis-reimagined/01.webp",
+      "/brand-stories/a-majlis-reimagined/02.webp",
     ],
     sections: [
       {
@@ -196,15 +196,15 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "To mark 25 years, we returned to where it all began, the founder's original sketch and transformed it into 100 individually crafted pieces.",
     materials: "Founder's sketch · Hand-finished metal · Optical crystal · Numbered edition",
-    image: "/brand-stories/from-sketch-to-legacy/hero.png",
+    image: "/brand-stories/from-sketch-to-legacy/hero.webp",
     alt: "Gold skyline sculpture preserved in optical crystal beside the original sketch",
     gallery: [
-      "/brand-stories/from-sketch-to-legacy/01.png",
-      "/brand-stories/from-sketch-to-legacy/02.png",
-      "/brand-stories/from-sketch-to-legacy/03.png",
-      "/brand-stories/from-sketch-to-legacy/04.png",
-      "/brand-stories/from-sketch-to-legacy/05.png",
-      "/brand-stories/from-sketch-to-legacy/06.png",
+      "/brand-stories/from-sketch-to-legacy/01.webp",
+      "/brand-stories/from-sketch-to-legacy/02.webp",
+      "/brand-stories/from-sketch-to-legacy/03.webp",
+      "/brand-stories/from-sketch-to-legacy/04.webp",
+      "/brand-stories/from-sketch-to-legacy/05.webp",
+      "/brand-stories/from-sketch-to-legacy/06.webp",
     ],
     sections: [
       {
@@ -241,12 +241,12 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "The signature that started a company, transformed into a piece of its legacy.",
     materials: "Formed brass · Optical crystal · Black stone · Limited edition",
-    image: "/brand-stories/the-first-signature/hero.png",
+    image: "/brand-stories/the-first-signature/hero.webp",
     alt: "Gold signature sculpture casting its handwritten shadow onto crystal",
     gallery: [
-      "/brand-stories/the-first-signature/01.png",
-      "/brand-stories/the-first-signature/02.png",
-      "/brand-stories/the-first-signature/03.png",
+      "/brand-stories/the-first-signature/01.webp",
+      "/brand-stories/the-first-signature/02.webp",
+      "/brand-stories/the-first-signature/03.webp",
     ],
     sections: [
       {
@@ -279,11 +279,11 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "Achievement isn't a destination. It's the journey upward. We turned that idea into an award designed to embody progress.",
     materials: "Optical crystal · Formed brass · Honed black stone",
-    image: "/brand-stories/the-ascent/hero.png",
+    image: "/brand-stories/the-ascent/hero.webp",
     alt: "Crystal award with a rising brass line on a black stone base",
     gallery: [
-      "/brand-stories/the-ascent/01.png",
-      "/brand-stories/the-ascent/02.png",
+      "/brand-stories/the-ascent/01.webp",
+      "/brand-stories/the-ascent/02.webp",
     ],
     sections: [
       {
@@ -324,12 +324,12 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "We designed the journey around what travellers need most — a moment to switch off.",
     materials: "Aromatherapy · Neck support · Earplugs · Sleep mask · Travel blanket",
-    image: "/brand-stories/the-quiet-journey/hero.png",
+    image: "/brand-stories/the-quiet-journey/hero.webp",
     alt: "Open travel rest kit with aromatherapy, mask, earplugs, neck support and blanket",
     gallery: [
-      "/brand-stories/the-quiet-journey/01.png",
-      "/brand-stories/the-quiet-journey/02.png",
-      "/brand-stories/the-quiet-journey/03.png",
+      "/brand-stories/the-quiet-journey/01.webp",
+      "/brand-stories/the-quiet-journey/02.webp",
+      "/brand-stories/the-quiet-journey/03.webp",
     ],
     sections: [
       {
@@ -368,9 +368,9 @@ export const brandStories: readonly BrandStory[] = [
     materials: "Wood · Leather · Brass · Glass · Sculpted Metal · Premium Paper",
     materialsDetail:
       "<strong>Material</strong><br />Wood · Leather · Brass · Glass · Sculpted Metal · Premium Paper",
-    image: "/brand-stories/welcome-before-a-word/hero.png",
+    image: "/brand-stories/welcome-before-a-word/hero.webp",
     alt: "VIP hospitality welcome chest with Dubai fragrance, keepsakes and local delicacies",
-    gallery: ["/brand-stories/welcome-before-a-word/01.png"],
+    gallery: ["/brand-stories/welcome-before-a-word/01.webp"],
     sections: [
       {
         heading: "The Brief",

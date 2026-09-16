@@ -75,7 +75,7 @@ export const DEFAULT_BEHIND_THE_DESIGN: Omit<BehindTheDesignContent, "_id" | "cr
       description: "Every texture, weight and finish is chosen with purpose.",
       detail:
         "Every layer is designed with intention. From story and materials to personal details and the final object, each reveal builds anticipation for what comes next.",
-      image: "/behind-the-design/materials.png",
+      image: "/behind-the-design/materials.webp",
       alt: "Stacked drawers with wood, stone and fabric samples beside hinges and hardware",
       sortOrder: 4,
     },
@@ -86,7 +86,7 @@ export const DEFAULT_BEHIND_THE_DESIGN: Omit<BehindTheDesignContent, "_id" | "cr
       description: "Precision technology and practiced craftsmanship work together.",
       detail:
         "Every component is finished separately, then precisely brought together. Structure, materials, hidden mechanisms and illumination become one seamless final experience.",
-      image: "/behind-the-design/production.png",
+      image: "/behind-the-design/production.webp",
       alt: "Exploded view of lid, trays, mechanisms, illuminated base and bottle assembled as one",
       sortOrder: 5,
     },
@@ -97,7 +97,7 @@ export const DEFAULT_BEHIND_THE_DESIGN: Omit<BehindTheDesignContent, "_id" | "cr
       description: "The reveal is designed as carefully as the piece itself.",
       detail:
         "The final form is intentionally restrained, allowing the experience to unfold through discovery. What appears simple from the outside transforms layer by layer.",
-      image: "/behind-the-design/packaging.png",
+      image: "/behind-the-design/packaging.webp",
       alt: "Closed presentation box beside the open illuminated packaging reveal",
       sortOrder: 6,
     },
@@ -108,7 +108,7 @@ export const DEFAULT_BEHIND_THE_DESIGN: Omit<BehindTheDesignContent, "_id" | "cr
       description: "The final experience reaches the people it was designed for.",
       detail:
         "What began as an idea becomes a fully resolved experience — where material, structure, light and detail lead to one defining moment: the object itself.",
-      image: "/behind-the-design/delivery.png",
+      image: "/behind-the-design/delivery.webp",
       alt: "Finished perfume bottle revealed in its illuminated presentation box",
       sortOrder: 7,
     },

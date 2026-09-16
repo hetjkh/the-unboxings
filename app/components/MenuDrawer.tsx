@@ -90,7 +90,7 @@ const defaultIndustryFeatures = [
 const defaultProductFeatures = [
   {
     name: "Employee Welcome Kits",
-    image: "/bo.png",
+    image: "/bo.webp",
     href: "/solutions",
   },
   {
@@ -113,7 +113,7 @@ const defaultProductFeatures = [
 const defaultSolutionFeatures = [
   {
     name: "Employee Welcome Kits",
-    image: "/bo.png",
+    image: "/bo.webp",
     href: "/solutions",
   },
   {
@@ -128,7 +128,7 @@ const defaultSolutionFeatures = [
   },
   {
     name: "Luxury Writing",
-    image: "/products/slides/luxury-gifts/fountain-pen-leather.png",
+    image: "/products/slides/luxury-gifts/fountain-pen-leather.webp",
     href: "/products/luxury-writing",
   },
 ];

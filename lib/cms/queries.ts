@@ -19,7 +19,7 @@ const STATIC_SOLUTIONS: Omit<Solution, "_id" | "createdAt" | "updatedAt">[] = [
     slug: "employee-welcome-kits",
     description:
       "Onboarding sets built from tech, office essentials and drinkware — a complete first-day experience in one branded box.",
-    image: "/bo.png",
+    image: "/bo.webp",
     href: "/products/office-essentials",
     tags: ["Onboarding", "HR"],
     sortOrder: 0,
@@ -41,7 +41,7 @@ const STATIC_SOLUTIONS: Omit<Solution, "_id" | "createdAt" | "updatedAt">[] = [
     slug: "executive-gifts-solution",
     description:
       "Premium presentation sets for leadership, clients and milestones — considered pieces, not catalogue giveaways.",
-    image: "/products/slides/luxury-gifts/executive-pen-set.png",
+    image: "/products/slides/luxury-gifts/executive-pen-set.webp",
     href: "/products/luxury-writing",
     tags: ["Leadership", "VIP"],
     sortOrder: 2,
@@ -63,7 +63,7 @@ const STATIC_SOLUTIONS: Omit<Solution, "_id" | "createdAt" | "updatedAt">[] = [
     slug: "packaging-solutions-solution",
     description:
       "Presentation packaging engineered around the product and the opening moment — for launches, handovers and gifting.",
-    image: "/products/slides/packaging/red-exploding-gift-box.png",
+    image: "/products/slides/packaging/red-exploding-gift-box.webp",
     href: "/products/packaging-solutions",
     tags: ["Launch", "Unboxing"],
     sortOrder: 4,
@@ -74,7 +74,7 @@ const STATIC_SOLUTIONS: Omit<Solution, "_id" | "createdAt" | "updatedAt">[] = [
     slug: "luxury-writing-solution",
     description:
       "Refined fountain pens, ballpoints and executive writing sets for client appreciation, milestones and senior relationships.",
-    image: "/products/slides/luxury-gifts/fountain-pen-leather.png",
+    image: "/products/slides/luxury-gifts/fountain-pen-leather.webp",
     href: "/products/luxury-writing",
     tags: ["Clients", "Seasonal"],
     sortOrder: 5,

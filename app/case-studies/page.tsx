@@ -8,7 +8,7 @@ const caseStudies = [
     challenge: "A fast-growing tech firm needed 300 branded welcome kits for new hires, delivered in under 2 weeks.",
     solution: "We sourced laptop bags, notebooks, bottles, wireless chargers, and premium packaging — all branded and delivered to 3 office locations.",
     outcome: "300 kits delivered in 11 days. Employee satisfaction scores for onboarding increased by 40%.",
-    image: "/bo.png",
+    image: "/bo.webp",
     tags: ["HR", "Tech", "Onboarding"],
   },
   {
@@ -16,7 +16,7 @@ const caseStudies = [
     challenge: "A luxury developer needed 150 exclusive handover gift boxes for villa buyers.",
     solution: "Custom rigid magnetic boxes with marble key trays, champagne flutes, personalized copper cards, and luxury candles — all branded.",
     outcome: "Buyers shared unboxing experiences on social media. 12 referrals traced back to the gifting campaign.",
-    image: "/products/slides/packaging/red-exploding-gift-box.png",
+    image: "/products/slides/packaging/red-exploding-gift-box.webp",
     tags: ["Real Estate", "Luxury", "VIP"],
   },
   {
@@ -32,7 +32,7 @@ const caseStudies = [
     challenge: "A leading FMCG brand needed 2,000 Ramadan hampers for clients and retail partners.",
     solution: "Custom luxury boxes with premium dates, Arabic coffee sets, oud candles, and personalized cards — delivered across UAE.",
     outcome: "Campaign received 98% positive feedback. Brand visibility significantly increased among B2B partners.",
-    image: "/brand-stories/a-majlis-reimagined/hero.png",
+    image: "/brand-stories/a-majlis-reimagined/hero.webp",
     tags: ["Ramadan", "FMCG", "Seasonal"],
   },
   {

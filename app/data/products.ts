@@ -4,15 +4,15 @@ export const productCategories = [
   { name: "Office Essentials", slug: "office-essentials", image: "/products/10.jpg", description: "Considered desk tools and organizers for productive working environments." },
   { name: "Executive Gifts", slug: "executive-gifts", image: "/products/15.jpg", description: "Premium presentation sets created for leadership, clients, and milestones." },
   { name: "Eco Collection", slug: "eco-collection", image: "/products/21.jpg", description: "Thoughtful products made with lower-impact and natural materials." },
-  { name: "Health & Wellness", slug: "health-wellness", image: "/products/health%26wellness/re.png", description: "Branded fitness, recovery and active lifestyle products for teams, events and employee wellbeing." },
-  { name: "Apparel & Uniforms", slug: "apparel-uniforms", image: "/bo.png", description: "Branded apparel and coordinated uniforms tailored to your team." },
-  { name: "Aprons", slug: "aprons", image: "/mer.png", description: "Promotional and service aprons for hospitality, retail, events and kitchen teams." },
-  { name: "Staff ID", slug: "staff-id", image: "/poi.png", description: "Branded lanyards, staff cards and illuminated badges for events and front-of-house teams." },
+  { name: "Health & Wellness", slug: "health-wellness", image: "/products/health%26wellness/re.webp", description: "Branded fitness, recovery and active lifestyle products for teams, events and employee wellbeing." },
+  { name: "Apparel & Uniforms", slug: "apparel-uniforms", image: "/bo.webp", description: "Branded apparel and coordinated uniforms tailored to your team." },
+  { name: "Aprons", slug: "aprons", image: "/mer.webp", description: "Promotional and service aprons for hospitality, retail, events and kitchen teams." },
+  { name: "Staff ID", slug: "staff-id", image: "/poi.webp", description: "Branded lanyards, staff cards and illuminated badges for events and front-of-house teams." },
   { name: "Keychains", slug: "keychains", image: "/products/slides/keychains/leather-strip-keychains.png", description: "Metal, leather and acrylic key tags for giveaways, events and everyday brand visibility." },
   { name: "Awards & Recognition", slug: "awards-recognition", image: "/products/27.jpg", description: "Bespoke trophies and recognition pieces that make achievement tangible." },
   { name: "Packaging Solutions", slug: "packaging-solutions", image: "/products/35.jpg", description: "Presentation packaging engineered around the product and opening moment." },
   { name: "Luxury Gifts", slug: "luxury-gifts", image: "/products/41.jpg", description: "Fragrance, collectibles and elevated desk objects with a refined finish." },
-  { name: "Luxury Writing", slug: "luxury-writing", image: "/products/slides/luxury-gifts/fountain-pen-leather.png", description: "Refined writing instruments designed for executive gifting, milestones, recognition, and lasting impressions." },
+  { name: "Luxury Writing", slug: "luxury-writing", image: "/products/slides/luxury-gifts/fountain-pen-leather.webp", description: "Refined writing instruments designed for executive gifting, milestones, recognition, and lasting impressions." },
   { name: "Travel Collection", slug: "travel-collection", image: "/products/54.jpg", description: "Smart luggage and travel accessories designed for journeys." },
 ] as const;
 
@@ -100,7 +100,7 @@ export const products = [
   {
     name: "Executive Wood Desk Organizer Set",
     category: "office-essentials",
-    image: "/products/slides/office-essentials/executive-wood-desk-organizer-set.png",
+    image: "/products/slides/office-essentials/executive-wood-desk-organizer-set.webp",
     description: "A modular walnut desk suite with trays, pen cup, phone stand and document dividers in one coordinated set.",
   },
   {
@@ -118,7 +118,7 @@ export const products = [
   {
     name: "Vertical Staff Card Set",
     category: "staff-id",
-    image: "/products/slides/staff-id-vertical-staff-cards.png",
+    image: "/products/slides/staff-id-vertical-staff-cards.webp",
     description: "Bold vertical staff cards on black lanyards for conferences, retail and activations.",
   },
   {
@@ -178,7 +178,7 @@ export const products = [
   {
     name: "Stone Lanyard Staff Badge",
     category: "staff-id",
-    image: "/products/slides/staff-id-stone-lanyard-badge.png",
+    image: "/products/slides/staff-id-stone-lanyard-badge.webp",
     description: "A stone-textured staff badge on a neutral lanyard for premium hospitality environments.",
   },
   {
@@ -190,7 +190,7 @@ export const products = [
   {
     name: "Cord Lanyard Staff Badge",
     category: "staff-id",
-    image: "/products/slides/staff-id-cord-lanyard-badge.png",
+    image: "/products/slides/staff-id-cord-lanyard-badge.webp",
     description: "A staff badge on a braided cord lanyard for outdoor events and field teams.",
   },
   {
@@ -202,13 +202,13 @@ export const products = [
   {
     name: "Photo Lanyard Staff Badge",
     category: "staff-id",
-    image: "/products/slides/staff-id-photo-lanyard-badge.png",
+    image: "/products/slides/staff-id-photo-lanyard-badge.webp",
     description: "A photo-format staff badge with custom portrait panel and woven lanyard.",
   },
   {
     name: "Pattern Lanyard Badge Set",
     category: "staff-id",
-    image: "/products/slides/staff-id-pattern-lanyard-group.png",
+    image: "/products/slides/staff-id-pattern-lanyard-group.webp",
     description: "A coordinated set of patterned lanyards and staff badges for large event teams.",
   },
   {
@@ -238,13 +238,13 @@ export const products = [
   {
     name: "Jersey Key Tags",
     category: "keychains",
-    image: "/products/slides/keychain-jersey-tags.png",
+    image: "/products/slides/keychain-jersey-tags.webp",
     description: "Acrylic jersey-shaped key tags with numbered fronts for sports and event merchandise.",
   },
   {
     name: "Leather Loop Keychain Set",
     category: "keychains",
-    image: "/products/slides/keychain-leather-loop-set.png",
+    image: "/products/slides/keychain-leather-loop-set.webp",
     description: "Black leather loop keychains with metal hardware and gold brand plaques.",
   },
   {
@@ -442,7 +442,7 @@ export const products = [
   {
     name: "Promotional Bib Apron",
     category: "aprons",
-    image: "/products/slides/kitchen-apron/promotional-bib-apron-front.png",
+    image: "/products/slides/kitchen-apron/promotional-bib-apron-front.webp",
     description: "A versatile promotional bib apron with front pocket, available in multiple brand colours.",
   },
   {
@@ -484,25 +484,25 @@ export const products = [
   {
     name: "Premium Cotton Bib Apron",
     category: "aprons",
-    image: "/products/slides/kitchen-apron/premium-cotton-bib-apron.png",
+    image: "/products/slides/kitchen-apron/premium-cotton-bib-apron.webp",
     description: "A tailored navy cotton bib apron with pocket compartments and gold hardware.",
   },
   {
     name: "Heavy Canvas Apron",
     category: "aprons",
-    image: "/products/slides/kitchen-apron/heavy-canvas-apron.png",
+    image: "/products/slides/kitchen-apron/heavy-canvas-apron.webp",
     description: "A durable canvas apron built for high-use kitchen, studio and workshop environments.",
   },
   {
     name: "Denim Barista Apron",
     category: "aprons",
-    image: "/products/slides/kitchen-apron/denim-barista-apron.png",
+    image: "/products/slides/kitchen-apron/denim-barista-apron.webp",
     description: "A cross-back denim apron with leather straps for coffee bars and artisan food concepts.",
   },
   {
     name: "Cross-Back Canvas Apron",
     category: "aprons",
-    image: "/products/slides/kitchen-apron/cross-back-canvas-apron.png",
+    image: "/products/slides/kitchen-apron/cross-back-canvas-apron.webp",
     description: "A cross-back canvas apron with utility pocket for chefs, baristas and makers.",
   },
   {
@@ -568,37 +568,37 @@ export const products = [
   {
     name: "Fountain Pen Gift Box",
     category: "packaging-solutions",
-    image: "/products/slides/packaging/fountain-pen-gift-box.png",
+    image: "/products/slides/packaging/fountain-pen-gift-box.webp",
     description: "A matte black hinged box with custom foam inserts for pen, cap and brand card.",
   },
   {
     name: "Red Exploding Gift Box",
     category: "packaging-solutions",
-    image: "/products/slides/packaging/red-exploding-gift-box.png",
+    image: "/products/slides/packaging/red-exploding-gift-box.webp",
     description: "A folding presentation box with side wings that open into a dramatic branded reveal.",
   },
   {
     name: "Wood Lattice Reveal Box",
     category: "packaging-solutions",
-    image: "/products/slides/packaging/wood-lattice-reveal-box.png",
+    image: "/products/slides/packaging/wood-lattice-reveal-box.webp",
     description: "A dark wood box with laser-cut lattice lid and suede-lined interior compartments.",
   },
   {
     name: "Navy Marble Compartment Box",
     category: "packaging-solutions",
-    image: "/products/slides/packaging/navy-marble-compartment-box.png",
+    image: "/products/slides/packaging/navy-marble-compartment-box.webp",
     description: "A velvet-lined box with marble panels and a grid of individual product compartments.",
   },
   {
     name: "Geometric Gemstone Box",
     category: "packaging-solutions",
-    image: "/products/slides/packaging/geometric-gemstone-box.png",
+    image: "/products/slides/packaging/geometric-gemstone-box.webp",
     description: "A faceted cream presentation case with black interior and acrylic product mount.",
   },
   {
     name: "Wooden Bottle Presentation Box",
     category: "packaging-solutions",
-    image: "/products/slides/packaging/wooden-bottle-presentation-box.png",
+    image: "/products/slides/packaging/wooden-bottle-presentation-box.webp",
     description: "A light wood box with angled panels designed to present a bottle as a ceremonial object.",
   },
   {
@@ -652,73 +652,73 @@ export const products = [
   {
     name: "Forest Green Writing Collection",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/premium-writing-collection-green.png",
+    image: "/products/slides/luxury-gifts/premium-writing-collection-green.webp",
     description: "Forest-green fountain and ballpoint pens with ribbon-wrapped presentation boxes.",
   },
   {
     name: "Fountain Pen on Leather",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/fountain-pen-leather.png",
+    image: "/products/slides/luxury-gifts/fountain-pen-leather.webp",
     description: "A black fountain pen with gold trim photographed on pebbled leather for executive gifting.",
   },
   {
     name: "Executive Pen Set",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/executive-pen-set.png",
+    image: "/products/slides/luxury-gifts/executive-pen-set.webp",
     description: "A coordinated pen and notebook set with gold hardware and brand plaque.",
   },
   {
     name: "Gold Trim Executive Pen",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/gold-trim-pen.png",
+    image: "/products/slides/luxury-gifts/gold-trim-pen.webp",
     description: "A polished writing instrument with gold accents and fitted presentation case.",
   },
   {
     name: "Matte Black Signature Pen",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/matte-black-pen.png",
+    image: "/products/slides/luxury-gifts/matte-black-pen.webp",
     description: "A matte black pen with subtle gold branding for client and leadership gifting.",
   },
   {
     name: "Charcoal Executive Pen Duo",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/charcoal-executive-pen-duo.png",
+    image: "/products/slides/luxury-gifts/charcoal-executive-pen-duo.webp",
     description: "Matte charcoal fountain and ballpoint pens with gold clips, photographed on textured charcoal.",
   },
   {
     name: "Burgundy Fountain Pen",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/burgundy-fountain-pen.png",
+    image: "/products/slides/luxury-gifts/burgundy-fountain-pen.webp",
     description: "A translucent burgundy fountain pen with gold nib and cap band for refined desk gifting.",
   },
   {
     name: "Black Gold Fluted Fountain Pen",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/black-gold-fluted-fountain-pen.png",
+    image: "/products/slides/luxury-gifts/black-gold-fluted-fountain-pen.webp",
     description: "A glossy black fountain pen with gold fluted cap and reflective presentation styling.",
   },
   {
     name: "Heritage Fountain Pen",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/heritage-fountain-pen.png",
+    image: "/products/slides/luxury-gifts/heritage-fountain-pen.webp",
     description: "A black and gold fountain pen styled on antique manuscript paper for classic executive gifting.",
   },
   {
     name: "Notebook Fountain Pen",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/notebook-fountain-pen.png",
+    image: "/products/slides/luxury-gifts/notebook-fountain-pen.webp",
     description: "A glossy black fountain pen with gold trim photographed across leather notebooks.",
   },
   {
     name: "Velvet Fountain Pen",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/velvet-fountain-pen.png",
+    image: "/products/slides/luxury-gifts/velvet-fountain-pen.webp",
     description: "A textured black fountain pen with gold nib presented on deep red velvet.",
   },
   {
     name: "Carbon Fibre Fountain Pen",
     category: "luxury-writing",
-    image: "/products/slides/luxury-gifts/carbon-fibre-fountain-pen.png",
+    image: "/products/slides/luxury-gifts/carbon-fibre-fountain-pen.webp",
     description: "A red carbon-fibre fountain pen with chrome accents and branded cap medallion.",
   },
   {
@@ -826,7 +826,7 @@ export const products = [
   {
     name: "Zip Pocket Gym Towel",
     category: "health-wellness",
-    image: "/products/health%26wellness/Picture13.png",
+    image: "/products/health%26wellness/Picture13.webp",
     description: "Microfiber towels with a zippered pocket for phone and keys — practical for gym, travel and sport.",
   },
   {
