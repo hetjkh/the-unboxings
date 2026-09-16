@@ -1,0 +1,71 @@
+.panel {
+  padding: clamp(20px, 4vw, 32px);
+  color: #fff;
+  background: #111;
+  border: 1px solid #292929;
+  animation: arrive 450ms ease-out both;
+}
+
+.heading { display: flex; align-items: center; gap: 20px; }
+.copy { min-width: 0; }
+.artwork { position: relative; flex: 0 0 72px; }
+.artwork svg { display: block; width: 100%; overflow: visible; }
+.lid { animation: unwrap 3s ease-in-out infinite; }
+.sparkles { animation: glimmer 3s ease-in-out infinite; }
+.shadow {
+  display: block;
+  width: 34px;
+  height: 3px;
+  margin: 5px auto 0;
+  border-radius: 50%;
+  background: #ffffff26;
+  animation: glimmer 3s ease-in-out infinite;
+}
+.eyebrow { margin: 0 0 10px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #aaa; }
+.title { margin: 0; font-size: clamp(18px, 2.5vw, 24px); font-weight: 300; letter-spacing: -0.025em; }
+.description { margin: 10px 0 0; max-width: 420px; font-size: 12px; line-height: 1.7; color: #b5b5b5; }
+.dots { display: inline-flex; gap: 3px; margin-left: 6px; vertical-align: baseline; }
+.dots i { width: 3px; height: 3px; border-radius: 50%; background: currentColor; animation: dot 1.5s ease-in-out infinite; }
+.dots i:nth-child(2) { animation-delay: 150ms; }
+.dots i:nth-child(3) { animation-delay: 300ms; }
+.meta { display: flex; justify-content: space-between; gap: 16px; margin-top: 28px; font-size: 10px; color: #b5b5b5; }
+.fileName { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.value { flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.track { height: 2px; margin-top: 12px; overflow: hidden; background: #ffffff26; }
+.fill, .indeterminate { display: block; height: 100%; background: #fff; }
+.fill { transition: width 350ms ease-out; }
+.indeterminate { width: 35%; animation: travel 1.8s ease-in-out infinite; }
+.steps { display: flex; justify-content: space-between; gap: 12px; margin-top: 16px; color: #858585; font-size: 9px; line-height: 1.5; letter-spacing: 0.04em; }
+.steps span:first-child, .steps .active { color: #fff; }
+.steps .complete { color: #b5b5b5; }
+
+@keyframes arrive {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes unwrap {
+  0%, 15%, 85%, 100% { transform: translateY(0); }
+  45%, 55% { transform: translateY(-9px); }
+}
+@keyframes glimmer {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+@keyframes dot {
+  0%, 70%, 100% { opacity: 0.3; transform: translateY(0); }
+  35% { opacity: 1; transform: translateY(-3px); }
+}
+@keyframes travel {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(390%); }
+}
+@media (max-width: 420px) {
+  .heading { gap: 12px; }
+  .artwork { flex-basis: 52px; }
+  .steps { font-size: 8px; letter-spacing: 0; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .panel, .lid, .sparkles, .shadow, .dots i, .indeterminate { animation: none; }
+  .fill { transition: none; }
+  .indeterminate { width: 100%; opacity: 0.5; }
+}
