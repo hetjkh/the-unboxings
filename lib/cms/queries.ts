@@ -86,7 +86,7 @@ const STATIC_PAGE_HEROES: Omit<PageHero, "_id" | "createdAt" | "updatedAt">[] = 
   {
     pageKey: "behind-the-design",
     label: "Behind the Design",
-    image: "/sketch.png",
+    image: "/behind-the-design/sketch.webp",
     alt: "Hand sketching trophy designs on tracing paper beside acrylic prototypes and material samples",
     title: "Behind the Design",
     subtitle: "Our process",

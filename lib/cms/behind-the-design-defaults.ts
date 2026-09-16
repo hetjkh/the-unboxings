@@ -8,7 +8,7 @@ export const DEFAULT_BEHIND_THE_DESIGN: Omit<BehindTheDesignContent, "_id" | "cr
     titleLine2: "Design",
     description:
       "From an idea on paper to an experience in someone's hands. Every decision, detail and material turns a brand brief into something worth keeping.",
-    image: "/sketch.png",
+    image: "/behind-the-design/sketch.webp",
     alt: "Hand sketching trophy designs on tracing paper beside acrylic prototypes and material samples",
     ctaText: "Explore the process",
   },
