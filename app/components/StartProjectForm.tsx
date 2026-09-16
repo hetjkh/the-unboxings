@@ -5,6 +5,7 @@ import BlackSelect from "./BlackSelect";
 import BlackMultiSelect from "./BlackMultiSelect";
 import AutoGrowTextarea from "./AutoGrowTextarea";
 import BriefSubmissionStatus from "./BriefSubmissionStatus";
+import BriefSubmissionSuccess from "./BriefSubmissionSuccess";
 
 const textFields = [
   { name: "company", label: "Company", placeholder: "Your company name", type: "text" },
@@ -197,11 +198,14 @@ export default function StartProjectForm({
 
     try {
       // XMLHttpRequest exposes actual upload progress for multipart attachments.
-      const response = await new Promise<{ ok: boolean; payload: {
-        error?: string;
-        warning?: string;
-        whatsapp?: { ok?: boolean; error?: string };
-      } }>((resolve, reject) => {
+      const response = await new Promise<{
+        ok: boolean;
+        payload: {
+          error?: string;
+          warning?: string;
+          whatsapp?: { ok?: boolean; error?: string };
+        };
+      }>((resolve, reject) => {
         const request = new XMLHttpRequest();
         request.open("POST", "/api/project-brief");
         request.responseType = "json";
@@ -211,10 +215,12 @@ export default function StartProjectForm({
           }
         };
         request.upload.onload = () => setUploading(false);
-        request.onload = () => resolve({
-          ok: request.status >= 200 && request.status < 300,
-          payload: request.response ?? {},
-        });
+        request.onload = () => {
+          resolve({
+            ok: request.status >= 200 && request.status < 300,
+            payload: request.response ?? {},
+          });
+        };
         request.onerror = () => reject(new Error("Network error"));
         request.onabort = () => reject(new Error("Request cancelled"));
         request.send(data);
@@ -250,32 +256,7 @@ export default function StartProjectForm({
   }
 
   if (status === "sent") {
-    return (
-      <div
-        ref={(node) => { node?.focus(); }}
-        tabIndex={-1}
-        role="status"
-        className="border border-black/15 bg-white/50 px-6 py-10 outline-none md:px-8"
-      >
-        <span className="mb-6 flex size-12 items-center justify-center rounded-full bg-black text-white" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="m5 12 4 4L19 6" />
-          </svg>
-        </span>
-        <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-black/40 uppercase">Brief received</p>
-        <h3 className="m-0 mt-4 text-2xl font-light tracking-[-0.04em] uppercase">Thank you</h3>
-        <p className="m-0 mt-4 max-w-[420px] text-sm leading-6 text-black/60">
-          Your project brief is with our team. We&apos;ll review it and get back to you within 24 hours.
-        </p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className="mt-8 cursor-pointer border-0 bg-transparent p-0 text-[11px] font-bold tracking-[0.08em] text-black uppercase underline underline-offset-4"
-        >
-          Send another brief
-        </button>
-      </div>
-    );
+    return <BriefSubmissionSuccess onReset={() => setStatus("idle")} />;
   }
 
   return (
@@ -440,7 +421,6 @@ export default function StartProjectForm({
             </button>
           ) : null}
         </div>
-
       </fieldset>
 
       <div className="pt-2 md:col-span-2">

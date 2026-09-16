@@ -43,7 +43,9 @@ export default function BriefSubmissionStatus({
             <p className={styles.title}>{title}<span className={styles.dots} aria-hidden="true"><i /><i /><i /></span></p>
             <p className={styles.description}>
               {takingLonger
-                ? "Still working on it. Larger files can take a little longer. Please keep this page open."
+                ? uploading
+                  ? "Still uploading. Larger files can take a little longer. Please keep this page open."
+                  : "Still sending your brief. Thank you for your patience. Please keep this page open."
                 : uploading
                   ? "Making room for your inspiration. Please keep this page open."
                   : "Your ideas are on their way to our team. Just a moment."}

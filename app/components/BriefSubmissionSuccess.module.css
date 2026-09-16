@@ -1,0 +1,91 @@
+.card {
+  align-self: start;
+  min-width: 0;
+  overflow: hidden;
+  color: #171717;
+  background: #faf9f6;
+  border: 1px solid #d9d7d0;
+  box-shadow: 0 12px 40px #29251b06;
+  animation: reveal 650ms ease-out both;
+}
+
+.topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px clamp(20px, 4vw, 36px);
+  border-bottom: 1px solid #e7e5df;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.received { display: inline-flex; align-items: center; gap: 8px; color: #64625c; }
+.received > span { width: 5px; height: 5px; border-radius: 50%; background: #171717; }
+.main { padding: 32px 24px 40px; text-align: center; }
+.seal { width: 144px; margin: 0 auto 22px; }
+.seal svg { display: block; width: 100%; overflow: visible; }
+.outerRing { stroke: #dedbd2; transform-origin: center; animation: ring 1.2s ease-out both; }
+.innerRing { stroke: #e9e6df; }
+.disc { fill: #171717; transform-origin: center; animation: settle 650ms 100ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+.check { stroke: #fff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; animation: draw 650ms 450ms ease-out both; }
+.sparkles { stroke: #8a8170; stroke-width: 1; transform-origin: center; animation: settle 900ms 200ms ease-out both; }
+.eyebrow { margin: 0; font-size: 9px; font-weight: 500; line-height: 1.6; letter-spacing: 0.18em; text-transform: uppercase; color: #6a665f; }
+.title { margin: 17px 0 0; font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 0.98; letter-spacing: -0.055em; text-transform: uppercase; outline: none; }
+.description { max-width: 400px; margin: 22px auto 0; font-size: 13px; line-height: 1.8; color: #68655f; }
+.title, .description { animation: reveal 650ms 180ms ease-out both; }
+
+.next {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+  margin: 0 clamp(20px, 4vw, 36px);
+  padding: 24px 0;
+  border-top: 1px solid #dedbd2;
+  border-bottom: 1px solid #dedbd2;
+}
+.timing { padding-right: 28px; border-right: 1px solid #dedbd2; }
+.timing p { margin: 8px 0 0; font-size: 40px; font-weight: 300; line-height: 1; letter-spacing: -0.045em; }
+.timing p span { margin-left: 8px; font-size: 11px; letter-spacing: 0; color: #68655f; }
+.nextDescription { max-width: 310px; margin: 0; font-size: 12px; line-height: 1.8; color: #68655f; }
+.footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px; padding: 24px clamp(20px, 4vw, 36px); }
+.footer > span { font-size: 10px; line-height: 1.6; color: #77736b; }
+.reset { display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 44px; padding: 0; border: 0; background: transparent; color: #171717; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+.reset svg { transition: transform 250ms ease; }
+.reset:hover svg { transform: translateX(4px); }
+.reset:hover { color: #74654e; }
+.reset:focus-visible { outline: 2px solid #171717; outline-offset: 5px; }
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ring {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes settle {
+  from { opacity: 0; transform: scale(0.75); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@media (max-width: 480px) {
+  .main { padding: 26px 20px 32px; }
+  .seal { width: 120px; margin-bottom: 18px; }
+  .desktopBreak { display: none; }
+  .next { grid-template-columns: 1fr; gap: 14px; padding: 22px 0; }
+  .timing { border: 0; padding: 0; }
+  .footer { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .reset { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .outerRing, .disc, .check, .sparkles, .title, .description { animation: none; }
+  .reset, .reset svg { transition: none; }
+}
