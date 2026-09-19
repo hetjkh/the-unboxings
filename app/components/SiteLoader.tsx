@@ -2,16 +2,36 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import type { gsap as GsapNS } from "gsap";
-import { SITE_LOADER_COMPLETE_EVENT, waitForHeroVideoReady } from "./site-loader-events";
+import { SITE_LOADER_COMPLETE_EVENT, waitForHeroVideoReady, signalSiteLoaderComplete } from "./site-loader-events";
 
 export { SITE_LOADER_COMPLETE_EVENT, HERO_VIDEO_READY_EVENT } from "./site-loader-events";
 
 type GsapTimeline = ReturnType<typeof GsapNS.timeline>;
 
+const LOADER_SEEN_KEY = "theunboxing-loader-seen";
+
+function hasSeenLoaderThisSession() {
+  try {
+    return sessionStorage.getItem(LOADER_SEEN_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function markLoaderSeenThisSession() {
+  try {
+    sessionStorage.setItem(LOADER_SEEN_KEY, "1");
+  } catch {
+    // Ignore private-mode / blocked storage.
+  }
+}
+
 function finishLoader() {
+  markLoaderSeenThisSession();
   document.documentElement.style.overflow = "";
   document.documentElement.classList.remove("site-loading");
-  window.dispatchEvent(new Event(SITE_LOADER_COMPLETE_EVENT));
+  document.getElementById("site-boot-cover")?.remove();
+  signalSiteLoaderComplete();
 }
 
 export default function SiteLoader() {
@@ -19,20 +39,27 @@ export default function SiteLoader() {
   const theRef = useRef<HTMLSpanElement>(null);
   const unboxingRef = useRef<HTMLSpanElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
-  // Visible on SSR + first paint so the hero never flashes underneath.
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
+  // Decide once: skip on repeat visits this session.
   useLayoutEffect(() => {
-    document.getElementById("site-boot-cover")?.remove();
-    document.documentElement.classList.add("site-loading");
-    document.documentElement.style.overflow = "hidden";
-
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) {
+
+    if (hasSeenLoaderThisSession() || reduceMotion) {
       finishLoader();
-      setVisible(false);
       return;
     }
+
+    document.documentElement.classList.add("site-loading");
+    document.documentElement.style.overflow = "hidden";
+    setVisible(true);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!visible) return;
+
+    // Hand off from the static boot cover to the animated overlay.
+    document.getElementById("site-boot-cover")?.remove();
 
     const overlay = overlayRef.current;
     const theWord = theRef.current;
@@ -51,7 +78,6 @@ export default function SiteLoader() {
         defaults: { ease: "power3.out" },
       });
 
-      // Start fully opaque — never fade the cover in over the hero.
       gsap.set(overlay, { autoAlpha: 1, yPercent: 0 });
       gsap.set([theWord, unboxingWord, line], { autoAlpha: 0 });
       gsap.set(unboxingWord, { y: 28, clipPath: "inset(100% 0% 0% 0%)" });
@@ -123,10 +149,8 @@ export default function SiteLoader() {
     return () => {
       cancelled = true;
       timeline?.kill();
-      document.documentElement.style.overflow = "";
-      document.documentElement.classList.remove("site-loading");
     };
-  }, []);
+  }, [visible]);
 
   if (!visible) return null;
 

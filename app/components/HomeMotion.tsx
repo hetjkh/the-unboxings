@@ -5,7 +5,7 @@ import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SITE_LOADER_COMPLETE_EVENT } from "./site-loader-events";
+import { SITE_LOADER_COMPLETE_EVENT, isSiteLoaderComplete } from "./site-loader-events";
 
 export default function HomeMotion({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -120,7 +120,7 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
       }, root);
     };
 
-    if (reduceMotion) {
+    if (reduceMotion || isSiteLoaderComplete()) {
       setupMotion();
     } else {
       window.addEventListener(SITE_LOADER_COMPLETE_EVENT, setupMotion, { once: true });

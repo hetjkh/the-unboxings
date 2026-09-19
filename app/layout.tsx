@@ -20,7 +20,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               html.site-loading { overflow: hidden; }
-              #site-boot-cover {
+              #site-boot-cover { display: none; }
+              html.site-loading #site-boot-cover {
+                display: block;
                 position: fixed;
                 inset: 0;
                 z-index: 10000;
@@ -31,7 +33,7 @@ export default function RootLayout({
         />
         <script
           dangerouslySetInnerHTML={{
-            __html: `document.documentElement.classList.add("site-loading");`,
+            __html: `(function(){try{if(sessionStorage.getItem("theunboxing-loader-seen")==="1")return;}catch(e){}document.documentElement.classList.add("site-loading");})();`,
           }}
         />
       </head>
