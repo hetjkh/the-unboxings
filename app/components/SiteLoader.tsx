@@ -36,12 +36,94 @@ function playExit(
   return timeline;
 }
 
+/** Brand intro → wait for page media → brand outro + slide away. */
+function playBrandLoader(
+  gsap: typeof GsapNS,
+  els: {
+    overlay: HTMLElement;
+    theWord: HTMLElement;
+    unboxingWord: HTMLElement;
+    line: HTMLElement;
+  },
+  waitForMedia: () => Promise<void>,
+  onDone: () => void,
+  isCancelled: () => boolean,
+): GsapTimeline {
+  const { overlay, theWord, unboxingWord, line } = els;
+  const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+  gsap.set(overlay, { autoAlpha: 1, yPercent: 0 });
+  gsap.set([theWord, unboxingWord, line], { autoAlpha: 0 });
+  gsap.set(unboxingWord, { y: 28, clipPath: "inset(100% 0% 0% 0%)" });
+  gsap.set(theWord, { y: 12 });
+  gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
+
+  timeline
+    .to(theWord, { autoAlpha: 1, y: 0, duration: 0.7 }, 0)
+    .to(
+      unboxingWord,
+      {
+        autoAlpha: 1,
+        y: 0,
+        clipPath: "inset(0% 0% 0% 0%)",
+        duration: 1.05,
+        ease: "power4.out",
+      },
+      0.12,
+    )
+    .to(line, { autoAlpha: 1, scaleX: 1, duration: 0.85, ease: "power2.inOut" }, 0.8)
+    .to({}, { duration: 0.2 })
+    .add(() => {
+      timeline.pause();
+      void waitForMedia().then(() => {
+        if (isCancelled()) {
+          onDone();
+          return;
+        }
+        timeline.resume();
+      });
+    })
+    .to(
+      [theWord, unboxingWord],
+      {
+        y: -18,
+        autoAlpha: 0,
+        duration: 0.55,
+        stagger: 0.04,
+        ease: "power3.in",
+      },
+    )
+    .to(
+      line,
+      {
+        scaleX: 0,
+        transformOrigin: "right center",
+        autoAlpha: 0,
+        duration: 0.45,
+        ease: "power2.in",
+      },
+      "<0.1",
+    )
+    .to(
+      overlay,
+      {
+        yPercent: -100,
+        duration: 0.95,
+        ease: "power4.inOut",
+        onComplete: onDone,
+      },
+      "-=0.2",
+    );
+
+  return timeline;
+}
+
 export default function SiteLoader() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const theRef = useRef<HTMLSpanElement>(null);
   const unboxingRef = useRef<HTMLSpanElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
-  // Visible on SSR + first paint so the hero never flashes underneath.
+  // Visible on SSR + first paint so content never flashes underneath.
   const [visible, setVisible] = useState(true);
 
   useLayoutEffect(() => {
@@ -59,67 +141,45 @@ export default function SiteLoader() {
       return;
     }
 
-    // Collection pages: keep the cover up while images warm, then exit.
-    if (isCollection) {
+    // Home + collections: full brand animation while media warms behind.
+    if (isHome || isCollection) {
       const overlay = overlayRef.current;
-      let cancelled = false;
-      let timeline: GsapTimeline | null = null;
+      const theWord = theRef.current;
+      const unboxingWord = unboxingRef.current;
+      const line = lineRef.current;
 
-      void (async () => {
-        await waitForCollectionImagesReady(4500);
-        if (cancelled) return;
-
-        const { default: gsap } = await import("gsap");
-        if (cancelled || !overlay) {
-          finishLoader();
-          setVisible(false);
-          return;
-        }
-
-        timeline = playExit(gsap, overlay, () => {
-          finishLoader();
-          setVisible(false);
-        });
-      })();
-
-      const failSafe = window.setTimeout(() => {
-        if (cancelled) return;
+      if (!overlay || !theWord || !unboxingWord || !line) {
         finishLoader();
         setVisible(false);
-      }, 6000);
+        return;
+      }
 
-      return () => {
-        cancelled = true;
-        window.clearTimeout(failSafe);
-        timeline?.kill();
-        document.documentElement.style.overflow = "";
-        document.documentElement.classList.remove("site-loading");
-      };
-    }
-
-    // Other non-home pages: dismiss quickly.
-    if (!isHome) {
-      const overlay = overlayRef.current;
       let cancelled = false;
       let timeline: GsapTimeline | null = null;
 
-      void import("gsap").then(({ default: gsap }) => {
-        if (cancelled || !overlay) {
-          finishLoader();
-          setVisible(false);
-          return;
-        }
+      const waitForMedia = () =>
+        isCollection ? waitForCollectionImagesReady(4500) : waitForHeroVideoReady(5000);
 
-        timeline = playExit(gsap, overlay, () => {
-          finishLoader();
-          setVisible(false);
-        });
+      void import("gsap").then(({ default: gsap }) => {
+        if (cancelled) return;
+
+        timeline = playBrandLoader(
+          gsap,
+          { overlay, theWord, unboxingWord, line },
+          waitForMedia,
+          () => {
+            finishLoader();
+            setVisible(false);
+          },
+          () => cancelled,
+        );
       });
 
       const failSafe = window.setTimeout(() => {
+        if (cancelled) return;
         finishLoader();
         setVisible(false);
-      }, 2000);
+      }, 10000);
 
       return () => {
         cancelled = true;
@@ -130,102 +190,28 @@ export default function SiteLoader() {
       };
     }
 
+    // Other pages: quick slide away.
     const overlay = overlayRef.current;
-    const theWord = theRef.current;
-    const unboxingWord = unboxingRef.current;
-    const line = lineRef.current;
-
-    if (!overlay || !theWord || !unboxingWord || !line) {
-      finishLoader();
-      setVisible(false);
-      return;
-    }
-
     let cancelled = false;
     let timeline: GsapTimeline | null = null;
 
     void import("gsap").then(({ default: gsap }) => {
-      if (cancelled) return;
+      if (cancelled || !overlay) {
+        finishLoader();
+        setVisible(false);
+        return;
+      }
 
-      timeline = gsap.timeline({
-        defaults: { ease: "power3.out" },
+      timeline = playExit(gsap, overlay, () => {
+        finishLoader();
+        setVisible(false);
       });
-
-      // Start fully opaque — never fade the cover in over the hero.
-      gsap.set(overlay, { autoAlpha: 1, yPercent: 0 });
-      gsap.set([theWord, unboxingWord, line], { autoAlpha: 0 });
-      gsap.set(unboxingWord, { y: 28, clipPath: "inset(100% 0% 0% 0%)" });
-      gsap.set(theWord, { y: 12 });
-      gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
-
-      timeline
-        .to(theWord, { autoAlpha: 1, y: 0, duration: 0.7 }, 0)
-        .to(
-          unboxingWord,
-          {
-            autoAlpha: 1,
-            y: 0,
-            clipPath: "inset(0% 0% 0% 0%)",
-            duration: 1.05,
-            ease: "power4.out",
-          },
-          0.12,
-        )
-        .to(line, { autoAlpha: 1, scaleX: 1, duration: 0.85, ease: "power2.inOut" }, 0.8)
-        .to({}, { duration: 0.2 })
-        .add(() => {
-          timeline?.pause();
-          void waitForHeroVideoReady(5000).then(() => {
-            if (cancelled || !timeline) {
-              finishLoader();
-              setVisible(false);
-              return;
-            }
-            timeline.resume();
-          });
-        })
-        .to(
-          [theWord, unboxingWord],
-          {
-            y: -18,
-            autoAlpha: 0,
-            duration: 0.55,
-            stagger: 0.04,
-            ease: "power3.in",
-          },
-        )
-        .to(
-          line,
-          {
-            scaleX: 0,
-            transformOrigin: "right center",
-            autoAlpha: 0,
-            duration: 0.45,
-            ease: "power2.in",
-          },
-          "<0.1",
-        )
-        .to(
-          overlay,
-          {
-            yPercent: -100,
-            duration: 0.95,
-            ease: "power4.inOut",
-            onComplete: () => {
-              finishLoader();
-              setVisible(false);
-            },
-          },
-          "-=0.2",
-        );
     });
 
-    // Absolute failsafe — never leave the site covered.
     const failSafe = window.setTimeout(() => {
-      if (cancelled) return;
       finishLoader();
       setVisible(false);
-    }, 10000);
+    }, 2000);
 
     return () => {
       cancelled = true;
