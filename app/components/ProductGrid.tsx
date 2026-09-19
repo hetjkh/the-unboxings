@@ -5,6 +5,9 @@ import type { GridProduct } from "@/lib/cms/nav";
 import { plainTextFromRich } from "@/lib/cms/rich-text";
 import FormattedText from "./FormattedText";
 
+/** Eager-load the first row (2 mobile / 4 desktop) so the fold feels instant. */
+const PRIORITY_COUNT = 4;
+
 export default function ProductGrid({
   items,
   categories,
@@ -17,18 +20,27 @@ export default function ProductGrid({
 
   return (
     <div className="grid grid-cols-2 items-stretch gap-0 lg:grid-cols-4">
-      {items.map((product) => {
+      {items.map((product, index) => {
         const name = plainTextFromRich(product.name);
         const category = categoryName(product.categorySlug);
         const href = `/products/${product.categorySlug}/${product._id}`;
+        const priority = index < PRIORITY_COUNT;
 
         return (
-          <article key={product._id} className="group flex h-full min-w-0 flex-col bg-white">
-            <Link href={href} className="relative aspect-square w-full shrink-0 overflow-hidden bg-white no-underline">
+          <article
+            key={product._id}
+            className="group flex h-full min-w-0 flex-col bg-white [content-visibility:auto] [contain-intrinsic-size:auto_420px]"
+          >
+            <Link
+              href={href}
+              className="relative aspect-square w-full shrink-0 overflow-hidden bg-[#f7f6f3] no-underline"
+            >
               <CmsImage
                 src={product.image}
                 alt={name}
                 fill
+                priority={priority}
+                loading={priority ? "eager" : "lazy"}
                 className="object-contain object-center p-2 transition-transform duration-500 group-hover:scale-[1.03] sm:p-3"
                 sizes="(max-width: 1024px) 50vw, 25vw"
               />
