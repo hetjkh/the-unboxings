@@ -24,17 +24,7 @@ const defaultProductsLinks = [
   { label: "Travel Collection", href: "/products/travel-collection" },
 ];
 
-const defaultSolutionsLinks = [
-  { label: "Employee Welcome Kits", href: "/solutions" },
-  { label: "Event Merchandise", href: "/solutions" },
-  { label: "Executive Gifts", href: "/products/executive-gifts" },
-  { label: "Staff ID & Badges", href: "/products/staff-id" },
-  { label: "Packaging Solutions", href: "/products/packaging-solutions" },
-  { label: "Luxury Writing", href: "/products/luxury-writing" },
-];
-
 const primaryLinks = [
-  { label: "Solutions", panel: "solutions" as MenuPanel },
   { label: "Collections", panel: "products" as MenuPanel },
   { label: "By Industry", href: "/industries" },
   { label: "Brand Stories", href: "/inspiration-gallery" },
@@ -110,36 +100,12 @@ const defaultProductFeatures = [
   },
 ];
 
-const defaultSolutionFeatures = [
-  {
-    name: "Employee Welcome Kits",
-    image: "/bo.webp",
-    href: "/solutions",
-  },
-  {
-    name: "Event Merchandise",
-    image: "/products/slides/kitchen-apron-black.png",
-    href: "/products/aprons",
-  },
-  {
-    name: "Staff ID & Badges",
-    image: "/products/slides/staff-id-premium-portrait-badge.png",
-    href: "/products/staff-id",
-  },
-  {
-    name: "Luxury Writing",
-    image: "/products/slides/luxury-gifts/fountain-pen-leather.webp",
-    href: "/products/luxury-writing",
-  },
-];
-
-type MenuPanel = "main" | "solutions" | "products" | "industries";
+type MenuPanel = "main" | "products" | "industries";
 
 const panelOffset: Record<MenuPanel, number> = {
   main: 0,
-  solutions: 1,
-  products: 2,
-  industries: 3,
+  products: 1,
+  industries: 2,
 };
 
 function CloseIcon() {
@@ -177,9 +143,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
   const panelTriggerRef = useRef<HTMLButtonElement | null>(null);
   const [activePanel, setActivePanel] = useState<MenuPanel>("main");
   const [productsLinks, setProductsLinks] = useState(defaultProductsLinks);
-  const [solutionsLinks, setSolutionsLinks] = useState(defaultSolutionsLinks);
   const [productFeatures, setProductFeatures] = useState(defaultProductFeatures);
-  const [solutionFeatures, setSolutionFeatures] = useState(defaultSolutionFeatures);
   const [industriesLinks] = useState(defaultIndustriesLinks);
   const [industryFeatures] = useState(defaultIndustryFeatures);
 
@@ -195,9 +159,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
         if (cancelled) return;
         navLoadedRef.current = true;
         if (nav.productsLinks?.length) setProductsLinks(nav.productsLinks);
-        if (nav.solutionsLinks?.length) setSolutionsLinks(nav.solutionsLinks);
         if (nav.productFeatures?.length) setProductFeatures(nav.productFeatures);
-        if (nav.solutionFeatures?.length) setSolutionFeatures(nav.solutionFeatures);
       })
       .catch(() => {
         // Keep defaults when nav API is unavailable.
@@ -396,54 +358,6 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                   →
                 </span>
               </a>
-            </nav>
-
-            {/* ── Solutions Panel ── */}
-            <nav
-              aria-label="Solutions"
-              data-panel="solutions"
-              inert={activePanel !== "solutions"}
-              className="flex h-full min-w-full flex-[0_0_100%] flex-col overflow-y-auto overscroll-y-contain px-5 pb-[max(2rem,env(safe-area-inset-bottom))] md:px-10 md:pb-10"
-            >
-              <h2 tabIndex={-1} className="m-0 text-[clamp(1.75rem,8vw,2.5rem)] leading-tight outline-none md:text-[48px] md:leading-[56px] font-light tracking-[-0.03em] text-black uppercase">
-                Solutions
-              </h2>
-
-              <div className="mt-6 grid grid-cols-2 gap-3 md:mt-8 md:gap-4">
-                {solutionFeatures.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="group flex flex-col no-underline"
-                  >
-                    <div className="relative w-full aspect-square overflow-hidden bg-[#f5f5f5]">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        className="object-cover object-center"
-                        sizes="(max-width: 767px) 45vw, 280px"
-                      />
-                    </div>
-                    <span className="mt-1 text-sm leading-5 font-normal text-black">
-                      {item.name}
-                    </span>
-                  </a>
-                ))}
-              </div>
-
-              <ul className="m-0 mt-10 list-none p-0">
-                {solutionsLinks.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="block py-2.5 text-base leading-6 font-normal text-black no-underline md:py-2"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
             </nav>
 
             {/* ── Collections Panel ── */}
