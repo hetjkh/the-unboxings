@@ -138,8 +138,8 @@ export default function MaterialsPage() {
 
               <div className="mt-10 grid border-t border-l border-black/20 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
                 {materials.map((material, index) => (
-                  <article key={material.name} data-motion-card className="group border-r border-b border-black/20 bg-white">
-                    <div data-motion-media className="relative aspect-[4/3] overflow-hidden bg-[#111]">
+                  <article key={material.name} className="group border-r border-b border-black/20 bg-white">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-[#111]">
                       <Image
                         src={material.image}
                         alt={`${material.name} samples and finished product applications`}

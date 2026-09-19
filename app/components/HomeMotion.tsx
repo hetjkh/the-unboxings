@@ -101,23 +101,24 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
             immediateRender: false,
             scrollTrigger: {
               trigger: media,
-              start: "top 90%",
+              start: "top 92%",
               once: true,
               toggleActions: "play none none none",
             },
           });
         });
 
+        // Animate position only — never opacity/autoAlpha, which can leave
+        // collection/material cards permanently invisible if ScrollTrigger misses.
         gsap.utils.toArray<HTMLElement>("[data-motion-card]", root).forEach((card) => {
           gsap.from(card, {
-            autoAlpha: 0,
-            y: 48,
-            duration: 0.95,
+            y: 36,
+            duration: 0.9,
             ease: "power3.out",
             immediateRender: false,
             scrollTrigger: {
               trigger: card,
-              start: "top 90%",
+              start: "top 92%",
               once: true,
               toggleActions: "play none none none",
             },
@@ -125,9 +126,10 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
         });
       }, root);
 
-      // Loader changes layout — refresh triggers so in-view cards animate instead of staying hidden.
+      // Loader / Lenis change layout — refresh so in-view items animate correctly.
       requestAnimationFrame(() => {
         ScrollTrigger.refresh();
+        requestAnimationFrame(() => ScrollTrigger.refresh());
       });
     };
 

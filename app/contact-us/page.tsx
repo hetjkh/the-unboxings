@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import StartProjectForm from "../components/StartProjectForm";
+import PhoneContactLink, { PHONE_WHATSAPP } from "../components/PhoneContactLink";
 
 export const metadata = {
   title: "Contact Us | The Unboxing — Corporate Gifts UAE",
@@ -21,14 +22,14 @@ const contactMethods = [
     title: "WhatsApp",
     description: "For quick questions and conversations.",
     action: "Start a conversation →",
-    href: "https://wa.me/971506023071",
+    href: PHONE_WHATSAPP,
   },
   {
     number: "03",
     title: "Phone",
     description: "Prefer to speak? We'd be happy to hear from you.",
     action: "+971 50 602 3071",
-    href: "tel:+971506023071",
+    href: "phone",
   },
 ] as const;
 
@@ -110,27 +111,45 @@ export default function ContactUsPage() {
             </header>
 
             <div className="mt-12 grid border-t border-l border-black/20 md:grid-cols-3">
-              {contactMethods.map((method) => (
-                <a
-                  key={method.title}
-                  href={method.href}
-                  target={method.title === "WhatsApp" ? "_blank" : undefined}
-                  rel={method.title === "WhatsApp" ? "noopener noreferrer" : undefined}
-                  className="group flex min-h-[260px] flex-col justify-between border-r border-b border-black/20 p-6 text-black no-underline transition-colors duration-300 hover:bg-black hover:text-white md:min-h-[320px] md:p-8"
-                >
-                  <div className="flex items-start justify-between">
-                    <span className="text-[10px] tracking-[0.16em] text-black/35 transition-colors group-hover:text-white/40">{method.number}</span>
-                    <span className="text-xl font-light transition-transform group-hover:translate-x-1" aria-hidden="true">↗</span>
-                  </div>
-                  <div>
-                    <h3 className="m-0 text-xl font-medium tracking-[-0.03em] uppercase">{method.title}</h3>
-                    <p className="m-0 mt-3 text-xs leading-5 text-black/50 transition-colors group-hover:text-white/55">{method.description}</p>
-                    <span className="mt-6 inline-block text-sm underline underline-offset-4">
-                      {method.action}
-                    </span>
-                  </div>
-                </a>
-              ))}
+              {contactMethods.map((method) => {
+                const className =
+                  "group flex min-h-[260px] flex-col justify-between border-r border-b border-black/20 p-6 text-black no-underline transition-colors duration-300 hover:bg-black hover:text-white md:min-h-[320px] md:p-8";
+                const content = (
+                  <>
+                    <div className="flex items-start justify-between">
+                      <span className="text-[10px] tracking-[0.16em] text-black/35 transition-colors group-hover:text-white/40">{method.number}</span>
+                      <span className="text-xl font-light transition-transform group-hover:translate-x-1" aria-hidden="true">↗</span>
+                    </div>
+                    <div>
+                      <h3 className="m-0 text-xl font-medium tracking-[-0.03em] uppercase">{method.title}</h3>
+                      <p className="m-0 mt-3 text-xs leading-5 text-black/50 transition-colors group-hover:text-white/55">{method.description}</p>
+                      <span className="mt-6 inline-block text-sm underline underline-offset-4">
+                        {method.action}
+                      </span>
+                    </div>
+                  </>
+                );
+
+                if (method.title === "Phone") {
+                  return (
+                    <PhoneContactLink key={method.title} className={className}>
+                      {content}
+                    </PhoneContactLink>
+                  );
+                }
+
+                return (
+                  <a
+                    key={method.title}
+                    href={method.href}
+                    target={method.title === "WhatsApp" ? "_blank" : undefined}
+                    rel={method.title === "WhatsApp" ? "noopener noreferrer" : undefined}
+                    className={className}
+                  >
+                    {content}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </section>
