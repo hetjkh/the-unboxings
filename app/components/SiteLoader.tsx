@@ -1,10 +1,14 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import type { gsap as GsapNS } from "gsap";
 import {
+  isBrandLoaderPath,
   isCollectionPath,
-  isSiteLoaderComplete,
+  prepareSiteLoader,
+  resetCollectionImagesReady,
+  resetHeroVideoReady,
   signalSiteLoaderComplete,
   waitForCollectionImagesReady,
   waitForHeroVideoReady,
@@ -16,21 +20,6 @@ type GsapTimeline = ReturnType<typeof GsapNS.timeline>;
 
 function finishLoader() {
   signalSiteLoaderComplete();
-}
-
-function playExit(
-  gsap: typeof GsapNS,
-  overlay: HTMLElement,
-  onDone: () => void,
-): GsapTimeline {
-  const timeline = gsap.timeline({ onComplete: onDone });
-  gsap.set(overlay, { autoAlpha: 1, yPercent: 0 });
-  timeline.to(overlay, {
-    yPercent: -100,
-    duration: 0.7,
-    ease: "power3.inOut",
-  });
-  return timeline;
 }
 
 /** Brand intro → wait for page media → brand outro + slide away. */
@@ -116,36 +105,47 @@ function playBrandLoader(
 }
 
 export default function SiteLoader() {
+  const pathname = usePathname();
   const overlayRef = useRef<HTMLDivElement>(null);
   const theRef = useRef<HTMLSpanElement>(null);
   const unboxingRef = useRef<HTMLSpanElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
-  // Visible on SSR + first paint so content never flashes underneath.
-  const [visible, setVisible] = useState(() => !isSiteLoaderComplete());
+  const [visible, setVisible] = useState(true);
+  const [cycle, setCycle] = useState(0);
 
+  // Re-show the white brand loader on home + collection navigations.
   useLayoutEffect(() => {
-    // Already finished on a previous soft navigation — stay out of the way.
-    if (isSiteLoaderComplete()) {
+    if (!isBrandLoaderPath(pathname)) {
+      // Non-brand routes: if we somehow still cover the page, clear it.
+      finishLoader();
       setVisible(false);
       return;
     }
 
-    // Hide boot cover via CSS class only — never remove React-owned DOM nodes.
-    document.documentElement.classList.add("site-loading");
-    document.documentElement.style.overflow = "hidden";
+    prepareSiteLoader();
+    if (isCollectionPath(pathname)) resetCollectionImagesReady();
+    if (pathname === "/" || pathname === "") resetHeroVideoReady();
+    setVisible(true);
+    setCycle((value) => value + 1);
+  }, [pathname]);
+
+  // Run the animation after the overlay is mounted and refs exist.
+  useLayoutEffect(() => {
+    if (!visible || cycle === 0) return;
+    if (!isBrandLoaderPath(pathname)) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isHome = window.location.pathname === "/" || window.location.pathname === "";
-    const isCollection = isCollectionPath();
-
     if (reduceMotion) {
       finishLoader();
       setVisible(false);
       return;
     }
 
-    // Home + collections: full brand animation while media warms behind.
-    if (isHome || isCollection) {
+    let cancelled = false;
+    let timeline: GsapTimeline | null = null;
+    let failSafe = 0;
+
+    const start = () => {
       const overlay = overlayRef.current;
       const theWord = theRef.current;
       const unboxingWord = unboxingRef.current;
@@ -157,11 +157,10 @@ export default function SiteLoader() {
         return;
       }
 
-      let cancelled = false;
-      let timeline: GsapTimeline | null = null;
-
       const waitForMedia = () =>
-        isCollection ? waitForCollectionImagesReady(4500) : waitForHeroVideoReady(5000);
+        isCollectionPath(pathname)
+          ? waitForCollectionImagesReady(4500)
+          : waitForHeroVideoReady(5000);
 
       void import("gsap").then(({ default: gsap }) => {
         if (cancelled) return;
@@ -178,48 +177,23 @@ export default function SiteLoader() {
         );
       });
 
-      const failSafe = window.setTimeout(() => {
+      failSafe = window.setTimeout(() => {
         if (cancelled) return;
         finishLoader();
         setVisible(false);
       }, 10000);
+    };
 
-      return () => {
-        cancelled = true;
-        window.clearTimeout(failSafe);
-        timeline?.kill();
-      };
-    }
-
-    // Other pages: quick slide away.
-    const overlay = overlayRef.current;
-    let cancelled = false;
-    let timeline: GsapTimeline | null = null;
-
-    void import("gsap").then(({ default: gsap }) => {
-      if (cancelled || !overlay) {
-        finishLoader();
-        setVisible(false);
-        return;
-      }
-
-      timeline = playExit(gsap, overlay, () => {
-        finishLoader();
-        setVisible(false);
-      });
-    });
-
-    const failSafe = window.setTimeout(() => {
-      finishLoader();
-      setVisible(false);
-    }, 2000);
+    // Wait one frame so refs attach after setVisible(true) on soft navigations.
+    const raf = window.requestAnimationFrame(start);
 
     return () => {
       cancelled = true;
+      window.cancelAnimationFrame(raf);
       window.clearTimeout(failSafe);
       timeline?.kill();
     };
-  }, []);
+  }, [visible, cycle, pathname]);
 
   if (!visible) return null;
 

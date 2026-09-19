@@ -26,6 +26,10 @@ export function isCollectionPath(pathname = typeof window !== "undefined" ? wind
   return pathname === "/products" || pathname.startsWith("/products/");
 }
 
+export function isBrandLoaderPath(pathname: string) {
+  return pathname === "/" || pathname === "" || isCollectionPath(pathname);
+}
+
 export function signalHeroVideoReady() {
   if (typeof window === "undefined") return;
   heroVideoReady = true;
@@ -40,6 +44,18 @@ export function signalCollectionImagesReady() {
 
 export function resetCollectionImagesReady() {
   collectionImagesReady = false;
+}
+
+export function resetHeroVideoReady() {
+  heroVideoReady = false;
+}
+
+/** Start a fresh loader cycle (used on soft navigations to home/collections). */
+export function prepareSiteLoader() {
+  if (typeof window === "undefined") return;
+  siteLoaderComplete = false;
+  document.documentElement.classList.add("site-loading");
+  document.documentElement.style.overflow = "hidden";
 }
 
 export function signalSiteLoaderComplete() {
