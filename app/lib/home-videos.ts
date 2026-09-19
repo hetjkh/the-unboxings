@@ -9,5 +9,3 @@ export const HOME_EXPERIENCE_VIDEOS = [
   "/video/3.webm",
   "/video/4.webm",
 ] as const;
-
-export const HOME_VIDEO_CACHE_NAME = "theunboxing-home-videos-v1";

@@ -2,14 +2,15 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import type { gsap as GsapNS } from "gsap";
-import { SITE_LOADER_COMPLETE_EVENT } from "./site-loader-events";
+import { SITE_LOADER_COMPLETE_EVENT, waitForHeroVideoReady } from "./site-loader-events";
 
-export { SITE_LOADER_COMPLETE_EVENT };
+export { SITE_LOADER_COMPLETE_EVENT, HERO_VIDEO_READY_EVENT } from "./site-loader-events";
 
 type GsapTimeline = ReturnType<typeof GsapNS.timeline>;
 
 function finishLoader() {
   document.documentElement.style.overflow = "";
+  document.documentElement.classList.remove("site-loading");
   window.dispatchEvent(new Event(SITE_LOADER_COMPLETE_EVENT));
 }
 
@@ -18,22 +19,20 @@ export default function SiteLoader() {
   const theRef = useRef<HTMLSpanElement>(null);
   const unboxingRef = useRef<HTMLSpanElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
-  const [visible, setVisible] = useState(false);
+  // Visible on SSR + first paint so the hero never flashes underneath.
+  const [visible, setVisible] = useState(true);
 
   useLayoutEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById("site-boot-cover")?.remove();
+    document.documentElement.classList.add("site-loading");
+    document.documentElement.style.overflow = "hidden";
 
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) {
       finishLoader();
+      setVisible(false);
       return;
     }
-
-    setVisible(true);
-    document.documentElement.style.overflow = "hidden";
-  }, []);
-
-  useLayoutEffect(() => {
-    if (!visible) return;
 
     const overlay = overlayRef.current;
     const theWord = theRef.current;
@@ -50,21 +49,17 @@ export default function SiteLoader() {
 
       timeline = gsap.timeline({
         defaults: { ease: "power3.out" },
-        onComplete: () => {
-          finishLoader();
-          setVisible(false);
-        },
       });
 
-      gsap.set(overlay, { autoAlpha: 0 });
+      // Start fully opaque — never fade the cover in over the hero.
+      gsap.set(overlay, { autoAlpha: 1, yPercent: 0 });
       gsap.set([theWord, unboxingWord, line], { autoAlpha: 0 });
       gsap.set(unboxingWord, { y: 28, clipPath: "inset(100% 0% 0% 0%)" });
       gsap.set(theWord, { y: 12 });
       gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
 
       timeline
-        .to(overlay, { autoAlpha: 1, duration: 0.35, ease: "power2.out" })
-        .to(theWord, { autoAlpha: 1, y: 0, duration: 0.7 }, 0.15)
+        .to(theWord, { autoAlpha: 1, y: 0, duration: 0.7 }, 0)
         .to(
           unboxingWord,
           {
@@ -74,10 +69,21 @@ export default function SiteLoader() {
             duration: 1.05,
             ease: "power4.out",
           },
-          0.28,
+          0.12,
         )
-        .to(line, { autoAlpha: 1, scaleX: 1, duration: 0.85, ease: "power2.inOut" }, 0.95)
-        .to({}, { duration: 0.35 })
+        .to(line, { autoAlpha: 1, scaleX: 1, duration: 0.85, ease: "power2.inOut" }, 0.8)
+        .to({}, { duration: 0.2 })
+        .add(() => {
+          timeline?.pause();
+          void waitForHeroVideoReady(5000).then(() => {
+            if (cancelled || !timeline) {
+              finishLoader();
+              setVisible(false);
+              return;
+            }
+            timeline.resume();
+          });
+        })
         .to(
           [theWord, unboxingWord],
           {
@@ -87,7 +93,6 @@ export default function SiteLoader() {
             stagger: 0.04,
             ease: "power3.in",
           },
-          "+=0.05",
         )
         .to(
           line,
@@ -106,6 +111,10 @@ export default function SiteLoader() {
             yPercent: -100,
             duration: 0.95,
             ease: "power4.inOut",
+            onComplete: () => {
+              finishLoader();
+              setVisible(false);
+            },
           },
           "-=0.2",
         );
@@ -115,8 +124,9 @@ export default function SiteLoader() {
       cancelled = true;
       timeline?.kill();
       document.documentElement.style.overflow = "";
+      document.documentElement.classList.remove("site-loading");
     };
-  }, [visible]);
+  }, []);
 
   if (!visible) return null;
 
@@ -124,7 +134,7 @@ export default function SiteLoader() {
     <div
       ref={overlayRef}
       aria-hidden="true"
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-white opacity-0"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-white"
     >
       <div className="flex flex-col items-center px-6 text-center">
         <div className="flex items-baseline justify-center gap-[0.35em] whitespace-nowrap">

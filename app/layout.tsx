@@ -15,7 +15,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
+      <head>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              html.site-loading { overflow: hidden; }
+              #site-boot-cover {
+                position: fixed;
+                inset: 0;
+                z-index: 10000;
+                background: #fff;
+              }
+            `,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add("site-loading");`,
+          }}
+        />
+      </head>
       <body className="flex min-h-full flex-col">
+        <div id="site-boot-cover" aria-hidden="true" />
         <SiteLoader />
         {children}
       </body>

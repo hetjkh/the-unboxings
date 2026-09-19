@@ -15,7 +15,7 @@ import {
   heroOverlayTitleClass,
 } from "./heroCtaStyles";
 import { usePinHeroCta } from "../hooks/usePinHeroCta";
-import { getCachedVideoSrc, preloadVideo, subscribeVideoSrc } from "../lib/video-cache";
+import { signalHeroVideoReady } from "./site-loader-events";
 
 type CampaignHeroProps = {
   ariaLabel: string;
@@ -49,7 +49,6 @@ function getIsMobileSnapshot(): boolean | null {
   return window.matchMedia("(max-width: 767px)").matches;
 }
 
-/** SSR + hydration pass: unknown until the client store snapshot runs. */
 function getIsMobileServerSnapshot(): boolean | null {
   return null;
 }
@@ -83,8 +82,8 @@ export default function CampaignHero({
     getIsMobileSnapshot,
     getIsMobileServerSnapshot,
   );
-  const [playbackSrc, setPlaybackSrc] = useState<string | null>(null);
   const [videoReady, setVideoReady] = useState(false);
+  const signaledRef = useRef(false);
 
   const buttonClassName =
     buttonStyle === "dark" ? heroOverlayButtonDark : heroOverlayButtonLight;
@@ -97,27 +96,28 @@ export default function CampaignHero({
   const hasVideo = Boolean(video || mobileVideo);
 
   useEffect(() => {
+    const el = videoRef.current;
     if (!activeVideo) {
-      setPlaybackSrc(null);
-      setVideoReady(false);
+      // No video on this hero — don't block the site loader.
+      if (priority) signalHeroVideoReady();
       return;
     }
+    if (!el) return;
 
+    signaledRef.current = false;
     setVideoReady(false);
-    const cached = getCachedVideoSrc(activeVideo);
-    if (cached) setPlaybackSrc(cached);
 
-    const unsubscribe = subscribeVideoSrc(activeVideo, setPlaybackSrc);
-    void preloadVideo(activeVideo).then(setPlaybackSrc);
+    const markReady = () => {
+      setVideoReady(true);
+      if (priority && !signaledRef.current) {
+        signaledRef.current = true;
+        signalHeroVideoReady();
+      }
+      el.play().catch(() => {
+        // Autoplay may be blocked until user interaction.
+      });
+    };
 
-    return unsubscribe;
-  }, [activeVideo]);
-
-  useEffect(() => {
-    const el = videoRef.current;
-    if (!el || !playbackSrc) return;
-
-    const markReady = () => setVideoReady(true);
     if (el.readyState >= 3) {
       markReady();
     } else {
@@ -125,17 +125,22 @@ export default function CampaignHero({
       el.addEventListener("loadeddata", markReady);
     }
 
-    el.play().catch(() => {
-      // Autoplay may be blocked until user interaction.
-    });
+    // Safety: never leave the loader waiting forever if the video stalls.
+    const failSafe = window.setTimeout(() => {
+      if (priority && !signaledRef.current) {
+        signaledRef.current = true;
+        signalHeroVideoReady();
+      }
+    }, 4500);
 
     return () => {
+      window.clearTimeout(failSafe);
       el.removeEventListener("canplay", markReady);
       el.removeEventListener("loadeddata", markReady);
     };
-  }, [playbackSrc]);
+  }, [activeVideo, priority]);
 
-  const showPoster = hasVideo && (!playbackSrc || !videoReady);
+  const showPoster = hasVideo && !videoReady;
 
   return (
     <section
@@ -143,10 +148,10 @@ export default function CampaignHero({
       aria-label={ariaLabel}
       className={`relative w-full overflow-hidden ${fullViewport ? "h-svh max-md:min-h-[420px]" : ""}`}
     >
-      {playbackSrc ? (
+      {activeVideo ? (
         <video
           ref={videoRef}
-          key={playbackSrc}
+          key={activeVideo}
           autoPlay
           muted
           loop
@@ -158,7 +163,7 @@ export default function CampaignHero({
           className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ${
             videoReady ? "opacity-100" : "opacity-0"
           }`}
-          src={playbackSrc}
+          src={activeVideo}
         />
       ) : null}
 
