@@ -1,4 +1,4 @@
-import Image from "next/image";
+import CmsImage from "./CmsImage";
 import Link from "next/link";
 import type { Category } from "@/lib/cms/types";
 import type { GridProduct } from "@/lib/cms/nav";
@@ -25,7 +25,7 @@ export default function ProductGrid({
         return (
           <article key={product._id} className="group flex h-full min-w-0 flex-col bg-white">
             <Link href={href} className="relative aspect-square w-full shrink-0 overflow-hidden bg-white no-underline">
-              <Image
+              <CmsImage
                 src={product.image}
                 alt={name}
                 fill

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import ProductGrid from "../../components/ProductGrid";
+import CmsImage from "../../components/CmsImage";
 import { getCategoryBySlug, getCatalog } from "@/lib/cms/queries";
 import { getSiteSettings } from "@/lib/cms/site-settings";
 import { plainTextFromRich } from "@/lib/cms/rich-text";
@@ -51,7 +51,7 @@ export default async function ProductCategoryPage({ params }: { params: Promise<
               containHeaderImage ? "flex items-center justify-center bg-[#0a0a0a]" : ""
             }`}
           >
-            <Image
+            <CmsImage
               src={category.image}
               alt={plainTextFromRich(category.name)}
               fill

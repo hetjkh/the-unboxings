@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import type { NavPayload } from "@/lib/cms/nav";
+import CmsImage from "./CmsImage";
 
 // ─── Navigation Data ────────────────────────────────────────────────────────
 
@@ -379,7 +379,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                     className="group flex flex-col no-underline"
                   >
                     <div className="relative w-full aspect-square overflow-hidden bg-[#f5f5f5]">
-                      <Image
+                      <CmsImage
                         src={product.image}
                         alt={product.name}
                         fill
@@ -427,7 +427,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                     className="group flex flex-col no-underline"
                   >
                     <div className="relative w-full aspect-square overflow-hidden bg-[#f5f5f5]">
-                      <Image
+                      <CmsImage
                         src={industry.image}
                         alt={industry.name}
                         fill

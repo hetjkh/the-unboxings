@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import StartProjectForm from "../../../components/StartProjectForm";
 import FormattedText from "../../../components/FormattedText";
+import CmsImage from "../../../components/CmsImage";
 import { getCatalog, getProductById } from "@/lib/cms/queries";
 import { plainTextFromRich } from "@/lib/cms/rich-text";
 
@@ -83,7 +83,7 @@ export default async function ProductDetailPage({
           <div className="mx-auto grid max-w-[1440px] lg:grid-cols-2">
             <div className="lg:sticky lg:top-[var(--header-height)] lg:self-start">
               <div className="relative aspect-[4/3] overflow-hidden sm:aspect-square">
-                <Image
+                <CmsImage
                   src={product.image}
                   alt={name}
                   fill
@@ -176,7 +176,7 @@ export default async function ProductDetailPage({
                       className="group block text-black no-underline"
                     >
                       <div className="relative aspect-square overflow-hidden">
-                        <Image
+                        <CmsImage
                           src={item.image}
                           alt={itemName}
                           fill

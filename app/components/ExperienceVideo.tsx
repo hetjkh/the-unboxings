@@ -1,26 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { HERO_VIDEO_READY_EVENT, isHeroVideoReady } from "./site-loader-events";
 
 type ExperienceVideoProps = {
   src: string;
   label: string;
 };
 
+/**
+ * Load each clip only when near the viewport — avoids loading all four
+ * full videos at once (which can OOM the tab on cold loads).
+ */
 export default function ExperienceVideo({ src, label }: ExperienceVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
   const [inView, setInView] = useState(false);
   const [ready, setReady] = useState(false);
-  const [heroReady, setHeroReady] = useState(() => isHeroVideoReady());
-
-  useEffect(() => {
-    if (heroReady) return;
-    const onReady = () => setHeroReady(true);
-    window.addEventListener(HERO_VIDEO_READY_EVENT, onReady, { once: true });
-    return () => window.removeEventListener(HERO_VIDEO_READY_EVENT, onReady);
-  }, [heroReady]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -33,17 +28,12 @@ export default function ExperienceVideo({ src, label }: ExperienceVideoProps) {
         if (visible) setShouldLoad(true);
         if (!visible) video.pause();
       },
-      { rootMargin: "280px", threshold: 0.1 },
+      { rootMargin: "200px", threshold: 0.1 },
     );
 
     observer.observe(video);
     return () => observer.disconnect();
   }, []);
-
-  // After hero is ready, preload nearby experience clips even before they enter view.
-  useEffect(() => {
-    if (heroReady) setShouldLoad(true);
-  }, [heroReady]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -73,7 +63,7 @@ export default function ExperienceVideo({ src, label }: ExperienceVideoProps) {
       muted
       loop
       playsInline
-      preload={shouldLoad ? "auto" : "none"}
+      preload={shouldLoad ? "metadata" : "none"}
       className={`h-full w-full object-cover object-center transition-[transform,opacity] duration-500 group-hover:scale-105 ${
         ready ? "opacity-100" : "opacity-0"
       }`}

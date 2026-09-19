@@ -12,6 +12,10 @@ function finishLoader() {
   signalSiteLoaderComplete();
 }
 
+function removeBootCover() {
+  document.getElementById("site-boot-cover")?.remove();
+}
+
 export default function SiteLoader() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const theRef = useRef<HTMLSpanElement>(null);
@@ -21,15 +25,59 @@ export default function SiteLoader() {
   const [visible, setVisible] = useState(true);
 
   useLayoutEffect(() => {
-    document.getElementById("site-boot-cover")?.remove();
+    removeBootCover();
     document.documentElement.classList.add("site-loading");
     document.documentElement.style.overflow = "hidden";
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isHome = window.location.pathname === "/" || window.location.pathname === "";
+
     if (reduceMotion) {
       finishLoader();
       setVisible(false);
       return;
+    }
+
+    // Non-home pages: dismiss quickly so collections/images aren't blocked.
+    if (!isHome) {
+      const overlay = overlayRef.current;
+      let cancelled = false;
+      let timeline: GsapTimeline | null = null;
+
+      void import("gsap").then(({ default: gsap }) => {
+        if (cancelled || !overlay) {
+          finishLoader();
+          setVisible(false);
+          return;
+        }
+
+        timeline = gsap.timeline({
+          onComplete: () => {
+            finishLoader();
+            setVisible(false);
+          },
+        });
+        gsap.set(overlay, { autoAlpha: 1, yPercent: 0 });
+        timeline.to(overlay, {
+          yPercent: -100,
+          duration: 0.55,
+          ease: "power3.inOut",
+          delay: 0.15,
+        });
+      });
+
+      const failSafe = window.setTimeout(() => {
+        finishLoader();
+        setVisible(false);
+      }, 2000);
+
+      return () => {
+        cancelled = true;
+        window.clearTimeout(failSafe);
+        timeline?.kill();
+        document.documentElement.style.overflow = "";
+        document.documentElement.classList.remove("site-loading");
+      };
     }
 
     const overlay = overlayRef.current;
@@ -37,7 +85,11 @@ export default function SiteLoader() {
     const unboxingWord = unboxingRef.current;
     const line = lineRef.current;
 
-    if (!overlay || !theWord || !unboxingWord || !line) return;
+    if (!overlay || !theWord || !unboxingWord || !line) {
+      finishLoader();
+      setVisible(false);
+      return;
+    }
 
     let cancelled = false;
     let timeline: GsapTimeline | null = null;
@@ -118,8 +170,16 @@ export default function SiteLoader() {
         );
     });
 
+    // Absolute failsafe — never leave the site covered.
+    const failSafe = window.setTimeout(() => {
+      if (cancelled) return;
+      finishLoader();
+      setVisible(false);
+    }, 10000);
+
     return () => {
       cancelled = true;
+      window.clearTimeout(failSafe);
       timeline?.kill();
       document.documentElement.style.overflow = "";
       document.documentElement.classList.remove("site-loading");

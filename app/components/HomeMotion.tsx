@@ -81,10 +81,12 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
               duration: 0.85,
               stagger: 0.1,
               ease: "power3.out",
+              immediateRender: false,
               scrollTrigger: {
                 trigger: section,
-                start: "top 82%",
+                start: "top 85%",
                 once: true,
+                toggleActions: "play none none none",
               },
             });
           }
@@ -96,10 +98,12 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
             scale: 0.96,
             duration: 1.15,
             ease: "power3.out",
+            immediateRender: false,
             scrollTrigger: {
               trigger: media,
-              start: "top 88%",
+              start: "top 90%",
               once: true,
+              toggleActions: "play none none none",
             },
           });
         });
@@ -110,20 +114,31 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
             y: 48,
             duration: 0.95,
             ease: "power3.out",
+            immediateRender: false,
             scrollTrigger: {
               trigger: card,
-              start: "top 88%",
+              start: "top 90%",
               once: true,
+              toggleActions: "play none none none",
             },
           });
         });
       }, root);
+
+      // Loader changes layout — refresh triggers so in-view cards animate instead of staying hidden.
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
     };
 
     if (reduceMotion || isSiteLoaderComplete()) {
       setupMotion();
     } else {
       window.addEventListener(SITE_LOADER_COMPLETE_EVENT, setupMotion, { once: true });
+      // Failsafe: never leave motion unset if the loader event is missed.
+      window.setTimeout(() => {
+        if (!context) setupMotion();
+      }, 8000);
     }
 
     const refreshScrollPositions = () => ScrollTrigger.refresh();

@@ -14,7 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    // site-loading is intentional on SSR so the boot cover matches; SiteLoader removes it.
+    <html lang="en" className="h-full antialiased site-loading" suppressHydrationWarning>
       <head>
         <style
           dangerouslySetInnerHTML={{
@@ -25,13 +26,10 @@ export default function RootLayout({
                 inset: 0;
                 z-index: 10000;
                 background: #fff;
+                pointer-events: none;
               }
+              html:not(.site-loading) #site-boot-cover { display: none !important; }
             `,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `document.documentElement.classList.add("site-loading");`,
           }}
         />
       </head>

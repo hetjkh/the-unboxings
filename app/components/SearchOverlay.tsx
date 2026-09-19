@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { SearchHit } from "@/app/api/search/route";
+import CmsImage from "./CmsImage";
 
 const TYPE_LABEL: Record<SearchHit["type"], string> = {
   product: "Product",
@@ -404,7 +404,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                         >
                           <div className="relative aspect-square overflow-hidden bg-transparent">
                             {hit.image ? (
-                              <Image
+                              <CmsImage
                                 src={hit.image}
                                 alt={hit.title}
                                 fill
@@ -587,7 +587,7 @@ function ResultMedia({ hit }: { hit: SearchHit }) {
   return (
     <div className="relative h-16 w-16 shrink-0 overflow-hidden bg-transparent">
       {hit.image ? (
-        <Image
+        <CmsImage
           src={hit.image}
           alt=""
           fill
