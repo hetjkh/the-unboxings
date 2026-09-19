@@ -130,3 +130,7 @@ button:active {
   color: rgb(0 0 0 / 35%);
   pointer-events: none;
 }
+
+html.site-loading {
+  overflow: hidden;
+}

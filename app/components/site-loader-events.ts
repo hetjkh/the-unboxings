@@ -50,7 +50,6 @@ export function resetHeroVideoReady() {
   heroVideoReady = false;
 }
 
-/** Start a fresh loader cycle (used on soft navigations to home/collections). */
 export function prepareSiteLoader() {
   if (typeof window === "undefined") return;
   siteLoaderComplete = false;

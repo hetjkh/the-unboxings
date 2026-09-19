@@ -14,28 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // site-loading stays until SiteLoader finishes; do not remove #site-boot-cover from the DOM
-    // (that caused React #418 / insertBefore crashes on client navigations).
-    <html lang="en" className="h-full antialiased site-loading" suppressHydrationWarning>
-      <head>
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              html.site-loading { overflow: hidden; }
-              #site-boot-cover {
-                position: fixed;
-                inset: 0;
-                z-index: 10000;
-                background: #fff;
-                pointer-events: none;
-              }
-              html:not(.site-loading) #site-boot-cover { display: none !important; }
-            `,
-          }}
-        />
-      </head>
+    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <body className="flex min-h-full flex-col">
-        <div id="site-boot-cover" aria-hidden="true" />
         <SiteLoader />
         {children}
       </body>

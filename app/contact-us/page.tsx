@@ -111,9 +111,12 @@ export default function ContactUsPage() {
 
             <div className="mt-12 grid border-t border-l border-black/20 md:grid-cols-3">
               {contactMethods.map((method) => (
-                <article
+                <a
                   key={method.title}
-                  className="group flex min-h-[260px] flex-col justify-between border-r border-b border-black/20 p-6 transition-colors duration-300 hover:bg-black hover:text-white md:min-h-[320px] md:p-8"
+                  href={method.href}
+                  target={method.title === "WhatsApp" ? "_blank" : undefined}
+                  rel={method.title === "WhatsApp" ? "noopener noreferrer" : undefined}
+                  className="group flex min-h-[260px] flex-col justify-between border-r border-b border-black/20 p-6 text-black no-underline transition-colors duration-300 hover:bg-black hover:text-white md:min-h-[320px] md:p-8"
                 >
                   <div className="flex items-start justify-between">
                     <span className="text-[10px] tracking-[0.16em] text-black/35 transition-colors group-hover:text-white/40">{method.number}</span>
@@ -122,16 +125,11 @@ export default function ContactUsPage() {
                   <div>
                     <h3 className="m-0 text-xl font-medium tracking-[-0.03em] uppercase">{method.title}</h3>
                     <p className="m-0 mt-3 text-xs leading-5 text-black/50 transition-colors group-hover:text-white/55">{method.description}</p>
-                    <a
-                      href={method.href}
-                      className="mt-6 inline-block text-sm text-black underline underline-offset-4 transition-colors group-hover:text-white"
-                      target={method.title === "WhatsApp" ? "_blank" : undefined}
-                      rel={method.title === "WhatsApp" ? "noopener noreferrer" : undefined}
-                    >
+                    <span className="mt-6 inline-block text-sm underline underline-offset-4">
                       {method.action}
-                    </a>
+                    </span>
                   </div>
-                </article>
+                </a>
               ))}
             </div>
           </div>

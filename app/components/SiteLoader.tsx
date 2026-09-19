@@ -22,7 +22,6 @@ function finishLoader() {
   signalSiteLoaderComplete();
 }
 
-/** Brand intro → wait for page media → brand outro + slide away. */
 function playBrandLoader(
   gsap: typeof GsapNS,
   els: {
@@ -38,7 +37,7 @@ function playBrandLoader(
   const { overlay, theWord, unboxingWord, line } = els;
   const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-  gsap.set(overlay, { autoAlpha: 1, yPercent: 0 });
+  gsap.set(overlay, { autoAlpha: 1, yPercent: 0, clearProps: "transform" });
   gsap.set([theWord, unboxingWord, line], { autoAlpha: 0 });
   gsap.set(unboxingWord, { y: 28, clipPath: "inset(100% 0% 0% 0%)" });
   gsap.set(theWord, { y: 12 });
@@ -58,7 +57,7 @@ function playBrandLoader(
       0.12,
     )
     .to(line, { autoAlpha: 1, scaleX: 1, duration: 0.85, ease: "power2.inOut" }, 0.8)
-    .to({}, { duration: 0.2 })
+    .to({}, { duration: 0.35 })
     .add(() => {
       timeline.pause();
       void waitForMedia().then(() => {
@@ -110,13 +109,11 @@ export default function SiteLoader() {
   const theRef = useRef<HTMLSpanElement>(null);
   const unboxingRef = useRef<HTMLSpanElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
-  const [visible, setVisible] = useState(true);
-  const [cycle, setCycle] = useState(0);
+  const [visible, setVisible] = useState(() => isBrandLoaderPath(pathname || "/"));
+  const runIdRef = useRef(0);
 
-  // Re-show the white brand loader on home + collection navigations.
   useLayoutEffect(() => {
     if (!isBrandLoaderPath(pathname)) {
-      // Non-brand routes: if we somehow still cover the page, clear it.
       finishLoader();
       setVisible(false);
       return;
@@ -125,14 +122,6 @@ export default function SiteLoader() {
     prepareSiteLoader();
     if (isCollectionPath(pathname)) resetCollectionImagesReady();
     if (pathname === "/" || pathname === "") resetHeroVideoReady();
-    setVisible(true);
-    setCycle((value) => value + 1);
-  }, [pathname]);
-
-  // Run the animation after the overlay is mounted and refs exist.
-  useLayoutEffect(() => {
-    if (!visible || cycle === 0) return;
-    if (!isBrandLoaderPath(pathname)) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) {
@@ -141,51 +130,77 @@ export default function SiteLoader() {
       return;
     }
 
+    setVisible(true);
+    const runId = ++runIdRef.current;
     let cancelled = false;
     let timeline: GsapTimeline | null = null;
     let failSafe = 0;
 
-    const start = () => {
+    // Defer one frame so the overlay is in the DOM with refs after setVisible(true).
+    const raf = window.requestAnimationFrame(() => {
+      if (cancelled || runId !== runIdRef.current) return;
+
       const overlay = overlayRef.current;
       const theWord = theRef.current;
       const unboxingWord = unboxingRef.current;
       const line = lineRef.current;
 
       if (!overlay || !theWord || !unboxingWord || !line) {
-        finishLoader();
-        setVisible(false);
+        // Refs not ready yet — try once more next frame.
+        window.requestAnimationFrame(() => {
+          if (cancelled || runId !== runIdRef.current) return;
+          const o = overlayRef.current;
+          const t = theRef.current;
+          const u = unboxingRef.current;
+          const l = lineRef.current;
+          if (!o || !t || !u || !l) {
+            finishLoader();
+            setVisible(false);
+            return;
+          }
+          void import("gsap").then(({ default: gsap }) => {
+            if (cancelled || runId !== runIdRef.current) return;
+            timeline = playBrandLoader(
+              gsap,
+              { overlay: o, theWord: t, unboxingWord: u, line: l },
+              () =>
+                isCollectionPath(pathname)
+                  ? waitForCollectionImagesReady(4500)
+                  : waitForHeroVideoReady(5000),
+              () => {
+                finishLoader();
+                setVisible(false);
+              },
+              () => cancelled || runId !== runIdRef.current,
+            );
+          });
+        });
         return;
       }
 
-      const waitForMedia = () =>
-        isCollectionPath(pathname)
-          ? waitForCollectionImagesReady(4500)
-          : waitForHeroVideoReady(5000);
-
       void import("gsap").then(({ default: gsap }) => {
-        if (cancelled) return;
-
+        if (cancelled || runId !== runIdRef.current) return;
         timeline = playBrandLoader(
           gsap,
           { overlay, theWord, unboxingWord, line },
-          waitForMedia,
+          () =>
+            isCollectionPath(pathname)
+              ? waitForCollectionImagesReady(4500)
+              : waitForHeroVideoReady(5000),
           () => {
             finishLoader();
             setVisible(false);
           },
-          () => cancelled,
+          () => cancelled || runId !== runIdRef.current,
         );
       });
+    });
 
-      failSafe = window.setTimeout(() => {
-        if (cancelled) return;
-        finishLoader();
-        setVisible(false);
-      }, 10000);
-    };
-
-    // Wait one frame so refs attach after setVisible(true) on soft navigations.
-    const raf = window.requestAnimationFrame(start);
+    failSafe = window.setTimeout(() => {
+      if (cancelled || runId !== runIdRef.current) return;
+      finishLoader();
+      setVisible(false);
+    }, 10000);
 
     return () => {
       cancelled = true;
@@ -193,7 +208,7 @@ export default function SiteLoader() {
       window.clearTimeout(failSafe);
       timeline?.kill();
     };
-  }, [visible, cycle, pathname]);
+  }, [pathname]);
 
   if (!visible) return null;
 
