@@ -1,29 +1,30 @@
 import Link from "next/link";
 import ExperienceVideo from "./ExperienceVideo";
+import { HOME_EXPERIENCE_VIDEOS } from "../lib/home-videos";
 
 const categories = [
   {
     title: "Employee",
     tagline: "Welcome. Recognize. Celebrate.",
-    video: "/video/1.webm",
+    video: HOME_EXPERIENCE_VIDEOS[0],
     href: "/contact-us#start-project",
   },
   {
     title: "Client",
     tagline: "Thank. Connect. Be remembered.",
-    video: "/video/2.webm",
+    video: HOME_EXPERIENCE_VIDEOS[1],
     href: "/contact-us#start-project",
   },
   {
     title: "Brand",
     tagline: "Make your brand tangible.",
-    video: "/video/3.webm",
+    video: HOME_EXPERIENCE_VIDEOS[2],
     href: "/contact-us#start-project",
   },
   {
     title: "Event",
     tagline: "Make the moment last.",
-    video: "/video/4.webm",
+    video: HOME_EXPERIENCE_VIDEOS[3],
     href: "/contact-us#start-project",
   },
 ];

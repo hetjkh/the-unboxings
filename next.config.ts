@@ -38,6 +38,16 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // Hero + experience videos — long CDN/browser cache
+        source: "/:path*\\.:extension(webm|mp4)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: `public, max-age=${IMAGE_CACHE_TTL}, stale-while-revalidate=86400`,
+          },
+        ],
+      },
+      {
         // Uploaded files use unique names — safe to cache immutably
         source: "/uploads/:path*",
         headers: [

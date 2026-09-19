@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   heroCtaContainerClass,
   heroOverlayButtonDark,
@@ -15,6 +15,7 @@ import {
   heroOverlayTitleClass,
 } from "./heroCtaStyles";
 import { usePinHeroCta } from "../hooks/usePinHeroCta";
+import { getCachedVideoSrc, preloadVideo, subscribeVideoSrc } from "../lib/video-cache";
 
 type CampaignHeroProps = {
   ariaLabel: string;
@@ -38,6 +39,21 @@ type CampaignHeroProps = {
   fullViewport?: boolean;
 };
 
+function subscribeIsMobile(onChange: () => void) {
+  const media = window.matchMedia("(max-width: 767px)");
+  media.addEventListener("change", onChange);
+  return () => media.removeEventListener("change", onChange);
+}
+
+function getIsMobileSnapshot(): boolean | null {
+  return window.matchMedia("(max-width: 767px)").matches;
+}
+
+/** SSR + hydration pass: unknown until the client store snapshot runs. */
+function getIsMobileServerSnapshot(): boolean | null {
+  return null;
+}
+
 export default function CampaignHero({
   ariaLabel,
   title,
@@ -60,16 +76,15 @@ export default function CampaignHero({
   fullViewport = false,
 }: CampaignHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const pinCta = usePinHeroCta(sectionRef);
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    const media = window.matchMedia("(max-width: 767px)");
-    const sync = () => setIsMobile(media.matches);
-    sync();
-    media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
-  }, []);
+  const isMobile = useSyncExternalStore(
+    subscribeIsMobile,
+    getIsMobileSnapshot,
+    getIsMobileServerSnapshot,
+  );
+  const [playbackSrc, setPlaybackSrc] = useState<string | null>(null);
+  const [videoReady, setVideoReady] = useState(false);
 
   const buttonClassName =
     buttonStyle === "dark" ? heroOverlayButtonDark : heroOverlayButtonLight;
@@ -81,30 +96,70 @@ export default function CampaignHero({
     isMobile == null ? undefined : isMobile ? mobileVideo || video : video;
   const hasVideo = Boolean(video || mobileVideo);
 
+  useEffect(() => {
+    if (!activeVideo) {
+      setPlaybackSrc(null);
+      setVideoReady(false);
+      return;
+    }
+
+    setVideoReady(false);
+    const cached = getCachedVideoSrc(activeVideo);
+    if (cached) setPlaybackSrc(cached);
+
+    const unsubscribe = subscribeVideoSrc(activeVideo, setPlaybackSrc);
+    void preloadVideo(activeVideo).then(setPlaybackSrc);
+
+    return unsubscribe;
+  }, [activeVideo]);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || !playbackSrc) return;
+
+    const markReady = () => setVideoReady(true);
+    if (el.readyState >= 3) {
+      markReady();
+    } else {
+      el.addEventListener("canplay", markReady);
+      el.addEventListener("loadeddata", markReady);
+    }
+
+    el.play().catch(() => {
+      // Autoplay may be blocked until user interaction.
+    });
+
+    return () => {
+      el.removeEventListener("canplay", markReady);
+      el.removeEventListener("loadeddata", markReady);
+    };
+  }, [playbackSrc]);
+
+  const showPoster = hasVideo && (!playbackSrc || !videoReady);
+
   return (
     <section
       ref={sectionRef}
       aria-label={ariaLabel}
       className={`relative w-full overflow-hidden ${fullViewport ? "h-svh max-md:min-h-[420px]" : ""}`}
     >
-      {activeVideo ? (
+      {playbackSrc ? (
         <video
-          key={activeVideo}
+          ref={videoRef}
+          key={playbackSrc}
           autoPlay
           muted
           loop
           playsInline
-          preload={priority ? "metadata" : "none"}
+          preload={priority ? "auto" : "metadata"}
           poster={image}
           aria-hidden="true"
           tabIndex={-1}
-          className="absolute inset-0 h-full w-full object-cover object-center"
-        >
-          <source
-            src={activeVideo}
-            type={activeVideo.endsWith(".webm") ? "video/webm" : "video/mp4"}
-          />
-        </video>
+          className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ${
+            videoReady ? "opacity-100" : "opacity-0"
+          }`}
+          src={playbackSrc}
+        />
       ) : null}
 
       {!hasVideo && mobileImage ? (
@@ -131,7 +186,7 @@ export default function CampaignHero({
         />
       ) : null}
 
-      {hasVideo && !activeVideo ? (
+      {showPoster ? (
         <Image
           src={image}
           alt={imageAlt}

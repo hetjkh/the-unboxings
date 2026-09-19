@@ -1,4 +1,5 @@
 import CampaignHero from "./CampaignHero";
+import { HOME_HERO_DESKTOP_VIDEO, HOME_HERO_MOBILE_VIDEO, HOME_HERO_POSTER } from "../lib/home-videos";
 
 export default function Hero() {
   return (
@@ -14,9 +15,9 @@ export default function Hero() {
       titleAlt="Not just given. Remembered."
       subline="Corporate gifting, designed differently."
       heading
-      image="/hero1.webp"
-      video="/hero.webm"
-      mobileVideo="/video.webm"
+      image={HOME_HERO_POSTER}
+      video={HOME_HERO_DESKTOP_VIDEO}
+      mobileVideo={HOME_HERO_MOBILE_VIDEO}
       splitLayout
       priority
       bottomGradient
