@@ -15,6 +15,10 @@ export type ProjectBriefPayload = {
   objectives: string;
   additionalNotes: string;
   specificIdeas: string;
+  lookingFor: string;
+  whereUsed: string;
+  whatInMind: string;
+  formVariant: string;
   productInterest: string;
   productCategory: string;
 };
@@ -70,6 +74,8 @@ export function buildProjectBriefEmail(fields: ProjectBriefPayload) {
     ] as const
   ).filter(([, value]) => value.trim());
 
+  const isActivation = fields.formVariant.trim() === "activation";
+
   const briefRows = (
     [
       ["Company", fields.company],
@@ -77,15 +83,26 @@ export function buildProjectBriefEmail(fields: ProjectBriefPayload) {
       ["Email", fields.contactEmail],
       ["Delivery location", fields.location],
       ["International country", fields.locationCountry],
-      ["Audience", fields.audience],
-      ["Occasion", fields.occasion],
-      ["Quantity", fields.quantity],
-      ["Budget", fields.budget],
-      ["Timeline", fields.timeline],
-      ["Industry", fields.industry],
-      ["Objectives", fields.objectives],
-      ["Additional notes", fields.additionalNotes],
-      ["Specific ideas", fields.specificIdeas],
+      ...(isActivation
+        ? ([
+            ["What are you looking for?", fields.lookingFor],
+            ["Where will it be used?", fields.whereUsed],
+            ["What should it achieve?", fields.objectives],
+            ["When do you need it?", fields.timeline],
+            ["What's your budget?", fields.budget],
+            ["What do you have in mind?", fields.whatInMind],
+          ] as const)
+        : ([
+            ["Audience", fields.audience],
+            ["Occasion", fields.occasion],
+            ["Quantity", fields.quantity],
+            ["Budget", fields.budget],
+            ["Timeline", fields.timeline],
+            ["Industry", fields.industry],
+            ["Objectives", fields.objectives],
+            ["Additional notes", fields.additionalNotes],
+            ["Specific ideas", fields.specificIdeas],
+          ] as const)),
     ] as const
   ).filter(([, value]) => value.trim());
 

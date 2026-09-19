@@ -55,6 +55,12 @@ export default async function ProductDetailPage({
   const category = catalog.categories.find((item) => item.slug === product.categorySlug);
   const name = plainTextFromRich(product.name);
   const categoryName = plainTextFromRich(category?.name ?? "Products");
+  const categoryProducts = catalog.products.filter((item) => item.categorySlug === product.categorySlug);
+  const productIndex = categoryProducts.findIndex((item) => item._id === product._id);
+  const formVariant =
+    product.categorySlug === "events-activations" && productIndex >= 0 && productIndex < 16
+      ? "activation"
+      : "default";
 
   const related = [
     ...catalog.products.filter(
@@ -126,6 +132,7 @@ export default async function ProductDetailPage({
                 <StartProjectForm
                   productName={name}
                   productCategory={categoryName}
+                  formVariant={formVariant}
                 />
               </div>
             </div>

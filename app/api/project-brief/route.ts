@@ -21,6 +21,10 @@ const FIELD_KEYS = [
   "objectives",
   "additionalNotes",
   "specificIdeas",
+  "lookingFor",
+  "whereUsed",
+  "whatInMind",
+  "formVariant",
   "productInterest",
   "productCategory",
 ] as const;

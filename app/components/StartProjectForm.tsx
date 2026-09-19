@@ -138,16 +138,50 @@ const industryOptions = [
   "Luxury & Fashion",
 ] as const;
 
+const lookingForOptions = [
+  "Activation",
+  "Pop-up",
+  "Display",
+  "Counter or kiosk",
+  "Installation",
+  "Not sure yet",
+] as const;
+
+const whereUsedOptions = [
+  "Event",
+  "Retail",
+  "Mall",
+  "Office",
+  "Hotel",
+  "Exhibition",
+  "Other",
+] as const;
+
+const activationBudgetOptions = [
+  "Under AED 10,000",
+  "AED 10,000–25,000",
+  "AED 25,000–50,000",
+  "AED 50,000–100,000",
+  "AED 100,000+",
+  "Prefer to discuss",
+] as const;
+
 const fieldClassName =
   "mt-3 w-full appearance-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black";
+
+const textareaClassName =
+  "mt-3 w-full resize-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm leading-6 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black";
 
 export default function StartProjectForm({
   productName,
   productCategory,
+  formVariant = "default",
 }: {
   productName?: string;
   productCategory?: string;
+  formVariant?: "default" | "activation";
 }) {
+  const isActivation = formVariant === "activation";
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
   const [briefFile, setBriefFile] = useState<File | null>(null);
@@ -269,6 +303,7 @@ export default function StartProjectForm({
         <legend className="sr-only">Your project brief</legend>
         {productName ? <input type="hidden" name="productInterest" value={productName} /> : null}
         {productCategory ? <input type="hidden" name="productCategory" value={productCategory} /> : null}
+        <input type="hidden" name="formVariant" value={formVariant} />
 
         {textFields.map((field) => (
           <label key={field.name} className="group block">
@@ -323,63 +358,126 @@ export default function StartProjectForm({
           <input type="hidden" name="locationCountry" value="" />
         )}
 
-        <BlackSelect
-          name="audience"
-          label="Audience"
-          placeholder="Who is this for?"
-          groups={audienceGroups}
-        />
+        {isActivation ? (
+          <>
+            <BlackSelect
+              name="lookingFor"
+              label="What are you looking for?"
+              placeholder="Activation / Pop-up / Display / Counter or kiosk / Installation / Not sure yet"
+              options={lookingForOptions}
+            />
 
-        {selectFields.map((field) => (
-          <BlackSelect
-            key={field.name}
-            name={field.name}
-            label={field.label}
-            placeholder={field.placeholder}
-            options={field.options}
-          />
-        ))}
+            <BlackSelect
+              name="whereUsed"
+              label="Where will it be used?"
+              placeholder="Event / Retail / Mall / Office / Hotel / Exhibition / Other"
+              options={whereUsedOptions}
+            />
 
-        <div className="md:col-span-2">
-          <BlackSelect name="industry" label="Industry" placeholder="Your industry" options={industryOptions} />
-        </div>
+            <label className="group block md:col-span-2">
+              <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
+                What should it achieve?
+              </span>
+              <AutoGrowTextarea
+                name="objectives"
+                minRows={1}
+                placeholder="Tell us what you'd like people to experience, do or remember"
+                className={textareaClassName}
+              />
+            </label>
 
-        <label className="group block md:col-span-2">
-          <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">Objectives</span>
-          <AutoGrowTextarea
-            name="objectives"
-            minRows={1}
-            placeholder="What should this experience achieve?"
-            className="mt-3 w-full resize-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm leading-6 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black"
-          />
-        </label>
+            <label className="group block">
+              <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
+                When do you need it?
+              </span>
+              <input
+                name="timeline"
+                type="text"
+                placeholder="Date / approximate timeline"
+                className={fieldClassName}
+              />
+            </label>
 
-        <label className="group block md:col-span-2">
-          <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
-            Additional notes or requirements
-          </span>
-          <span className="mt-2 block text-xs leading-5 text-black/40">
-            For example items to be included, materials, etc.
-          </span>
-          <AutoGrowTextarea
-            name="additionalNotes"
-            minRows={1}
-            placeholder="Share any must-haves, materials, inclusions or constraints"
-            className="mt-3 w-full resize-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm leading-6 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black"
-          />
-        </label>
+            <BlackSelect
+              name="budget"
+              label="What's your budget?"
+              placeholder="Budget ranges"
+              options={activationBudgetOptions}
+            />
 
-        <label className="group block md:col-span-2">
-          <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
-            Are there any specific ideas you already have?
-          </span>
-          <AutoGrowTextarea
-            name="specificIdeas"
-            minRows={1}
-            placeholder="Mood, references, product directions, packaging thoughts…"
-            className="mt-3 w-full resize-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-sm leading-6 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-black"
-          />
-        </label>
+            <label className="group block md:col-span-2">
+              <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
+                What do you have in mind?
+              </span>
+              <AutoGrowTextarea
+                name="whatInMind"
+                minRows={1}
+                placeholder="Share any ideas, references or direction you already have"
+                className={textareaClassName}
+              />
+            </label>
+          </>
+        ) : (
+          <>
+            <BlackSelect
+              name="audience"
+              label="Audience"
+              placeholder="Who is this for?"
+              groups={audienceGroups}
+            />
+
+            {selectFields.map((field) => (
+              <BlackSelect
+                key={field.name}
+                name={field.name}
+                label={field.label}
+                placeholder={field.placeholder}
+                options={field.options}
+              />
+            ))}
+
+            <div className="md:col-span-2">
+              <BlackSelect name="industry" label="Industry" placeholder="Your industry" options={industryOptions} />
+            </div>
+
+            <label className="group block md:col-span-2">
+              <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">Objectives</span>
+              <AutoGrowTextarea
+                name="objectives"
+                minRows={1}
+                placeholder="What should this experience achieve?"
+                className={textareaClassName}
+              />
+            </label>
+
+            <label className="group block md:col-span-2">
+              <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
+                Additional notes or requirements
+              </span>
+              <span className="mt-2 block text-xs leading-5 text-black/40">
+                For example items to be included, materials, etc.
+              </span>
+              <AutoGrowTextarea
+                name="additionalNotes"
+                minRows={1}
+                placeholder="Share any must-haves, materials, inclusions or constraints"
+                className={textareaClassName}
+              />
+            </label>
+
+            <label className="group block md:col-span-2">
+              <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">
+                Are there any specific ideas you already have?
+              </span>
+              <AutoGrowTextarea
+                name="specificIdeas"
+                minRows={1}
+                placeholder="Mood, references, product directions, packaging thoughts…"
+                className={textareaClassName}
+              />
+            </label>
+          </>
+        )}
 
         <div className="md:col-span-2">
           <span className="text-[10px] font-bold tracking-[0.14em] text-black uppercase">Brief Upload</span>

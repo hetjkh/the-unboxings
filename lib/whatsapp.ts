@@ -55,46 +55,64 @@ export function projectBriefMessage(fields: Record<string, string>): string {
     "",
   ];
 
-  const order = [
-    "productInterest",
-    "productCategory",
-    "company",
-    "contactPhone",
-    "contactEmail",
-    "location",
-    "locationCountry",
-    "audience",
-    "occasion",
-    "quantity",
-    "budget",
-    "timeline",
-    "industry",
-    "objectives",
-    "additionalNotes",
-    "specificIdeas",
-  ];
+  const isActivation = fields.formVariant?.trim() === "activation";
+
+  const order = isActivation
+    ? [
+        "productInterest",
+        "productCategory",
+        "company",
+        "contactPhone",
+        "contactEmail",
+        "location",
+        "locationCountry",
+        "lookingFor",
+        "whereUsed",
+        "objectives",
+        "timeline",
+        "budget",
+        "whatInMind",
+      ]
+    : [
+        "productInterest",
+        "productCategory",
+        "company",
+        "contactPhone",
+        "contactEmail",
+        "location",
+        "locationCountry",
+        "audience",
+        "occasion",
+        "quantity",
+        "budget",
+        "timeline",
+        "industry",
+        "objectives",
+        "additionalNotes",
+        "specificIdeas",
+      ];
+
+  const labels: Record<string, string> = {
+    productInterest: "Product",
+    productCategory: "Category",
+    contactPhone: "Contact number",
+    contactEmail: "Email",
+    location: "Delivery location",
+    locationCountry: "International country",
+    lookingFor: "What are you looking for?",
+    whereUsed: "Where will it be used?",
+    objectives: isActivation ? "What should it achieve?" : "Objectives",
+    timeline: isActivation ? "When do you need it?" : "Timeline",
+    budget: isActivation ? "What's your budget?" : "Budget",
+    whatInMind: "What do you have in mind?",
+    additionalNotes: "Additional notes",
+    specificIdeas: "Specific ideas",
+  };
 
   for (const key of order) {
     const value = fields[key]?.trim();
     if (!value) continue;
-    const label =
-      key === "productInterest"
-        ? "Product"
-        : key === "productCategory"
-          ? "Category"
-          : key === "contactPhone"
-            ? "Contact number"
-            : key === "contactEmail"
-              ? "Email"
-              : key === "location"
-            ? "Delivery location"
-            : key === "locationCountry"
-              ? "International country"
-              : key === "additionalNotes"
-                ? "Additional notes"
-                : key === "specificIdeas"
-                  ? "Specific ideas"
-                  : key.charAt(0).toUpperCase() + key.slice(1);
+    const label = labels[key] ?? key.charAt(0).toUpperCase() + key.slice(1);
     lines.push(`${label}: ${value}`);
   }
 
