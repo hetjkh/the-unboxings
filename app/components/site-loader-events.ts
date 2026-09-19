@@ -4,15 +4,28 @@ export const SITE_LOADER_COMPLETE_EVENT = "site-loader-complete";
 export const HERO_VIDEO_READY_EVENT = "hero-video-ready";
 
 let heroVideoReady = false;
+let siteLoaderComplete = false;
 
 export function isHeroVideoReady() {
   return heroVideoReady;
+}
+
+export function isSiteLoaderComplete() {
+  return siteLoaderComplete;
 }
 
 export function signalHeroVideoReady() {
   if (typeof window === "undefined") return;
   heroVideoReady = true;
   window.dispatchEvent(new Event(HERO_VIDEO_READY_EVENT));
+}
+
+export function signalSiteLoaderComplete() {
+  if (typeof window === "undefined") return;
+  siteLoaderComplete = true;
+  document.documentElement.style.overflow = "";
+  document.documentElement.classList.remove("site-loading");
+  window.dispatchEvent(new Event(SITE_LOADER_COMPLETE_EVENT));
 }
 
 /** Resolves when the hero can play, or after timeout / non-home routes. */

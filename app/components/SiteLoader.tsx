@@ -2,16 +2,14 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import type { gsap as GsapNS } from "gsap";
-import { SITE_LOADER_COMPLETE_EVENT, waitForHeroVideoReady } from "./site-loader-events";
+import { signalSiteLoaderComplete, waitForHeroVideoReady } from "./site-loader-events";
 
 export { SITE_LOADER_COMPLETE_EVENT, HERO_VIDEO_READY_EVENT } from "./site-loader-events";
 
 type GsapTimeline = ReturnType<typeof GsapNS.timeline>;
 
 function finishLoader() {
-  document.documentElement.style.overflow = "";
-  document.documentElement.classList.remove("site-loading");
-  window.dispatchEvent(new Event(SITE_LOADER_COMPLETE_EVENT));
+  signalSiteLoaderComplete();
 }
 
 export default function SiteLoader() {
