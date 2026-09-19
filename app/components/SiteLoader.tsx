@@ -2,7 +2,12 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import type { gsap as GsapNS } from "gsap";
-import { signalSiteLoaderComplete, waitForHeroVideoReady } from "./site-loader-events";
+import {
+  isCollectionPath,
+  signalSiteLoaderComplete,
+  waitForCollectionImagesReady,
+  waitForHeroVideoReady,
+} from "./site-loader-events";
 
 export { SITE_LOADER_COMPLETE_EVENT, HERO_VIDEO_READY_EVENT } from "./site-loader-events";
 
@@ -14,6 +19,21 @@ function finishLoader() {
 
 function removeBootCover() {
   document.getElementById("site-boot-cover")?.remove();
+}
+
+function playExit(
+  gsap: typeof GsapNS,
+  overlay: HTMLElement,
+  onDone: () => void,
+): GsapTimeline {
+  const timeline = gsap.timeline({ onComplete: onDone });
+  gsap.set(overlay, { autoAlpha: 1, yPercent: 0 });
+  timeline.to(overlay, {
+    yPercent: -100,
+    duration: 0.7,
+    ease: "power3.inOut",
+  });
+  return timeline;
 }
 
 export default function SiteLoader() {
@@ -31,6 +51,7 @@ export default function SiteLoader() {
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isHome = window.location.pathname === "/" || window.location.pathname === "";
+    const isCollection = isCollectionPath();
 
     if (reduceMotion) {
       finishLoader();
@@ -38,7 +59,45 @@ export default function SiteLoader() {
       return;
     }
 
-    // Non-home pages: dismiss quickly so collections/images aren't blocked.
+    // Collection pages: keep the cover up while images warm, then exit.
+    if (isCollection) {
+      const overlay = overlayRef.current;
+      let cancelled = false;
+      let timeline: GsapTimeline | null = null;
+
+      void (async () => {
+        await waitForCollectionImagesReady(4500);
+        if (cancelled) return;
+
+        const { default: gsap } = await import("gsap");
+        if (cancelled || !overlay) {
+          finishLoader();
+          setVisible(false);
+          return;
+        }
+
+        timeline = playExit(gsap, overlay, () => {
+          finishLoader();
+          setVisible(false);
+        });
+      })();
+
+      const failSafe = window.setTimeout(() => {
+        if (cancelled) return;
+        finishLoader();
+        setVisible(false);
+      }, 6000);
+
+      return () => {
+        cancelled = true;
+        window.clearTimeout(failSafe);
+        timeline?.kill();
+        document.documentElement.style.overflow = "";
+        document.documentElement.classList.remove("site-loading");
+      };
+    }
+
+    // Other non-home pages: dismiss quickly.
     if (!isHome) {
       const overlay = overlayRef.current;
       let cancelled = false;
@@ -51,18 +110,9 @@ export default function SiteLoader() {
           return;
         }
 
-        timeline = gsap.timeline({
-          onComplete: () => {
-            finishLoader();
-            setVisible(false);
-          },
-        });
-        gsap.set(overlay, { autoAlpha: 1, yPercent: 0 });
-        timeline.to(overlay, {
-          yPercent: -100,
-          duration: 0.55,
-          ease: "power3.inOut",
-          delay: 0.15,
+        timeline = playExit(gsap, overlay, () => {
+          finishLoader();
+          setVisible(false);
         });
       });
 

@@ -1,15 +1,18 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ProductGrid from "../components/ProductGrid";
+import CollectionImagePreload from "../components/CollectionImagePreload";
 import { getCatalog } from "@/lib/cms/queries";
 
 export const revalidate = 60;
 
 export default async function ProductsPage() {
   const catalog = await getCatalog();
+  const preloadUrls = catalog.products.slice(0, 12).map((product) => product.image);
 
   return (
     <>
+      <CollectionImagePreload urls={preloadUrls} waitFor={8} />
       <Header />
       <main>
         <section aria-label="All Products" className="bg-white">

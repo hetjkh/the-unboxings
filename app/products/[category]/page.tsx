@@ -5,6 +5,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import ProductGrid from "../../components/ProductGrid";
 import CmsImage from "../../components/CmsImage";
+import CollectionImagePreload from "../../components/CollectionImagePreload";
 import { getCategoryBySlug, getCatalog } from "@/lib/cms/queries";
 import { getSiteSettings } from "@/lib/cms/site-settings";
 import { plainTextFromRich } from "@/lib/cms/rich-text";
@@ -39,9 +40,11 @@ export default async function ProductCategoryPage({ params }: { params: Promise<
     settings.whatsappNumber,
     `Hi The Unboxing,\n\nI'd like a curated proposal for the ${plainTextFromRich(category.name)} collection.\n\nPlease share options, MOQ and timeline.`,
   );
+  const preloadUrls = [category.image, ...categoryProducts.slice(0, 12).map((product) => product.image)];
 
   return (
     <>
+      <CollectionImagePreload urls={preloadUrls} waitFor={8} />
       <Header />
       <main className="bg-white">
         <section className={headerClassName} aria-labelledby="category-title">
