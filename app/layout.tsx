@@ -14,7 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // site-loading is intentional on SSR so the boot cover matches; SiteLoader removes it.
+    // site-loading stays until SiteLoader finishes; do not remove #site-boot-cover from the DOM
+    // (that caused React #418 / insertBefore crashes on client navigations).
     <html lang="en" className="h-full antialiased site-loading" suppressHydrationWarning>
       <head>
         <style

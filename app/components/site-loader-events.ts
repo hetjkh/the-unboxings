@@ -38,6 +38,10 @@ export function signalCollectionImagesReady() {
   window.dispatchEvent(new Event(COLLECTION_IMAGES_READY_EVENT));
 }
 
+export function resetCollectionImagesReady() {
+  collectionImagesReady = false;
+}
+
 export function signalSiteLoaderComplete() {
   if (typeof window === "undefined") return;
   siteLoaderComplete = true;

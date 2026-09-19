@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import type { gsap as GsapNS } from "gsap";
 import {
   isCollectionPath,
+  isSiteLoaderComplete,
   signalSiteLoaderComplete,
   waitForCollectionImagesReady,
   waitForHeroVideoReady,
@@ -15,10 +16,6 @@ type GsapTimeline = ReturnType<typeof GsapNS.timeline>;
 
 function finishLoader() {
   signalSiteLoaderComplete();
-}
-
-function removeBootCover() {
-  document.getElementById("site-boot-cover")?.remove();
 }
 
 function playExit(
@@ -124,10 +121,16 @@ export default function SiteLoader() {
   const unboxingRef = useRef<HTMLSpanElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
   // Visible on SSR + first paint so content never flashes underneath.
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(() => !isSiteLoaderComplete());
 
   useLayoutEffect(() => {
-    removeBootCover();
+    // Already finished on a previous soft navigation — stay out of the way.
+    if (isSiteLoaderComplete()) {
+      setVisible(false);
+      return;
+    }
+
+    // Hide boot cover via CSS class only — never remove React-owned DOM nodes.
     document.documentElement.classList.add("site-loading");
     document.documentElement.style.overflow = "hidden";
 
@@ -185,8 +188,6 @@ export default function SiteLoader() {
         cancelled = true;
         window.clearTimeout(failSafe);
         timeline?.kill();
-        document.documentElement.style.overflow = "";
-        document.documentElement.classList.remove("site-loading");
       };
     }
 
@@ -217,8 +218,6 @@ export default function SiteLoader() {
       cancelled = true;
       window.clearTimeout(failSafe);
       timeline?.kill();
-      document.documentElement.style.overflow = "";
-      document.documentElement.classList.remove("site-loading");
     };
   }, []);
 
