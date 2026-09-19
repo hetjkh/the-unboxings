@@ -6,15 +6,9 @@ const IMAGE_CACHE_TTL = 60 * 60 * 24 * 31;
 const nextConfig: NextConfig = {
   serverExternalPackages: ["sharp"],
   images: {
-    // WebP only: AVIF is slower to encode on first transform (cold cache)
-    formats: ["image/webp"],
-    // Keep optimized variants on the Vercel CDN for a full month
-    minimumCacheTTL: IMAGE_CACHE_TTL,
-    // Limit quality variants (Next 16 requires an allowlist)
-    qualities: [75],
-    // Fewer widths = fewer unique transformations to generate/cache
-    deviceSizes: [640, 750, 1080, 1440, 1920],
-    imageSizes: [64, 128, 256, 384],
+    // Bypass Vercel Image Optimization — Hobby/pro quota 402s break /_next/image.
+    // Assets are already WebP (upload pipeline + public/); serve them as static files.
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

@@ -13,9 +13,8 @@ type CmsImageProps = ImageProps & {
 };
 
 /**
- * CMS / Blob images are already on a CDN. Skip Sharp re-optimization for remotes
- * (avoids OOM on big collections). Local paths still use Next Image optimization.
- * Fades in once decoded for a smoother grid load.
+ * Soft fade-in for CMS / grid images. Optimization is off globally in next.config
+ * (avoids Vercel Image Optimization 402 quota). Remotes stay unoptimized explicitly.
  */
 export default function CmsImage({
   src,
