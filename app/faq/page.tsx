@@ -1,6 +1,8 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FaqAccordion from "../components/FaqAccordion";
+import DeferredHomeMotion from "../components/DeferredHomeMotion";
+import { faqs } from "../data/faqs";
 
 export const metadata = {
   title: "FAQ | The Unboxing — Corporate Gifts UAE",
@@ -8,101 +10,90 @@ export const metadata = {
     "Answers about MOQs, lead times, branding methods, sampling, packaging, and delivery for The Unboxing.",
 };
 
-const faqs = [
-  {
-    question: "What is the minimum order quantity (MOQ)?",
-    answer:
-      "Our MOQ varies by product type. For most branded merchandise, we start from 50 units. Some products like premium executive gifts can be ordered in smaller quantities, while others like promotional merchandise have MOQs of 100–250 units. Contact us and we'll advise based on your specific requirements.",
-  },
-  {
-    question: "How long does production take?",
-    answer:
-      "Lead times depend on product complexity and quantity. Standard branded items typically take 7–14 business days. Complex products with multiple branding techniques or custom packaging may require 15–21 days. Rush orders (under 7 days) are possible for select products with an additional charge. We always advise ordering 3–4 weeks ahead of your event or delivery date.",
-  },
-  {
-    question: "What branding methods do you offer?",
-    answer:
-      "We offer a full suite of branding techniques: Laser Engraving, UV Printing, Screen Printing, Embroidery, Foil Stamping, Debossing, DTF (Direct-to-Film) Printing, Sublimation, and Digital Printing. The best method depends on your product, material, and design. Our team will recommend the most suitable option.",
-  },
-  {
-    question: "Can we get a product sample before placing a bulk order?",
-    answer:
-      "Yes — we strongly encourage pre-production sampling. For branded samples, there is typically a sample charge that covers the production and branding of 1–3 units. This is often deducted from your final order once you proceed. Sample lead time is typically 5–7 business days.",
-  },
-  {
-    question: "Can you handle custom packaging design?",
-    answer:
-      "Absolutely. Our packaging team designs and produces rigid boxes, magnetic closure boxes, mailer boxes, custom inserts, tissue paper, ribbons, personalized cards, and more. Packaging can be fully branded to match your corporate identity. Minimum quantities for custom packaging apply.",
-  },
-  {
-    question: "Do you ship internationally?",
-    answer:
-      "Yes. While we are UAE-based, we deliver worldwide. International shipping costs, duties, and lead times vary by destination. We work with trusted logistics partners to ensure safe, timely delivery. Contact us for a shipping quote to your specific location.",
-  },
-  {
-    question: "Do you provide digital mockups before production?",
-    answer:
-      "Yes. Before any production begins, our design team prepares digital mockups showing your logo on the product. For complex orders, we can also produce a physical pre-production sample. Production only begins after your written approval.",
-  },
-  {
-    question: "What file formats do you accept for logos?",
-    answer:
-      "For best results, we require vector files: AI, EPS, or PDF. PNG files with transparent backgrounds are acceptable for digital/UV printing. JPEG files are generally not recommended as they lack the resolution needed for high-quality branding.",
-  },
-  {
-    question: "Can you source products not listed on your website?",
-    answer:
-      "Yes. We have access to a global sourcing network. If you have a specific product in mind, share the details and we'll source it for you. Custom product development is also possible for large-volume orders.",
-  },
-  {
-    question: "Do you offer design services for gift concepts?",
-    answer:
-      "Yes. Our creative team can develop gift concept proposals based on your brief, including product selection, branding layout, and packaging design. This is complimentary for qualified inquiries.",
-  },
-  {
-    question: "How can I discuss my requirements?",
-    answer:
-      "Contact us with your requirements — product type, quantity, delivery date, and budget. Our team will respond within 24 hours with a tailored proposal. You can also reach us by email or WhatsApp for urgent requirements.",
-  },
-  {
-    question: "Do you have a catalogue?",
-    answer:
-      "We maintain a curated digital catalogue that we share upon request. Because our product range is constantly evolving and we offer custom sourcing, a consultation with our team often yields better results than browsing a static catalogue. Request yours via the form below.",
-  },
-] as const;
-
 export default function FAQPage() {
   return (
     <>
       <Header />
-      <main className="bg-white">
-        <section
-          aria-label="Frequently Asked Questions"
-          className="mx-auto w-full max-w-[720px] px-8 py-16 md:px-16 md:py-20"
-        >
-          <div className="text-center">
-            <h1 className="m-0 text-xl leading-7 font-bold tracking-[-0.03em] text-black uppercase md:text-2xl md:leading-8">
-              Frequently Asked Questions
-            </h1>
-            <p className="m-0 mt-4 text-xs leading-5 font-normal text-black/60">
-              Everything you need to know about corporate gifting, MOQs, branding, and delivery.
-            </p>
-          </div>
+      <main>
+        <DeferredHomeMotion>
+          <section
+            aria-labelledby="faq-heading"
+            className="bg-[#0a0a0a] px-5 py-16 text-white sm:px-8 md:px-16 md:py-24"
+          >
+            <div className="mx-auto max-w-[1440px] border-t border-white/25 pt-7">
+              <p className="m-0 text-[10px] font-medium tracking-[0.22em] text-white/40 uppercase">
+                Questions, answered
+              </p>
+              <div className="mt-10 grid gap-8 sm:mt-16 sm:gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+                <h1
+                  id="faq-heading"
+                  className="m-0 text-[clamp(2.75rem,9vw,8rem)] leading-[0.86] font-light tracking-[-0.07em] uppercase"
+                >
+                  FAQ
+                </h1>
+                <div className="min-w-0 border-t border-white/25 pt-6">
+                  <p className="m-0 text-lg leading-7 font-light sm:text-xl">
+                    Everything you need to know before the first unboxing.
+                  </p>
+                  <p className="m-0 mt-4 max-w-[520px] text-sm leading-6 text-white/50">
+                    MOQs, lead times, branding, sampling, packaging and delivery — answered in one place.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
 
-          <FaqAccordion items={faqs} />
+          <section
+            aria-labelledby="faq-directory-heading"
+            className="bg-[#f1f0ec] px-5 py-16 text-black sm:px-8 md:px-16 md:py-24"
+          >
+            <div className="mx-auto max-w-[1440px]">
+              <header className="grid gap-6 border-t border-black pt-7 md:grid-cols-2 md:items-end">
+                <div>
+                  <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-black/40 uppercase">
+                    01 / Answers
+                  </p>
+                  <h2
+                    id="faq-directory-heading"
+                    className="m-0 mt-4 text-3xl font-light tracking-[-0.045em] uppercase md:text-5xl"
+                  >
+                    The essentials
+                  </h2>
+                </div>
+                <p className="m-0 max-w-[500px] text-sm leading-6 text-black/50 md:justify-self-end md:text-right">
+                  From first brief to final delivery, these are the questions teams ask most often.
+                </p>
+              </header>
 
-          <div className="mt-14 text-center">
-            <p className="m-0 text-base leading-6 font-normal text-black">
-              Have a question that&apos;s not covered here?
-            </p>
-            <a
-              href="/contact-us"
-              className="mt-4 inline-flex h-12 items-center justify-center bg-black px-10 text-xs font-bold tracking-[0.04em] text-white uppercase no-underline"
-            >
-              Contact Our Team
-            </a>
-          </div>
-        </section>
+              <FaqAccordion items={faqs} className="mt-12 bg-white px-5 sm:px-8 md:px-10" />
+            </div>
+          </section>
+
+          <section
+            className="grid bg-[#cbd8d4] text-black md:grid-cols-[1.4fr_0.6fr]"
+            aria-labelledby="faq-cta-heading"
+          >
+            <div className="px-5 py-12 sm:px-8 sm:py-14 md:px-16 md:py-20">
+              <p className="m-0 text-[10px] font-bold tracking-[0.1em] text-black/50 uppercase">
+                Still have a question?
+              </p>
+              <h2
+                id="faq-cta-heading"
+                className="m-0 mt-4 max-w-[780px] text-[clamp(1.75rem,5vw,3rem)] leading-tight font-light tracking-[-0.04em] md:text-5xl"
+              >
+                Tell us about the moment, the people and what you want to achieve.
+              </h2>
+            </div>
+            <div className="flex items-end border-t border-black/15 px-5 py-8 sm:px-8 sm:py-10 md:border-t-0 md:border-l md:px-12 md:py-16">
+              <a
+                href="/contact-us#start-project"
+                className="flex min-h-12 w-full items-center justify-between border-b border-black pb-3 text-xs font-bold text-black uppercase no-underline"
+              >
+                Contact our team <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </section>
+        </DeferredHomeMotion>
       </main>
       <Footer />
     </>

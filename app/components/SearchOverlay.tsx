@@ -56,6 +56,7 @@ const QUICK_LINKS = [
   { label: "By industry", href: "/industries" },
   { label: "Brand stories", href: "/inspiration-gallery" },
   { label: "Materials", href: "/materials" },
+  { label: "FAQ", href: "/faq" },
   { label: "Start a project", href: "/contact-us#start-project" },
 ];
 

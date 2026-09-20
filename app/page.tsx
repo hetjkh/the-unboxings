@@ -7,6 +7,7 @@ import GucciServicesSection from "./components/GucciServicesSection";
 import CreateMethodSection from "./components/CreateMethodSection";
 import IndustriesSection from "./components/IndustriesSection";
 import ConceptLabSection from "./components/ConceptLabSection";
+import FaqSection from "./components/FaqSection";
 import StartProjectSection from "./components/StartProjectSection";
 import Footer from "./components/Footer";
 import DeferredHomeMotion from "./components/DeferredHomeMotion";
@@ -29,6 +30,7 @@ export default function Home() {
           <CreateMethodSection />
           <IndustriesSection />
           <ConceptLabSection />
+          <FaqSection />
           <StartProjectSection />
         </DeferredHomeMotion>
       </main>

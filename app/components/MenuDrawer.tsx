@@ -36,6 +36,7 @@ const primaryLinks = [
 const secondaryLinks = [
   { label: "About Us", href: "/about" },
   { label: "Our Process", href: "/about#process" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 const defaultIndustriesLinks = [
