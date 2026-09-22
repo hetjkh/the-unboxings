@@ -1,12 +1,13 @@
 "use client";
 
 import { useLayoutEffect, useRef, type ReactNode } from "react";
-import Lenis from "lenis";
-import "lenis/dist/lenis.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SITE_LOADER_COMPLETE_EVENT, isSiteLoaderComplete } from "./site-loader-events";
 
+/**
+ * Page-scoped scroll animations. Smooth scrolling is handled globally by SmoothScroll.
+ */
 export default function HomeMotion({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -17,27 +18,6 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
     gsap.registerPlugin(ScrollTrigger);
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
-
-    // Native scroll on touch — Lenis + ScrollTrigger often desync and fire early/twice.
-    const lenis = isTouch
-      ? null
-      : new Lenis({
-          anchors: { offset: -72 },
-          lerp: 0.085,
-          smoothWheel: true,
-          wheelMultiplier: 0.9,
-          prevent: (node) => Boolean(node.closest("[data-lenis-prevent]")),
-        });
-
-    const updateScrollTrigger = () => ScrollTrigger.update();
-    const tick = lenis ? (time: number) => lenis.raf(time * 1000) : null;
-
-    if (lenis && tick) {
-      lenis.on("scroll", updateScrollTrigger);
-      gsap.ticker.add(tick);
-      gsap.ticker.lagSmoothing(0);
-    }
 
     let context: gsap.Context | null = null;
     let didSetup = false;
@@ -112,7 +92,6 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
           );
         });
 
-        // Media OR card — never both on the same block (that felt like a double animation).
         gsap.utils.toArray<HTMLElement>("[data-motion-media]", root).forEach((media) => {
           if (media.closest("[data-motion-card]")) return;
 
@@ -153,7 +132,6 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
         });
       }, root);
 
-      // Single refresh after layout settles — avoid double refresh (replays tweens).
       requestAnimationFrame(() => ScrollTrigger.refresh());
     };
 
@@ -188,12 +166,6 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
         item.removeEventListener("loadedmetadata", refreshScrollPositions);
       });
       context?.revert();
-      if (lenis && tick) {
-        lenis.off("scroll", updateScrollTrigger);
-        lenis.destroy();
-        gsap.ticker.remove(tick);
-      }
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 

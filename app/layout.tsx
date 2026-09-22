@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import SiteLoader from "./components/SiteLoader";
+import SmoothScroll from "./components/SmoothScroll";
 
 const GA_MEASUREMENT_ID = "G-77KW768QTG";
 
@@ -39,6 +40,7 @@ export default function RootLayout({
             gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
+        <SmoothScroll />
         <SiteLoader />
         {children}
       </body>
