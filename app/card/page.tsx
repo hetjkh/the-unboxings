@@ -70,13 +70,12 @@ export default async function CardPage() {
           </div>
 
           <div className={styles.nameBlock}>
-            <h1 id="card-name">{profile.firstName}<br />{profile.lastName}<span className={styles.nameDot}>.</span></h1>
+            <h1 id="card-name">{profile.firstName}<br />{profile.lastName}</h1>
             <p className={styles.role}>{profile.role}</p>
           </div>
 
           <div className={styles.identityBottom}>
-            <span>Considered gifts. Lasting impressions.</span>
-            <span className={styles.signature} aria-hidden="true">U.</span>
+            <span>Not just given. Remembered.</span>
           </div>
         </div>
 
@@ -111,7 +110,6 @@ export default async function CardPage() {
 
           <footer className={styles.cardFooter}>
             <span><span className={styles.locationDot} aria-hidden="true" />Dubai, United Arab Emirates</span>
-            <span>Bespoke gifting</span>
           </footer>
         </div>
       </article>
