@@ -1,9 +1,9 @@
 export const productCategories = [
-  { name: "Tech & Electronics", slug: "tech-electronics", image: "/products/07.jpg", description: "Useful branded technology for desks, travel, onboarding, and modern work." },
+  { name: "Tech & Electronics", slug: "tech-electronics", image: "/products/07.sm.jpg", description: "Useful branded technology for desks, travel, onboarding, and modern work." },
   { name: "Drinkware", slug: "drinkware", image: "/products/04.jpg", description: "Custom mugs, bottles, and everyday hydration essentials." },
   { name: "Office Essentials", slug: "office-essentials", image: "/products/10.jpg", description: "Considered desk tools and organizers for productive working environments." },
-  { name: "Executive Gifts", slug: "executive-gifts", image: "/products/15.jpg", description: "Premium presentation sets created for leadership, clients, and milestones." },
-  { name: "Eco Collection", slug: "eco-collection", image: "/products/21.jpg", description: "Thoughtful products made with lower-impact and natural materials." },
+  { name: "Executive Gifts", slug: "executive-gifts", image: "/products/15.sm.jpg", description: "Premium presentation sets created for leadership, clients, and milestones." },
+  { name: "Eco Collection", slug: "eco-collection", image: "/products/21.sm.jpg", description: "Thoughtful products made with lower-impact and natural materials." },
   { name: "Health & Wellness", slug: "health-wellness", image: "/products/health%26wellness/re.webp", description: "Branded fitness, recovery and active lifestyle products for teams, events and employee wellbeing." },
   { name: "Apparel & Uniforms", slug: "apparel-uniforms", image: "/bo.webp", description: "Branded apparel and coordinated uniforms tailored to your team." },
   { name: "Aprons", slug: "aprons", image: "/mer.webp", description: "Promotional and service aprons for hospitality, retail, events and kitchen teams." },
@@ -58,7 +58,7 @@ export const products = [
   {
     name: "Multi-Device Charging Desk Mat",
     category: "tech-electronics",
-    image: "/products/07.jpg",
+    image: "/products/07.sm.jpg",
     description: "A leather charging station for phone, watch, earbuds and cables — built for a modern executive desk.",
   },
   {
@@ -328,7 +328,7 @@ export const products = [
   {
     name: "Executive Workday Gift Set",
     category: "executive-gifts",
-    image: "/products/15.jpg",
+    image: "/products/15.sm.jpg",
     description: "Insulated bottle, leather notebook, pen and USB drive in a coordinated maroon presentation box.",
   },
   {
@@ -364,7 +364,7 @@ export const products = [
   {
     name: "Sustainable Home Grow Kit",
     category: "eco-collection",
-    image: "/products/21.jpg",
+    image: "/products/21.sm.jpg",
     description: "Carafe, tumblers, ceramic mug, linen and a basil grow kit designed to be used, not discarded.",
   },
   {

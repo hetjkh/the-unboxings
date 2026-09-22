@@ -32,7 +32,7 @@ const caseStudies = [
     challenge: "A leading FMCG brand needed 2,000 Ramadan hampers for clients and retail partners.",
     solution: "Custom luxury boxes with premium dates, Arabic coffee sets, oud candles, and personalized cards — delivered across UAE.",
     outcome: "Campaign received 98% positive feedback. Brand visibility significantly increased among B2B partners.",
-    image: "/brand-stories/a-majlis-reimagined/hero.webp",
+    image: "/brand-stories/a-majlis-reimagined/hero.sm.webp",
     tags: ["Ramadan", "FMCG", "Seasonal"],
   },
   {
@@ -40,7 +40,7 @@ const caseStudies = [
     challenge: "A government department needed 500 UAE National Day gift sets for staff and VIP guests.",
     solution: "Heritage-inspired gift boxes with locally sourced products, UAE flag accessories, and premium packaging in national colors.",
     outcome: "Delivered 5 days before the event. Praised by senior leadership as the most memorable National Day gift in years.",
-    image: "/products/15.jpg",
+    image: "/products/15.sm.jpg",
     tags: ["Government", "National Day", "UAE"],
   },
   {
@@ -48,7 +48,7 @@ const caseStudies = [
     challenge: "A multinational company needed 800 sustainable gifts for their global ESG campaign.",
     solution: "100% eco-friendly kits: bamboo notebooks, cork pens, RPET tote bags, seed paper cards, and recycled packaging.",
     outcome: "Campaign aligned with their ESG targets. Featured in their annual sustainability report.",
-    image: "/products/21.jpg",
+    image: "/products/21.sm.jpg",
     tags: ["Eco", "CSR", "Global"],
   },
 ];

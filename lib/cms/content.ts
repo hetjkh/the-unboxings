@@ -50,16 +50,35 @@ async function loadResourcesFromSource(): Promise<ResourceArticle[]> {
   }
 }
 
+function preferSmallBrandStoryImage(src: string): string {
+  const map: Record<string, string> = {
+    "/brand-stories/a-majlis-reimagined/hero.webp": "/brand-stories/a-majlis-reimagined/hero.sm.webp",
+    "/brand-stories/dubai-skyline-chess-set/hero.webp": "/brand-stories/dubai-skyline-chess-set/hero.sm.webp",
+    "/brand-stories/the-private-reveal/hero.webp": "/brand-stories/the-private-reveal/hero.sm.webp",
+    "/brand-stories/dubai-developer-homeowners/hero.webp": "/brand-stories/dubai-developer-homeowners/hero.sm.webp",
+  };
+  return map[src] ?? src;
+}
+
+function withSmallBrandStoryImages(story: BrandStory): BrandStory {
+  return {
+    ...story,
+    image: preferSmallBrandStoryImage(story.image),
+  };
+}
+
 async function loadBrandStoriesFromSource(): Promise<BrandStory[]> {
-  if (!isMongoConfigured()) return staticBrandStoriesList();
+  if (!isMongoConfigured()) return staticBrandStoriesList().map(withSmallBrandStoryImages);
 
   try {
     const db = await getDb();
     const docs = await db.collection("brandStories").find().sort({ sortOrder: 1, title: 1 }).toArray();
-    if (!docs.length) return staticBrandStoriesList();
-    return docs.map((doc) => serializeDoc(doc) as unknown as BrandStory);
+    if (!docs.length) return staticBrandStoriesList().map(withSmallBrandStoryImages);
+    return docs
+      .map((doc) => serializeDoc(doc) as unknown as BrandStory)
+      .map(withSmallBrandStoryImages);
   } catch {
-    return staticBrandStoriesList();
+    return staticBrandStoriesList().map(withSmallBrandStoryImages);
   }
 }
 

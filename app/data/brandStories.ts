@@ -25,7 +25,7 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "Turn a standardized handover process into something that feels personal, considered and worthy of the moment.",
     materials: "Architectural Crystal Model · Signature Home Fragrance · Leather Key Holder · Personalised Residence Plaque · Bespoke Presentation Box",
-    image: "/brand-stories/dubai-developer-homeowners/hero.webp",
+    image: "/brand-stories/dubai-developer-homeowners/hero.sm.webp",
     alt: "Homeowner carrying a The Unboxing welcome case into a Dubai apartment overlooking the skyline",
     gallery: ["/brand-stories/dubai-developer-homeowners/01.webp"],
     sections: [
@@ -59,7 +59,7 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "How we transformed Dubai's iconic skyline into a functional executive piece designed to live beyond the gifting moment.",
     materials: "Clear acrylic · Smoked acrylic · Architectural form · Executive gift",
-    image: "/brand-stories/dubai-skyline-chess-set/hero.webp",
+    image: "/brand-stories/dubai-skyline-chess-set/hero.sm.webp",
     alt: "Acrylic Dubai skyline chess set displayed against the city at night",
     gallery: [
       "/brand-stories/dubai-skyline-chess-set/01.webp",
@@ -108,7 +108,7 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "How we turned the presentation of an exclusive banking card into an experience worthy of what it unlocks.",
     materials: "Matte black · Smoked acrylic · Hidden magnets · Integrated illumination",
-    image: "/brand-stories/the-private-reveal/hero.webp",
+    image: "/brand-stories/the-private-reveal/hero.sm.webp",
     alt: "Illuminated private access card presentation box revealing a personalized name",
     gallery: [
       "/brand-stories/the-private-reveal/01.webp",
@@ -155,7 +155,7 @@ export const brandStories: readonly BrandStory[] = [
     challenge:
       "How we translated the spirit of Ramadan hospitality into a contemporary gifting experience.",
     materials: "Stone · Brass · Oud · Bakhoor · Arabic coffee · Mashrabiya detail",
-    image: "/brand-stories/a-majlis-reimagined/hero.webp",
+    image: "/brand-stories/a-majlis-reimagined/hero.sm.webp",
     alt: "Contemporary majlis gift box with brass incense sculpture and mashrabiya doors",
     gallery: [
       "/brand-stories/a-majlis-reimagined/01.webp",
