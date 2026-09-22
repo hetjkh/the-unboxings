@@ -109,7 +109,7 @@ export const brandStories: readonly BrandStory[] = [
       "How we turned the presentation of an exclusive banking card into an experience worthy of what it unlocks.",
     materials: "Matte black · Smoked acrylic · Hidden magnets · Integrated illumination",
     image: "/brand-stories/the-private-reveal/hero.sm.webp",
-    alt: "Illuminated private access card presentation box revealing a personalized name",
+    alt: "Illuminated private access card presentation box revealing the embossed emblem",
     gallery: [
       "/brand-stories/the-private-reveal/01.webp",
       "/brand-stories/the-private-reveal/02.webp",

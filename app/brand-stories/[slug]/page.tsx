@@ -17,28 +17,13 @@ function StoryImage({
   sizes,
   className = "",
   priority = false,
-  fill = false,
 }: {
   src: string;
   alt: string;
   sizes: string;
   className?: string;
   priority?: boolean;
-  fill?: boolean;
 }) {
-  if (fill) {
-    return (
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes={sizes}
-        priority={priority}
-        className={`object-cover object-center ${className}`}
-      />
-    );
-  }
-
   return (
     <Image
       src={src}
@@ -92,20 +77,19 @@ export default async function BrandStoryPage({
         <DeferredHomeMotion>
           <section
             aria-labelledby="story-heading"
-            className="grid overflow-hidden border-b border-black/20 bg-[#0a0a0a] text-white md:h-[52vh] md:max-h-[680px] md:grid-cols-[1fr_1.05fr] lg:h-[min(calc(100svh-72px),820px)] lg:max-h-none"
+            className="grid overflow-hidden border-b border-black/20 bg-[#0a0a0a] text-white md:grid-cols-[1fr_1.05fr] lg:min-h-[calc(100svh-72px)]"
           >
             {/* Mobile: image first. Desktop: text left / image right */}
             <div
               data-motion-media
-              className="relative order-1 aspect-[16/10] w-full overflow-hidden bg-[#0a0a0a] sm:aspect-[16/9] md:order-2 md:aspect-auto md:flex md:h-full md:min-h-0 md:items-center md:justify-center md:p-6 lg:p-8"
+              className="relative order-1 flex aspect-[4/5] max-h-[70svh] w-full items-center justify-center overflow-hidden bg-[#0a0a0a] p-4 sm:aspect-auto sm:min-h-[420px] md:order-2 lg:max-h-none lg:min-h-full lg:p-8"
             >
               <StoryImage
                 src={story.image}
                 alt={story.alt}
                 sizes="(max-width: 768px) 100vw, 55vw"
                 priority
-                fill
-                className="object-cover object-center md:object-contain"
+                className="max-h-full object-contain object-center sm:max-h-[min(85svh,900px)]"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
             </div>
@@ -167,23 +151,22 @@ export default async function BrandStoryPage({
                     return (
                       <article
                         key={section.heading}
-                        className={`grid border-b border-black/10 ${image ? "md:grid-cols-2" : ""}`}
+                        className={`grid border-b border-black/10 ${image ? "md:grid-cols-2 md:items-stretch" : ""}`}
                       >
                         {image ? (
                           <div
                             data-motion-media
-                            className={`relative aspect-[4/3] overflow-hidden bg-[#f1f0ec] sm:aspect-auto sm:min-h-[320px] md:min-h-[420px] ${imageFirst ? "md:order-1" : "md:order-2"}`}
+                            className={`overflow-hidden bg-[#f1f0ec] ${imageFirst ? "md:order-1" : "md:order-2"}`}
                           >
                             <StoryImage
                               src={image}
                               alt={`${plainTextFromRich(story.title)} — ${section.heading}`}
                               sizes="(max-width: 768px) 100vw, 50vw"
-                              fill
                             />
                           </div>
                         ) : null}
                         <div
-                          className={`flex flex-col justify-center p-5 sm:p-7 md:p-10 lg:p-12 ${image ? (imageFirst ? "md:order-2" : "md:order-1") : ""}`}
+                          className={`flex min-h-[280px] flex-col justify-center p-5 sm:min-h-[320px] sm:p-7 md:h-full md:p-10 lg:p-12 ${image ? (imageFirst ? "md:order-2" : "md:order-1") : ""}`}
                         >
                           <h2 className="m-0 text-xs font-bold tracking-[0.08em] text-black/40 uppercase">{section.heading}</h2>
                           <p className="m-0 mt-4 text-sm leading-6 text-black/80 sm:text-base sm:leading-7 md:text-lg md:leading-8">

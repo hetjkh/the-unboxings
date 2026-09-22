@@ -55,7 +55,15 @@
   align-items: center;
 }
 
-.mark { color: var(--gold); }
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.mark { display: block; color: var(--gold); }
 
 .eyebrow {
   max-width: 110px;
@@ -70,11 +78,13 @@
 .nameBlock { margin-top: 31px; }
 
 .company {
-  margin: 0 0 15px;
+  margin: 0;
   color: var(--gold);
   font-size: 9px;
   font-weight: 500;
   letter-spacing: .27em;
+  text-indent: .27em;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -181,7 +191,7 @@
   .identity { padding: clamp(14px, 3svh, 26px) 25px clamp(12px, 2svh, 18px); }
   .mark { width: 34px; height: 44px; }
   .nameBlock { margin-top: clamp(12px, 2.5svh, 22px); }
-  .company { margin-bottom: 10px; }
+  .brand { gap: 8px; }
   .nameBlock h1 { font-size: clamp(38px, 6.5svh, 52px); }
   .role { margin-top: 10px; }
   .identityBottom { margin-top: clamp(12px, 2.5svh, 20px); padding-top: 10px; }
@@ -204,7 +214,7 @@
   .identity { padding-top: 12px; padding-bottom: 12px; }
   .mark { width: 22px; height: 28px; }
   .nameBlock { margin-top: 8px; }
-  .company { margin-bottom: 6px; }
+  .brand { gap: 6px; }
   .nameBlock h1 { font-size: 34px; }
   .role { margin-top: 6px; }
   .details { padding-top: 10px; padding-bottom: 10px; }

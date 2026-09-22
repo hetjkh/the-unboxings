@@ -60,14 +60,16 @@ export default async function CardPage() {
       <article className={styles.card} aria-labelledby="card-name">
         <div className={styles.identity}>
           <div className={styles.identityTop}>
-            <svg className={styles.mark} width="43" height="56" viewBox="0 0 64 82" fill="currentColor" aria-hidden="true">
-              <path d="M1 15 24 1v51L1 66ZM2 67l22-14 15 9v18l-5 2ZM40 36l24-14v44L40 80Z" />
-            </svg>
+            <div className={styles.brand}>
+              <svg className={styles.mark} width="43" height="56" viewBox="0 0 64 82" fill="currentColor" aria-hidden="true">
+                <path d="M1 15 24 1v51L1 66ZM2 67l22-14 15 9v18l-5 2ZM40 36l24-14v44L40 80Z" />
+              </svg>
+              <p className={styles.company}>{profile.company}</p>
+            </div>
             <span className={styles.eyebrow}>A personal connection</span>
           </div>
 
           <div className={styles.nameBlock}>
-            <p className={styles.company}>{profile.company}</p>
             <h1 id="card-name">{profile.firstName}<br />{profile.lastName}<span className={styles.nameDot}>.</span></h1>
             <p className={styles.role}>{profile.role}</p>
           </div>
