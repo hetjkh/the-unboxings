@@ -51,7 +51,7 @@ export default function FAQPage() {
               <header className="grid gap-6 border-t border-black pt-7 md:grid-cols-2 md:items-end">
                 <div>
                   <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-black/40 uppercase">
-                    01 / The essentials
+                    The essentials
                   </p>
                   <h2
                     id="faq-directory-heading"
