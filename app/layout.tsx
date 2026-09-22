@@ -10,9 +10,12 @@ export const metadata: Metadata = {
   description:
     "Premium corporate gifting, employee welcome kits, branded merchandise and packaging solutions. UAE-based. Custom branding. Bulk orders.",
   icons: {
-    icon: "/ioc.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/ioc.png", type: "image/png" },
+    ],
     apple: "/ioc.png",
-    shortcut: "/ioc.png",
+    shortcut: "/favicon.ico",
   },
 };
 
