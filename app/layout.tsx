@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: "The Unboxing | Corporate Gifts & Branded Merchandise UAE",
   description:
     "Premium corporate gifting, employee welcome kits, branded merchandise and packaging solutions. UAE-based. Custom branding. Bulk orders.",
+  icons: {
+    icon: "/ioc.png",
+    apple: "/ioc.png",
+    shortcut: "/ioc.png",
+  },
 };
 
 export default function RootLayout({
