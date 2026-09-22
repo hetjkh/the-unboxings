@@ -56,9 +56,9 @@ function BodyBlock({ block }: { block: ResourceBlock }) {
   }
 
   return (
-    <p className="m-0 mt-5 text-sm leading-7 text-black/70">
-      <FormattedText html={block.text} />
-    </p>
+    <div className="m-0 mt-5 text-sm leading-7 text-black/70">
+      <FormattedText html={block.text} as="div" />
+    </div>
   );
 }
 

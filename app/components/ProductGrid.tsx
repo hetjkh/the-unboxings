@@ -5,15 +5,15 @@ import type { GridProduct } from "@/lib/cms/nav";
 import { plainTextFromRich } from "@/lib/cms/rich-text";
 import FormattedText from "./FormattedText";
 
-/** Eager-load the first row (2 mobile / 4 desktop) so the fold feels instant. */
-const PRIORITY_COUNT = 4;
-
 export default function ProductGrid({
   items,
   categories,
+  /** Use only when this grid is the page LCP (e.g. /products with no hero). */
+  priorityFirst = false,
 }: {
   items: readonly GridProduct[];
   categories: readonly Category[];
+  priorityFirst?: boolean;
 }) {
   const categoryName = (slug: string) =>
     plainTextFromRich(categories.find((category) => category.slug === slug)?.name ?? "Products");
@@ -24,7 +24,7 @@ export default function ProductGrid({
         const name = plainTextFromRich(product.name);
         const category = categoryName(product.categorySlug);
         const href = `/products/${product.categorySlug}/${product._id}`;
-        const priority = index < PRIORITY_COUNT;
+        const isLcp = priorityFirst && index === 0;
 
         return (
           <article
@@ -39,8 +39,7 @@ export default function ProductGrid({
                 src={product.image}
                 alt={name}
                 fill
-                priority={priority}
-                loading={priority ? "eager" : "lazy"}
+                priority={isLcp}
                 className="object-contain object-center p-2 transition-transform duration-500 group-hover:scale-[1.03] sm:p-3"
                 sizes="(max-width: 1024px) 50vw, 25vw"
               />
@@ -54,9 +53,9 @@ export default function ProductGrid({
               <p className="m-0 mt-1 text-[9px] leading-4 tracking-[0.04em] text-black/40 uppercase sm:text-[10px]">
                 {category}
               </p>
-              <p className="m-0 mt-2 line-clamp-3 text-[10px] leading-4 text-black/55 sm:line-clamp-4 sm:text-[11px]">
-                <FormattedText html={product.description} />
-              </p>
+              <div className="m-0 mt-2 line-clamp-3 text-[10px] leading-4 text-black/55 sm:line-clamp-4 sm:text-[11px]">
+                <FormattedText html={product.description} as="div" />
+              </div>
               <div className="mt-auto pt-2">
                 <p className="m-0 text-[11px] leading-4 text-black/50 italic sm:text-xs">Pricing on request</p>
                 <Link

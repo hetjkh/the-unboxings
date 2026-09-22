@@ -52,3 +52,5 @@ next-env.d.ts
 
 # image optimize temp map
 /scripts/.image-replacements.json
+/scripts/.blob-webp-replacements.json
+/scripts/.blob-webp-convert.log

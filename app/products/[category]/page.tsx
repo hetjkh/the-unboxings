@@ -40,11 +40,12 @@ export default async function ProductCategoryPage({ params }: { params: Promise<
     settings.whatsappNumber,
     `Hi The Unboxing,\n\nI'd like a curated proposal for the ${plainTextFromRich(category.name)} collection.\n\nPlease share options, MOQ and timeline.`,
   );
-  const preloadUrls = [category.image, ...categoryProducts.slice(0, 12).map((product) => product.image)];
+  // Warm only the category hero (LCP). Product cards lazy-load below the fold.
+  const preloadUrls = [category.image];
 
   return (
     <>
-      <CollectionImagePreload urls={preloadUrls} waitFor={8} />
+      <CollectionImagePreload urls={preloadUrls} waitFor={1} />
       <Header />
       <main className="bg-white">
         <section className={headerClassName} aria-labelledby="category-title">
@@ -74,9 +75,9 @@ export default async function ProductCategoryPage({ params }: { params: Promise<
             >
               <FormattedText html={category.name} />
             </h1>
-            <p className="m-0 mt-3 max-w-[560px] text-sm leading-6 text-white/65 sm:mt-4 sm:text-base sm:leading-7 md:mt-6 md:text-lg md:leading-8">
-              <FormattedText html={category.description} />
-            </p>
+            <div className="m-0 mt-3 max-w-[560px] text-sm leading-6 text-white/65 sm:mt-4 sm:text-base sm:leading-7 md:mt-6 md:text-lg md:leading-8">
+              <FormattedText html={category.description} as="div" />
+            </div>
           </div>
         </section>
 

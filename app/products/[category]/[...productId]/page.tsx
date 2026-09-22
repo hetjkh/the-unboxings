@@ -108,9 +108,9 @@ export default async function ProductDetailPage({
                 >
                   <FormattedText html={product.name} />
                 </h1>
-                <p className="m-0 mt-4 max-w-[520px] text-sm leading-6 text-black/60">
-                  <FormattedText html={product.description} />
-                </p>
+                <div className="m-0 mt-4 max-w-[520px] text-sm leading-6 text-black/60">
+                  <FormattedText html={product.description} as="div" />
+                </div>
                 <p className="m-0 mt-4 text-sm italic text-black/45">Pricing on request</p>
               </div>
             </div>

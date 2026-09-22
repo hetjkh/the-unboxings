@@ -8,11 +8,12 @@ export const revalidate = 60;
 
 export default async function ProductsPage() {
   const catalog = await getCatalog();
-  const preloadUrls = catalog.products.slice(0, 12).map((product) => product.image);
+  // Warm only the LCP card — rest of the grid lazy-loads.
+  const preloadUrls = catalog.products.slice(0, 1).map((product) => product.image);
 
   return (
     <>
-      <CollectionImagePreload urls={preloadUrls} waitFor={8} />
+      <CollectionImagePreload urls={preloadUrls} waitFor={1} />
       <Header />
       <main>
         <section aria-label="All Products" className="bg-white">
@@ -49,7 +50,7 @@ export default async function ProductsPage() {
             </div>
           </div>
 
-          <ProductGrid items={catalog.products} categories={catalog.categories} />
+          <ProductGrid items={catalog.products} categories={catalog.categories} priorityFirst />
         </section>
       </main>
       <Footer />
