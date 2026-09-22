@@ -17,24 +17,37 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
     gsap.registerPlugin(ScrollTrigger);
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const lenis = new Lenis({
-      anchors: { offset: -72 },
-      lerp: 0.085,
-      smoothWheel: true,
-      wheelMultiplier: 0.9,
-      prevent: (node) => Boolean(node.closest("[data-lenis-prevent]")),
-    });
+    const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+
+    // Native scroll on touch — Lenis + ScrollTrigger often desync and fire early/twice.
+    const lenis = isTouch
+      ? null
+      : new Lenis({
+          anchors: { offset: -72 },
+          lerp: 0.085,
+          smoothWheel: true,
+          wheelMultiplier: 0.9,
+          prevent: (node) => Boolean(node.closest("[data-lenis-prevent]")),
+        });
 
     const updateScrollTrigger = () => ScrollTrigger.update();
-    const tick = (time: number) => lenis.raf(time * 1000);
+    const tick = lenis ? (time: number) => lenis.raf(time * 1000) : null;
 
-    lenis.on("scroll", updateScrollTrigger);
-    gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
+    if (lenis && tick) {
+      lenis.on("scroll", updateScrollTrigger);
+      gsap.ticker.add(tick);
+      gsap.ticker.lagSmoothing(0);
+    }
 
     let context: gsap.Context | null = null;
+    let didSetup = false;
+    let failSafeTimer = 0;
 
     const setupMotion = () => {
+      if (didSetup) return;
+      didSetup = true;
+      window.clearTimeout(failSafeTimer);
+
       context?.revert();
       context = gsap.context(() => {
         if (reduceMotion) return;
@@ -44,14 +57,18 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
 
         if (hero) {
           const heroCopy = hero.querySelectorAll("h1, h1 ~ div > p, h1 ~ div a");
-          gsap.from(heroCopy, {
-            autoAlpha: 0,
-            y: 32,
-            duration: 1,
-            stagger: 0.1,
-            ease: "power3.out",
-            delay: 0.15,
-          });
+          gsap.fromTo(
+            heroCopy,
+            { autoAlpha: 0, y: 32 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 1,
+              stagger: 0.1,
+              ease: "power3.out",
+              delay: 0.15,
+            },
+          );
 
           const heroMedia = hero.querySelector("video, img");
           if (heroMedia) {
@@ -74,76 +91,82 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
 
         sections.slice(1).forEach((section) => {
           const intro = section.querySelectorAll("h2, header > p");
-          if (intro.length) {
-            gsap.from(intro, {
-              autoAlpha: 0,
-              y: 36,
-              duration: 0.85,
-              stagger: 0.1,
+          if (!intro.length) return;
+
+          gsap.fromTo(
+            intro,
+            { autoAlpha: 0, y: 28 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.08,
               ease: "power3.out",
-              immediateRender: false,
               scrollTrigger: {
                 trigger: section,
-                start: "top 85%",
+                start: "top 65%",
                 once: true,
                 toggleActions: "play none none none",
               },
-            });
-          }
+            },
+          );
         });
 
+        // Media OR card — never both on the same block (that felt like a double animation).
         gsap.utils.toArray<HTMLElement>("[data-motion-media]", root).forEach((media) => {
-          gsap.from(media, {
-            clipPath: "inset(8% 0% 8% 0%)",
-            scale: 0.96,
-            duration: 1.15,
-            ease: "power3.out",
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: media,
-              start: "top 92%",
-              once: true,
-              toggleActions: "play none none none",
+          if (media.closest("[data-motion-card]")) return;
+
+          gsap.fromTo(
+            media,
+            { clipPath: "inset(6% 0% 6% 0%)", scale: 0.97 },
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              scale: 1,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: media,
+                start: "top 70%",
+                once: true,
+                toggleActions: "play none none none",
+              },
             },
-          });
+          );
         });
 
-        // Animate position only — never opacity/autoAlpha, which can leave
-        // collection/material cards permanently invisible if ScrollTrigger misses.
         gsap.utils.toArray<HTMLElement>("[data-motion-card]", root).forEach((card) => {
-          gsap.from(card, {
-            y: 36,
-            duration: 0.9,
-            ease: "power3.out",
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: card,
-              start: "top 92%",
-              once: true,
-              toggleActions: "play none none none",
+          gsap.fromTo(
+            card,
+            { y: 28 },
+            {
+              y: 0,
+              duration: 0.75,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 70%",
+                once: true,
+                toggleActions: "play none none none",
+              },
             },
-          });
+          );
         });
       }, root);
 
-      // Loader / Lenis change layout — refresh so in-view items animate correctly.
-      requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
-        requestAnimationFrame(() => ScrollTrigger.refresh());
-      });
+      // Single refresh after layout settles — avoid double refresh (replays tweens).
+      requestAnimationFrame(() => ScrollTrigger.refresh());
     };
 
     if (reduceMotion || isSiteLoaderComplete()) {
       setupMotion();
     } else {
       window.addEventListener(SITE_LOADER_COMPLETE_EVENT, setupMotion, { once: true });
-      // Failsafe: never leave motion unset if the loader event is missed.
-      window.setTimeout(() => {
-        if (!context) setupMotion();
-      }, 8000);
+      failSafeTimer = window.setTimeout(setupMotion, 8000);
     }
 
-    const refreshScrollPositions = () => ScrollTrigger.refresh();
+    const refreshScrollPositions = () => {
+      if (didSetup) ScrollTrigger.refresh();
+    };
     const media = root.querySelectorAll<HTMLImageElement | HTMLVideoElement>("img, video");
 
     media.forEach((item) => {
@@ -155,20 +178,21 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
     });
 
     window.addEventListener("load", refreshScrollPositions, { once: true });
-    const refresh = window.setTimeout(refreshScrollPositions, 100);
 
     return () => {
       window.removeEventListener(SITE_LOADER_COMPLETE_EVENT, setupMotion);
-      window.clearTimeout(refresh);
+      window.clearTimeout(failSafeTimer);
       window.removeEventListener("load", refreshScrollPositions);
       media.forEach((item) => {
         item.removeEventListener("load", refreshScrollPositions);
         item.removeEventListener("loadedmetadata", refreshScrollPositions);
       });
       context?.revert();
-      lenis.off("scroll", updateScrollTrigger);
-      lenis.destroy();
-      gsap.ticker.remove(tick);
+      if (lenis && tick) {
+        lenis.off("scroll", updateScrollTrigger);
+        lenis.destroy();
+        gsap.ticker.remove(tick);
+      }
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
