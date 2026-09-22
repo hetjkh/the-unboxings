@@ -88,7 +88,7 @@ export default async function ProductDetailPage({
       <Header />
       <main className="bg-white">
         <section
-          id="start-project"
+          id="product-brief"
           aria-labelledby="product-heading"
           className="scroll-mt-18 border-b border-black/15"
         >

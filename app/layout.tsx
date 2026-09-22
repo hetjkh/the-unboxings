@@ -6,13 +6,25 @@ import SmoothScroll from "./components/SmoothScroll";
 
 const GA_MEASUREMENT_ID = "G-77KW768QTG";
 
-/** Runs before paint so home/collection never flash hero poster under the loader. */
+/** Runs before paint so home/category grids never flash content under the loader. */
 const SITE_LOADING_BOOT = `
 (function () {
   try {
     var p = location.pathname || "/";
-    if (p === "/" || p === "" || p.indexOf("/products") === 0) {
+    if (p === "/" || p === "") {
       document.documentElement.classList.add("site-loading");
+      return;
+    }
+    if (p === "/products") {
+      document.documentElement.classList.add("site-loading");
+      return;
+    }
+    // /products/aprons = category (loader). /products/aprons/xyz = product (no loader).
+    if (p.indexOf("/products/") === 0) {
+      var rest = p.slice("/products/".length).replace(/\\/$/, "");
+      if (rest && rest.indexOf("/") === -1) {
+        document.documentElement.classList.add("site-loading");
+      }
     }
   } catch (e) {}
 })();

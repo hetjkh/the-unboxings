@@ -22,12 +22,23 @@ export function isCollectionImagesReady() {
   return collectionImagesReady;
 }
 
+/** Product listing pages only — not product detail (`/products/cat/id`). */
 export function isCollectionPath(pathname = typeof window !== "undefined" ? window.location.pathname : "") {
-  return pathname === "/products" || pathname.startsWith("/products/");
+  if (pathname === "/products") return true;
+  if (!pathname.startsWith("/products/")) return false;
+  const rest = pathname.slice("/products/".length).replace(/\/$/, "");
+  // One segment = category grid. Two+ = product detail (skip full-site loader).
+  return rest.length > 0 && !rest.includes("/");
 }
 
 export function isBrandLoaderPath(pathname: string) {
   return pathname === "/" || pathname === "" || isCollectionPath(pathname);
+}
+
+export function isProductDetailPath(pathname = typeof window !== "undefined" ? window.location.pathname : "") {
+  if (!pathname.startsWith("/products/")) return false;
+  const rest = pathname.slice("/products/".length).replace(/\/$/, "");
+  return rest.includes("/");
 }
 
 export function signalHeroVideoReady() {
