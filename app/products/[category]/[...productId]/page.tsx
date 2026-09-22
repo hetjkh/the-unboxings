@@ -1,15 +1,26 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
-import StartProjectForm from "../../../components/StartProjectForm";
 import FormattedText from "../../../components/FormattedText";
 import CmsImage from "../../../components/CmsImage";
 import { getCatalog, getProductById } from "@/lib/cms/queries";
 import { plainTextFromRich } from "@/lib/cms/rich-text";
 
 export const revalidate = 60;
+
+/** Heavy client form — load after first paint so product page opens faster. */
+const StartProjectForm = dynamic(() => import("../../../components/StartProjectForm"), {
+  loading: () => (
+    <div
+      className="min-h-[480px] animate-pulse rounded-sm bg-black/[0.04]"
+      aria-label="Loading project form"
+    />
+  ),
+});
+
 
 type ProductPageParams = {
   category: string;
@@ -48,10 +59,11 @@ export default async function ProductDetailPage({
   params: Promise<ProductPageParams>;
 }) {
   const { category: categorySlug, productId } = await params;
-  const product = await getProductById(resolveProductId(productId));
+  const id = resolveProductId(productId);
+
+  const [product, catalog] = await Promise.all([getProductById(id), getCatalog()]);
   if (!product || product.categorySlug !== categorySlug) notFound();
 
-  const catalog = await getCatalog();
   const category = catalog.categories.find((item) => item.slug === product.categorySlug);
   const name = plainTextFromRich(product.name);
   const categoryName = plainTextFromRich(category?.name ?? "Products");

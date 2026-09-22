@@ -8,6 +8,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /**
  * Site-wide Lenis smooth scroll (desktop + mobile) mounted from the root layout.
+ *
+ * Important: do NOT put data-lenis-prevent on full-width horizontal carousels.
+ * Lenis owns page scroll (html overflow hidden) — preventing it there traps vertical scroll.
  */
 export default function SmoothScroll() {
   useEffect(() => {
@@ -17,12 +20,16 @@ export default function SmoothScroll() {
       anchors: { offset: -72 },
       lerp: 0.085,
       smoothWheel: true,
-      // Enable smooth touch scrolling on phones/tablets
+      // Only claim vertical gestures so horizontal carousels keep native swipe
+      gestureOrientation: "vertical",
       syncTouch: true,
-      syncTouchLerp: 0.075,
-      touchMultiplier: 1.2,
+      syncTouchLerp: 0.12,
+      touchInertiaExponent: 1.4,
+      touchMultiplier: 1,
       wheelMultiplier: 0.9,
+      allowNestedScroll: true,
       respectReducedMotion: true,
+      // Modals / drawers / selects only — not page-wide carousels
       prevent: (node) => Boolean(node.closest("[data-lenis-prevent]")),
     });
 
