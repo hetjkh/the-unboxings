@@ -98,13 +98,15 @@ export default function CampaignHero({
   useEffect(() => {
     const el = videoRef.current;
     if (!activeVideo) {
-      // No video on this hero — don't block the site loader.
-      if (priority) signalHeroVideoReady();
+      // Viewport unknown or no video — poster covers LCP; don't block the loader.
+      if (priority && !signaledRef.current) {
+        signaledRef.current = true;
+        signalHeroVideoReady();
+      }
       return;
     }
     if (!el) return;
 
-    signaledRef.current = false;
     setVideoReady(false);
 
     const markReady = () => {

@@ -48,7 +48,7 @@ export default async function MenCampaignHero() {
               alt={featuredStory.alt}
               fill
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
-              sizes="(max-width: 768px) 100vw, 68vw"
+              sizes="(max-width: 768px) 100vw, 900px"
             />
             <span className="absolute top-5 left-5 text-[10px] font-medium tracking-[0.18em] text-white/70">
               01 / 04
@@ -94,7 +94,7 @@ export default async function MenCampaignHero() {
                   alt={story.alt}
                   fill
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 768px) 92vw, 360px"
                 />
                 <span className="absolute top-5 left-5 text-[10px] font-medium tracking-[0.18em] text-white/70">
                   {String(index + 2).padStart(2, "0")} / 04

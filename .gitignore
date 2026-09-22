@@ -54,3 +54,8 @@ next-env.d.ts
 /scripts/.image-replacements.json
 /scripts/.blob-webp-replacements.json
 /scripts/.blob-webp-convert.log
+
+# Video compression backups / temp image writes
+*.webm.bak
+public/**/*.tmpopt
+public/**/*.new

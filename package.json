@@ -10,7 +10,8 @@
     "seed:cms": "tsx --env-file=.env.local scripts/seed-cms.ts",
     "migrate:categories": "tsx --env-file=.env.local scripts/migrate-product-categories.ts",
     "migrate:brand-stories": "tsx --env-file=.env.local scripts/migrate-brand-stories.ts",
-    "optimize:images": "tsx scripts/compress-large-images.mts && tsx scripts/update-image-refs.mts"
+    "optimize:images": "tsx scripts/compress-large-images.mts && tsx scripts/update-image-refs.mts",
+    "optimize:lighthouse-images": "tsx scripts/compress-lighthouse-images.ts"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0",
