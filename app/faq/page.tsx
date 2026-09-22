@@ -81,7 +81,11 @@ export default function FAQPage() {
                 id="faq-cta-heading"
                 className="m-0 mt-4 max-w-[780px] text-[clamp(1.75rem,5vw,3rem)] leading-tight font-light tracking-[-0.04em] md:text-5xl"
               >
-                Tell us about the moment, the people and what you want to achieve.
+                Tell us about the moment,
+                <br />
+                the people, and the experience
+                <br />
+                you want to create.
               </h2>
             </div>
             <div className="flex items-end border-t border-black/15 px-5 py-8 sm:px-8 sm:py-10 md:border-t-0 md:border-l md:px-12 md:py-16">
@@ -89,7 +93,7 @@ export default function FAQPage() {
                 href="/contact-us#start-project"
                 className="flex min-h-12 w-full items-center justify-between border-b border-black pb-3 text-xs font-bold text-black uppercase no-underline"
               >
-                Contact our team <span aria-hidden="true">→</span>
+                Start a conversation <span aria-hidden="true">→</span>
               </a>
             </div>
           </section>
