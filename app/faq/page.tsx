@@ -51,7 +51,7 @@ export default function FAQPage() {
               <header className="grid gap-6 border-t border-black pt-7 md:grid-cols-2 md:items-end">
                 <div>
                   <p className="m-0 text-[10px] font-medium tracking-[0.2em] text-black/40 uppercase">
-                    01 / Answers
+                    01 / The essentials
                   </p>
                   <h2
                     id="faq-directory-heading"
@@ -61,7 +61,9 @@ export default function FAQPage() {
                   </h2>
                 </div>
                 <p className="m-0 max-w-[500px] text-sm leading-6 text-black/50 md:justify-self-end md:text-right">
-                  From first brief to final delivery, these are the questions teams ask most often.
+                  The practical details, made simple.
+                  <br />
+                  From minimum quantities and timelines to customisation, samples and delivery, here are the answers to the questions we&apos;re asked most often.
                 </p>
               </header>
 

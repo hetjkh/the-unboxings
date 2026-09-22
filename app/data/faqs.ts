@@ -5,9 +5,14 @@ export type FaqEntry = {
 
 export const faqs = [
   {
-    question: "What is the minimum order quantity (MOQ)?",
+    question: "Can you manage large corporate or event orders?",
     answer:
-      "Our MOQ varies by product type. For most branded merchandise, we start from 50 units. Some products like premium executive gifts can be ordered in smaller quantities, while others like promotional merchandise have MOQs of 100–250 units. Contact us and we'll advise based on your specific requirements.",
+      "Yes. We support corporate gifting, employee programmes, client gifting, exhibitions, conferences, launches and other large-scale requirements.",
+  },
+  {
+    question: "What is your minimum order quantity?",
+    answer:
+      "Minimum quantities vary depending on the product, customisation and packaging. Share your requirements with us and we'll recommend the most suitable options.",
   },
   {
     question: "How long does production take?",
