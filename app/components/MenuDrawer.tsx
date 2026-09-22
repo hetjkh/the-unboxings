@@ -379,7 +379,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                     href={product.href}
                     className="group flex flex-col no-underline"
                   >
-                    <div className="relative w-full aspect-square overflow-hidden bg-[#f5f5f5]">
+                    <div className="relative w-full aspect-square overflow-hidden bg-white">
                       <CmsImage
                         src={product.image}
                         alt={product.name}
@@ -427,7 +427,7 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
                     href={industry.href}
                     className="group flex flex-col no-underline"
                   >
-                    <div className="relative w-full aspect-square overflow-hidden bg-[#f5f5f5]">
+                    <div className="relative w-full aspect-square overflow-hidden bg-white">
                       <CmsImage
                         src={industry.image}
                         alt={industry.name}

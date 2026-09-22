@@ -33,7 +33,7 @@ export default function ProductGrid({
           >
             <Link
               href={href}
-              className="relative aspect-square w-full shrink-0 overflow-hidden bg-[#f7f6f3] no-underline"
+              className="relative aspect-square w-full shrink-0 overflow-hidden bg-white no-underline"
             >
               <CmsImage
                 src={product.image}

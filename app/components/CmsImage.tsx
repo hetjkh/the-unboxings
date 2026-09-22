@@ -8,7 +8,7 @@ function isRemoteSrc(src: ImageProps["src"]) {
 }
 
 type CmsImageProps = ImageProps & {
-  /** Soft gray wash behind the image while it loads */
+  /** Soft wash behind the image while it loads */
   showPlaceholder?: boolean;
 };
 
@@ -33,7 +33,7 @@ export default function CmsImage({
       {showPlaceholder && !loaded ? (
         <span
           aria-hidden="true"
-          className="absolute inset-0 animate-pulse bg-[#f0eeea]"
+          className="absolute inset-0 animate-pulse bg-white"
         />
       ) : null}
       <Image

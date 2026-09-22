@@ -82,7 +82,7 @@ export default async function ProductDetailPage({
         >
           <div className="mx-auto grid max-w-[1440px] lg:grid-cols-2">
             <div className="lg:sticky lg:top-[var(--header-height)] lg:self-start">
-              <div className="relative aspect-[4/3] overflow-hidden sm:aspect-square">
+              <div className="relative aspect-[4/3] overflow-hidden bg-white sm:aspect-square">
                 <CmsImage
                   src={product.image}
                   alt={name}
@@ -175,7 +175,7 @@ export default async function ProductDetailPage({
                       href={href}
                       className="group block text-black no-underline"
                     >
-                      <div className="relative aspect-square overflow-hidden">
+                      <div className="relative aspect-square overflow-hidden bg-white">
                         <CmsImage
                           src={item.image}
                           alt={itemName}
