@@ -134,3 +134,17 @@ button:active {
 html.site-loading {
   overflow: hidden;
 }
+
+/* Covers hero until the brand loader is ready (SSR-safe). */
+#site-boot-cover {
+  display: none;
+}
+
+html.site-loading:not(.site-loader-exiting) #site-boot-cover {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: #fff;
+  pointer-events: none;
+}

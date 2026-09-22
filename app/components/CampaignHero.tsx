@@ -97,14 +97,10 @@ export default function CampaignHero({
 
   useEffect(() => {
     const el = videoRef.current;
-    if (!activeVideo) {
-      // Viewport unknown or no video — poster covers LCP; don't block the loader.
-      if (priority && !signaledRef.current) {
-        signaledRef.current = true;
-        signalHeroVideoReady();
-      }
-      return;
-    }
+
+    // Wait for matchMedia before choosing desktop/mobile video — never signal
+    // ready on the poster-only frame (that dismissed the loader too early).
+    if (!activeVideo) return;
     if (!el) return;
 
     setVideoReady(false);
@@ -129,6 +125,7 @@ export default function CampaignHero({
 
     // Safety: never leave the loader waiting forever if the video stalls.
     const failSafe = window.setTimeout(() => {
+      setVideoReady(true);
       if (priority && !signaledRef.current) {
         signaledRef.current = true;
         signalHeroVideoReady();
@@ -147,6 +144,7 @@ export default function CampaignHero({
   return (
     <section
       ref={sectionRef}
+      data-home-hero={priority ? "" : undefined}
       aria-label={ariaLabel}
       className={`relative w-full overflow-hidden ${fullViewport ? "h-svh max-md:min-h-[420px]" : ""}`}
     >
@@ -198,7 +196,8 @@ export default function CampaignHero({
           src={image}
           alt={imageAlt}
           fill
-          priority={priority}
+          // Don't steal LCP / paint ahead of the loader — video is the real hero.
+          priority={false}
           className="object-cover object-center"
           sizes="100vw"
         />

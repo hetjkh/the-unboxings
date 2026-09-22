@@ -6,6 +6,18 @@ import SmoothScroll from "./components/SmoothScroll";
 
 const GA_MEASUREMENT_ID = "G-77KW768QTG";
 
+/** Runs before paint so home/collection never flash hero poster under the loader. */
+const SITE_LOADING_BOOT = `
+(function () {
+  try {
+    var p = location.pathname || "/";
+    if (p === "/" || p === "" || p.indexOf("/products") === 0) {
+      document.documentElement.classList.add("site-loading");
+    }
+  } catch (e) {}
+})();
+`;
+
 export const metadata: Metadata = {
   title: "The Unboxing | Corporate Gifts & Branded Merchandise UAE",
   description:
@@ -27,7 +39,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: SITE_LOADING_BOOT }} />
+      </head>
       <body className="flex min-h-full flex-col">
+        <div id="site-boot-cover" aria-hidden="true" />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"

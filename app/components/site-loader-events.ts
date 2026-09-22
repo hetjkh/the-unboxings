@@ -54,14 +54,20 @@ export function prepareSiteLoader() {
   if (typeof window === "undefined") return;
   siteLoaderComplete = false;
   document.documentElement.classList.add("site-loading");
+  document.documentElement.classList.remove("site-loader-exiting");
   document.documentElement.style.overflow = "hidden";
+}
+
+export function signalSiteLoaderExiting() {
+  if (typeof window === "undefined") return;
+  document.documentElement.classList.add("site-loader-exiting");
 }
 
 export function signalSiteLoaderComplete() {
   if (typeof window === "undefined") return;
   siteLoaderComplete = true;
   document.documentElement.style.overflow = "";
-  document.documentElement.classList.remove("site-loading");
+  document.documentElement.classList.remove("site-loading", "site-loader-exiting");
   window.dispatchEvent(new Event(SITE_LOADER_COMPLETE_EVENT));
 }
 

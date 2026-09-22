@@ -10,6 +10,7 @@ import {
   resetCollectionImagesReady,
   resetHeroVideoReady,
   signalSiteLoaderComplete,
+  signalSiteLoaderExiting,
   waitForCollectionImagesReady,
   waitForHeroVideoReady,
 } from "./site-loader-events";
@@ -65,6 +66,8 @@ function playBrandLoader(
           onDone();
           return;
         }
+        // Drop the white boot cover so the hero is already painted under the slide-away.
+        signalSiteLoaderExiting();
         timeline.resume();
       });
     })
