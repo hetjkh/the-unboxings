@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Script from "next/script";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const GA_MEASUREMENT_ID = "G-77KW768QTG";
@@ -28,8 +29,10 @@ function writeConsent(value: ConsentValue) {
 }
 
 export default function CookieConsent() {
+  const pathname = usePathname();
   const [consent, setConsent] = useState<ConsentValue | null>(null);
   const [ready, setReady] = useState(false);
+  const isCardPage = pathname === "/card" || pathname.startsWith("/card/");
 
   useEffect(() => {
     setConsent(readConsent());
@@ -46,7 +49,7 @@ export default function CookieConsent() {
     setConsent("rejected");
   }
 
-  const showBanner = ready && consent === null;
+  const showBanner = ready && consent === null && !isCardPage;
   const loadAnalytics = consent === "accepted";
 
   return (
