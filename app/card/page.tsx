@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import QRCode from "qrcode";
 import type { ReactNode } from "react";
 import { profile } from "./profile";
 import styles from "./card.module.css";
@@ -30,27 +29,32 @@ function Icon({ children }: { children: ReactNode }) {
   );
 }
 
-const phoneIcon = <Icon><path d="m8 3 2 5-2.5 2a15 15 0 0 0 6.5 6.5l2-2.5 5 2v3a2 2 0 0 1-2 2C9.6 20.4 3.6 14.4 3 5a2 2 0 0 1 2-2Z" /></Icon>;
-const emailIcon = <Icon><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></Icon>;
+const linkedinIcon = (
+  <Icon>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </Icon>
+);
+const instagramIcon = (
+  <Icon>
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none" />
+  </Icon>
+);
 const whatsappIcon = <Icon><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.5L3 20.5l1.3-4.7A8.5 8.5 0 1 1 20.5 11.7Z" /><path d="m9 7-1 1c-.5 2.8 3.2 6.5 6 6l1-1-2-1-1 1-2-2 1-1Z" /></Icon>;
 const websiteIcon = <Icon><circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="3.6" ry="9" /><path d="M3 12h18" /></Icon>;
 const arrowIcon = <Icon><path d="M6 18 18 6M6 6h12v12" /></Icon>;
 
 const actions = [
-  { label: "Call", href: `tel:${profile.phone}`, icon: phoneIcon },
-  { label: "Email", href: `mailto:${profile.email}`, icon: emailIcon },
-  { label: "WhatsApp", href: profile.whatsapp, icon: whatsappIcon, external: true },
-  { label: "Website", href: profile.website, icon: websiteIcon, external: true },
+  { label: "LinkedIn", href: profile.linkedin, icon: linkedinIcon },
+  { label: "Instagram", href: profile.instagram, icon: instagramIcon },
+  { label: "WhatsApp", href: profile.whatsapp, icon: whatsappIcon },
+  { label: "Website", href: profile.website, icon: websiteIcon },
 ];
 
-export default async function CardPage() {
-  const qrCode = await QRCode.toDataURL(profile.cardUrl, {
-    errorCorrectionLevel: "M",
-    margin: 4,
-    width: 240,
-    color: { dark: "#242420", light: "#ffffff" },
-  });
-
+export default function CardPage() {
   return (
     <main className={styles.page}>
       <Link className={styles.wordmark} href="/" aria-label="The Unboxing home">
@@ -80,9 +84,11 @@ export default async function CardPage() {
         </div>
 
         <div className={styles.details}>
-          <nav className={styles.actions} aria-label="Connect with Himanshu">
+          <p className={styles.services}>Corporate gifting</p>
+
+          <nav className={styles.actions} aria-label="Connect with The Unboxing">
             {actions.map((action) => (
-              <a key={action.label} href={action.href} target={action.external ? "_blank" : undefined} rel={action.external ? "noopener noreferrer" : undefined}>
+              <a key={action.label} href={action.href} target="_blank" rel="noopener noreferrer">
                 <span className={styles.actionIcon}>{action.icon}</span>
                 <span>{action.label}</span>
               </a>
@@ -96,8 +102,8 @@ export default async function CardPage() {
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
               <a className={styles.website} href={profile.website} target="_blank" rel="noopener noreferrer">{profile.websiteLabel}{arrowIcon}</a>
             </div>
-            <a className={styles.qr} href={profile.cardUrl} aria-label="Open Himanshu's digital business card">
-              <Image src={qrCode} alt="QR code for Himanshu Arora's digital business card" width={96} height={96} unoptimized />
+            <a className={styles.qr} href={profile.instagram} target="_blank" rel="noopener noreferrer" aria-label="Scan to follow The Unboxing on Instagram">
+              <Image src="/url_qrcodecreator.com_09_01_53.png" alt="QR code for The Unboxing on Instagram" width={96} height={96} />
               <span>Scan to connect</span>
             </a>
           </div>

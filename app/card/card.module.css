@@ -115,6 +115,17 @@
 }
 
 .details { padding: 25px 30px 20px; }
+
+.services {
+  margin: 0 0 18px;
+  color: #757566;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .19em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 
 .actions a {

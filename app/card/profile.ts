@@ -11,4 +11,6 @@ export const profile = {
   websiteLabel: "theunboxing.ae",
   cardUrl: "https://theunboxing.ae/card",
   whatsapp: "https://wa.me/971506023071",
+  linkedin: "https://www.linkedin.com/company/the-unboxing/about/",
+  instagram: "https://www.instagram.com/theunboxing.ae/",
 } as const;
