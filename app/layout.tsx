@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import SiteLoader from "./components/SiteLoader";
 import SmoothScroll from "./components/SmoothScroll";
+import CookieConsent from "./components/CookieConsent";
 import { getSiteUrl } from "@/lib/seo";
 
-const GA_MEASUREMENT_ID = "G-77KW768QTG";
 const SITE_URL = getSiteUrl();
 
 /** Runs before paint so home/category grids never flash content under the loader. */
@@ -108,21 +107,10 @@ export default function RootLayout({
       </head>
       <body className="flex min-h-full flex-col">
         <div id="site-boot-cover" aria-hidden="true" />
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}');
-          `}
-        </Script>
         <SmoothScroll />
         <SiteLoader />
         {children}
+        <CookieConsent />
       </body>
     </html>
   );

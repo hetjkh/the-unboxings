@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PhoneContactLink from "./PhoneContactLink";
+import LegalConsentCheckbox from "./LegalConsentCheckbox";
 
 const quickLinks = [
   { label: "Products", href: "/products" },
@@ -17,7 +18,8 @@ const companyLinks = [
   { label: "Signature Projects", href: "/inspiration-gallery" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact-us" },
-  { label: "Privacy", href: "/privacy" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms & Conditions", href: "/terms" },
 ];
 
 const socialLinks = [
@@ -98,6 +100,7 @@ export default function Footer() {
                   Subscribe →
                 </button>
               </div>
+              <LegalConsentCheckbox id="legal-consent-footer" tone="dark" className="mt-4" />
               <p className="m-0 mt-3 text-[10px] leading-4 text-white/30">
                 By subscribing, you agree to receive news from The Unboxing.
               </p>

@@ -6,6 +6,7 @@ import BlackMultiSelect from "./BlackMultiSelect";
 import AutoGrowTextarea from "./AutoGrowTextarea";
 import BriefSubmissionStatus from "./BriefSubmissionStatus";
 import BriefSubmissionSuccess from "./BriefSubmissionSuccess";
+import LegalConsentCheckbox from "./LegalConsentCheckbox";
 
 const textFields = [
   { name: "company", label: "Company", placeholder: "Your company name", type: "text" },
@@ -211,6 +212,12 @@ export default function StartProjectForm({
     // Capture values before the pending state disables the form fields.
     const form = event.currentTarget;
     const data = new FormData(form);
+
+    if (data.get("legalConsent") !== "on") {
+      setStatus("error");
+      setError("Please accept the Terms & Conditions and Privacy Policy to continue.");
+      return;
+    }
 
     if (briefFile && briefFile.size > 8 * 1024 * 1024) {
       setStatus("error");
@@ -522,6 +529,7 @@ export default function StartProjectForm({
       </fieldset>
 
       <div className="pt-2 md:col-span-2">
+        <LegalConsentCheckbox id="legal-consent-start-project" className="mb-6" />
         {status === "sending" ? (
           <BriefSubmissionStatus uploading={uploading} progress={uploadProgress} fileName={briefFile?.name} />
         ) : (

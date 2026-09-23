@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { buildWhatsAppUrl, projectBriefMessage } from "@/lib/whatsapp";
+import LegalConsentCheckbox from "./LegalConsentCheckbox";
 
 const formFields = [
   { name: "company", label: "Company", placeholder: "Your company name" },
@@ -28,6 +29,11 @@ export default function ProjectBriefForm({ whatsappNumber }: { whatsappNumber: s
       fields[field.name] = String(data.get(field.name) ?? "");
     }
     fields.objectives = String(data.get("objectives") ?? "");
+
+    if (data.get("legalConsent") !== "on") {
+      setError("Please accept the Terms & Conditions and Privacy Policy to continue.");
+      return;
+    }
 
     const hasContent = Object.values(fields).some((value) => value.trim());
     if (!hasContent) {
@@ -85,6 +91,7 @@ export default function ProjectBriefForm({ whatsappNumber }: { whatsappNumber: s
       </label>
 
       <div className="pt-2 md:col-span-2">
+        <LegalConsentCheckbox id="legal-consent-project-brief" className="mb-6" />
         <button
           type="submit"
           className="group flex min-h-20 w-full cursor-pointer items-center justify-between gap-5 border-0 bg-black px-6 py-5 text-left text-xs font-bold tracking-[0.06em] text-white uppercase md:px-8 md:text-sm"
