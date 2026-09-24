@@ -19,6 +19,12 @@ export default function SmoothScroll() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
+    // Compact touch screens need more travel per gesture than desktop trackpads.
+    // Keep this adaptive so tablets, laptops and mouse wheels retain their current feel.
+    const isSmallTouchScreen = window.matchMedia(
+      "(max-width: 767px) and (pointer: coarse)",
+    ).matches;
+
     const lenis = new Lenis({
       // Only handle in-page hash clicks; we reset scroll ourselves on route changes
       anchors: { offset: -72 },
@@ -26,9 +32,9 @@ export default function SmoothScroll() {
       smoothWheel: true,
       gestureOrientation: "vertical",
       syncTouch: true,
-      syncTouchLerp: 0.12,
-      touchInertiaExponent: 1.4,
-      touchMultiplier: 1,
+      syncTouchLerp: isSmallTouchScreen ? 0.1 : 0.12,
+      touchInertiaExponent: isSmallTouchScreen ? 1.8 : 1.4,
+      touchMultiplier: isSmallTouchScreen ? 1.6 : 1,
       wheelMultiplier: 0.9,
       allowNestedScroll: true,
       respectReducedMotion: true,
