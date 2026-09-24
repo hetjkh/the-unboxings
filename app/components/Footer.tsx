@@ -3,6 +3,7 @@ import PhoneContactLink from "./PhoneContactLink";
 import LegalConsentCheckbox from "./LegalConsentCheckbox";
 
 const quickLinks = [
+  { label: "2026 Catalogue", href: "/catalogue" },
   { label: "Products", href: "/products" },
   { label: "Gift by Industry", href: "/industries" },
   { label: "Solutions", href: "/solutions" },

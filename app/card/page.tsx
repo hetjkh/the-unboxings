@@ -102,9 +102,9 @@ export default function CardPage() {
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
               <a className={styles.website} href={profile.website} target="_blank" rel="noopener noreferrer">{profile.websiteLabel}{arrowIcon}</a>
             </div>
-            <a className={styles.qr} href={profile.instagram} target="_blank" rel="noopener noreferrer" aria-label="Scan to follow The Unboxing on Instagram">
-              <Image src="/url_qrcodecreator.com_09_01_53.png" alt="QR code for The Unboxing on Instagram" width={96} height={96} />
-              <span>Scan to connect</span>
+            <a className={styles.qr} href="/card-catalogue.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open The Unboxing catalogue PDF">
+              <Image src="/card-catalogue-qr.svg" alt="Scan to open The Unboxing catalogue PDF" width={96} height={96} />
+              <span>Scan to view catalogue</span>
             </a>
           </div>
 

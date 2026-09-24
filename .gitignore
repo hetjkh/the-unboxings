@@ -12,6 +12,9 @@
 
 # testing
 /coverage
+/artifacts/catalogue/
+/artifacts/luxury-source/
+/artifacts/luxury-catalogue/
 
 # next.js
 /.next/

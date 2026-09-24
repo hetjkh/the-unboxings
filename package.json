@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "build:catalogue": "node scripts/build-catalogue.mjs",
+    "build:luxury-catalogue": "node scripts/build-luxury-catalogue.mjs && node scripts/export-luxury-catalogue.mjs",
     "seed:cms": "tsx --env-file=.env.local scripts/seed-cms.ts",
     "migrate:categories": "tsx --env-file=.env.local scripts/migrate-product-categories.ts",
     "migrate:brand-stories": "tsx --env-file=.env.local scripts/migrate-brand-stories.ts",

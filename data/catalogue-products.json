@@ -1,0 +1,251 @@
+{
+  "source": "https://theunboxing.ae/api/catalog",
+  "retrievedAt": "2026-09-23T16:31:41.924Z",
+  "products": [
+    {
+      "id": "6a952087d321235d6375fc5a",
+      "name": "The Architectural Chess Set",
+      "category": "luxury-gifts",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788983632292-chatgpt-image-sep-9-2026-11-53-37-pm.webp",
+      "description": "A statement chess set featuring oversized minimalist pieces crafted from marble and brushed brass , paired with a precision-designed architectural board. Created as both a playable game and a permanent luxury object for executive offices, boardrooms and VIP spaces."
+    },
+    {
+      "id": "6a949c2ce5eb68ba86277a4f",
+      "name": "The Boardroom Box",
+      "category": "executive-gifts",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788868547389-02.webp",
+      "description": "A refined executive meeting set combining a premium notebook, signature pen, card holder and essential presentation accessories in one sophisticated box. Designed for boardrooms, leadership meetings and executive gifting."
+    },
+    {
+      "id": "6a949de70159b88005a5b6db",
+      "name": "The Strategy Set",
+      "category": "executive-gifts",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788874173954-06.webp",
+      "description": "A sculptural luxury chess set crafted from marble and refined metal finishes. Designed as both a functional game and a permanent executive desk object, symbolizing strategy, foresight and leadership."
+    },
+    {
+      "id": "6aa2928eb7625c49f562e38a",
+      "name": "Gift Selection Bar",
+      "category": "events-activations",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1789039242530-chatgpt-image-sep-10-2026-02-54-49-pm.webp",
+      "description": "An interactive gifting experience where guests choose from a curated selection of premium products tailored to their preferences. Creates a more personal and memorable brand interaction than a traditional event giveaway."
+    },
+    {
+      "id": "6aa29225fbf21b96eb1e7023",
+      "name": "Live Personalization Counter",
+      "category": "events-activations",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1789039134843-chatgpt-image-sep-10-2026-02-50-50-pm.webp",
+      "description": "An interactive event station where guests can customize selected gifts with engraving or personalization on the spot. Transforms a simple giveaway into a memorable, engaging brand experience."
+    },
+    {
+      "id": "6aa2d149af49c4fefa098398",
+      "name": "Fragrance Bar",
+      "category": "events-activations",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1789055302536-chatgpt-image-sep-10-2026-07-48-10-pm.webp",
+      "description": "An immersive sensory experience where guests can explore curated fragrances, discover signature scents and create a personalized selection. Combines fragrance discovery, customization and premium gifting to create a memorable brand experience."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a29",
+      "name": "Fountain Pen and Ink Presentation",
+      "category": "luxury-writing",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788982114351-chatgpt-image-sep-9-2026-11-28-20-pm.webp",
+      "description": "Fountain pen, ink and plaque in a gatefold black box — writing as a ceremonial gift."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a2b",
+      "name": "Leather Journal Gift Set",
+      "category": "luxury-writing",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788982333214-chatgpt-image-sep-9-2026-11-31-58-pm.webp",
+      "description": "Taupe leather journal, matching pen and gold tassel — a quieter luxury stationery object."
+    },
+    {
+      "id": "6a94765ad59dbf2f2a065fe1",
+      "name": "Wireless Charging Valet Tray",
+      "category": "tech-electronics",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788855127991-05.webp",
+      "description": "A refined leather desk valet that brings organization and wireless charging together. Designed to keep your phone, watch and everyday essentials neatly arranged, charged and ready."
+    },
+    {
+      "id": "6a94758f899aa2cb1a0cd823",
+      "name": "Conference Speakerphone",
+      "category": "tech-electronics",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788854662482-01.webp",
+      "description": "A compact executive speakerphone designed for clear, effortless hybrid meetings. Combining premium sound, intuitive controls and a refined desk-ready design for the modern workplace."
+    },
+    {
+      "id": "6a9489515842d1ba58b7326f",
+      "name": "The Focus Light",
+      "category": "office-essentials",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788866219898-04.webp",
+      "description": "A minimal rechargeable desk light with touch controls and adjustable brightness. Designed to provide comfortable, focused illumination while keeping the modern workspace clean and refined."
+    },
+    {
+      "id": "6a948441dc2b1764124f6324",
+      "name": "The Meeting Companion",
+      "category": "office-essentials",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788866245829-05.webp",
+      "description": "A refined all-in-one desk system combining a premium notebook, magnetic pen, phone stand and business-card holder. Designed to keep meeting essentials organized, accessible and elegantly presented."
+    },
+    {
+      "id": "6a947c5ddfeab7f16097422a",
+      "name": "The Monolith",
+      "category": "drinkware",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788862448351-08.webp",
+      "description": "A sculptural insulated bottle defined by bold geometry and a refined matte finish. Designed to keep drinks at temperature while making a distinctive statement on any desk or journey."
+    },
+    {
+      "id": "6a947a51dfeab7f160974228",
+      "name": "The Morning Set",
+      "category": "drinkware",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788862611714-09.webp",
+      "description": "A thoughtfully curated coffee ritual featuring a premium travel tumbler, reusable coffee filter and selected coffee. Designed to turn an everyday routine into a refined experience."
+    },
+    {
+      "id": "6a947d8bdfeab7f16097422b",
+      "name": "The Nomad",
+      "category": "drinkware",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788862697293-11.webp",
+      "description": "A premium travel flask wrapped in a refined leather sleeve, complete with a carrying loop and concealed tea infuser. Designed for effortless hydration and tea rituals wherever the journey takes you."
+    },
+    {
+      "id": "6a94a0fee5eb68ba86277a52",
+      "name": "The Eco Welcome Box",
+      "category": "eco-collection",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788879843687-05.webp",
+      "description": "A considered onboarding collection featuring a recycled notebook, reusable bottle, sustainable tech pouch and plantable welcome card. Designed to make every new beginning feel meaningful while keeping sustainability at its core."
+    },
+    {
+      "id": "6a94a020e5eb68ba86277a51",
+      "name": "Recycled Glass Carafe Set",
+      "category": "eco-collection",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788879520214-04.webp",
+      "description": "A hand-finished carafe with matching tumblers crafted from recycled glass and presented on a natural bamboo tray. A refined, sustainable serveware set designed for executive desks, meeting rooms and modern workspaces."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a4b",
+      "name": "Active Lifestyle Kit",
+      "category": "health-wellness",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788893339556-chatgpt-image-sep-8-2026-10-48-46-pm.webp",
+      "description": "A coordinated bottle, towel, cap, tee and accessories in black and lime for an energised brand edit."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a49",
+      "name": "Branded Yoga Mat Duo",
+      "category": "health-wellness",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788893024657-chatgpt-image-sep-8-2026-10-42-39-pm.webp",
+      "description": "Two premium rolled yoga mats in forest green and charcoal with discreet gold branding."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a04",
+      "name": "Corporate Classic Collection",
+      "category": "apparel-uniforms",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788853077452-apparel-02.webp",
+      "description": "Tailored shirts, blazers and formalwear for a polished corporate identity."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a0a",
+      "name": "Hospitality Collection",
+      "category": "apparel-uniforms",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788854019247-08.webp",
+      "description": "Front-of-house and service uniforms coordinated for hotels, dining and guest teams."
+    },
+    {
+      "id": "6a94a85a7d89ae969fc1b4bb",
+      "name": "Denim Barista Apron",
+      "category": "aprons",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788127320114-denim-barista.webp",
+      "description": "A premium denim apron featuring adjustable cross-back straps, brass-tone hardware and functional pockets. Designed for comfort and durability, with customizable branding for cafés, hospitality teams, events and brand activations."
+    },
+    {
+      "id": "6a924ceb9afa984d6e8769d6",
+      "name": "Premium Portrait Staff Badge",
+      "category": "staff-id",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788940275678-01.webp",
+      "description": "A portrait-format staff badge with gold trim, premium lanyard and discreet brand detailing."
+    },
+    {
+      "id": "6a924ceb9afa984d6e8769ed",
+      "name": "Leather Loop Keychain Set",
+      "category": "keychains",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788944049382-chatgpt-image-sep-9-2026-12-53-55-pm.webp",
+      "description": "Black leather loop keychains with metal hardware and gold brand plaques."
+    },
+    {
+      "id": "6a924ceb9afa984d6e8769f9",
+      "name": "Round Metal Logo Keychains",
+      "category": "keychains",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788945168716-chatgpt-image-sep-9-2026-01-12-31-pm.webp",
+      "description": "Brushed silver round key tags with cube logo engraving and braided cord attachments."
+    },
+    {
+      "id": "6a946eda899aa2cb1a0cd820",
+      "name": "The Orbit",
+      "category": "awards-recognition",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788952380452-chatgpt-image-sep-9-2026-03-10-08-pm.webp",
+      "description": "A sculptural balance of natural wood and polished gold, symbolizing momentum, possibility and continuous growth. Designed to recognize those whose vision keeps people, ideas and progress moving forward."
+    },
+    {
+      "id": "6a952b63d263ee673f862ba7",
+      "name": "The Edge-Lit Falcon",
+      "category": "luxury-gifts",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788983452129-chatgpt-image-sep-9-2026-11-49-55-pm.webp",
+      "description": "A premium transparent acrylic sculpture featuring a precision-engraved abstract falcon. When placed on its illuminated base, concealed LED lighting travels through the acrylic and highlights the engraved design, creating a striking glowing falcon effect."
+    },
+    {
+      "id": "6a9526cfd263ee673f862ba5",
+      "name": "The Architectural Bakhoor Sculpture",
+      "category": "luxury-gifts",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1788983558203-chatgpt-image-sep-9-2026-11-52-19-pm.webp",
+      "description": "A contemporary sculptural bakhoor burner crafted in brushed brass or premium ceramic , with the burner discreetly integrated into its architectural form. Designed to transform a traditional fragrance ritual into a sophisticated decorative object."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a43",
+      "name": "Voyager Weekender Duffel",
+      "category": "travel-collection",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1789351181810-chatgpt-image-sep-14-2026-07-24-44-am.webp",
+      "description": "A leather overnight bag with trolley sleeve, document pocket and organized interior."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a41",
+      "name": "Leather Passport Wallet",
+      "category": "travel-collection",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1789351122909-chatgpt-image-sep-14-2026-07-18-13-am.webp",
+      "description": "A slim black wallet for passport and cards, finished with gold corner detail and branding."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a46",
+      "name": "The Long-Haul Box",
+      "category": "travel-collection",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1789351285742-whatsapp-image-2026-09-11-at-20-01-43.webp",
+      "description": "Pillow, blanket, bottle, power bank, eye mask and pouch presented as one elevated journey kit."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a1f",
+      "name": "Kinetic Gear Reveal Box",
+      "category": "packaging-solutions",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1789123072966-chatgpt-image-sep-11-2026-02-37-42-pm.webp",
+      "description": "Doors open, gears move, then the product is revealed — packaging as a mechanical ritual."
+    },
+    {
+      "id": "6a94af797d89ae969fc1b4be",
+      "name": "Illuminated Museum Display Box",
+      "category": "packaging-solutions",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1789123480873-chatgpt-image-sep-11-2026-02-38-41-pm.webp",
+      "description": "A lit showcase that presents one object like an exhibit rather than a standard gift box."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a25",
+      "name": "Wood Lattice Reveal Box",
+      "category": "packaging-solutions",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1789124406991-chatgpt-image-sep-11-2026-02-59-51-pm.webp",
+      "description": "A dark wood box with laser-cut lattice lid and suede-lined interior compartments."
+    },
+    {
+      "id": "6a924ceb9afa984d6e876a1d",
+      "name": "Magnetic Perfume Presentation Boxes",
+      "category": "packaging-solutions",
+      "image": "https://7kepc9darkwjsubh.public.blob.vercel-storage.com/uploads/1789122869132-chatgpt-image-sep-11-2026-02-33-49-pm.webp",
+      "description": "Hinged rigid boxes with custom inserts, designed around the bottle and the first reveal."
+    }
+  ]
+}

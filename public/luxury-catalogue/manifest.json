@@ -1,0 +1,28 @@
+{
+  "title": "Luxury Experience Catalogue",
+  "year": 2026,
+  "pages": 22,
+  "chapters": [
+    {
+      "title": "A considered point of view",
+      "pages": "02–04",
+      "page": 2
+    },
+    {
+      "title": "Experiences worth remembering",
+      "pages": "05–12",
+      "page": 5
+    },
+    {
+      "title": "The art of making",
+      "pages": "13–17",
+      "page": 13
+    },
+    {
+      "title": "From vision to final reveal",
+      "pages": "18–22",
+      "page": 18
+    }
+  ],
+  "bytes": 5696265
+}
