@@ -57,6 +57,10 @@ next-env.d.ts
 /scripts/.image-replacements.json
 /scripts/.blob-webp-replacements.json
 /scripts/.blob-webp-convert.log
+/scripts/.blob-local-map.json
+
+# MongoDB backups
+/backups/
 
 # Video compression backups / temp image writes
 *.webm.bak
